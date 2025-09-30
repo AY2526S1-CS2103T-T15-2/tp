@@ -59,3 +59,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Tan Keng Hong
+
+<img src="images/kh-boop-bit.png" width="200px">
+
+[[github](http://github.com/KH-boop-bit)]
+[[portfolio](team/johndoe.md)]
