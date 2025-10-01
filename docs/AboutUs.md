@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Scheduling and Tracking, Deliverables and Deadlines
 
-### Johnny Doe
+### Glendon Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eggie23.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/eggie23)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
