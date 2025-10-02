@@ -300,9 +300,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `iCon` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case: UC1 - Add a person**
+
+**MSS**
+
+1.  User requests to add a person with all details specified
+2.  AddressBook adds the person
+
+    Use case ends.
+
+**Extensions**
+* 1a. Some compulsory details are missing.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC2 - Delete a person**
 
 **MSS**
 
@@ -325,7 +341,259 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use Case: UC3 - Edit a person's details**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  AddressBook updates the person's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+  * 4a. Some compulsory details are missing.
+  
+      * 4a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC4 - Find persons by name**
+
+**MSS**
+
+1.  User requests to find persons by name
+2.  AddressBook shows a list of persons whose names contain the given keywords
+3.  User requests to view details of a specific person in the list
+4.  AddressBook shows the person's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No persons found.
+
+  * 2a1. AddressBook shows an empty list.
+
+    Use case ends.
+
+**Use Case: UC5 - List all persons**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  * 1a1. AddressBook shows an empty list.
+
+    Use case ends.
+
+**Use Case: UC6 - Clear all persons**
+
+**MSS**
+
+1.  User requests to clear all persons
+2.  AddressBook clears all persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use Case: UC7 - Exit the App**
+
+**MSS**
+
+1.  User requests to exit the App
+2.  AddressBook saves all data to hard disk
+3.  AddressBook exits
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. AddressBook fails to save data to hard disk.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+
+**Use Case: UC8 - Add Policy**
+
+**MSS**
+
+1. User adds policy using file path to policy file
+2. AddressBook adds the policy
+3. AddressBook shows a success message & generates a policy ID
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. File path is invalid
+
+   * 1a1. AddressBook shows an error message.
+
+     Use case ends.
+
+**Use case: UC9 - Remove Policy**
+
+**MSS**
+
+1. User requests to list policies
+2. AddressBook shows a list of policies
+3. User requests to remove a specific policy in the list
+4. AddressBook removes the policy
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC10 - View Policies**
+
+**MSS**
+
+1. User requests to list policies
+2. AddressBook shows a list of policies
+3. User requests to view details of a specific policy in the list
+4. AddressBook shows the policy's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  * 2a1. AddressBook shows an empty list.
+
+    Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The policy file is missing/corrupted.
+
+    * 3b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC11 - Add contract**
+
+**MSS**
+
+1. User adds contract with specific details
+2. AddressBook adds the contract
+3. AddressBook shows a success message & generates a contract ID
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Some compulsory details are missing.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. The person ID is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+  
+* 2b. The policy ID is invalid.
+
+    * 2b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2c. The contract is duplicate.
+
+    * 2c1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use Case: UC12 - Remove contract**
+
+**MSS**
+
+1. User requests to list contracts
+2. AddressBook shows a list of contracts
+3. User requests to remove a specific contract in the list
+4. AddressBook removes the contract
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC13 - View contracts**
+
+**MSS**
+
+1. User requests to list contracts
+2. AddressBook shows a list of contracts
+3. User requests to view details of a specific contract in the list by id
+4. AddressBook shows the contract's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  * 2a1. AddressBook shows an empty list.
+
+    Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
