@@ -285,28 +285,30 @@ iCon helps insurance agents manage a large pool of clients and contracts, with t
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​               | So that I can …​                                                         |
-|----------|-------------------|----------------------------|--------------------------------------------------------------------------|
-| `* * *`  | Insurance Agent   | add a contact              | store contacts                                                           |
-| `* * *`  | Insurance Agent   | remove a contact           | remove unnecessary contacts                                              |
-| `* * *`  | Insurance Agent   | view a contact             | see contact details of customers I want to see                           |
-| `* * *`  | Insurance Agent   | add a policy               | add more policy types                                                    |
-| `* * *`  | Insurance Agent   | add a contract             | link a policy to a customer                                              |
-| `* * *`  | Insurance Agent   | delete a policy            | remove unnecessary policy types                                          |
-| `* * *`  | Insurance Agent   | view a policy              | see the policy details and who signed the policy as a contract           |
-| `* *`    | Insurance Agent   | tag a contact              | tag a contact with follow-ups                                            |
-| `* *`    | Insurance Agent   | search for a contact       | find a specific contact by name                                          |
-| `* *`    | Insurance Agent   | search for a contract      | find a specific contract by its type or date                             |
-| `* *`    | Insurance Agent   | add client appointments    | add an appointment date for a contact for follow-ups                     |
-| `* *`    | Insurance Agent   | delete client appointments | delete any misplaced appointment dates for a contact                     |
-| `* *`    | Insurance Agent   | add contract expiry        | know when a contract is expiring so that I could schedule an appointment |
-| `* *`    | Insurance Agent   | add contract premium       | easily reference the rates offered to my customers                       |
-| ` * * `  | Insurance Agent   | edit a contact             | edit the wrong details of customers                                      |
-| ` * * `  | Insurance Agent   | edit a policy              | edit the policy of the contract                                          |
-| ` * `    | Insurance Agent   | sort a contact             | sort contacts by alphabetical order                                      |
-| ` * `    | Insurance Agent   | sort a contract            | sort contracts by dates                                                  |
-| ` * `    | Insurance Agent   | edit client appointments   | reschedule an appointment date for a contact or mark it as completed     |
-| ` * `    | Insurance Agent   | sort by appointments       | easily take reference to upcoming appointments                           |
+| Priority | As a …​         | I want to …​               | So that I can …​                                                        |
+|----------|-----------------|----------------------------|-------------------------------------------------------------------------|
+| `* * *`  | Insurance Agent | add a contact              | store contacts                                                          |
+| `* * *`  | Insurance Agent | remove a contact           | remove unnecessary contacts                                             |
+| `* * *`  | Insurance Agent | view a contact             | see contact details of customers I want to see                          |
+| `* * *`  | Insurance Agent | add a policy               | add more policy types                                                   | 
+| `* * *`  | Insurance Agent | remove a policy            | remove unnecessary policy types                                         |
+| `* * *`  | Insurance Agent | view a policy              | see the policy details and who signed the policy as a contract          |
+| `* * *`  | Insurance Agent | add a contract             | link a policy to a customer                                             |
+| `* * *`  | Insurance Agent | remove a contract          | remove unnecessary contracts                                            |
+| `* * *`  | Insurance Agent | view a contract            | see the contract details and who signed the contract                    |
+| `* *`    | Insurance Agent | tag a contact              | tag a contact with follow-ups                                           |
+| `* *`    | Insurance Agent | search for a contact       | find a specific contact by name                                         |
+| `* *`    | Insurance Agent | search for a contract      | find a specific contract by its type or date                            |
+| `* *`    | Insurance Agent | add client appointments    | add an appointment date for a contact for follow-ups                    |
+| `* *`    | Insurance Agent | delete client appointments | delete any misplaced appointment dates for a contact                    |
+| `* *`    | Insurance Agent | add contract expiry        | add when a contract is expiring so that I could schedule an appointment |
+| `* *`    | Insurance Agent | add contract premium       | easily reference the rates offered to my customers                      |
+| `* *`    | Insurance Agent | edit a contact             | edit the wrong details of customers                                     |
+| `* *`    | Insurance Agent | edit a policy              | edit the policy of the contract                                         |
+| `*`      | Insurance Agent | sort by contacts           | sort contacts by alphabetical order                                     |
+| `*`      | Insurance Agent | sort by contracts          | sort contracts by dates                                                 |
+| `*`      | Insurance Agent | edit client appointments   | reschedule an appointment date for a contact or mark it as completed    |
+| `*`      | Insurance Agent | sort by appointments       | easily take reference to upcoming appointments                          |
 
 
 
