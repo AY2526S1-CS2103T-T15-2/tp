@@ -274,13 +274,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Independent Insurance Agents who manage the personal portfolio of clients, contracts and insurance policies.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+iCon helps insurance agents manage a large pool of clients and contracts, with the flexibility to add policies from any issuer. By enabling fast, accurate retrieval of critical client and policy data, it minimizes admin overhead and let agents focus more on delivering high-quality advisory services.
 
 
 ### User stories
