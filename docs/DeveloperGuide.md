@@ -285,16 +285,33 @@ iCon helps insurance agents manage a large pool of clients and contracts, with t
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​               | So that I can …​                                                     |
+|----------|-----------------|----------------------------|----------------------------------------------------------------------|
+| `* * *`  | Insurance Agent | add a contact              | store contacts                                                       |
+| `* * *`  | Insurance Agent | remove a contact           | remove unnecessary contacts                                          |
+| `* * *`  | Insurance Agent | view a contact             | see contact details of customers I want to see                       |
+| `* * *`  | Insurance Agent | add a policy               | add more policy types                                                | 
+| `* * *`  | Insurance Agent | remove a policy            | remove unnecessary policy types                                      |
+| `* * *`  | Insurance Agent | view a policy              | see the policy details                                               |
+| `* * *`  | Insurance Agent | add a contract             | link a policy to a customer                                          |
+| `* * *`  | Insurance Agent | remove a contract          | remove unnecessary contracts                                         |
+| `* * *`  | Insurance Agent | view a contract            | see the contract details and who signed the contract                 |
+| `* *`    | Insurance Agent | tag a contact              | tag a contact with follow-ups                                        |
+| `* *`    | Insurance Agent | search for a contact       | find a specific contact by name                                      |
+| `* *`    | Insurance Agent | search for a contract      | find a specific contract by its type or date                         |
+| `* *`    | Insurance Agent | add client appointments    | add an appointment date for a contact for follow-ups                 |
+| `* *`    | Insurance Agent | delete client appointments | delete any misplaced appointment dates for a contact                 |
+| `* *`    | Insurance Agent | add contract expiry        | start to schedule an appointment closer to contract's expiry         |
+| `* *`    | Insurance Agent | add contract premium       | easily reference the rates offered to my customers                   |
+| `* *`    | Insurance Agent | edit a contact             | edit the wrong details of customers                                  |
+| `* *`    | Insurance Agent | edit a policy              | edit the policy of the contract                                      |
+| `*`      | Insurance Agent | sort by contacts           | order by contacts                                                    |
+| `*`      | Insurance Agent | sort by contracts          | order by contracts                                                   |
+| `*`      | Insurance Agent | edit client appointments   | reschedule an appointment date for a contact or mark it as completed |
+| `*`      | Insurance Agent | sort by appointments       | easily take reference to upcoming appointments                       |
 
-*{More to be added}*
+
+
 
 ### Use cases
 
