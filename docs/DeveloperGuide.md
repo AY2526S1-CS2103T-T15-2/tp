@@ -307,14 +307,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a person with all details specified
-2.  AddressBook adds the person
+2.  iCon adds the person
 
     Use case ends.
 
 **Extensions**
 * 1a. Some compulsory details are missing.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. iCon shows an error message.
 
       Use case ends.
 
@@ -323,9 +323,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  iCon shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  iCon deletes the person
 
     Use case ends.
 
@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
@@ -346,9 +346,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  iCon shows a list of persons
 3.  User requests to edit a specific person in the list
-4.  AddressBook updates the person's details
+4.  iCon updates the person's details
 
     Use case ends.
 
@@ -360,13 +360,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
   * 4a. Some compulsory details are missing.
   
-      * 4a1. AddressBook shows an error message.
+      * 4a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
@@ -375,9 +375,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to find persons by name
-2.  AddressBook shows a list of persons whose names contain the given keywords
+2.  iCon shows a list of persons whose names contain the given keywords
 3.  User requests to view details of a specific person in the list
-4.  AddressBook shows the person's details
+4.  iCon shows the person's details
 
     Use case ends.
 
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. No persons found.
 
-  * 2a1. AddressBook shows an empty list.
+  * 2a1. iCon shows an empty list.
 
     Use case ends.
 
@@ -394,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  iCon shows a list of persons
 
     Use case ends.
 
@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The list is empty.
 
-  * 1a1. AddressBook shows an empty list.
+  * 1a1. iCon shows an empty list.
 
     Use case ends.
 
@@ -411,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to clear all persons
-2.  AddressBook clears all persons
+2.  iCon clears all persons
 
     Use case ends.
 
@@ -426,16 +426,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to exit the App
-2.  AddressBook saves all data to hard disk
-3.  AddressBook exits
+2.  iCon saves all data to hard disk
+3.  iCon exits
 
     Use case ends.
 
 **Extensions**
 
-* 2a. AddressBook fails to save data to hard disk.
+* 2a. iCon fails to save data to hard disk.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. iCon shows an error message.
 
       Use case resumes at step 3.
 
@@ -444,8 +444,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User adds policy using file path to policy file
-2. AddressBook adds the policy
-3. AddressBook shows a success message & generates a policy ID
+2. iCon adds the policy
+3. iCon shows a success message & generates a policy ID
 
    Use case ends.
 
@@ -453,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. File path is invalid
 
-   * 1a1. AddressBook shows an error message.
+   * 1a1. iCon shows an error message.
 
      Use case ends.
 
@@ -462,9 +462,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list policies
-2. AddressBook shows a list of policies
+2. iCon shows a list of policies
 3. User requests to remove a specific policy in the list
-4. AddressBook removes the policy
+4. iCon removes the policy
 
     Use case ends.
 
@@ -476,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given id is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
@@ -485,9 +485,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list policies
-2. AddressBook shows a list of policies
+2. iCon shows a list of policies
 3. User requests to view details of a specific policy in the list
-4. AddressBook shows the policy's details
+4. iCon shows the policy's details
 
     Use case ends.
 
@@ -495,19 +495,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  * 2a1. AddressBook shows an empty list.
+  * 2a1. iCon shows an empty list.
 
     Use case ends.
 
 * 3a. The given id is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The policy file is missing/corrupted.
 
-    * 3b1. AddressBook shows an error message.
+    * 3b1. iCon shows an error message.
 
       Use case resumes at step 2.
 
@@ -516,8 +516,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User adds contract with specific details
-2. AddressBook adds the contract
-3. AddressBook shows a success message & generates a contract ID
+2. iCon adds the contract
+3. iCon shows a success message & generates a contract ID
 
     Use case ends.
 
@@ -525,25 +525,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Some compulsory details are missing.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. iCon shows an error message.
 
       Use case ends.
 
 * 2a. The person ID is invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. iCon shows an error message.
 
       Use case ends.
   
 * 2b. The policy ID is invalid.
 
-    * 2b1. AddressBook shows an error message.
+    * 2b1. iCon shows an error message.
 
       Use case ends.
 
 * 2c. The contract is duplicate.
 
-    * 2c1. AddressBook shows an error message.
+    * 2c1. iCon shows an error message.
 
       Use case ends.
 
@@ -552,9 +552,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list contracts
-2. AddressBook shows a list of contracts
+2. iCon shows a list of contracts
 3. User requests to remove a specific contract in the list
-4. AddressBook removes the contract
+4. iCon removes the contract
 
     Use case ends.
 
@@ -566,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given id is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
@@ -575,9 +575,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list contracts
-2. AddressBook shows a list of contracts
+2. iCon shows a list of contracts
 3. User requests to view details of a specific contract in the list by id
-4. AddressBook shows the contract's details
+4. iCon shows the contract's details
 
     Use case ends.
 
@@ -585,13 +585,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  * 2a1. AddressBook shows an empty list.
+  * 2a1. iCon shows an empty list.
 
     Use case ends.
 
 * 3a. The given id is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
