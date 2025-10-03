@@ -287,16 +287,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​       |  I want to …​             |   So that I can …​                                                    |
+|----------|------------------|------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | Insurance Agent  | add a contact                | store contacts                                                           |
+| `* * *`  | Insurance Agent  | remove a contact             | remove unnecessary contacts                                              |
+| `* * *`  | Insurance Agent  | view a contact               | see contact details of customers I want to see                           |
+| ` * * `  | Insurance Agent  | edit a contact               | edit the wrong details of customers                                      |
+| `* * *`  | Insurance Agent  | add a contract               | add more contract types                                                  |
+| `* * *`  | Insurance Agent  | link a contract to a contact | see which contracts a customer has                                       |
+| `* * *`  | Insurance Agent  | delete a contract            | remove unnecessary contract types                                        |
+| ` * * `  | Insurance Agent  | edit a contract              | edit the details of the contract                                         |
+| `* * *`  | Insurance Agent  | view a contract              | see the contract details and who is tied to the contract                 |
+| `* *`    | Insurance Agent  | tag a contact                | tag a contact with follow-ups                                            |
+| ` * `    | Insurance Agent  | sort a contact               | sort contacts by alphabetical order                                      |
+| ` * `    | Insurance Agent  | sort a contract              | sort contracts by dates                                                  |
+| `* *`    | Insurance Agent  | search for a contact         | find a specific contact by name                                          |
+| `* *`    | Insurance Agent  | search for a contract        | find a specific contract by its type or date                             |
+| `* *`    | Insurance Agent  | add client appointments      | add an appointment date for a contact for follow-ups                     |
+| `* *`    | Insurance Agent  | delete client appointments   | delete any misplaced appointment dates for a contact                     |
+| ` * `    | Insurance Agent  | edit client appointments     | reschedule an appointment date for a contact or mark it as completed     |
+| ` * `    | Insurance Agent  | sort by appointments         | easily take reference to upcoming appointments                           |
+| `* *`    | Insurance Agent  | add contract expiry          | know when a contract is expiring so that I could schedule an appointment |
+| `* *`    | Insurance Agent  | add contract premium         | easily reference the rates offered to my customers                       |
 
-*{More to be added}*
+
 
 ### Use cases
 
