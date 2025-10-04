@@ -622,6 +622,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A customer of the insurance agent that has data fields, name, email, and NRIC
+* **Person(s)**: Another way of saying a contact
+* **Policy**: The document that details the terms and conditions of a contract
+* **Contract**: A contract that binds a customer to a certain policy
 
 --------------------------------------------------------------------------------------------------------------------
 
