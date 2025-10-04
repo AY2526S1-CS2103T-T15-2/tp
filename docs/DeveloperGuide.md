@@ -364,9 +364,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-  * 4a. Some compulsory details are missing.
+* 4a. Some compulsory details are missing.
   
-      * 4a1. iCon shows an error message.
+    * 4a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
