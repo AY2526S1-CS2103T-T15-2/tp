@@ -3,6 +3,10 @@ package seedu.address.model.policy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Policy's name.
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ */
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -12,12 +16,20 @@ public class Name {
 
     public final String value;
 
+    /**
+     * Constructs a {@code Name}.
+     *
+     * @param name A valid name.
+     */
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         value = name;
     }
 
+    /**
+     * Returns true if a given string is a valid name.
+     */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }

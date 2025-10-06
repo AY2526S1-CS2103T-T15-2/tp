@@ -6,11 +6,18 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents a Policy of a Contract.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Policy {
 
     private final Name name;
     private final Details details;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Policy(Name name, Details details) {
         requireAllNonNull(name, details);
         this.name = name;
