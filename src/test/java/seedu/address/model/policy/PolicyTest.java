@@ -41,7 +41,8 @@ public class PolicyTest {
     @Test
     public void toStringMethod() {
         Policy policy = new Policy(new Name("Property - A"), new Details("policy details"));
-        String expected = Policy.class.getCanonicalName() + "{name=" + policy.getName() + ", details=" + policy.getDetails() + "}";
+        String expected = Policy.class.getCanonicalName() + "{name=" + policy.getName()
+                + ", details=" + policy.getDetails() + "}";
         assertEquals(expected, policy.toString());
     }
 
