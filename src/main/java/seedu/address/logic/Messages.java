@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.Policy;
 
 /**
  * Container for user visible messages.
@@ -48,4 +49,7 @@ public class Messages {
         return builder.toString();
     }
 
+    public static String format(Policy policy) {
+        return "";
+    }
 }
