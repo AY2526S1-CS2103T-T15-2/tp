@@ -4,11 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Details {
+
     public static final String MESSAGE_CONSTRAINTS = "Details should not be blank";
 
     public static final String VALIDATION_REGEX = "\\S.*";
 
-    private final String value;
+    public final String value;
 
     public Details(String details) {
         requireNonNull(details);

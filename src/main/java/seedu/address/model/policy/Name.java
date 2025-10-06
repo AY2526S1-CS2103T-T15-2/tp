@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Name {
+
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters, spaces, and dashes, and it should not be blank";
 
     public static final String VALIDATION_REGEX = "[\\p{Alnum}-][\\p{Alnum}- ]*";
 
-    private final String value;
+    public final String value;
 
     public Name(String name) {
         requireNonNull(name);

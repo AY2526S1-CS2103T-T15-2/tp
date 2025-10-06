@@ -7,6 +7,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 public class Policy {
+
     private final Name name;
     private final Details details;
 
