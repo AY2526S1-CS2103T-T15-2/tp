@@ -18,19 +18,23 @@ import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
 
 public class AddPolicyCommandParserTest {
-    private AddPolicyCommandParser parser = new AddPolicyCommandParser();
 
     private static final String VALID_NAME_1 = "Healthcare - A";
     private static final String VALID_NAME_2 = "Life Insurance";
     private static final String INVALID_NAME = "Medical*";
+
     private static final String VALID_DETAILS_1 = "This policy coverage...";
     private static final String VALID_DETAILS_2 = "Other policy details";
+
     private static final String NAME_DESC_1 = " " + PREFIX_NAME + VALID_NAME_1;
     private static final String NAME_DESC_2 = " " + PREFIX_NAME + VALID_NAME_2;
     private static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME;
+
     private static final String DETAILS_DESC_1 = " " + PREFIX_DETAILS + VALID_DETAILS_1;
     private static final String DETAILS_DESC_2 = " " + PREFIX_DETAILS + VALID_DETAILS_2;
     private static final String INVALID_DETAILS_DESC = " " + PREFIX_DETAILS;
+
+    private AddPolicyCommandParser parser = new AddPolicyCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
