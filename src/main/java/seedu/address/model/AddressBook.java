@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueContractList contracts;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        contracts = new UniqueContractList();
     }
 
     public AddressBook() {}
@@ -92,6 +96,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Returns true if a contract with the same details as {@code contract} exists in the address book.
+     */
+    public boolean hasContract(Contract contract) {
+        requireNonNull(contract);
+        return contracts.contains(contract);
+    }
+
+    /**
+     * Adds the given contract.
+     * {@code contract} must not already exist in the address book.
+     */
+    public void addContract(Contract contract) {
+        requireNonNull(contract);
+        contracts.add(contract);
     }
 
     //// util methods

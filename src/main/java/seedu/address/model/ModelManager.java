@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 
 /**
@@ -109,6 +110,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public boolean hasContract(Contract contract) {
+        requireNonNull(contract);
+        return addressBook.hasContract(contract);
+    }
+
+    @Override
+    public void addContract(Contract contract) {
+        addressBook.addContract(contract);
     }
 
     //=========== Filtered Person List Accessors =============================================================
