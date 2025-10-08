@@ -8,6 +8,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.policy.Policy;
 
+/**
+ * Adds a policy.
+ */
 public class AddPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "add_policy";
@@ -16,6 +19,9 @@ public class AddPolicyCommand extends Command {
 
     private final Policy toAdd;
 
+    /**
+     * Creates an AddPolicyCommand to add the specified {@code Policy}
+     */
     public AddPolicyCommand(Policy policy) {
         requireNonNull(policy);
         toAdd = policy;

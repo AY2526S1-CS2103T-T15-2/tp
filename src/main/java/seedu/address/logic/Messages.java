@@ -49,6 +49,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code policy} for display to the user.
+     */
     public static String format(Policy policy) {
         return policy.getName() + "; Details: " + policy.getDetails();
     }
