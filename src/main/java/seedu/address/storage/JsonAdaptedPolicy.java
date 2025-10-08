@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.policy.PolicyId;
-import seedu.address.model.policy.PolicyDetails;
-import seedu.address.model.policy.PolicyName;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDetails;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.PolicyName;
+
 
 
 /**
@@ -50,7 +51,8 @@ class JsonAdaptedPolicy {
     public Policy toModelType() throws IllegalValueException {
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PolicyName.class.getSimpleName()));
         }
         if (!PolicyName.isValidPolicyName(name)) {
             throw new IllegalValueException(PolicyName.MESSAGE_CONSTRAINTS);
@@ -58,7 +60,8 @@ class JsonAdaptedPolicy {
         final PolicyName modelPolicyName = new PolicyName(name);
 
         if (detail == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyDetails.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PolicyDetails.class.getSimpleName()));
         }
         if (!PolicyDetails.isValidPolicyDetails(detail)) {
             throw new IllegalValueException(PolicyDetails.MESSAGE_CONSTRAINTS);
