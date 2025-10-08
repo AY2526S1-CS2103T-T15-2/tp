@@ -30,7 +30,7 @@ public class PolicyCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label description;
+    private Label detail;
 
     /**
      * Creates a {@code PolicyCode} with the given {@code Policy} and index to display.
@@ -38,9 +38,9 @@ public class PolicyCard extends UiPart<Region> {
     public PolicyCard(Policy policy, int displayedIndex) {
         super(FXML);
         this.policy = policy;
-        name.setText(policy.getName().fullName);
-        id.setText(policy.getId().fullId);
-        description.setText(policy.getDescription().fullDescription);
+        name.setText(policy.getName().value);
+        id.setText(policy.getId().value);
+        detail.setText(policy.getDetails().value);
     }
 }
 

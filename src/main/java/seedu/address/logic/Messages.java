@@ -59,8 +59,8 @@ public class Messages {
         builder.append(policy.getName())
                 .append("; id: ")
                 .append(policy.getId())
-                .append("; Description: ")
-                .append(policy.getDescription());
+                .append("; Detail: ")
+                .append(policy.getDetails());
         return builder.toString();
     }
 

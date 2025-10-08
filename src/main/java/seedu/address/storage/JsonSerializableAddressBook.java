@@ -24,16 +24,16 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_POLICY = "Policies list contains duplicate policy(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final List<JsonAdaptedPolicy> policies = new ArrayList<>();
+    //private final List<JsonAdaptedPolicy> policies = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+                                       //,@JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
         this.persons.addAll(persons);
-        this.policies.addAll(policies);
+        //this.policies.addAll(policies);
     }
 
     /**
@@ -43,7 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        policies.addAll(source.getPolicyList().stream().map(JsonAdaptedPolicy::new).collect(Collectors.toList()));
+        //policies.addAll(source.getPolicyList().stream().map(JsonAdaptedPolicy::new).collect(Collectors.toList()));
     }
 
     /**
@@ -60,6 +60,7 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+        /*
         for (JsonAdaptedPolicy jsonAdaptedPolicy : policies) {
             Policy policy = jsonAdaptedPolicy.toModelType();
             if (addressBook.hasPolicy(policy)) {
@@ -67,7 +68,7 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPolicy(policy);
         }
+        */
         return addressBook;
     }
-
 }

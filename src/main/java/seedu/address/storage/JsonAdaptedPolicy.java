@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.policy.Id;
-import seedu.address.model.policy.Description;
-import seedu.address.model.policy.Name;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.PolicyDetails;
+import seedu.address.model.policy.PolicyName;
 import seedu.address.model.policy.Policy;
-
 
 
 /**
@@ -20,26 +19,27 @@ class JsonAdaptedPolicy {
 
     private final String id;
     private final String name;
-    private final String description;
+    private final String detail;
 
     /**
      * Constructs a {@code JsonAdaptedPolicy} with the given policy details.
      */
     @JsonCreator
-    public JsonAdaptedPolicy(@JsonProperty("id") String id, @JsonProperty("name") String name,
-                             @JsonProperty("description") String description) {
-        this.id = id;
+    public JsonAdaptedPolicy(@JsonProperty("name") String name,
+                             @JsonProperty("detail") String detail,
+                             @JsonProperty("id") String id) {
         this.name = name;
-        this.description = description;
+        this.detail = detail;
+        this.id = id;
     }
 
     /**
      * Converts a given {@code Policy} into this class for Jackson use.
      */
     public JsonAdaptedPolicy(Policy source) {
-        id = source.getId().fullId;
-        name = source.getName().fullName;
-        description = source.getDescription().fullDescription;
+        name = source.getName().value;
+        detail = source.getDetails().value;
+        id = source.getId().value;
     }
 
     /**
@@ -50,30 +50,24 @@ class JsonAdaptedPolicy {
     public Policy toModelType() throws IllegalValueException {
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!PolicyName.isValidPolicyName(name)) {
+            throw new IllegalValueException(PolicyName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final PolicyName modelPolicyName = new PolicyName(name);
 
-        if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
+        if (detail == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyDetails.class.getSimpleName()));
         }
-        if (!Id.isValidId(id)) {
-            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
+        if (!PolicyDetails.isValidPolicyDetails(detail)) {
+            throw new IllegalValueException(PolicyDetails.MESSAGE_CONSTRAINTS);
         }
-        final Id modelId = new Id(id);
+        final PolicyDetails modelPolicyDetails = new PolicyDetails(detail);
 
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
-        }
-        if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
-        }
-        final Description modelDescription = new Description(description);
+        final PolicyId modelPolicyId = new PolicyId(id);
 
-        return new Policy(modelId, modelName, modelDescription);
+        return new Policy(modelPolicyName, modelPolicyDetails, modelPolicyId);
     }
 
 }

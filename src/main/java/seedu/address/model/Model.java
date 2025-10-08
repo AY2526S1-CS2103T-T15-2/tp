@@ -14,7 +14,7 @@ import seedu.address.model.policy.Policy;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Policy> PREDICATE_SHOW_ALL_POLICIES = unused -> false;
+    Predicate<Policy> PREDICATE_SHOW_ALL_POLICIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -96,7 +96,7 @@ public interface Model {
      * Deletes the given policy.
      * The policy must exist in the address book.
      */
-    void deletePolicy(Policy target);
+    void removePolicy(Policy target);
 
     /**
      * Adds the given policy.
