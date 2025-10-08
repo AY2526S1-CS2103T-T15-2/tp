@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
-import seedu.address.model.policy.PolicyDetails;
-import seedu.address.model.policy.Policy;
 
 /**
  * Parses input arguments and creates a new AddPolicyCommand object
