@@ -10,10 +10,11 @@ public class PolicyTest {
 
     @Test
     public void equals() {
-        Policy policy = new Policy(new Name("Healthcare - A"), new Details("policy details"));
+        Id id = Id.generate();
+        Policy policy = new Policy(new Name("Healthcare - A"), new Details("policy details"), id);
 
         // same values -> returns true
-        Policy policyCopy = new Policy(new Name("Healthcare - A"), new Details("policy details"));
+        Policy policyCopy = new Policy(new Name("Healthcare - A"), new Details("policy details"), id);
         assertTrue(policy.equals(policyCopy));
 
         // same object -> returns true
@@ -26,23 +27,27 @@ public class PolicyTest {
         assertFalse(policy.equals(5));
 
         // different person -> returns false
-        Policy differentPolicy = new Policy(new Name("Life"), new Details("other details"));
+        Policy differentPolicy = new Policy(new Name("Life"), new Details("other details"), id);
         assertFalse(policy.equals(differentPolicy));
 
         // different name -> returns false
-        Policy editedPolicy = new Policy(new Name("Medical - A"), new Details("policy details"));
+        Policy editedPolicy = new Policy(new Name("Medical - A"), new Details("policy details"), id);
         assertFalse(policy.equals(editedPolicy));
 
         // different details -> returns false
-        editedPolicy = new Policy(new Name("Healthcare - A"), new Details("other details"));
+        editedPolicy = new Policy(new Name("Healthcare - A"), new Details("other details"), id);
+        assertFalse(policy.equals(editedPolicy));
+
+        // different id -> returns false
+        editedPolicy = new Policy(new Name("Healthcare - A"), new Details("policy details"), Id.generate());
         assertFalse(policy.equals(editedPolicy));
     }
 
     @Test
     public void toStringMethod() {
-        Policy policy = new Policy(new Name("Property - A"), new Details("policy details"));
+        Policy policy = new Policy(new Name("Property - A"), new Details("policy details"), Id.generate());
         String expected = Policy.class.getCanonicalName() + "{name=" + policy.getName()
-                + ", details=" + policy.getDetails() + "}";
+                + ", details=" + policy.getDetails() + ", id=" + policy.getId() + "}";
         assertEquals(expected, policy.toString());
     }
 

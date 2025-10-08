@@ -17,13 +17,13 @@ public class Policy {
     private final Id id;
 
     /**
-     * Name and details must be present and not null.
+     * Fields must be present and not null.
      */
-    public Policy(Name name, Details details) {
+    public Policy(Name name, Details details, Id id) {
         requireAllNonNull(name, details);
         this.name = name;
         this.details = details;
-        this.id = Id.generate();
+        this.id = id;
     }
 
     public Name getName() {
@@ -50,12 +50,13 @@ public class Policy {
         }
 
         Policy otherPolicy = (Policy) other;
-        return name.equals(otherPolicy.name) && details.equals(otherPolicy.details);
+        return name.equals(otherPolicy.name) && details.equals(otherPolicy.details)
+                && id.equals(otherPolicy.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, details);
+        return Objects.hash(name, details, id);
     }
 
     @Override
@@ -63,6 +64,7 @@ public class Policy {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("details", details)
+                .add("id", id)
                 .toString();
     }
 }
