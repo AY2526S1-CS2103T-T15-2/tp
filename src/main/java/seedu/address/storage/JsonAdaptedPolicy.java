@@ -69,5 +69,4 @@ class JsonAdaptedPolicy {
 
         return new Policy(modelPolicyName, modelPolicyDetails, modelPolicyId);
     }
-
 }

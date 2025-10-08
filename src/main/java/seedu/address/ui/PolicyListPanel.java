@@ -45,5 +45,4 @@ public class PolicyListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
