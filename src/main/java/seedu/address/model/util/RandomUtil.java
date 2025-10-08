@@ -2,6 +2,9 @@ package seedu.address.model.util;
 
 import java.util.Random;
 
+/**
+ * Contains utility methods for random generation.
+ */
 public class RandomUtil {
 
     private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
