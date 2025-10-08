@@ -6,7 +6,7 @@ import java.util.Random;
  * Represents a Policy's id that a user can reference.
  * Guarantees: immutable.
  */
-public class Id {
+public class PolicyId {
 
     private static final String ID_CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
             + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -15,14 +15,14 @@ public class Id {
 
     public final String value;
 
-    private Id(String id) {
+    private PolicyId(String id) {
         value = id;
     }
 
     /**
      * Generates a random alphanumeric id to assign to a Policy.
      */
-    public static Id generate() {
+    public static PolicyId generate() {
         Random random = new Random();
         String id = random.ints(0, ID_CHARACTERS.length())
                 .map(ID_CHARACTERS::charAt)
@@ -30,7 +30,7 @@ public class Id {
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                 .toString();
 
-        return new Id(id);
+        return new PolicyId(id);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class Id {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Id)) {
+        if (!(other instanceof PolicyId)) {
             return false;
         }
 
-        Id otherId = (Id) other;
-        return value.equals(otherId.value);
+        PolicyId otherPolicyId = (PolicyId) other;
+        return value.equals(otherPolicyId.value);
     }
 
     @Override

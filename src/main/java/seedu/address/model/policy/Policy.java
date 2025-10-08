@@ -12,30 +12,30 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Policy {
 
-    private final Name name;
-    private final Details details;
-    private final Id id;
+    private final PolicyName policyName;
+    private final PolicyDetails policyDetails;
+    private final PolicyId policyId;
 
     /**
      * Fields must be present and not null.
      */
-    public Policy(Name name, Details details, Id id) {
-        requireAllNonNull(name, details);
-        this.name = name;
-        this.details = details;
-        this.id = id;
+    public Policy(PolicyName policyName, PolicyDetails policyDetails, PolicyId policyId) {
+        requireAllNonNull(policyName, policyDetails);
+        this.policyName = policyName;
+        this.policyDetails = policyDetails;
+        this.policyId = policyId;
     }
 
-    public Name getName() {
-        return name;
+    public PolicyName getName() {
+        return policyName;
     }
 
-    public Details getDetails() {
-        return details;
+    public PolicyDetails getDetails() {
+        return policyDetails;
     }
 
-    public Id getId() {
-        return id;
+    public PolicyId getId() {
+        return policyId;
     }
 
     @Override
@@ -50,21 +50,21 @@ public class Policy {
         }
 
         Policy otherPolicy = (Policy) other;
-        return name.equals(otherPolicy.name) && details.equals(otherPolicy.details)
-                && id.equals(otherPolicy.id);
+        return policyName.equals(otherPolicy.policyName) && policyDetails.equals(otherPolicy.policyDetails)
+                && policyId.equals(otherPolicy.policyId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, details, id);
+        return Objects.hash(policyName, policyDetails, policyId);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("details", details)
-                .add("id", id)
+                .add("name", policyName)
+                .add("details", policyDetails)
+                .add("id", policyId)
                 .toString();
     }
 }

@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Policy's details.
  * Guarantees: immutable; is valid as declared in {@link #isValidDetails(String)}
  */
-public class Details {
+public class PolicyDetails {
 
     public static final String MESSAGE_CONSTRAINTS = "Details should not be blank";
 
@@ -20,7 +20,7 @@ public class Details {
      *
      * @param details Valid details.
      */
-    public Details(String details) {
+    public PolicyDetails(String details) {
         requireNonNull(details);
         checkArgument(isValidDetails(details), MESSAGE_CONSTRAINTS);
         value = details;
@@ -45,12 +45,12 @@ public class Details {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Details)) {
+        if (!(other instanceof PolicyDetails)) {
             return false;
         }
 
-        Details otherDetails = (Details) other;
-        return value.equals(otherDetails.value);
+        PolicyDetails otherPolicyDetails = (PolicyDetails) other;
+        return value.equals(otherPolicyDetails.value);
     }
 
     @Override
