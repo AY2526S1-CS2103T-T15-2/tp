@@ -26,7 +26,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
     public AddPolicyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DETAILS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DETAILS)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DETAILS) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
         }
 
