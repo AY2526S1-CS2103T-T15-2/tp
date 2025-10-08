@@ -22,16 +22,16 @@ public class PolicyDetailsTest {
     @Test
     public void isValidDetails() {
         // null details
-        assertThrows(NullPointerException.class, () -> PolicyDetails.isValidDetails(null));
+        assertThrows(NullPointerException.class, () -> PolicyDetails.isValidPolicyDetails(null));
 
         // invalid details
-        assertFalse(PolicyDetails.isValidDetails("")); // empty string
-        assertFalse(PolicyDetails.isValidDetails(" ")); // spaces only
+        assertFalse(PolicyDetails.isValidPolicyDetails("")); // empty string
+        assertFalse(PolicyDetails.isValidPolicyDetails(" ")); // spaces only
 
         // valid details
-        assertTrue(PolicyDetails.isValidDetails("This policy"));
-        assertTrue(PolicyDetails.isValidDetails("a")); // one character
-        assertTrue(PolicyDetails.isValidDetails("This policy provides coverage for the insured and immediate family "
+        assertTrue(PolicyDetails.isValidPolicyDetails("This policy"));
+        assertTrue(PolicyDetails.isValidPolicyDetails("a")); // one character
+        assertTrue(PolicyDetails.isValidPolicyDetails("This policy provides coverage for the insured and immediate family "
                 + "members against medical emergencies, hospitalization, and accidental injuries.")); // long details
     }
 

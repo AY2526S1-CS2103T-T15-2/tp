@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Policy's name.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPolicyName(String)}
  */
 public class PolicyName {
 
@@ -19,18 +19,18 @@ public class PolicyName {
     /**
      * Constructs a {@code Name}.
      *
-     * @param name A valid name.
+     * @param name A valid policy name.
      */
     public PolicyName(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPolicyName(name), MESSAGE_CONSTRAINTS);
         value = name;
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid policy name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidPolicyName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

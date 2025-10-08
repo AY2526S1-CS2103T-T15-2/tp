@@ -22,19 +22,19 @@ public class PolicyNameTest {
     @Test
     public void isValidName() {
         // null name
-        assertThrows(NullPointerException.class, () -> PolicyName.isValidName(null));
+        assertThrows(NullPointerException.class, () -> PolicyName.isValidPolicyName(null));
 
         // invalid name
-        assertFalse(PolicyName.isValidName("")); // empty string
-        assertFalse(PolicyName.isValidName(" ")); // spaces only
-        assertFalse(PolicyName.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(PolicyName.isValidName("medical*")); // contains non-alphanumeric characters
+        assertFalse(PolicyName.isValidPolicyName("")); // empty string
+        assertFalse(PolicyName.isValidPolicyName(" ")); // spaces only
+        assertFalse(PolicyName.isValidPolicyName("^")); // only non-alphanumeric characters
+        assertFalse(PolicyName.isValidPolicyName("medical*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(PolicyName.isValidName("property")); // alphabets only
-        assertTrue(PolicyName.isValidName("12345")); // numbers only
-        assertTrue(PolicyName.isValidName("Life")); // with capital letters
-        assertTrue(PolicyName.isValidName("Healthcare - A1")); // alphanumeric with dashes
+        assertTrue(PolicyName.isValidPolicyName("property")); // alphabets only
+        assertTrue(PolicyName.isValidPolicyName("12345")); // numbers only
+        assertTrue(PolicyName.isValidPolicyName("Life")); // with capital letters
+        assertTrue(PolicyName.isValidPolicyName("Healthcare - A1")); // alphanumeric with dashes
     }
 
     @Test

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Policy's details.
- * Guarantees: immutable; is valid as declared in {@link #isValidDetails(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPolicyDetails(String)}
  */
 public class PolicyDetails {
 
@@ -18,18 +18,18 @@ public class PolicyDetails {
     /**
      * Constructs a {@code Details}.
      *
-     * @param details Valid details.
+     * @param details Valid policy details.
      */
     public PolicyDetails(String details) {
         requireNonNull(details);
-        checkArgument(isValidDetails(details), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPolicyDetails(details), MESSAGE_CONSTRAINTS);
         value = details;
     }
 
     /**
-     * Returns true if a given string is valid details.
+     * Returns true if a given string is valid policy details.
      */
-    public static boolean isValidDetails(String test) {
+    public static boolean isValidPolicyDetails(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
