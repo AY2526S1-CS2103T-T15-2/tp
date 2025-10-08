@@ -23,15 +23,14 @@ public class Contract {
 
     /**
      * Constructor for a Contract object.
-     * @param name Name of policy holder
      * @param nric NRIC of policy holder
      * @param pId ID of policy
      */
-    public Contract(Name name, Nric nric, Id pId) {
-        this.name = name;
+    public Contract(Nric nric, Id pId, Date date) {
+        // this.name = name; // Name can be fetched using NRIC from Person. Function to be implemented
         this.nric = nric;
         this.pId = pId;
-        this.dateSigned = new Date();
+        this.dateSigned = date;
     }
 
     public Id getCId() {
@@ -46,7 +45,7 @@ public class Contract {
         return nric;
     }
 
-   public Id getPId() {
+    public Id getPId() {
         return pId;
     }
 
@@ -96,5 +95,6 @@ public class Contract {
                 .add("dateSigned", dateSigned)
                 .toString();
         )
+    }
 
 }
