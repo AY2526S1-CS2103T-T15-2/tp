@@ -5,9 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Policy's name.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPolicyName(String)}
  */
-public class Name {
+public class PolicyName {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters, spaces, and dashes, and it should not be blank";
@@ -19,18 +19,18 @@ public class Name {
     /**
      * Constructs a {@code Name}.
      *
-     * @param name A valid name.
+     * @param name A valid policy name.
      */
-    public Name(String name) {
+    public PolicyName(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPolicyName(name), MESSAGE_CONSTRAINTS);
         value = name;
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid policy name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidPolicyName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -46,12 +46,12 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof PolicyName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return value.equals(otherName.value);
+        PolicyName otherPolicyName = (PolicyName) other;
+        return value.equals(otherPolicyName.value);
     }
 
     @Override
