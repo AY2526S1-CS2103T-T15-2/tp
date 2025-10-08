@@ -57,7 +57,7 @@ public class AddPolicyCommand extends Command {
         }
 
         AddPolicyCommand otherAddPolicyCommand = (AddPolicyCommand) other;
-        return toAdd.equals(otherAddPolicyCommand.toAdd);
+        return toAdd.partialEquals(otherAddPolicyCommand.toAdd);
     }
 
     @Override
