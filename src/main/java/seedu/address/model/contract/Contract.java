@@ -6,7 +6,7 @@ import seedu.address.model.person.Name;
 import java.util.Date;
 
 //import seedu.address.model.person.Nric;
-//import seedu.address.model.policy.Id;
+//import seedu.address.model.util.Id;
 
 /**
  * Represents a Contract in the iCon.
