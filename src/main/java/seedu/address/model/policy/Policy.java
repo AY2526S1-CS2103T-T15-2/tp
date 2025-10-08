@@ -14,14 +14,16 @@ public class Policy {
 
     private final Name name;
     private final Details details;
+    private final Id id;
 
     /**
-     * Every field must be present and not null.
+     * Name and details must be present and not null.
      */
     public Policy(Name name, Details details) {
         requireAllNonNull(name, details);
         this.name = name;
         this.details = details;
+        this.id = Id.generate();
     }
 
     public Name getName() {
@@ -30,6 +32,10 @@ public class Policy {
 
     public Details getDetails() {
         return details;
+    }
+
+    public Id getId() {
+        return id;
     }
 
     @Override
