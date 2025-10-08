@@ -15,7 +15,7 @@ import seedu.address.model.policy.PolicyName;
 public class AddPolicyCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullPolicy_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddPolicyCommand(null));
     }
 
@@ -41,7 +41,7 @@ public class AddPolicyCommandTest {
         // null -> returns false
         assertFalse(addPolicyCommand.equals(null));
 
-        // different person -> returns false
+        // different policy -> returns false
         assertFalse(addPolicyCommand.equals(addPolicyCommandOther));
     }
 
