@@ -1,7 +1,5 @@
 package seedu.address.model.policy;
 
-import java.util.Random;
-
 import seedu.address.model.util.RandomUtil;
 
 /**
