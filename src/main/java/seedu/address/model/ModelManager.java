@@ -130,8 +130,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPolicy(Policy toAdd) {
-
+    public void addPolicy(Policy policy) {
     }
 
     @Override

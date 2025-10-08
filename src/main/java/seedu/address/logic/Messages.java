@@ -50,6 +50,6 @@ public class Messages {
     }
 
     public static String format(Policy policy) {
-        return "";
+        return policy.getName() + "; Details: " + policy.getDetails();
     }
 }
