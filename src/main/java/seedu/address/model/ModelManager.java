@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Contract> filteredContracts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredContracts = new FilteredList<>(this.addressBook.getContractList());
     }
 
     public ModelManager() {
@@ -123,6 +125,11 @@ public class ModelManager implements Model {
         addressBook.addContract(contract);
     }
 
+    @Override
+    public void removeContract(Contract contract) {
+        addressBook.removeContract(contract);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -138,6 +145,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Contract> getFilteredContractList() {
+        return filteredContracts;
+    }
+
+    @Override
+    public void updateFilteredContractList(Predicate<Contract> predicate) {
+        requireNonNull(predicate);
+        filteredContracts.setPredicate(predicate);
     }
 
     @Override

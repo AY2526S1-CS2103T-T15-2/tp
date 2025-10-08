@@ -115,6 +115,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         contracts.add(contract);
     }
 
+    /**
+     * Removes the given contract.
+     * The contract must exist in the address book.
+     */
+    public void removeContract(Contract contract) {
+        requireNonNull(contract);
+        contracts.remove(contract);
+    }
+
     //// util methods
 
     @Override
@@ -127,6 +136,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Contract> getContractList() {
+        return contracts.asUnmodifiableObservableList();
     }
 
     @Override

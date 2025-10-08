@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -96,4 +97,19 @@ public interface Model {
      * {@code contract} must not already exist in the address book.
      */
     void addContract(Contract contract);
+
+    /** Returns an unmodifiable view of the filtered contract list */
+    ObservableList<Contract> getFilteredContractList();
+
+    /**
+     * Updates the filter of the filtered contract list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredContractList(Predicate<Contract> predicate);
+
+    /**
+     * Removes the given contract.
+     * The contract must exist in the address book.
+     */
+    void removeContract(Contract contract);
 }
