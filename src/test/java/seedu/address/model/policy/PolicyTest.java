@@ -39,13 +39,15 @@ public class PolicyTest {
         assertFalse(policy.equals(editedPolicy));
 
         // different id -> returns false
-        editedPolicy = new Policy(new PolicyName("Healthcare - A"), new PolicyDetails("policy details"), PolicyId.generate());
+        editedPolicy = new Policy(new PolicyName("Healthcare - A"), new PolicyDetails("policy details"),
+                PolicyId.generate());
         assertFalse(policy.equals(editedPolicy));
     }
 
     @Test
     public void toStringMethod() {
-        Policy policy = new Policy(new PolicyName("Property - A"), new PolicyDetails("policy details"), PolicyId.generate());
+        Policy policy = new Policy(new PolicyName("Property - A"), new PolicyDetails("policy details"),
+                PolicyId.generate());
         String expected = Policy.class.getCanonicalName() + "{name=" + policy.getName()
                 + ", details=" + policy.getDetails() + ", id=" + policy.getId() + "}";
         assertEquals(expected, policy.toString());

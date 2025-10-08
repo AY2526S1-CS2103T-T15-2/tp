@@ -31,7 +31,8 @@ public class PolicyDetailsTest {
         // valid details
         assertTrue(PolicyDetails.isValidPolicyDetails("This policy"));
         assertTrue(PolicyDetails.isValidPolicyDetails("a")); // one character
-        assertTrue(PolicyDetails.isValidPolicyDetails("This policy provides coverage for the insured and immediate family "
+        assertTrue(PolicyDetails.isValidPolicyDetails(
+                "This policy provides coverage for the insured and immediate family "
                 + "members against medical emergencies, hospitalization, and accidental injuries.")); // long details
     }
 
