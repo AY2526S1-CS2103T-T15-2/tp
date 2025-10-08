@@ -5,23 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class IdTest {
+public class PolicyIdTest {
 
     @Test
     public void equals() {
-        Id id = Id.generate();
+        PolicyId policyId = PolicyId.generate();
 
         // same object -> returns true
-        assertTrue(id.equals(id));
+        assertTrue(policyId.equals(policyId));
 
         // null -> returns false
-        assertFalse(id.equals(null));
+        assertFalse(policyId.equals(null));
 
         // different types -> returns false
-        assertFalse(id.equals(5.0f));
+        assertFalse(policyId.equals(5.0f));
 
         // different values -> returns false
         // note: randomly generated
-        assertFalse(id.equals(Id.generate()));
+        assertFalse(policyId.equals(PolicyId.generate()));
     }
 }
