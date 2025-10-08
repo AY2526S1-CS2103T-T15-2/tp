@@ -17,7 +17,7 @@ import seedu.address.model.util.Id;
 /**
  * Parses input arguments and creates a new AddContractCommand object
  */
-public class AddContractParser {
+public class AddContractParser implements Parser<AddContract> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddContract
