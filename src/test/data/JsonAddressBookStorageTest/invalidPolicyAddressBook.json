@@ -1,0 +1,8 @@
+{
+  "persons": [],
+  "policies": [ {
+    "name": "Invalid name!!!",
+    "details": "details",
+    "id": "123456"
+  } ]
+}

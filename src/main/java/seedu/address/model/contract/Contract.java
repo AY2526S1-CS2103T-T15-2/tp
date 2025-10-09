@@ -7,31 +7,21 @@ import java.util.Date;
 import java.util.Objects;
 
 import seedu.address.model.person.Nric;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.util.RandomUtil;
 
 /**
  * Represents a Contract in the iCon.
  */
 public class Contract {
 
+
+
     private final ContractId cId;
     private final Name name;
     private final Nric nric;
     private final PolicyId pId;
     private final Date dateSigned;
-
-
-    /**
-     * Constructor for a Contract object.
-     * @param nric NRIC of policy holder
-     * @param pId ID of policy
-     */
-    public Contract(Nric nric, PolicyId pId, Date date) {
-        this.cId = ContractId.generate();
-        // this.name = name; // Name can be fetched using NRIC from Person. Function to be implemented
-        this.nric = nric;
-        this.pId = pId;
-        this.dateSigned = date;
-    }
 
     /**
      * Constructor for a Contract object with all fields specified.
@@ -99,7 +89,7 @@ public class Contract {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cId, /*name,*/ nric, pId, dateSigned);
+        return Objects.hash(cId, name, nric, pId, dateSigned);
     }
 
     @Override
