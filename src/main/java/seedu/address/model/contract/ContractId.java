@@ -8,11 +8,14 @@ import seedu.address.model.util.RandomUtil;
  */
 public class ContractId {
 
+    public static final String MESSAGE_CONSTRAINTS = "Contract IDs should be alphanumeric";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+
     private static final int ID_LENGTH = 6;
 
     public final String value;
 
-    private ContractId(String id) {
+    public ContractId(String id) {
         value = id;
     }
 
@@ -21,6 +24,13 @@ public class ContractId {
      */
     public static ContractId generate() {
         return new ContractId(RandomUtil.generateAlphanum(ID_LENGTH));
+    }
+
+    /**
+     * Returns true if a given string is a valid Contract ID.
+     */
+    public static boolean isValidContractId(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
