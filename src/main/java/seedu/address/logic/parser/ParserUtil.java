@@ -15,8 +15,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.PolicyDetails;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.PolicyName;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.Id;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -126,21 +128,40 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String id} into an {@code Id}.
+     * Parses a {@code String policyName} into an {@code PolicyName}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code policyName} is invalid.
      */
-    public static Id parsePid(String id) throws ParseException {
-        requireNonNull(id);
-        String trimmedId = id.trim();
-        if (!Id.isValidId(trimmedId)) {
-            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
+    public static PolicyName parsePolicyName(String policyName) throws ParseException {
+        requireNonNull(policyName);
+        String trimmedPolicyName = policyName.trim();
+        if (!PolicyName.isValidPolicyName(trimmedPolicyName)) {
+            throw new ParseException(PolicyName.MESSAGE_CONSTRAINTS);
         }
-        return new Id(trimmedId);
+        return new PolicyName(trimmedPolicyName);
     }
 
     /**
-     * Parses a {@code String nric} into an {@code Nric}.
+     * Parses a {@code String policyDetails} into an {@code PolicyDetails}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code policyDetails} is invalid.
+     */
+    public static PolicyDetails parsePolicyDetails(String policyDetails) throws ParseException {
+        requireNonNull(policyDetails);
+        String trimmedPolicyDetails = policyDetails.trim();
+        if (!PolicyDetails.isValidPolicyDetails(trimmedPolicyDetails)) {
+            throw new ParseException(PolicyDetails.MESSAGE_CONSTRAINTS);
+        }
+        return new PolicyDetails(trimmedPolicyDetails);
+    }
+
+    /**
+     * Parses a {@code String nric} into a {@code Nric}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nric} is invalid.
      */
     public static Nric parseNric(String nric) throws ParseException {
         requireNonNull(nric);
@@ -149,6 +170,19 @@ public class ParserUtil {
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
         return new Nric(trimmedNric);
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code Id}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static PolicyId parsePid(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!PolicyId.isValidPolicyId(trimmedId)) {
+            throw new ParseException(PolicyId.MESSAGE_CONSTRAINTS);
+        }
+        return new PolicyId(trimmedId);
     }
 
     /**

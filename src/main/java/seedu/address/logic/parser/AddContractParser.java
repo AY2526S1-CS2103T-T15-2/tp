@@ -12,7 +12,7 @@ import seedu.address.logic.commands.AddContract;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Nric;
-import seedu.address.model.util.Id;
+import seedu.address.model.policy.PolicyId;
 
 /**
  * Parses input arguments and creates a new AddContractCommand object
@@ -34,7 +34,7 @@ public class AddContractParser {
         }
 
         arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NRIC, PREFIX_DATE);
-        Id pid = ParserUtil.parsePid(arguMultimap.getValue(PREFIX_PID).get());
+        PolicyId pid = ParserUtil.parsePid(arguMultimap.getValue(PREFIX_PID).get());
         Nric nric = ParserUtil.parseNric(arguMultimap.getValue(PREFIX_NRIC).get());
         Date date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
 

@@ -274,42 +274,73 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Independent Insurance Agents who manage the personal portfolio of clients, contracts and insurance policies.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+iCon helps insurance agents manage a large pool of clients and contracts, with the flexibility to add policies from any issuer. By enabling fast, accurate retrieval of critical client and policy data, it minimizes admin overhead and let agents focus more on delivering high-quality advisory services.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​               | So that I can …​                                                     |
+|----------|-----------------|----------------------------|----------------------------------------------------------------------|
+| `* * *`  | Insurance Agent | add a contact              | store contacts                                                       |
+| `* * *`  | Insurance Agent | remove a contact           | remove unnecessary contacts                                          |
+| `* * *`  | Insurance Agent | view a contact             | see contact details of customers I want to see                       |
+| `* * *`  | Insurance Agent | add a policy               | add more policy types                                                | 
+| `* * *`  | Insurance Agent | remove a policy            | remove unnecessary policy types                                      |
+| `* * *`  | Insurance Agent | view a policy              | see the policy details                                               |
+| `* * *`  | Insurance Agent | add a contract             | link a policy to a customer                                          |
+| `* * *`  | Insurance Agent | remove a contract          | remove unnecessary contracts                                         |
+| `* * *`  | Insurance Agent | view a contract            | see the contract details and who signed the contract                 |
+| `* *`    | Insurance Agent | tag a contact              | tag a contact with follow-ups                                        |
+| `* *`    | Insurance Agent | search for a contact       | find a specific contact by name                                      |
+| `* *`    | Insurance Agent | search for a contract      | find a specific contract by its type or date                         |
+| `* *`    | Insurance Agent | add client appointments    | add an appointment date for a contact for follow-ups                 |
+| `* *`    | Insurance Agent | delete client appointments | delete any misplaced appointment dates for a contact                 |
+| `* *`    | Insurance Agent | add contract expiry        | start to schedule an appointment closer to contract's expiry         |
+| `* *`    | Insurance Agent | add contract premium       | easily reference the rates offered to my customers                   |
+| `* *`    | Insurance Agent | edit a contact             | edit the wrong details of customers                                  |
+| `* *`    | Insurance Agent | edit a policy              | edit the policy of the contract                                      |
+| `*`      | Insurance Agent | sort by contacts           | order by contacts                                                    |
+| `*`      | Insurance Agent | sort by contracts          | order by contracts                                                   |
+| `*`      | Insurance Agent | edit client appointments   | reschedule an appointment date for a contact or mark it as completed |
+| `*`      | Insurance Agent | sort by appointments       | easily take reference to upcoming appointments                       |
 
-*{More to be added}*
+
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `iCon` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case: UC1 - Add a person**
+
+**MSS**
+
+1.  User requests to add a person with all details specified
+2.  iCon adds the person
+
+    Use case ends.
+
+**Extensions**
+* 1a. Some compulsory details are missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+**Use case: UC2 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  iCon shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  iCon deletes the person
 
     Use case ends.
 
@@ -321,24 +352,284 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. iCon shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use Case: UC3 - Edit a person's details**
+
+**MSS**
+
+1.  User requests to list persons
+2.  iCon shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  iCon updates the person's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. iCon shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. Some compulsory details are missing.
+  
+    * 4a1. iCon shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC4 - Find persons by name**
+
+**MSS**
+
+1.  User requests to find persons by name
+2.  iCon shows a list of persons whose names contain the given keywords
+3.  User requests to view details of a specific person in the list
+4.  iCon shows the person's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No persons found.
+
+  * 2a1. iCon shows an empty list.
+
+    Use case ends.
+
+**Use Case: UC5 - List all persons**
+
+**MSS**
+
+1.  User requests to list persons
+2.  iCon shows a list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  * 1a1. iCon shows an empty list.
+
+    Use case ends.
+
+**Use Case: UC6 - Clear all persons**
+
+**MSS**
+
+1.  User requests to clear all persons
+2.  iCon clears all persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use Case: UC7 - Exit the App**
+
+**MSS**
+
+1.  User requests to exit the App
+2.  iCon saves all data to hard disk
+3.  iCon exits
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. iCon fails to save data to hard disk.
+
+    * 2a1. iCon shows an error message.
+
+      Use case resumes at step 3.
+
+**Use Case: UC8 - Add Policy**
+
+**MSS**
+
+1. User adds policy using file path to policy file
+2. iCon adds the policy
+3. iCon shows a success message & generates a policy ID
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. File path is invalid
+
+   * 1a1. iCon shows an error message.
+
+     Use case ends.
+
+**Use case: UC9 - Remove Policy**
+
+**MSS**
+
+1. User requests to list policies
+2. iCon shows a list of policies
+3. User requests to remove a specific policy in the list
+4. iCon removes the policy
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. iCon shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC10 - View Policies**
+
+**MSS**
+
+1. User requests to list policies
+2. iCon shows a list of policies
+3. User requests to view details of a specific policy in the list
+4. iCon shows the policy's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  * 2a1. iCon shows an empty list.
+
+    Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. iCon shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The policy file is missing/corrupted.
+
+    * 3b1. iCon shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC11 - Add contract**
+
+**MSS**
+
+1. User adds contract with specific details
+2. iCon adds the contract
+3. iCon shows a success message & generates a contract ID
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Some compulsory details are missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. The person ID is invalid.
+
+    * 2a1. iCon shows an error message.
+
+      Use case ends.
+  
+* 2b. The policy ID is invalid.
+
+    * 2b1. iCon shows an error message.
+
+      Use case ends.
+
+* 2c. The contract is duplicate.
+
+    * 2c1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC12 - Remove contract**
+
+**MSS**
+
+1. User requests to list contracts
+2. iCon shows a list of contracts
+3. User requests to remove a specific contract in the list
+4. iCon removes the contract
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. iCon shows an error message.
+
+      Use case resumes at step 2.
+
+**Use Case: UC13 - View contracts**
+
+**MSS**
+
+1. User requests to list contracts
+2. iCon shows a list of contracts
+3. User requests to view details of a specific contract in the list by id
+4. iCon shows the contract's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  * 2a1. iCon shows an empty list.
+
+    Use case ends.
+
+* 3a. The given id is invalid.
+
+    * 3a1. iCon shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  The application should be easily installable, with no additional third-party dependencies.
+3.  The application should function entirely offline.
+4.  The system should be able to hold up to 1000 persons, contracts, and policies without a noticeable sluggishness in performance for typical usage.
+5.  The system should respond to user input and commands within 100 milliseconds.
+6.  The system should manage its own copy of policies separate from the source file when adding or removing policies.
+7.  The save data should not take more than 100 MB in typical usage.
+8.  The system must save changes to the hard disk after 1 or a few user modifications and after exiting the program, to minimize data loss in the event of a crash.
+9.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A customer of the insurance agent that has data fields, name, email, and NRIC
+* **Person(s)**: Another way of saying a contact
+* **Policy**: The document that details the terms and conditions of a contract
+* **Contract**: A contract that binds a customer to a certain policy
 
 --------------------------------------------------------------------------------------------------------------------
 
