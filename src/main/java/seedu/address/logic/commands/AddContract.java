@@ -28,7 +28,7 @@ public class AddContract extends Command {
             + PREFIX_NRIC + "T0123456A "
             + PREFIX_DATE + "2025-01-13 ";
 
-    public static final String MESSAGE_SUCCESS = "New contract added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New contract added with the following ID: $s";
     public static final String MESSAGE_DUPLICATE_CONTRACT = "This contract already exists in iCon";
 
     private final Contract toAdd;
@@ -50,7 +50,7 @@ public class AddContract extends Command {
         }
 
         model.addContract(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()));
     }
 
     @Override

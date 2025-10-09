@@ -7,17 +7,16 @@ import java.util.Date;
 import java.util.Objects;
 
 import seedu.address.model.person.Nric;
-import seedu.address.model.util.Id;
 
 /**
  * Represents a Contract in the iCon.
  */
 public class Contract {
 
-    private final Id cId
+    private final ContractId cId;
     private final Name name;
     private final Nric nric;
-    private final Id pId;
+    private final PolicyId pId;
     private final Date dateSigned;
 
 
@@ -26,14 +25,15 @@ public class Contract {
      * @param nric NRIC of policy holder
      * @param pId ID of policy
      */
-    public Contract(Nric nric, Id pId, Date date) {
+    public Contract(Nric nric, PolicyId pId, Date date) {
+        this.cId = ContractId.generate();
         // this.name = name; // Name can be fetched using NRIC from Person. Function to be implemented
         this.nric = nric;
         this.pId = pId;
         this.dateSigned = date;
     }
 
-    public Id getCId() {
+    public ContractId getCId() {
         return cId;
     }
 
@@ -45,7 +45,7 @@ public class Contract {
         return nric;
     }
 
-    public Id getPId() {
+    public PolicyId getPId() {
         return pId;
     }
 
@@ -89,6 +89,7 @@ public class Contract {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("cId", cId)
                 .add("name", name)
                 .add("nric", nric)
                 .add("pId", pId)
