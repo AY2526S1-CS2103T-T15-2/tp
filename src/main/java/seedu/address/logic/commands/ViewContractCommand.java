@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Model;
 
 import static java.util.Objects.requireNonNull;
 
@@ -13,11 +14,10 @@ public class ViewContractCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Viewing all contracts ";
 
-
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_CONTRACTS)
+        model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_CONTRACTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
