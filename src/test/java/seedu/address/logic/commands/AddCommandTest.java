@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalData.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -160,7 +160,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPolicy(Policy toAdd) {
+        public boolean hasPolicy(Policy id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePolicy(Policy target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPolicy(Policy policy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPolicy(Policy target, Policy editedPolicy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Policy> getFilteredPolicyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPolicyList(Predicate<Policy> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

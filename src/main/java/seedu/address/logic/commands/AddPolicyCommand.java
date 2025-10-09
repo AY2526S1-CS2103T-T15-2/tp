@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -57,7 +59,8 @@ public class AddPolicyCommand extends Command {
         }
 
         AddPolicyCommand otherAddPolicyCommand = (AddPolicyCommand) other;
-        return toAdd.partialEquals(otherAddPolicyCommand.toAdd);
+
+        return toAdd.equals(otherAddPolicyCommand.toAdd);
     }
 
     @Override
