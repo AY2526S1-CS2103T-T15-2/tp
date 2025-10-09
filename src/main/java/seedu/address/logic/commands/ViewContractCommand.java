@@ -4,6 +4,9 @@ import seedu.address.commons.util.ToStringBuilder;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Lists all contracts in the address book to the user.
+ */
 public class ViewContractCommand extends Command {
 
     public static final String COMMAND_WORD = "view c: -a";
