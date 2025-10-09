@@ -59,6 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setContracts(newData.getContractList());
     }
 
     //// person-level operations
@@ -122,6 +123,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeContract(Contract contract) {
         requireNonNull(contract);
         contracts.remove(contract);
+    }
+
+    /**
+     * Replaces the contents of the contract list with {@code contracts}.
+     * {@code contracts} must not contain duplicate contracts.
+     */
+    public void setContracts(List<Contract> contracts) {
+        this.contracts.setContracts(contracts);
     }
 
     //// util methods
