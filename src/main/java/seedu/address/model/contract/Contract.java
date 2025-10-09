@@ -22,7 +22,21 @@ public class Contract {
     private final Date dateSigned;
 
     /**
-     * Constructor for a Contract object with all fields specified.
+     * Constructor for a Creating a new Contract object.
+     * @param nric NRIC of policy holder
+     * @param pId ID of policy
+     * @param date Date the contract was signed
+     */
+    public Contract(Nric nric, PolicyId pId, Date date) {
+        this.cId = ContractId.generate();
+        this.name = new Name("Placeholder");
+        this.nric = nric;
+        this.pId = pId;
+        this.dateSigned = date;
+    }
+
+    /**
+     * Constructor for a Contract object with all fields specified for JSON.
      * @param cId Contract ID
      * @param name Name of policy holder
      * @param nric NRIC of policy holder
