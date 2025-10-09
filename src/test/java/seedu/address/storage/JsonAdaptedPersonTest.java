@@ -78,7 +78,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidNric_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, INVALID_NRIC,
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_NRIC,
                         VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = Nric.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
