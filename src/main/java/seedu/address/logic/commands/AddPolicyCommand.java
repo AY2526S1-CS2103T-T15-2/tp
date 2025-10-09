@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -14,6 +16,14 @@ import seedu.address.model.policy.Policy;
 public class AddPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "add_policy";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a policy. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DETAILS + "DETAILS "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Life Insurance "
+            + PREFIX_DETAILS + "This policy... ";
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
 
@@ -47,6 +57,7 @@ public class AddPolicyCommand extends Command {
         }
 
         AddPolicyCommand otherAddPolicyCommand = (AddPolicyCommand) other;
+
         return toAdd.equals(otherAddPolicyCommand.toAdd);
     }
 
