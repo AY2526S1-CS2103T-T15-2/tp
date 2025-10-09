@@ -103,7 +103,7 @@ public class AddPolicyCommandParserTest {
         // invalid details
         assertParseFailure(parser, INVALID_DETAILS_DESC + NAME_DESC_1 , PolicyDetails.MESSAGE_CONSTRAINTS);
 
-        // two invalid values, only first invalid value reported
+        // two invalid values, only the first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + INVALID_DETAILS_DESC, PolicyName.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
