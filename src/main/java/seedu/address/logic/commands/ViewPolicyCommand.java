@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ViewPolicyCommand extends Command {
 
-    public static final String COMMAND_WORD = "view p -a";
+    public static final String COMMAND_WORD = "view_policy";
 
     public static final String MESSAGE_SUCCESS = "Viewing all policies";
 
