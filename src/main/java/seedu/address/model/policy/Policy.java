@@ -39,21 +39,15 @@ public class Policy {
     }
 
     /**
-     * Test for equality of fields other than policyId.
-     * Mainly used for unit testing.
+     * Returns true if both policies have the same policy id.
      */
-    public boolean partialEquals(Object other) {
-        if (other == this) {
+    public boolean hasSameId(Policy otherPolicy) {
+        if (otherPolicy == this) {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof Policy)) {
-            return false;
-        }
-
-        Policy otherPolicy = (Policy) other;
-        return policyName.equals(otherPolicy.policyName) && policyDetails.equals(otherPolicy.policyDetails);
+        return otherPolicy != null
+                && otherPolicy.getId().equals(getId());
     }
 
     @Override

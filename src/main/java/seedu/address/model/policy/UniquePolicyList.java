@@ -13,14 +13,14 @@ import seedu.address.model.policy.exceptions.PolicyNotFoundException;
 
 /**
  * A list of policies that enforces uniqueness between its elements and does not allow nulls.
- * A policy is considered unique by comparing using {@code Policy#isSamePolicy(Policy)}. As such, adding and updating of
+ * A policy is considered unique by comparing using {@code Policy#hasSameId(Policy)}. As such, adding and updating of
  * policies uses Policy#isSamePolicy(Policy) for equality so as to ensure that the policy being added or updated is
  * unique in terms of identity in the UniquePolicyList. However, the removal of a policy uses Policy#equals(Object) so
  * as to ensure that the policy with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Policy#partialEquals(Object)
+ * @see Policy#hasSameId(Policy)
  */
 public class UniquePolicyList implements Iterable<Policy> {
 
@@ -33,7 +33,7 @@ public class UniquePolicyList implements Iterable<Policy> {
      */
     public boolean contains(Policy toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::partialEquals);
+        return internalList.stream().anyMatch(toCheck::hasSameId);
     }
 
     /**
@@ -61,7 +61,7 @@ public class UniquePolicyList implements Iterable<Policy> {
             throw new PolicyNotFoundException();
         }
 
-        if (!target.partialEquals(editedPolicy) && contains(editedPolicy)) {
+        if (!target.hasSameId(editedPolicy) && contains(editedPolicy)) {
             throw new DuplicatePolicyException();
         }
 
@@ -140,7 +140,7 @@ public class UniquePolicyList implements Iterable<Policy> {
     private boolean policiesAreUnique(List<Policy> policies) {
         for (int i = 0; i < policies.size() - 1; i++) {
             for (int j = i + 1; j < policies.size(); j++) {
-                if (policies.get(i).partialEquals(policies.get(j))) {
+                if (policies.get(i).hasSameId(policies.get(j))) {
                     return false;
                 }
             }

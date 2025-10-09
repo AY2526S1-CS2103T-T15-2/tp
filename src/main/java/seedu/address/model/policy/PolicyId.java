@@ -1,6 +1,9 @@
 package seedu.address.model.policy;
 
-import java.util.Random;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.model.util.RandomUtil;
 
 /**
  * Represents a Policy's id that a user can reference.
@@ -8,29 +11,33 @@ import java.util.Random;
  */
 public class PolicyId {
 
-    private static final String ID_CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
-            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            + "0123456789";
-    private static final int ID_LENGTH = 6;
+    public static final int ID_LENGTH = 6;
+
+    public static final String MESSAGE_CONSTRAINTS =
+            String.format("Id should be an alphanumeric string of length %d", ID_LENGTH);
+
+    public static final String VALIDATION_REGEX = String.format("[a-zA-Z0-9]{%d}", ID_LENGTH);
 
     public final String value;
 
     public PolicyId(String id) {
+        requireNonNull(id);
+        checkArgument(isValidPolicyId(id), MESSAGE_CONSTRAINTS);
         value = id;
+    }
+
+    /**
+     * Returns true if a given string is a valid policy id.
+     */
+    public static boolean isValidPolicyId(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
      * Generates a random alphanumeric id to assign to a Policy.
      */
     public static PolicyId generate() {
-        Random random = new Random();
-        String id = random.ints(0, ID_CHARACTERS.length())
-                .map(ID_CHARACTERS::charAt)
-                .limit(ID_LENGTH)
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
-                .toString();
-
-        return new PolicyId(id);
+        return new PolicyId(RandomUtil.generateAlphanum(ID_LENGTH));
     }
 
     @Override
