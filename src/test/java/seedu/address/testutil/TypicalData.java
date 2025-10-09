@@ -61,8 +61,6 @@ public class TypicalData {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalData() {} // prevents instantiation
-
     public static final Policy LIFE = new Policy(
             new PolicyName("Life Insurance"),
             new PolicyDetails("This policy coverage for family..."),
@@ -92,6 +90,8 @@ public class TypicalData {
             new PolicyDetails("Policy details 123"),
             new PolicyId("654321")
     );
+
+    private TypicalData() {} // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
