@@ -33,13 +33,29 @@ public class Contract {
         this.dateSigned = date;
     }
 
+    /**
+     * Constructor for a Contract object with all fields specified.
+     * @param cId Contract ID
+     * @param name Name of policy holder
+     * @param nric NRIC of policy holder
+     * @param pId ID of policy
+     * @param date Date the contract was signed
+     */
+    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId, Date date) {
+        this.cId = cId;
+        this.name = name;
+        this.nric = nric;
+        this.pId = pId;
+        this.dateSigned = date;
+    }
+
     public ContractId getCId() {
         return cId;
     }
 
-    public Name getName() {
-        return name;
-    }
+//    public Name getName() {
+//        return name;
+//    }
 
     public Nric getNric() {
         return nric;
@@ -75,7 +91,7 @@ public class Contract {
 
         Contract otherContract = (Contract) other;
         return otherContract.getCId().equals(getCId())
-                && otherContract.getName().equals(getName())
+//                && otherContract.getName().equals(getName())
                 && otherContract.getNric().equals(getNric())
                 && otherContract.getPId().equals(getPId())
                 && otherContract.getDate().equals(getDate());
@@ -83,14 +99,14 @@ public class Contract {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cId, name, nric, pId, dateSigned);
+        return Objects.hash(cId, /*name,*/ nric, pId, dateSigned);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("cId", cId)
-                .add("name", name)
+//                .add("name", name)
                 .add("nric", nric)
                 .add("pId", pId)
                 .add("dateSigned", dateSigned)
