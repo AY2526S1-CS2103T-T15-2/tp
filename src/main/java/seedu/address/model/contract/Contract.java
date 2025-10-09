@@ -1,14 +1,12 @@
 package seedu.address.model.contract;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Name;
-
 import java.util.Date;
 import java.util.Objects;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
-import seedu.address.model.util.RandomUtil;
 
 /**
  * Represents a Contract in the iCon.
@@ -43,9 +41,9 @@ public class Contract {
         return cId;
     }
 
-//    public Name getName() {
-//        return name;
-//    }
+    public Name getName() {
+        return name;
+    }
 
     public Nric getNric() {
         return nric;
@@ -59,6 +57,9 @@ public class Contract {
         return dateSigned;
     }
 
+    /**
+     * Checks if the given contract is the same as this contract.
+     */
     public boolean isSameContract(Contract otherContract) {
         if (otherContract == this) {
             return true;
@@ -81,7 +82,7 @@ public class Contract {
 
         Contract otherContract = (Contract) other;
         return otherContract.getCId().equals(getCId())
-//                && otherContract.getName().equals(getName())
+                && otherContract.getName().equals(getName())
                 && otherContract.getNric().equals(getNric())
                 && otherContract.getPId().equals(getPId())
                 && otherContract.getDate().equals(getDate());
@@ -96,12 +97,11 @@ public class Contract {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("cId", cId)
-//                .add("name", name)
+                .add("name", name)
                 .add("nric", nric)
                 .add("pId", pId)
                 .add("dateSigned", dateSigned)
                 .toString();
-        )
     }
 
 }
