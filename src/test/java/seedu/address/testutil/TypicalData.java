@@ -19,11 +19,15 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDetails;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.PolicyName;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Person} and {@code Policy} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalData {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -66,7 +70,37 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    public static final Policy LIFE = new Policy(
+            new PolicyName("Life Insurance"),
+            new PolicyDetails("This policy coverage for family..."),
+            new PolicyId("abcdef")
+    );
+
+    public static final Policy HEALTH = new Policy(
+            new PolicyName("Healthcare - A"),
+            new PolicyDetails("Other policy details 123"),
+            new PolicyId("123456")
+    );
+
+    public static final Policy PROPERTY = new Policy(
+            new PolicyName("Property"),
+            new PolicyDetails("Non-alphanumeric characters *^$+-"),
+            new PolicyId("Abc123")
+    );
+
+    public static final Policy HOME = new Policy(
+            new PolicyName("Home Insurance - B"),
+            new PolicyDetails("Placeholder policy details"),
+            new PolicyId("abc123")
+    );
+
+    public static final Policy HEALTH_B = new Policy(
+            new PolicyName("Healthcare - B"),
+            new PolicyDetails("Policy details 123"),
+            new PolicyId("654321")
+    );
+
+    private TypicalData() {} // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -76,10 +110,17 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        for (Policy policy: getTypicalPolicies()) {
+            ab.addPolicy(policy);
+        }
         return ab;
     }
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Policy> getTypicalPolicies() {
+        return new ArrayList<>(Arrays.asList(LIFE, HEALTH, PROPERTY));
     }
 }

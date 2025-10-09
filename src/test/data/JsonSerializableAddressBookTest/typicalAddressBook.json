@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "AddressBook save file which contains the same values as in TypicalData#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
@@ -49,5 +49,18 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]
+  } ],
+  "policies": [ {
+    "name" : "Life Insurance",
+    "details" : "This policy coverage for family...",
+    "id" : "abcdef"
+  }, {
+    "name" : "Healthcare - A",
+    "details" : "Other policy details 123",
+    "id" : "123456"
+  }, {
+    "name" : "Property",
+    "details" : "Non-alphanumeric characters *^$+-",
+    "id" : "Abc123"
   } ]
 }
