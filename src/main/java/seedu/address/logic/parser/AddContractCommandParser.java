@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import java.util.Date;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddContract;
+import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Nric;
@@ -17,30 +17,30 @@ import seedu.address.model.policy.PolicyId;
 /**
  * Parses input arguments and creates a new AddContractCommand object
  */
-public class AddContractParser implements Parser<AddContract> {
+public class AddContractCommandParser implements Parser<AddContractCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddContract
      * and returns an AddContract object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddContract parse(String args) throws ParseException {
+    public AddContractCommand parse(String args) throws ParseException {
         ArgumentMultimap arguMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE);
 
         if (!arePrefixesPresent(arguMultimap, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE)
                 || !arguMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContract.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE));
         }
 
         arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NRIC, PREFIX_DATE);
-        PolicyId pid = ParserUtil.parsePid(arguMultimap.getValue(PREFIX_PID).get());
+        PolicyId pid = ParserUtil.parsePolicyId(arguMultimap.getValue(PREFIX_PID).get());
         Nric nric = ParserUtil.parseNric(arguMultimap.getValue(PREFIX_NRIC).get());
         Date date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
 
         Contract contract = new Contract(nric, pid, date);
 
-        return new AddContract(contract);
+        return new AddContractCommand(contract);
     }
 
     /**

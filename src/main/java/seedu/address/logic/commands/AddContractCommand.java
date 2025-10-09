@@ -14,7 +14,7 @@ import seedu.address.model.contract.Contract;
  * Adds a contract to iCon.
  * Links a contact to aa policy.
  */
-public class AddContract extends Command {
+public class AddContractCommand extends Command {
 
     public static final String COMMAND_WORD = "add_contract";
 
@@ -36,7 +36,7 @@ public class AddContract extends Command {
     /**
      * Creates an AddContract to add the specified {@code Contract}
      */
-    public AddContract(Contract contract) {
+    public AddContractCommand(Contract contract) {
         requireNonNull(contract);
         toAdd = contract;
     }
@@ -60,11 +60,11 @@ public class AddContract extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddContract)) {
+        if (!(other instanceof AddContractCommand)) {
             return false;
         }
 
-        AddContract otherAddContract = (AddContract) other;
+        AddContractCommand otherAddContract = (AddContractCommand) other;
         return toAdd.equals(otherAddContract.toAdd);
     }
 
