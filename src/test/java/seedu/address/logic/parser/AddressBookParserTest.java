@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemovePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -51,6 +52,14 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_removePolicy() throws Exception {
+        //todo: add index first policy into typicalpolicies to use for tests
+        RemovePolicyCommand command = (RemovePolicyCommand) parser.parseCommand(
+                RemovePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_POLICY.getOneBased());
+        assertEquals(new RemovePolicyCommand(INDEX_FIRST_POLICY), command);
     }
 
     @Test

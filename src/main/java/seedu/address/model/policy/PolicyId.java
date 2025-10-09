@@ -8,10 +8,14 @@ import java.util.Random;
  */
 public class PolicyId {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Policy Id should only contain alphanumeric characters, and should be 6 characters long";
     private static final String ID_CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
             + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "0123456789";
     private static final int ID_LENGTH = 6;
+
+    private static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String value;
 
@@ -31,6 +35,13 @@ public class PolicyId {
                 .toString();
 
         return new PolicyId(id);
+    }
+
+    /**
+     * Return true if a given string is a valid policy id
+     */
+    public static boolean isValidPolicyId(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
