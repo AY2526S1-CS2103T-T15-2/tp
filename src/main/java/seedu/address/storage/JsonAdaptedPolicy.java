@@ -16,9 +16,9 @@ class JsonAdaptedPolicy {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Policy's %s field is missing!";
 
-    private final String id;
     private final String name;
     private final String details;
+    private final String id;
 
     /**
      * Constructs a {@code JsonAdaptedPolicy} with the given policy details.

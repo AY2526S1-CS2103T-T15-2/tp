@@ -1,0 +1,12 @@
+{
+  "persons": [],
+  "policies": [ {
+    "name": "Healthcare - A",
+    "details": "policy details",
+    "id": "abcdef"
+  }, {
+    "name": "Property",
+    "details": "other details",
+    "id": "abcdef"
+  } ]
+}

@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalData.ALICE;
+import static seedu.address.testutil.TypicalData.BENSON;
+import static seedu.address.testutil.TypicalData.LIFE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -86,6 +87,17 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPolicy_policyNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasPolicy(LIFE));
+    }
+
+    @Test
+    public void hasPolicy_policyInAddressBook_returnsTrue() {
+        modelManager.addPolicy(LIFE);
+        assertTrue(modelManager.hasPolicy(LIFE));
     }
 
     @Test
