@@ -60,6 +60,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the policy list with {@code policies}.
+     * {@code policies} must not contain duplicate policies.
+     */
+    public void setPolicies(List<Policy> policies) {
+        this.policies.setPolicies(policies);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -106,48 +114,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    /// / util methods
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("persons", persons)
-                .toString();
-    }
-
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
-            return false;
-        }
-
-        AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
-    }
-
-    @Override
-    public int hashCode() {
-        return persons.hashCode();
-    }
-
-    /**
-     * Replaces the contents of the policy list with {@code policies}.
-     * {@code policies} must not contain duplicate policies.
-     */
-    public void setPolicies(List<Policy> policies) {
-        this.policies.setPolicies(policies);
-    }
-
     //// policy-level operations
 
     /**
@@ -185,11 +151,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         policies.remove(key);
     }
 
-    /// / util methods
+    //// util methods
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("persons", persons)
+                .toString();
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
+    }
 
     @Override
     public ObservableList<Policy> getPolicyList() {
         return policies.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddressBook)) {
+            return false;
+        }
+
+        AddressBook otherAddressBook = (AddressBook) other;
+        return persons.equals(otherAddressBook.persons);
+    }
+
+    @Override
+    public int hashCode() {
+        return persons.hashCode();
     }
 
 }

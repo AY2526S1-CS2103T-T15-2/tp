@@ -96,7 +96,7 @@ public interface Model {
      * Deletes the given policy.
      * The policy must exist in the address book.
      */
-    void removePolicy(Policy target);
+    void deletePolicy(Policy target);
 
     /**
      * Adds the given policy.
