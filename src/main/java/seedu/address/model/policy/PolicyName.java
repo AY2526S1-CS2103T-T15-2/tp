@@ -17,7 +17,7 @@ public class PolicyName {
     public final String value;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code PolicyName}.
      *
      * @param name A valid policy name.
      */

@@ -20,6 +20,11 @@ public class PolicyId {
 
     public final String value;
 
+    /**
+     * Constructs a {@code PolicyId}.
+     *
+     * @param id A valid policy id.
+     */
     public PolicyId(String id) {
         requireNonNull(id);
         checkArgument(isValidPolicyId(id), MESSAGE_CONSTRAINTS);

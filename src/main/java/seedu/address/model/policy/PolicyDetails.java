@@ -16,7 +16,7 @@ public class PolicyDetails {
     public final String value;
 
     /**
-     * Constructs a {@code Details}.
+     * Constructs a {@code PolicyDetails}.
      *
      * @param details Valid policy details.
      */
