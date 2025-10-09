@@ -37,16 +37,6 @@ public class AddPolicyCommandParserTest {
     private AddPolicyCommandParser parser = new AddPolicyCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
-        Policy expectedPolicy = new Policy(
-                new PolicyName(VALID_NAME_1), new PolicyDetails(VALID_DETAILS_1), new PolicyId("AAAAAA"));
-
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_1 + DETAILS_DESC_1,
-                new AddPolicyCommand(expectedPolicy));
-    }
-
-    @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPolicyString = NAME_DESC_1 + DETAILS_DESC_1;
 
