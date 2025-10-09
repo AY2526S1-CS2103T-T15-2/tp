@@ -14,13 +14,13 @@ public class PolicyDetailsTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidDetails = "";
-        assertThrows(IllegalArgumentException.class, () -> new PolicyDetails(invalidDetails));
+    public void constructor_invalidPolicyDetails_throwsIllegalArgumentException() {
+        String invalidPolicyDetails = "";
+        assertThrows(IllegalArgumentException.class, () -> new PolicyDetails(invalidPolicyDetails));
     }
 
     @Test
-    public void isValidDetails() {
+    public void isValidPolicyDetails() {
         // null details
         assertThrows(NullPointerException.class, () -> PolicyDetails.isValidPolicyDetails(null));
 

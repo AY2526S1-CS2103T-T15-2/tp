@@ -17,7 +17,7 @@ public class RandomUtil {
     public static String generateAlphanum(int length) {
         Random random = new Random();
         return random.ints(0, ALPHANUMERIC_CHARACTERS.length())
-                .map(ALPHANUMERIC_CHARACTERS::charAt)
+                .mapToObj(ALPHANUMERIC_CHARACTERS::charAt)
                 .limit(length)
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                 .toString();

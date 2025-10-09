@@ -14,13 +14,13 @@ public class PolicyNameTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new PolicyName(invalidName));
+    public void constructor_invalidPolicyName_throwsIllegalArgumentException() {
+        String invalidPolicyName = "";
+        assertThrows(IllegalArgumentException.class, () -> new PolicyName(invalidPolicyName));
     }
 
     @Test
-    public void isValidName() {
+    public void isValidPolicyName() {
         // null name
         assertThrows(NullPointerException.class, () -> PolicyName.isValidPolicyName(null));
 

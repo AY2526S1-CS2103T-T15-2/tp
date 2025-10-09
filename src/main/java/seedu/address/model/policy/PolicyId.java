@@ -1,5 +1,8 @@
 package seedu.address.model.policy;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import seedu.address.model.util.RandomUtil;
 
 /**
@@ -8,12 +11,31 @@ import seedu.address.model.util.RandomUtil;
  */
 public class PolicyId {
 
-    private static final int ID_LENGTH = 6;
+    public static final int ID_LENGTH = 6;
+
+    public static final String MESSAGE_CONSTRAINTS =
+            String.format("Id should be an alphanumeric string of length %d", ID_LENGTH);
+
+    public static final String VALIDATION_REGEX = String.format("[a-zA-Z0-9]{%d}", ID_LENGTH);
 
     public final String value;
 
-    private PolicyId(String id) {
+    /**
+     * Constructs a {@code PolicyId}.
+     *
+     * @param id A valid policy id.
+     */
+    public PolicyId(String id) {
+        requireNonNull(id);
+        checkArgument(isValidPolicyId(id), MESSAGE_CONSTRAINTS);
         value = id;
+    }
+
+    /**
+     * Returns true if a given string is a valid policy id.
+     */
+    public static boolean isValidPolicyId(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**

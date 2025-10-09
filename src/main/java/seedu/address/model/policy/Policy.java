@@ -38,6 +38,18 @@ public class Policy {
         return policyId;
     }
 
+    /**
+     * Returns true if both policies have the same policy id.
+     */
+    public boolean hasSameId(Policy otherPolicy) {
+        if (otherPolicy == this) {
+            return true;
+        }
+
+        return otherPolicy != null
+                && otherPolicy.getId().equals(getId());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
