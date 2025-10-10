@@ -1,11 +1,7 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
+
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
-import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
@@ -26,7 +21,7 @@ public class JsonAdaptedContract {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contract's %s field is missing!";
 
     private final String cId;
-//    private final String name;
+    private final String name;
     private final String nric;
     private final String pId;
     private final String dateSigned;
@@ -35,11 +30,11 @@ public class JsonAdaptedContract {
      * Constructs a {@code JsonAdaptedContract} with the given contract details.
      */
     @JsonCreator
-    public JsonAdaptedContract(@JsonProperty("cId") String cId, /*@JsonProperty("name") String name,*/
+    public JsonAdaptedContract(@JsonProperty("cId") String cId, @JsonProperty("name") String name,
                                @JsonProperty("nric") String nric, @JsonProperty("pId") String pId,
                                @JsonProperty("dateSigned") String dateSigned) {
         this.cId = cId;
-//        this.name = name;
+        this.name = name;
         this.nric = nric;
         this.pId = pId;
         this.dateSigned = dateSigned;
@@ -50,7 +45,7 @@ public class JsonAdaptedContract {
      */
     public JsonAdaptedContract(Contract source) {
         cId = source.getCId().toString();
-//        name = source.getName().fullName;
+        name = source.getName().fullName;
         nric = source.getNric().toString();
         pId = source.getPId().toString();
         dateSigned = source.getDate().toString();
@@ -70,13 +65,13 @@ public class JsonAdaptedContract {
         }
         final ContractId modelCId = new ContractId(cId);
 
-//        if (name == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-//        }
-//        if (!Name.isValidName(name)) {
-//            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-//        }
-//        final Name modelName = new Name(name);
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
 
         if (nric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "NRIC"));
@@ -99,6 +94,6 @@ public class JsonAdaptedContract {
         }
         // Date validation can be added if needed
         final Date modelDateSigned = new Date(dateSigned);
-        return new Contract(modelCId, /*modelName,*/ modelNric, modelPId, modelDateSigned);
+        return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned);
     }
 }

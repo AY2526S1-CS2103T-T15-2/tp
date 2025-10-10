@@ -38,8 +38,8 @@ public class Contract {
     /**
      * Constructor for a Contract object with all fields specified for JSON.
      * @param cId Contract ID
-     * @param name Name of policy holder
-     * @param nric NRIC of policy holder
+     * @param name Name of policyholder
+     * @param nric NRIC of policyholder
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
