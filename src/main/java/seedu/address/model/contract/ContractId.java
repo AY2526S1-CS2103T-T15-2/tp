@@ -1,5 +1,8 @@
 package seedu.address.model.contract;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import seedu.address.model.util.RandomUtil;
 
 /**
@@ -8,14 +11,20 @@ import seedu.address.model.util.RandomUtil;
  */
 public class ContractId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Contract IDs should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
     public static final int ID_LENGTH = 6;
+    public static final String MESSAGE_CONSTRAINTS = "Contract IDs should be alphanumeric";
+    public static final String VALIDATION_REGEX = String.format("[a-zA-Z0-9]{%d}", ID_LENGTH);
 
     public final String value;
 
+    /**
+     * Constructs a {@code ContractId}.
+     *
+     * @param id A valid contract id.
+     */
     public ContractId(String id) {
+        requireNonNull(id);
+        checkArgument(isValidContractId(id), MESSAGE_CONSTRAINTS);
         value = id;
     }
 
