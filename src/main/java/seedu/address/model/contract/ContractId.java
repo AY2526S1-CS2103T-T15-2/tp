@@ -11,7 +11,7 @@ public class ContractId {
     public static final String MESSAGE_CONSTRAINTS = "Contract IDs should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    private static final int ID_LENGTH = 6;
+    public static final int ID_LENGTH = 6;
 
     public final String value;
 
