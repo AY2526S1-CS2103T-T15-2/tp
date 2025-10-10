@@ -11,40 +11,38 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Andres Gonzales III
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/andrescuiii-too.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/andrescuiii-too)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Damien
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/porcupinezzz.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/porcupinezzz)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Scheduling and Tracking, Deliverables and Deadlines
 
-### Johnny Doe
+### Glendon Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eggie23.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/eggie23)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Joshua Seah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joshua-seah.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/Joshua-Seah)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
@@ -59,3 +57,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Tan Keng Hong
+
+<img src="images/kh-boop-bit.png" width="200px">
+
+[[github](http://github.com/KH-boop-bit)]
+[[portfolio](team/johndoe.md)]
