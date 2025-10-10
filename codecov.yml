@@ -1,0 +1,6 @@
+# codecov.yml
+coverage:
+  status:
+    project:
+      default:
+        target: 70%
