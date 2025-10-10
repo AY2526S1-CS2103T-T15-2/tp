@@ -13,11 +13,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.ContractId;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
@@ -98,6 +101,30 @@ public class TypicalData {
             new PolicyName("Healthcare - B"),
             new PolicyDetails("Policy details 123"),
             new PolicyId("654321")
+    );
+
+    public static final Contract CONTRACT_A = new Contract(
+            new ContractId("C1234A"),
+            ALICE.getName(),
+            ALICE.getNric(),
+            LIFE.getId(),
+            new SimpleDateFormat("2023-01-01")
+    );
+
+    public static final Contract CONTRACT_B = new Contract(
+            new ContractId("C1234B"),
+            BENSON.getName(),
+            BENSON.getNric(),
+            HEALTH.getId(),
+            new SimpleDateFormat("2023-02-01")
+    );
+
+    public static final Contract CONTRACT_C = new Contract(
+            new ContractId("C1234C"),
+            CARL.getName(),
+            CARL.getNric(),
+            PROPERTY.getId(),
+            new SimpleDateFormat("2023-03-01")
     );
 
     private TypicalData() {} // prevents instantiation
