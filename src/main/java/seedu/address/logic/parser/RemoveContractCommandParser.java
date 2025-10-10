@@ -9,7 +9,7 @@ import seedu.address.model.contract.ContractId;
 /**
  * Parses input arguments and creates a new RemoveContractCommand object
  */
-public class RemoveContractParser implements Parser<RemoveContractCommand> {
+public class RemoveContractCommandParser implements Parser<RemoveContractCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RemoveContract
