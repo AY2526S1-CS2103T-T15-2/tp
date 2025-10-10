@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
@@ -17,13 +17,13 @@ public class ContractBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_NRIC = "S1234567A";
     public static final String DEFAULT_POLICY_ID = "P1234A";
-    public static final Date DEFAULT_DATE = new Date();
+    public static final SimpleDateFormat DEFAULT_DATE = new SimpleDateFormat();
 
     private ContractId cId;
     private Name name;
     private Nric nric;
     private PolicyId pId;
-    private Date dateSigned;
+    private SimpleDateFormat dateSigned;
 
     /**
      * Creates a {@code ContractBuilder} with the default details.
@@ -72,9 +72,9 @@ public class ContractBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Contract} that we are building.
+     * Sets the {@code SimpleDateFormat} of the {@code Contract} that we are building.
      */
-    public ContractBuilder withDate(Date date) {
+    public ContractBuilder withDate(SimpleDateFormat date) {
         this.dateSigned = date;
         return this;
     }

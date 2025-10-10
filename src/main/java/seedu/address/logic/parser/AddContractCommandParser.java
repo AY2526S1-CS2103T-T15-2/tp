@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddContractCommand;
@@ -36,7 +36,7 @@ public class AddContractCommandParser implements Parser<AddContractCommand> {
         arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NRIC, PREFIX_DATE);
         PolicyId pid = ParserUtil.parsePolicyId(arguMultimap.getValue(PREFIX_PID).get());
         Nric nric = ParserUtil.parseNric(arguMultimap.getValue(PREFIX_NRIC).get());
-        Date date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
+        SimpleDateFormat date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
 
         Contract contract = new Contract(nric, pid, date);
 

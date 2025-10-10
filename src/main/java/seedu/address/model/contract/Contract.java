@@ -1,6 +1,6 @@
 package seedu.address.model.contract;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,13 +13,11 @@ import seedu.address.model.policy.PolicyId;
  */
 public class Contract {
 
-
-
     private final ContractId cId;
     private final Name name;
     private final Nric nric;
     private final PolicyId pId;
-    private final Date dateSigned;
+    private final SimpleDateFormat dateSigned;
 
     /**
      * Constructor for a Creating a new Contract object.
@@ -27,7 +25,7 @@ public class Contract {
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
-    public Contract(Nric nric, PolicyId pId, Date date) {
+    public Contract(Nric nric, PolicyId pId, SimpleDateFormat date) {
         this.cId = ContractId.generate();
         this.name = new Name("Placeholder");
         this.nric = nric;
@@ -43,7 +41,7 @@ public class Contract {
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
-    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId, Date date) {
+    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId, SimpleDateFormat date) {
         this.cId = cId;
         this.name = name;
         this.nric = nric;
@@ -67,7 +65,7 @@ public class Contract {
         return pId;
     }
 
-    public Date getDate() {
+    public SimpleDateFormat getDate() {
         return dateSigned;
     }
 
