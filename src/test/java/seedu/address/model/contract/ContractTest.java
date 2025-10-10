@@ -2,6 +2,7 @@ package seedu.address.model.contract;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.SimpleDateFormat;
@@ -73,6 +74,7 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 new SimpleDateFormat("2023-01-01"));
+        assertTrue(contract.isSameContract(contractCopy));
         assertTrue(contract.equals(contractCopy));
 
         // same object -> returns true
@@ -128,6 +130,9 @@ public class ContractTest {
                 new PolicyId("abcdef"),
                 new SimpleDateFormat("2023-01-02"));
         assertFalse(contract.equals(editedContract));
+
+        // hashcode same for same object
+        assertEquals(contract.hashCode(), contract.hashCode());
     }
 
     @Test
@@ -145,6 +150,21 @@ public class ContractTest {
                 + ", pId=" + contract.getPId()
                 + ", dateSigned=" + contract.getDate() + "}";
         assertEquals(expected, contract.toString());
+    }
+
+    @Test
+    public void differentContractsNotEqual() {
+        Contract contract1 = new Contract(
+                new Nric("T1234567A"),
+                new PolicyId("abcdef"),
+                new SimpleDateFormat("2023-01-02")
+        );
+        Contract contract2 = new Contract(
+                new Nric("S1234567A"),
+                new PolicyId("abcdef"),
+                new SimpleDateFormat("2023-01-02")
+        );
+        assertNotEquals(contract1, contract2);
     }
 
 }
