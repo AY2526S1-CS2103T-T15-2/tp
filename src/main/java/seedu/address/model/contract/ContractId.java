@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.model.util.RandomUtil;
 
 /**
- * Represents a Policy's id that a user can reference.
+ * Represents a Contract's id that a user can reference.
  * Guarantees: immutable.
  */
 public class ContractId {
