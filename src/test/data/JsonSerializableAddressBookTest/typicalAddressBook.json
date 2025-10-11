@@ -62,5 +62,6 @@
     "name" : "Property",
     "details" : "Non-alphanumeric characters *^$+-",
     "id" : "Abc123"
-  } ]
+  } ],
+  "contracts": []
 }

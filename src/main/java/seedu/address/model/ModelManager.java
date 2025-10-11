@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Policy> filteredPolicies;
+    private final FilteredList<Contract> filteredContracts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPolicies = new FilteredList<>(this.addressBook.getPolicyList());
+        filteredContracts = new FilteredList<>(this.addressBook.getContractList());
     }
 
     public ModelManager() {
@@ -138,6 +141,22 @@ public class ModelManager implements Model {
         addressBook.setPolicy(target, editedPolicy);
     }
 
+    @Override
+    public boolean hasContract(Contract contract) {
+        requireNonNull(contract);
+        return addressBook.hasContract(contract);
+    }
+
+    @Override
+    public void addContract(Contract contract) {
+        addressBook.addContract(contract);
+    }
+
+    @Override
+    public void removeContract(Contract contract) {
+        addressBook.removeContract(contract);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -172,6 +191,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Contract> getFilteredContractList() {
+        return filteredContracts;
+    }
+
+    @Override
+    public void updateFilteredContractList(Predicate<Contract> predicate) {
+        requireNonNull(predicate);
+        filteredContracts.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -186,6 +216,8 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredPolicies.equals(otherModelManager.filteredPolicies);
+                && filteredPolicies.equals(otherModelManager.filteredPolicies)
+                && filteredContracts.equals(otherModelManager.filteredContracts);
     }
+
 }

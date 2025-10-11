@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.testutil.PersonBuilder;
@@ -188,6 +189,30 @@ public class AddCommandTest {
         public void updateFilteredPolicyList(Predicate<Policy> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        public boolean hasContract(Contract contract) {
+            return false;
+        }
+
+        @Override
+        public void addContract(Contract contract) {
+
+        }
+
+        @Override
+        public ObservableList<Contract> getFilteredContractList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredContractList(Predicate<Contract> predicate) {
+
+        }
+
+        @Override
+        public void removeContract(Contract contract) {
+
+        }
     }
 
     /**
@@ -205,6 +230,32 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public void addContract(Contract contract) {
+            requireNonNull(contract);
+        }
+
+        @Override
+        public void removeContract(Contract contract) {
+            requireNonNull(contract);
+        }
+
+        @Override
+        public boolean hasContract(Contract contract) {
+            requireNonNull(contract);
+            return false;
+        }
+
+        @Override
+        public ObservableList<Contract> getFilteredContractList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredContractList(Predicate<Contract> predicate) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
@@ -224,6 +275,32 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void addContract(Contract contract) {
+            requireNonNull(contract);
+        }
+
+        @Override
+        public void removeContract(Contract contract) {
+            requireNonNull(contract);
+        }
+
+        @Override
+        public boolean hasContract(Contract contract) {
+            requireNonNull(contract);
+            return false;
+        }
+
+        @Override
+        public ObservableList<Contract> getFilteredContractList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredContractList(Predicate<Contract> predicate) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

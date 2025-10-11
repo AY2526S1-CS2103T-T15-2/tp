@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.policy.Policy;
@@ -18,6 +20,7 @@ import seedu.address.model.policy.UniquePolicyList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueContractList contracts;
     private final UniquePolicyList policies;
 
     /*
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        contracts = new UniqueContractList();
     }
 
     /*
@@ -75,6 +79,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setPolicies(newData.getPolicyList());
+        setContracts(newData.getContractList());
     }
 
     //// person-level operations
@@ -151,6 +156,40 @@ public class AddressBook implements ReadOnlyAddressBook {
         policies.remove(key);
     }
 
+    /**
+     * Returns true if a contract with the same details as {@code contract} exists in the address book.
+     */
+    public boolean hasContract(Contract contract) {
+        requireNonNull(contract);
+        return contracts.contains(contract);
+    }
+
+    /**
+     * Adds the given contract.
+     * {@code contract} must not already exist in the address book.
+     */
+    public void addContract(Contract contract) {
+        requireNonNull(contract);
+        contracts.add(contract);
+    }
+
+    /**
+     * Removes the given contract.
+     * The contract must exist in the address book.
+     */
+    public void removeContract(Contract contract) {
+        requireNonNull(contract);
+        contracts.remove(contract);
+    }
+
+    /**
+     * Replaces the contents of the contract list with {@code contracts}.
+     * {@code contracts} must not contain duplicate contracts.
+     */
+    public void setContracts(List<Contract> contracts) {
+        this.contracts.setContracts(contracts);
+    }
+
     //// util methods
 
     @Override
@@ -158,6 +197,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new ToStringBuilder(this)
                 .add("persons", persons)
                 .add("policies", policies)
+                .add("contracts", contracts)
                 .toString();
     }
 
@@ -169,6 +209,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Policy> getPolicyList() {
         return policies.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Contract> getContractList() {
+        return contracts.asUnmodifiableObservableList();
     }
 
     @Override

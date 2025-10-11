@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.contract.ContractId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -142,6 +144,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String id} into an {@code Id}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static PolicyId parsePolicyId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!PolicyId.isValidPolicyId(trimmedId)) {
+            throw new ParseException(PolicyId.MESSAGE_CONSTRAINTS);
+        }
+        return new PolicyId(trimmedId);
+    }
+
+    /**
      * Parses a {@code String policyDetails} into an {@code PolicyDetails}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -184,5 +199,34 @@ public class ParserUtil {
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
         return new Nric(trimmedNric);
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code ContractId}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static ContractId parseContractId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!ContractId.isValidContractId(trimmedId)) {
+            throw new ParseException(ContractId.MESSAGE_CONSTRAINTS);
+        }
+        return new ContractId(trimmedId);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static SimpleDateFormat parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        SimpleDateFormat parsedDate;
+        try {
+            parsedDate = new SimpleDateFormat(trimmedDate);
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage());
+        }
+        return parsedDate;
     }
 }
