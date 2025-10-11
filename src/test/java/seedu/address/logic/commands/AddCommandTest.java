@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePolicy(Policy target) {
+        public void removePolicy(Policy target) {
             throw new AssertionError("This method should not be called.");
         }
 

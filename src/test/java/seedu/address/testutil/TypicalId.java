@@ -9,4 +9,5 @@ import seedu.address.model.policy.PolicyId;
 public class TypicalId {
     public static final ContractId VALID_CONTRACT_ID = new ContractId("C1234A");
     public static final PolicyId VALID_POLICY_ID = new PolicyId("P1234A");
+    public static final PolicyId VALID_POLICY_ID_2 = new PolicyId("abcdef");
 }

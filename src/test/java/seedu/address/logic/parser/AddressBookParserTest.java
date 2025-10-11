@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalId.VALID_POLICY_ID;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemovePolicyCommand;
 import seedu.address.logic.commands.ViewContractCommand;
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -53,6 +55,13 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_removePolicy() throws Exception {
+        RemovePolicyCommand command = (RemovePolicyCommand) parser.parseCommand(
+                RemovePolicyCommand.COMMAND_WORD + " " + VALID_POLICY_ID);
+        assertEquals(new RemovePolicyCommand(VALID_POLICY_ID), command);
     }
 
     @Test
