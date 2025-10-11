@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,7 +108,7 @@ public class TypicalData {
             ALICE.getName(),
             ALICE.getNric(),
             LIFE.getId(),
-            new SimpleDateFormat("2023-01-01")
+            LocalDate.parse("2023-01-01")
     );
 
     public static final Contract CONTRACT_B = new Contract(
@@ -116,7 +116,7 @@ public class TypicalData {
             BENSON.getName(),
             BENSON.getNric(),
             HEALTH.getId(),
-            new SimpleDateFormat("2023-02-01")
+            LocalDate.parse("2023-02-01")
     );
 
     public static final Contract CONTRACT_C = new Contract(
@@ -124,7 +124,24 @@ public class TypicalData {
             CARL.getName(),
             CARL.getNric(),
             PROPERTY.getId(),
-            new SimpleDateFormat("2023-03-01")
+            LocalDate.parse("2023-03-01")
+    );
+
+    // Spare contracts not added into TypicalAddressBook
+    public static final Contract CONTRACT_D = new Contract(
+            new ContractId("C1234D"),
+            DANIEL.getName(),
+            DANIEL.getNric(),
+            LIFE.getId(),
+            LocalDate.parse("2023-04-01")
+    );
+
+    public static final Contract CONTRACT_E = new Contract(
+            new ContractId("C1234E"),
+            ELLE.getName(),
+            ELLE.getNric(),
+            HEALTH.getId(),
+            LocalDate.parse("2023-05-01")
     );
 
     private TypicalData() {} // prevents instantiation
@@ -140,6 +157,9 @@ public class TypicalData {
         for (Policy policy: getTypicalPolicies()) {
             ab.addPolicy(policy);
         }
+        for (Contract contract : getTypicalContracts()) {
+            ab.addContract(contract);
+        }
         return ab;
     }
 
@@ -149,5 +169,9 @@ public class TypicalData {
 
     public static List<Policy> getTypicalPolicies() {
         return new ArrayList<>(Arrays.asList(LIFE, HEALTH, PROPERTY));
+    }
+
+    public static List<Contract> getTypicalContracts() {
+        return new ArrayList<>(Arrays.asList(CONTRACT_A, CONTRACT_B, CONTRACT_C));
     }
 }
