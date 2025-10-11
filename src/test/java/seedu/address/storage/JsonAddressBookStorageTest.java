@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
+import static seedu.address.testutil.TypicalData.CONTRACT_B;
+import static seedu.address.testutil.TypicalData.CONTRACT_D;
+import static seedu.address.testutil.TypicalData.CONTRACT_E;
 import static seedu.address.testutil.TypicalData.HEALTH_B;
 import static seedu.address.testutil.TypicalData.HOME;
 import static seedu.address.testutil.TypicalData.HOON;
@@ -89,6 +92,8 @@ public class JsonAddressBookStorageTest {
         original.removePerson(ALICE);
         original.addPolicy(HOME);
         original.removePolicy(LIFE);
+        original.addContract(CONTRACT_D);
+        original.removeContract(CONTRACT_B);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
@@ -96,6 +101,7 @@ public class JsonAddressBookStorageTest {
         // Save and read without specifying file path
         original.addPerson(IDA);
         original.addPolicy(HEALTH_B);
+        original.addContract(CONTRACT_E);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
