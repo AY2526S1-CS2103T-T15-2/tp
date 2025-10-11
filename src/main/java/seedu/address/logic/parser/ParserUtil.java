@@ -172,21 +172,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String policyId} into a {@code PolicyId}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code policyId]} is invalid.
-     */
-    public static PolicyId parsePolicyId(String policyId) throws ParseException {
-        requireNonNull(policyId);
-        String trimmedPolicyId = policyId.trim();
-        if (!PolicyId.isValidPolicyId(trimmedPolicyId)) {
-            throw new ParseException(PolicyId.MESSAGE_CONSTRAINTS);
-        }
-        return new PolicyId(trimmedPolicyId);
-    }
-
-    /**
      * Parses a {@code String nric} into a {@code Nric}.
      * Leading and trailing whitespaces will be trimmed.
      *

@@ -100,8 +100,6 @@ public class TypicalData {
             new PolicyId("654321")
     );
 
-    public static final PolicyId POLICY_ID_1 = new PolicyId("AAAAAA");
-
     private TypicalData() {} // prevents instantiation
 
     /**

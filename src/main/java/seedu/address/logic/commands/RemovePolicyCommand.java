@@ -45,7 +45,7 @@ public class RemovePolicyCommand extends Command {
                     .findFirst()
                     .get();
             model.removePolicy(policyToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove));
+            return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove.getId()));
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_POLICY_ID);
         }
