@@ -28,6 +28,10 @@ public class RemovePolicyCommand extends Command {
 
     private final PolicyId targetId;
 
+    /**
+     * Creates a RemovePolicyCommand to remove the specified policy by id
+     * @param id the ID of policy to remove
+     */
     public RemovePolicyCommand(PolicyId id) {
         requireAllNonNull(id);
 
