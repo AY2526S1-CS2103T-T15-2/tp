@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 
@@ -20,4 +21,11 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate policies.
      */
     ObservableList<Policy> getPolicyList();
+
+    /**
+     * Returns an unmodifiable view of the contracts list.
+     * This list will not contain any duplicate contracts.
+     */
+    ObservableList<Contract> getContractList();
+
 }

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Policy> PREDICATE_SHOW_ALL_POLICIES = unused -> true;
+    Predicate<Contract> PREDICATE_SHOW_ALL_CONTRACTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -119,4 +121,30 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPolicyList(Predicate<Policy> predicate);
+
+    /**
+     * Returns true if a contract with the same policy id and NRIC as {@code contract} exists in the address book.
+     */
+    boolean hasContract(Contract contract);
+
+    /**
+     * Adds the given contract.
+     * {@code contract} must not already exist in the address book.
+     */
+    void addContract(Contract contract);
+
+    /** Returns an unmodifiable view of the filtered contract list */
+    ObservableList<Contract> getFilteredContractList();
+
+    /**
+     * Updates the filter of the filtered contract list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredContractList(Predicate<Contract> predicate);
+
+    /**
+     * Removes the given contract.
+     * The contract must exist in the address book.
+     */
+    void removeContract(Contract contract);
 }

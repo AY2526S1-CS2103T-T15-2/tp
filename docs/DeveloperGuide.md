@@ -276,7 +276,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Independent Insurance Agents who manage the personal portfolio of clients, contracts and insurance policies.
 
-**Value proposition**: 
+**Value proposition**:
 
 iCon helps insurance agents manage a large pool of clients and contracts, with the flexibility to add policies from any issuer. By enabling fast, accurate retrieval of critical client and policy data, it minimizes admin overhead and let agents focus more on delivering high-quality advisory services.
 
@@ -290,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Insurance Agent | add a contact              | store contacts                                                       |
 | `* * *`  | Insurance Agent | remove a contact           | remove unnecessary contacts                                          |
 | `* * *`  | Insurance Agent | view a contact             | see contact details of customers I want to see                       |
-| `* * *`  | Insurance Agent | add a policy               | add more policy types                                                | 
+| `* * *`  | Insurance Agent | add a policy               | add more policy types                                                |
 | `* * *`  | Insurance Agent | remove a policy            | remove unnecessary policy types                                      |
 | `* * *`  | Insurance Agent | view a policy              | see the policy details                                               |
 | `* * *`  | Insurance Agent | add a contract             | link a policy to a customer                                          |
@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 4a. Some compulsory details are missing.
-  
+
     * 4a1. iCon shows an error message.
 
       Use case resumes at step 2.
@@ -549,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. iCon shows an error message.
 
       Use case ends.
-  
+
 * 2b. The policy ID is invalid.
 
     * 2b1. iCon shows an error message.
