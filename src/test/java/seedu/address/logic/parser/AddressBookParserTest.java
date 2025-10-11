@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalData.POLICY_ID_1;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.PolicyId;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -57,10 +59,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_removePolicy() throws Exception {
-        //todo: add index first policy into typicalpolicies to use for tests
         RemovePolicyCommand command = (RemovePolicyCommand) parser.parseCommand(
-                RemovePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_POLICY.getOneBased());
-        assertEquals(new RemovePolicyCommand(INDEX_FIRST_POLICY), command);
+                RemovePolicyCommand.COMMAND_WORD + " " + POLICY_ID_1);
+        assertEquals(new RemovePolicyCommand(POLICY_ID_1), command);
     }
 
     @Test

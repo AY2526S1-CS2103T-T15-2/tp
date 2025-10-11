@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.PolicyId;
@@ -23,7 +22,7 @@ public class RemovePolicyCommandParser implements Parser<RemovePolicyCommand> {
             return new RemovePolicyCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemovePolicyCommand.MESSAGE_USAGE), pe);
         }
     }
 

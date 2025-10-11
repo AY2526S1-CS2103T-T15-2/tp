@@ -21,8 +21,8 @@ public class RemovePolicyCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes the policy identified by the id used in the policy list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: ID (must be 6 alphanumeric characters)\n"
+            + "Example: " + COMMAND_WORD + " A7f1Px";
 
     public static final String MESSAGE_REMOVE_POLICY_SUCCESS = "Removed Policy: %1$s";
 
