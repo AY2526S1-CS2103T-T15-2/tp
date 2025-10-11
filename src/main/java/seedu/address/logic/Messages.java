@@ -19,7 +19,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_CONTRACT_DISPLAYED_ID = "The contract index provided is invalid";
+    public static final String MESSAGE_CONTRACT_NOT_FOUND = "This contract ID does not exist in the address book.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
