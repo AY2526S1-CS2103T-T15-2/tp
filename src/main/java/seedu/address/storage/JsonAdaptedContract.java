@@ -93,7 +93,7 @@ public class JsonAdaptedContract {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Date Signed"));
         }
         // Date validation can be added if needed
-        final SimpleDateFormat modelDateSigned = new SimpleDateFormat(dateSigned);
+        final SimpleDateFormat modelDateSigned = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
         return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned);
     }
 }
