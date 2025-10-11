@@ -210,7 +210,7 @@ public class ParserUtil {
         try {
             parsedDate = LocalDate.parse(trimmedDate);
         } catch (Exception e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException("Date should be in the format yyyy-MM-dd");
         }
         return parsedDate;
     }
