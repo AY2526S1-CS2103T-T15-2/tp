@@ -22,7 +22,11 @@ import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDetails;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.PolicyName;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalData;
 
 public class AddressBookTest {
 
@@ -32,6 +36,7 @@ public class AddressBookTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
         assertEquals(Collections.emptyList(), addressBook.getPolicyList());
+        assertEquals(Collections.emptyList(), addressBook.getContractList());
     }
 
     @Test
@@ -92,10 +97,69 @@ public class AddressBookTest {
     }
 
     @Test
+    public void setPolicy_hasPolicyInAddressBook_returnsTrue() {
+        assertThrows(NullPointerException.class, () -> addressBook.setPolicy(null, null));
+        Policy policy = TypicalData.LIFE;
+        addressBook.addPolicy(policy);
+        Policy editedPolicy = new Policy(new PolicyName("Life Plus"), new PolicyDetails("Covers life and more"),
+                new PolicyId("123456"));
+        assertThrows(NullPointerException.class, () -> addressBook.setPolicy(policy, null));
+        assertThrows(NullPointerException.class, () -> addressBook.setPolicy(null, editedPolicy));
+        addressBook.setPolicy(policy, editedPolicy);
+        assertTrue(addressBook.hasPolicy(editedPolicy));
+        assertFalse(addressBook.hasPolicy(policy));
+    }
+
+    @Test
+    public void addContract_hasContractInAddressBook_returnsTrue() {
+        Contract contract = TypicalData.CONTRACT_A;
+        addressBook.addContract(contract);
+        assertTrue(addressBook.getContractList().contains(contract));
+        addressBook.removeContract(contract);
+        assertFalse(addressBook.getContractList().contains(contract));
+    }
+
+    @Test
+    public void contractMethods_nullContract_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addContract(null));
+        assertThrows(NullPointerException.class, () -> addressBook.removeContract(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasContract(null));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
                 + ", policies=" + addressBook.getPolicyList() + ", contracts=" + addressBook.getContractList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equals() {
+        AddressBook addressBook = new AddressBook();
+        AddressBook differentAddressBook = new AddressBook();
+        differentAddressBook.addPerson(ALICE);
+
+        // same values -> returns true
+        AddressBook addressBookCopy = new AddressBook(addressBook);
+        assertTrue(addressBook.equals(addressBookCopy));
+
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+
+        // different type -> returns false
+        assertFalse(addressBook.equals(5));
+
+        // different person -> returns false
+        assertFalse(addressBook.equals(differentAddressBook));
+    }
+
+    @Test
+    public void hashCode_sameObject_sameHashcode() {
+        AddressBook addressBook = new AddressBook();
+        assertEquals(addressBook.hashCode(), addressBook.hashCode());
     }
 
     /**
@@ -104,6 +168,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Policy> policies = FXCollections.observableArrayList();
+        private final ObservableList<Contract> contracts = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -121,7 +186,7 @@ public class AddressBookTest {
 
         @Override
         public ObservableList<Contract> getContractList() {
-            return null;
+            return contracts;
         }
     }
 

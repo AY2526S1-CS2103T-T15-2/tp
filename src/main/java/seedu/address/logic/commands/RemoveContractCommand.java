@@ -43,9 +43,9 @@ public class RemoveContractCommand extends Command {
                     .findFirst()
                     .get();
             model.removeContract(contractToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove));
+            return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove.getCId()));
         } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTRACT_DISPLAYED_ID);
+            throw new CommandException(Messages.MESSAGE_CONTRACT_NOT_FOUND);
         }
     }
 
