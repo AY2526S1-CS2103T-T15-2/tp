@@ -3,9 +3,13 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseDate;
+import static seedu.address.logic.parser.ParserUtil.parsePolicyDetails;
+import static seedu.address.logic.parser.ParserUtil.parsePolicyId;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,6 +22,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.PolicyDetails;
+import seedu.address.model.policy.PolicyId;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -192,5 +198,46 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parsePolicyId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePolicyId(null));
+    }
+
+    @Test
+    public void parsePolicyId_invalidValue_throwsParseException() {
+        String invalidPolicyId = "!!!!!!!!!";
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyId(invalidPolicyId));
+    }
+
+    @Test
+    public void parsePolicyId_validValueWithoutWhitespace_returnsPolicyId() throws Exception {
+        String validPolicyId = "abcdef";
+        assertEquals(new PolicyId(validPolicyId), parsePolicyId(validPolicyId));
+    }
+
+    @Test
+    public void parsePolicyDetails_validValueWithoutWhitespace_returnsPolicyDetails() throws Exception {
+        String validPolicyDetails = "This is a sample policy details.";
+        assertEquals(new PolicyDetails(validPolicyDetails), parsePolicyDetails(validPolicyDetails));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        String invalidDate = "This is not a date format";
+        assertThrows(ParseException.class, () -> parseDate(invalidDate));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parseDate(null));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedPolicyDetails() throws Exception {
+        String dateWithWhitespace = WHITESPACE + "2023-01-01" + WHITESPACE;
+        LocalDate expectedDate = LocalDate.parse("2023-01-01");
+        assertEquals(expectedDate, parseDate(dateWithWhitespace));
     }
 }
