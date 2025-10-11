@@ -5,6 +5,8 @@ import static seedu.address.storage.JsonAdaptedContract.MISSING_FIELD_MESSAGE_FO
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.CONTRACT_B;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -12,8 +14,6 @@ import seedu.address.model.contract.ContractId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
-
-import java.time.LocalDate;
 
 public class JsonAdaptedContractTest {
 

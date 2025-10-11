@@ -58,7 +58,8 @@ public class JsonAdaptedContract {
      */
     public Contract toModelType() throws IllegalValueException {
         if (cId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ContractId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ContractId.class.getSimpleName()));
         }
         if (!ContractId.isValidContractId(cId)) {
             throw new IllegalValueException(ContractId.MESSAGE_CONSTRAINTS);
