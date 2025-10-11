@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.Model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTRACTS;
+
+import seedu.address.model.Model;
+
 
 /**
  * Lists all contracts in the address book to the user.
@@ -17,7 +19,7 @@ public class ViewContractCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_CONTRACTS);
+        model.updateFilteredContractList(PREDICATE_SHOW_ALL_CONTRACTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
