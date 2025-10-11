@@ -12,7 +12,7 @@ import seedu.address.model.Model;
  */
 public class ViewContractCommand extends Command {
 
-    public static final String COMMAND_WORD = "view c: -a";
+    public static final String COMMAND_WORD = "view_contract";
 
     public static final String MESSAGE_SUCCESS = "Viewing all contracts ";
 
