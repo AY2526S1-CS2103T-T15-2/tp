@@ -2,9 +2,10 @@ package seedu.address.model.contract;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
 
         // same object -> returns true
         assertTrue(contract.isSameContract(contract));
@@ -35,7 +36,7 @@ public class ContractTest {
                 new Name("TestDiff"),
                 new Nric("T1234567A"),
                 new PolicyId("abceef"),
-                new SimpleDateFormat("2023-01-02"));
+                LocalDate.parse("2023-01-02"));
         assertEquals(contract.getCId(), editedContract.getCId());
 
         // different id, all other attributes same -> returns false
@@ -44,7 +45,7 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
         assertFalse(contract.getCId().equals(editedContract.getCId()));
 
         // id differs in case, all other attributes same -> returns false
@@ -53,7 +54,7 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
         assertFalse(contract.getCId().equals(editedContract.getCId()));
     }
 
@@ -64,7 +65,7 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
 
         // same values -> returns true
         Contract contractCopy = new Contract(
@@ -72,7 +73,8 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
+        assertTrue(contract.isSameContract(contractCopy));
         assertTrue(contract.equals(contractCopy));
 
         // same object -> returns true
@@ -90,7 +92,7 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
         assertFalse(contract.equals(differentContract));
 
         // different name -> returns false
@@ -99,7 +101,7 @@ public class ContractTest {
                 new Name("TestDiff"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
         assertFalse(contract.equals(editedContract));
 
         // different NRIC -> returns false
@@ -108,7 +110,7 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("T1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
         assertFalse(contract.equals(editedContract));
 
         // different PolicyId -> returns false
@@ -117,17 +119,20 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("bcdefg"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
         assertFalse(contract.equals(editedContract));
 
-        // different SimpleDateFormat -> returns false
+        // different LocalDate -> returns false
         editedContract = new Contract(
                 new ContractId("abcdef"),
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-02"));
+                LocalDate.parse("2023-01-02"));
         assertFalse(contract.equals(editedContract));
+
+        // hashcode same for same object
+        assertEquals(contract.hashCode(), contract.hashCode());
     }
 
     @Test
@@ -137,7 +142,7 @@ public class ContractTest {
                 new Name("Test"),
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
-                new SimpleDateFormat("2023-01-01"));
+                LocalDate.parse("2023-01-01"));
         String expected = Contract.class.getCanonicalName()
                 + "{cId=" + contract.getCId()
                 + ", name=" + contract.getName()
@@ -145,6 +150,21 @@ public class ContractTest {
                 + ", pId=" + contract.getPId()
                 + ", dateSigned=" + contract.getDate() + "}";
         assertEquals(expected, contract.toString());
+    }
+
+    @Test
+    public void differentContractsNotEqual() {
+        Contract contract1 = new Contract(
+                new Nric("T1234567A"),
+                new PolicyId("abcdef"),
+                LocalDate.parse("2023-01-02")
+        );
+        Contract contract2 = new Contract(
+                new Nric("S1234567A"),
+                new PolicyId("abcdef"),
+                LocalDate.parse("2023-01-02")
+        );
+        assertNotEquals(contract1, contract2);
     }
 
 }

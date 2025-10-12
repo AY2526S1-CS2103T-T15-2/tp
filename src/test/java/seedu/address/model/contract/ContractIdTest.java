@@ -61,4 +61,10 @@ public class ContractIdTest {
         // note: randomly generated
         assertFalse(contractId.equals(new ContractId("123456")));
     }
+
+    @Test
+    public void hashCode_sameObject_sameHashcode() {
+        ContractId contractId = new ContractId("abcdef");
+        assertEquals(contractId.hashCode(), contractId.hashCode());
+    }
 }

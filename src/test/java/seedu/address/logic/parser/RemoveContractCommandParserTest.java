@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalId.VALID_CONTRACT_ID;
+import static seedu.address.testutil.TypicalId.CONTRACT_A_ID;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class RemoveContractCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsRemoveContractCommand() {
-        assertParseSuccess(parser, "C1234A", new RemoveContractCommand(VALID_CONTRACT_ID));
+        assertParseSuccess(parser, "C1234A", new RemoveContractCommand(CONTRACT_A_ID));
     }
 
     @Test
