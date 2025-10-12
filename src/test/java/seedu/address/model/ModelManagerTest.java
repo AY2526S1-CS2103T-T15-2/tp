@@ -104,9 +104,9 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deletePolicy_policyInAddressBook_returnsFalse() {
+    public void removePolicy_policyInAddressBook_returnsFalse() {
         modelManager.addPolicy(LIFE);
-        modelManager.deletePolicy(LIFE);
+        modelManager.removePolicy(LIFE);
         assertFalse(modelManager.hasPolicy(LIFE));
     }
 
