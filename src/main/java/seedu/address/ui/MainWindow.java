@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PolicyListPanel policyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +43,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private StackPane mainContentPlaceholder;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane policyListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +120,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        policyListPanel = new PolicyListPanel(logic.getFilteredPolicyList());
+        policyListPanelPlaceholder.getChildren().add(policyListPanel.getRoot());
+
+        personListPanelPlaceholder.setVisible(true);
+        policyListPanelPlaceholder.setVisible(false);
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -178,6 +191,14 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            String feedback = commandResult.getFeedbackToUser().toLowerCase();
+
+            if (feedback.contains("listed all persons") || feedback.contains("persons listed")) {
+                showPersonListPanel();
+            } else if (feedback.contains("viewing all policies")) {
+                showPolicyListPanel();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -192,5 +213,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void showPersonListPanel() {
+        personListPanelPlaceholder.setVisible(true);
+        policyListPanelPlaceholder.setVisible(false);
+    }
+
+    private void showPolicyListPanel() {
+        personListPanelPlaceholder.setVisible(false);
+        policyListPanelPlaceholder.setVisible(true);
     }
 }
