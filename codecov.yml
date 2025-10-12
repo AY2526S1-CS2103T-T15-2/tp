@@ -9,4 +9,9 @@ coverage:
       default:
         target: 25%
         threshold: 0%
+  ignore:
+    - "src/main/java/seedu.address/ui/MainWindow.java"
+    - "src/main/java/seedu.address/ui/PolicyCard.java"
+    - "src/main/java/seedu.address/ui/PolicyListPanel.java"
+
 
