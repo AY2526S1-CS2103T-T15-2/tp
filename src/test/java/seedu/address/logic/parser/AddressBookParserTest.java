@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -92,6 +94,19 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_viewPolicy() throws Exception {
         assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD) instanceof ViewPolicyCommand);
+    }
+
+    @Test
+    public void parseCommand_addContract() throws Exception {
+        assertTrue(parser.parseCommand(
+                AddContractCommand.COMMAND_WORD + " p:P1234A ic:S1234567A dt:2024-12-12")
+                instanceof AddContractCommand);
+    }
+
+    @Test
+    public void parseCommand_removeContract() throws Exception {
+        assertTrue(parser.parseCommand(RemoveContractCommand.COMMAND_WORD + " C1234A")
+                instanceof RemoveContractCommand);
     }
 
     @Test
