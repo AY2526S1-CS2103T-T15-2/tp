@@ -1,0 +1,11 @@
+{
+  "persons": [],
+  "policies": [],
+  "contracts": [ {
+    "cId": "invalid id!!",
+    "name": "Benson Meir",
+    "nric": "S1234568B",
+    "pId": "P1235A",
+    "dateSigned": "2023-10-12"
+  } ]
+}

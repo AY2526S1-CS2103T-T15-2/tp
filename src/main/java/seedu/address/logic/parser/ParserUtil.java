@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -203,14 +203,14 @@ public class ParserUtil {
      * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static SimpleDateFormat parseDate(String date) throws ParseException {
+    public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        SimpleDateFormat parsedDate;
+        LocalDate parsedDate;
         try {
-            parsedDate = new SimpleDateFormat(trimmedDate);
+            parsedDate = LocalDate.parse(trimmedDate);
         } catch (Exception e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException("Date should be in the format yyyy-MM-dd");
         }
         return parsedDate;
     }

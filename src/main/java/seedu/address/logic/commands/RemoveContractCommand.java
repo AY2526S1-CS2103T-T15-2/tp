@@ -22,7 +22,7 @@ public class RemoveContractCommand extends Command {
             + ": Removes a contract from iCon. "
             + "Parameters: "
             + "CID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " C1234A";
 
     public static final String MESSAGE_REMOVE_CONTRACT_SUCCESS = "Removed Contract: %1$s";
 
@@ -43,9 +43,9 @@ public class RemoveContractCommand extends Command {
                     .findFirst()
                     .get();
             model.removeContract(contractToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove));
+            return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove.getCId()));
         } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTRACT_DISPLAYED_ID);
+            throw new CommandException(Messages.MESSAGE_CONTRACT_NOT_FOUND);
         }
     }
 

@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -58,7 +58,8 @@ public class JsonAdaptedContract {
      */
     public Contract toModelType() throws IllegalValueException {
         if (cId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Contract ID"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ContractId.class.getSimpleName()));
         }
         if (!ContractId.isValidContractId(cId)) {
             throw new IllegalValueException(ContractId.MESSAGE_CONSTRAINTS);
@@ -74,7 +75,7 @@ public class JsonAdaptedContract {
         final Name modelName = new Name(name);
 
         if (nric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "NRIC"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
         if (!Nric.isValidNric(nric)) {
             throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
@@ -82,7 +83,8 @@ public class JsonAdaptedContract {
         final Nric modelNric = new Nric(nric);
 
         if (pId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Policy ID"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PolicyId.class.getSimpleName()));
         }
         if (!PolicyId.isValidPolicyId(pId)) {
             throw new IllegalValueException(PolicyId.MESSAGE_CONSTRAINTS);
@@ -90,10 +92,15 @@ public class JsonAdaptedContract {
         final PolicyId modelPId = new PolicyId(pId);
 
         if (dateSigned == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Date Signed"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LocalDate.class.getSimpleName()));
         }
-        // Date validation can be added if needed
-        final SimpleDateFormat modelDateSigned = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
+        try {
+            LocalDate.parse(dateSigned);
+        } catch (Exception e) {
+            throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
+        }
+        final LocalDate modelDateSigned = LocalDate.parse(dateSigned);
         return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned);
     }
 }

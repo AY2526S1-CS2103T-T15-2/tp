@@ -7,6 +7,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
 import static seedu.address.testutil.TypicalData.BENSON;
+import static seedu.address.testutil.TypicalData.CONTRACT_A;
+import static seedu.address.testutil.TypicalData.CONTRACT_B;
+import static seedu.address.testutil.TypicalData.CONTRACT_D;
 import static seedu.address.testutil.TypicalData.LIFE;
 
 import java.nio.file.Path;
@@ -101,8 +104,65 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void removePolicy_policyInAddressBook_returnsFalse() {
+        modelManager.addPolicy(LIFE);
+        modelManager.removePolicy(LIFE);
+        assertFalse(modelManager.hasPolicy(LIFE));
+    }
+
+    @Test
+    public void setPolicy_policyInAddressBook_returnsTrue() {
+        modelManager.addPolicy(LIFE);
+        modelManager.setPolicy(LIFE, LIFE);
+        assertTrue(modelManager.hasPolicy(LIFE));
+    }
+
+    @Test
+    public void addContract_policyInAddressBook_returnsTrue() {
+        modelManager.addPolicy(LIFE);
+        modelManager.addContract(CONTRACT_A);
+        assertTrue(modelManager.hasContract(CONTRACT_A));
+    }
+
+    @Test
+    public void removeContract_policyInAddressBook_returnsFalse() {
+        modelManager.addContract(CONTRACT_A);
+        modelManager.removeContract(CONTRACT_A);
+        assertFalse(modelManager.hasContract(CONTRACT_A));
+    }
+
+    @Test
+    public void hasContract_policyNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasContract(CONTRACT_D));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredPolicyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPolicyList().remove(0));
+    }
+
+    @Test
+    public void getFilteredContractList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContractList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredContractList_modifyList_throwsUnsupportedOperationException() {
+        modelManager.addContract(CONTRACT_A);
+        modelManager.addContract(CONTRACT_B);
+        modelManager.updateFilteredContractList(x -> x.equals(CONTRACT_A));
+        assertEquals(1, modelManager.getFilteredContractList().size());
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContractList().remove(0));
+    }
+
+    @Test
+    public void updatedFilteredContractList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredContractList(null));
     }
 
     @Test
@@ -128,9 +188,17 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredPersonList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        //different filteredPolicyList -> returns false
+        modelManager.updateFilteredPolicyList(x -> x.equals(LIFE));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        //different filteredContractList -> returns false
+        modelManager.updateFilteredContractList(x -> x.equals(CONTRACT_A));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
