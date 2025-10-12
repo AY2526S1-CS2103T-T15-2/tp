@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.policy.Policy;
+import seedu.address.model.contract.Contract;
 
 /**
  * An UI component that displays information of a {@code Policy}.
  */
-public class PolicyCard extends UiPart<Region> {
+public class ContractCard extends UiPart<Region> {
 
-    private static final String FXML = "PolicyListCard.fxml";
+    private static final String FXML = "ContractListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,28 +21,31 @@ public class PolicyCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Policy policy;
+    public final Contract contract;
 
     @FXML
     private HBox cardPane;
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label cId;
     @FXML
-    private Label pid;
+    private Label pId;
     @FXML
-    private Label details;
+    private Label nric;
+    @FXML
+    private Label dateSigned;
 
     /**
      * Creates a {@code PolicyCode} with the given {@code Policy} and index to display.
      */
-    public PolicyCard(Policy policy, int displayedIndex) {
+    public ContractCard(Contract contract, int displayedIndex) {
         super(FXML);
-        this.policy = policy;
-        id.setText(displayedIndex + ". ");
-        name.setText(policy.getName().value);
-        pid.setText(policy.getId().value);
-        details.setText(policy.getDetails().value);
+        this.contract = contract;
+        pId.setText(contract.getPId().toString());
+        cId.setText(contract.getCId().value);
+        name.setText(contract.getName().fullName);
+        nric.setText(contract.getNric().nric);
+        dateSigned.setText(contract.getDate().toString());
     }
 }

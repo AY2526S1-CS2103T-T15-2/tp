@@ -8,40 +8,41 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.policy.Policy;
+import seedu.address.model.contract.Contract;
+
 
 /**
  * Panel containing the list of policies.
  */
-public class PolicyListPanel extends UiPart<Region> {
-    private static final String FXML = "PolicyListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PolicyListPanel.class);
+public class ContractListPanel extends UiPart<Region> {
+    private static final String FXML = "ContractListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ContractListPanel.class);
 
     @FXML
-    private ListView<Policy> policyListView;
+    private ListView<Contract> contractListView;
 
     /**
      * Creates a {@code PolicyListPanel} with the given {@code ObservableList}.
      */
-    public PolicyListPanel(ObservableList<Policy> policyList) {
+    public ContractListPanel(ObservableList<Contract> contractList) {
         super(FXML);
-        policyListView.setItems(policyList);
-        policyListView.setCellFactory(listView -> new PolicyListViewCell());
+        contractListView.setItems(contractList);
+        contractListView.setCellFactory(listView -> new ContractListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Policy} using a {@code PolicyCard}.
      */
-    class PolicyListViewCell extends ListCell<Policy> {
+    class ContractListViewCell extends ListCell<Contract> {
         @Override
-        protected void updateItem(Policy policy, boolean empty) {
-            super.updateItem(policy, empty);
+        protected void updateItem(Contract contract, boolean empty) {
+            super.updateItem(contract, empty);
 
-            if (empty || policy == null) {
+            if (empty || contract == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PolicyCard(policy, getIndex() + 1).getRoot());
+                setGraphic(new ContractCard(contract, getIndex() + 1).getRoot());
             }
         }
     }
