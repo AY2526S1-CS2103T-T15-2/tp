@@ -111,8 +111,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePolicy(Policy target) {
-        addressBook.removePolicy(target);
+    public void removePolicy(Policy policy) {
+        addressBook.removePolicy(policy);
     }
 
     @Override
