@@ -90,7 +90,7 @@ public class AddressBookParser {
             return new RemovePolicyCommandParser().parse(arguments);
 
         case ViewPolicyCommand.COMMAND_WORD:
-            return new ViewPolicyCommand();
+            return new ViewPolicyCommandParser().parse(arguments);
 
         case AddContractCommand.COMMAND_WORD:
             return new AddContractCommandParser().parse(arguments);
