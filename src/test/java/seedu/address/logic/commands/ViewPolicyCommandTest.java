@@ -26,6 +26,6 @@ public class ViewPolicyCommandTest {
 
     @Test
     public void execute_viewIsNotFiltered_showsSameView() {
-        assertCommandSuccess(new ViewPolicyCommand(), model, ViewPolicyCommand.MESSAGE_USAGE, expectedModel);
+        assertCommandSuccess(new ViewPolicyCommand(), model, ViewPolicyCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 }
