@@ -42,10 +42,10 @@ public class ContractCard extends UiPart<Region> {
     public ContractCard(Contract contract, int displayedIndex) {
         super(FXML);
         this.contract = contract;
-        pId.setText(contract.getPId().toString());
-        cId.setText(contract.getCId().value);
-        name.setText(contract.getName().fullName);
-        nric.setText(contract.getNric().nric);
-        dateSigned.setText(contract.getDate().toString());
+        pId.setText("Policy id: " + contract.getPId().toString());
+        cId.setText("Contract id: " + contract.getCId().value);
+        name.setText("Name: " + contract.getName().fullName);
+        nric.setText("NRIC: " + contract.getNric().nric);
+        dateSigned.setText("Date Signed: " + contract.getDate().toString());
     }
 }
