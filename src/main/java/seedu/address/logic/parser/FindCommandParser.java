@@ -27,6 +27,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
+        if (nameKeywords[0].equals("-a")) {
+            return new FindCommand(true);
+        }
+
         return new FindCommand(new NricContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
