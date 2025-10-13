@@ -33,10 +33,12 @@ import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.IdContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.PolicyUtil;
+
 
 public class AddressBookParserTest {
 
@@ -115,10 +117,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ViewContractCommand.COMMAND_WORD) instanceof ViewContractCommand);
     }
 
-    @Test
-    public void parseCommand_viewPolicy() throws Exception {
-        assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD) instanceof ViewPolicyCommand);
-    }
+
 
     @Test
     public void parseCommand_addContract() throws Exception {

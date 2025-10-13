@@ -6,6 +6,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 import seedu.address.model.Model;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
 
+import javax.swing.text.View;
+
 /**
  * Lists all policies or by specific policy id in the address book to the user
  * Keyword matching is case sensitive
@@ -59,6 +61,20 @@ public class ViewPolicyCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC,
                                                     String.join(", ", predicate.getKeywords())));
         }
+    }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewPolicyCommand)) {
+            return false;
+        }
+
+        ViewPolicyCommand otherViewPolicyCommand = (ViewPolicyCommand) other;
+        return predicate.equals(otherViewPolicyCommand.predicate);
     }
 }
