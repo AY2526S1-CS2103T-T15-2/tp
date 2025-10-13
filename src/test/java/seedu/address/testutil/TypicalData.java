@@ -42,10 +42,10 @@ public class TypicalData {
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withNric("S1234567C")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withNric("S1234567D")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+            .withEmail("cornelia@example.com").withAddress("").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withNric("T1234567A")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
