@@ -13,5 +13,7 @@ coverage:
     - "src/main/java/seedu.address/ui/MainWindow.java"
     - "src/main/java/seedu.address/ui/PolicyCard.java"
     - "src/main/java/seedu.address/ui/PolicyListPanel.java"
+    - "src/main/java/seedu.address/ui/ContractCard.java"
+    - "src/main/java/seedu.address/ui/ContractListPanel.java"
 
 
