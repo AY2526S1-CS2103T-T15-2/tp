@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 import seedu.address.model.Model;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
 
-import javax.swing.text.View;
 
 /**
  * Lists all policies or by specific policy id in the address book to the user
