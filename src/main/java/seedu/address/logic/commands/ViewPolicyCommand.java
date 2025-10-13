@@ -7,7 +7,8 @@ import seedu.address.model.Model;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
 
 /**
- * Lists all policies in the address book to the user.
+ * Lists all policies or by specific policy id in the address book to the user
+ * Keyword matching is case sensitive
  */
 public class ViewPolicyCommand extends Command {
 
@@ -28,11 +29,17 @@ public class ViewPolicyCommand extends Command {
     private final boolean viewAll;
     private final IdContainsKeywordsPredicate predicate;
 
+    /**
+     * Constructor method to view all policies
+     */
     public ViewPolicyCommand() {
         this.viewAll = true;
         this.predicate = null;
     }
 
+    /**
+     * Constructor method to view policies matching predicate
+     */
     public ViewPolicyCommand(IdContainsKeywordsPredicate predicate) {
         this.viewAll = false;
         this.predicate = predicate;
