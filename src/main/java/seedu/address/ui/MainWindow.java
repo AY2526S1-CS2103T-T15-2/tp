@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private PolicyListPanel policyListPanel;
+    private ContractListPanel contractListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -50,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane policyListPanelPlaceholder;
+
+    @FXML
+    private StackPane contractListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -123,8 +127,12 @@ public class MainWindow extends UiPart<Stage> {
         policyListPanel = new PolicyListPanel(logic.getFilteredPolicyList());
         policyListPanelPlaceholder.getChildren().add(policyListPanel.getRoot());
 
+        contractListPanel = new ContractListPanel(logic.getFilteredContractList());
+        contractListPanelPlaceholder.getChildren().add(contractListPanel.getRoot());
+
         personListPanelPlaceholder.setVisible(true);
         policyListPanelPlaceholder.setVisible(false);
+        contractListPanelPlaceholder.setVisible(false);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -197,6 +205,8 @@ public class MainWindow extends UiPart<Stage> {
                 showPersonListPanel();
             } else if (feedback.contains("viewing all policies")) {
                 showPolicyListPanel();
+            } else if (feedback.contains("viewing all contracts")) {
+                showContractListPanel();
             }
 
             if (commandResult.isShowHelp()) {
@@ -218,10 +228,18 @@ public class MainWindow extends UiPart<Stage> {
     private void showPersonListPanel() {
         personListPanelPlaceholder.setVisible(true);
         policyListPanelPlaceholder.setVisible(false);
+        contractListPanelPlaceholder.setVisible(false);
     }
 
     private void showPolicyListPanel() {
         personListPanelPlaceholder.setVisible(false);
         policyListPanelPlaceholder.setVisible(true);
+        contractListPanelPlaceholder.setVisible(false);
+    }
+
+    private void showContractListPanel() {
+        personListPanelPlaceholder.setVisible(false);
+        policyListPanelPlaceholder.setVisible(false);
+        contractListPanelPlaceholder.setVisible(true);
     }
 }
