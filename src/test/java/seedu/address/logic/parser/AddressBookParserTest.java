@@ -117,7 +117,15 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ViewContractCommand.COMMAND_WORD) instanceof ViewContractCommand);
     }
 
-
+    @Test
+    public void parseCommand_viewPolicy() throws Exception {
+        List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
+        ViewPolicyCommand command = (ViewPolicyCommand) parser.parseCommand(
+                ViewPolicyCommand.COMMAND_WORD
+                        + " p: " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewPolicyCommand(new IdContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD + " -a") instanceof ViewPolicyCommand);
+    }
 
     @Test
     public void parseCommand_addContract() throws Exception {
