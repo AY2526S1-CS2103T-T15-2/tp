@@ -83,9 +83,6 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case AddPolicyCommand.COMMAND_WORD:
-            return new AddPolicyCommandParser().parse(arguments);
-
         case RemovePolicyCommand.COMMAND_WORD:
             return new RemovePolicyCommandParser().parse(arguments);
 
