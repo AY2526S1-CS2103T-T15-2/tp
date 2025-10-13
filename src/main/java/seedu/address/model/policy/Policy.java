@@ -50,6 +50,24 @@ public class Policy {
                 && otherPolicy.getId().equals(getId());
     }
 
+    /**
+     * Tests for equality of policies excluding the policy id.
+     * Mainly used for testing the correctness of the parser.
+     */
+    public boolean weakEquals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Policy)) {
+            return false;
+        }
+
+        Policy otherPolicy = (Policy) other;
+        return policyName.equals(otherPolicy.policyName) && policyDetails.equals(otherPolicy.policyDetails);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

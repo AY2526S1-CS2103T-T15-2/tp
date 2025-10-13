@@ -45,6 +45,24 @@ public class AddPolicyCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
+    /**
+     * Tests for equality of commands excluding the policy id.
+     * Mainly used for testing the correctness of the parser.
+     */
+    public boolean weakEquals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddPolicyCommand)) {
+            return false;
+        }
+
+        AddPolicyCommand otherAddPolicyCommand = (AddPolicyCommand) other;
+        return toAdd.weakEquals(otherAddPolicyCommand.toAdd);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -57,7 +75,6 @@ public class AddPolicyCommand extends Command {
         }
 
         AddPolicyCommand otherAddPolicyCommand = (AddPolicyCommand) other;
-
         return toAdd.equals(otherAddPolicyCommand.toAdd);
     }
 

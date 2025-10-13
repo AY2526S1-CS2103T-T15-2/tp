@@ -4,13 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalData.LIFE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyDetails;
-import seedu.address.model.policy.PolicyId;
-import seedu.address.model.policy.PolicyName;
+import seedu.address.testutil.PolicyBuilder;
 
 public class AddPolicyCommandTest {
 
@@ -21,10 +20,8 @@ public class AddPolicyCommandTest {
 
     @Test
     public void equals() {
-        Policy policy = new Policy(new PolicyName("Life Insurance"), new PolicyDetails("policy details"),
-                PolicyId.generate());
-        Policy otherPolicy = new Policy(new PolicyName("Healthcare"), new PolicyDetails("other policy details"),
-                PolicyId.generate());
+        Policy policy = new PolicyBuilder().withName("Life Insurance").build();
+        Policy otherPolicy = new PolicyBuilder().withName("Healthcare").build();
         AddPolicyCommand addPolicyCommand = new AddPolicyCommand(policy);
         AddPolicyCommand addPolicyCommandOther = new AddPolicyCommand(otherPolicy);
 
@@ -47,10 +44,8 @@ public class AddPolicyCommandTest {
 
     @Test
     public void toStringMethod() {
-        Policy policy = new Policy(new PolicyName("Life Insurance"), new PolicyDetails("policy details"),
-                PolicyId.generate());
-        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(policy);
-        String expected = AddPolicyCommand.class.getCanonicalName() + "{toAdd=" + policy + "}";
+        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(LIFE);
+        String expected = AddPolicyCommand.class.getCanonicalName() + "{toAdd=" + LIFE + "}";
         assertEquals(expected, addPolicyCommand.toString());
     }
 }

@@ -12,6 +12,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_DETAILS_HEALTH_B;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_DETAILS_HOME;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HEALTH_B;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HOME;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -91,17 +97,11 @@ public class TypicalData {
             new PolicyId("Abc123")
     );
 
-    public static final Policy HOME = new Policy(
-            new PolicyName("Home Insurance - B"),
-            new PolicyDetails("Placeholder policy details"),
-            new PolicyId("abc123")
-    );
-
-    public static final Policy HEALTH_B = new Policy(
-            new PolicyName("Healthcare - B"),
-            new PolicyDetails("Policy details 123"),
-            new PolicyId("654321")
-    );
+    // Manually added - Policy's details found in {@code PolicyCommandTestUtil}
+    public static final Policy HOME = new PolicyBuilder().withName(VALID_POLICY_NAME_HOME)
+            .withDetails(VALID_DETAILS_HOME).withId(VALID_POLICY_ID_HOME).build();
+    public static final Policy HEALTH_B = new PolicyBuilder().withName(VALID_POLICY_NAME_HEALTH_B)
+            .withDetails(VALID_DETAILS_HEALTH_B).withId(VALID_POLICY_ID_HEALTH_B).build();
 
     public static final Contract CONTRACT_A = new Contract(
             new ContractId("C1234A"),
