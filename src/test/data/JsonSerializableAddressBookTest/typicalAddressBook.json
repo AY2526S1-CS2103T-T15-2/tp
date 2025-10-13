@@ -18,7 +18,7 @@
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "nric": "S1234567C",
-    "email" : "heinz@example.com",
+    "email" : "",
     "address" : "wall street",
     "tags" : [ ]
   }, {
@@ -26,7 +26,7 @@
     "phone" : "87652533",
     "nric": "S1234567D",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
+    "address" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
