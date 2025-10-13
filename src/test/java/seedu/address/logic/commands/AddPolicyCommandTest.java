@@ -9,9 +9,6 @@ import static seedu.address.testutil.TypicalData.LIFE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyDetails;
-import seedu.address.model.policy.PolicyId;
-import seedu.address.model.policy.PolicyName;
 import seedu.address.testutil.PolicyBuilder;
 
 public class AddPolicyCommandTest {
