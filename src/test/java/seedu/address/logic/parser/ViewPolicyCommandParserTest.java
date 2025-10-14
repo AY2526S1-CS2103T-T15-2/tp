@@ -6,13 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewPolicyCommand;
-import seedu.address.logic.commands.ViewPolicyCommandTest;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
 
 public class ViewPolicyCommandParserTest {
