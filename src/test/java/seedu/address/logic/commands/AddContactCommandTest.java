@@ -224,6 +224,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public PolicyId generateUniquePolicyId() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredContractList(Predicate<Contract> predicate) {
             throw new AssertionError("This method should not be called.");
         }
