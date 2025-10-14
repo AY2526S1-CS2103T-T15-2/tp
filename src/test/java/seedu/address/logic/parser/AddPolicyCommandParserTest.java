@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.AddPolicyCommandType;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
@@ -36,10 +37,10 @@ public class AddPolicyCommandParserTest {
      * Modified for {@code AddPolicyCommandParser}.
      */
     public static void assertPolicyParseSuccess(AddPolicyCommandParser parser, String userInput,
-            AddPolicyCommand expectedCommand) {
+                                                AddPolicyCommandType expectedCommand) {
         try {
-            AddPolicyCommand command = parser.parse(userInput);
-            assertTrue(expectedCommand.weakEquals(command));
+            AddPolicyCommandType command = parser.parse(userInput);
+            assertTrue(expectedCommand.isSameCommand(command));
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
         }
@@ -55,7 +56,7 @@ public class AddPolicyCommandParserTest {
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedValue_failure() {
         String validExpectedPolicyString = POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME;
 
         // multiple names

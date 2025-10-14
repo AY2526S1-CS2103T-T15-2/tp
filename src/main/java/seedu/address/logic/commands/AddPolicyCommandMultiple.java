@@ -13,7 +13,7 @@ import seedu.address.model.policy.Policy;
 /**
  * Adds a policy.
  */
-public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
+public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
 
     public static final String COMMAND_WORD = "add_policy";
 
@@ -32,7 +32,7 @@ public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
     /**
      * Creates an AddPolicyCommand to add the specified {@code Policy}
      */
-    public AddPolicyCommand(Policy policy) {
+    public AddPolicyCommandMultiple(Policy policy) {
         requireNonNull(policy);
         toAdd = policy;
     }
@@ -55,11 +55,11 @@ public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddPolicyCommand)) {
+        if (!(other instanceof AddPolicyCommandMultiple)) {
             return false;
         }
 
-        AddPolicyCommand otherAddPolicyCommand = (AddPolicyCommand) other;
+        AddPolicyCommandMultiple otherAddPolicyCommand = (AddPolicyCommandMultiple) other;
         return toAdd.weakEquals(otherAddPolicyCommand.toAdd);
     }
 
@@ -70,11 +70,11 @@ public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddPolicyCommand)) {
+        if (!(other instanceof AddPolicyCommandMultiple)) {
             return false;
         }
 
-        AddPolicyCommand otherAddPolicyCommand = (AddPolicyCommand) other;
+        AddPolicyCommandMultiple otherAddPolicyCommand = (AddPolicyCommandMultiple) other;
         return toAdd.equals(otherAddPolicyCommand.toAdd);
     }
 

@@ -65,7 +65,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addPolicy() throws Exception {
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(PolicyUtil.getAddPolicyCommand(LIFE));
-        assertTrue(command.weakEquals(new AddPolicyCommand(LIFE)));
+        assertTrue(command.isSameCommand(new AddPolicyCommand(LIFE)));
     }
 
     @Test

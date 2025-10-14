@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.AddPolicyCommandType;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
@@ -17,14 +19,14 @@ import seedu.address.model.policy.PolicyName;
 /**
  * Parses input arguments and creates a new AddPolicyCommand object
  */
-public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
+public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddPolicyCommand
      * and returns an AddPolicyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddPolicyCommand parse(String args) throws ParseException {
+    public AddPolicyCommandType parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DETAILS, PREFIX_FILE);
 
         if (argMultimap.getPreamble().isEmpty()) {
