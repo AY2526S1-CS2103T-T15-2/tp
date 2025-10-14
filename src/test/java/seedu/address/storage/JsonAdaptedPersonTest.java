@@ -87,7 +87,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_validPersonDetails_withContract_returnsPerson() throws Exception {
+    public void toModelType_validPersonDetailsWithContract_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(ALICE_WITH_CONTRACT);
         assertEquals(ALICE_WITH_CONTRACT, person.toModelType());
     }

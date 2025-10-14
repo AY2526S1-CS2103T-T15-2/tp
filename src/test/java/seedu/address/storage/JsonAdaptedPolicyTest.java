@@ -5,6 +5,10 @@ import static seedu.address.storage.JsonAdaptedPolicy.MISSING_FIELD_MESSAGE_FORM
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getTypicalPolicies;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -12,10 +16,6 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class JsonAdaptedPolicyTest {
     private static final String INVALID_NAME = "Medical*";
@@ -49,7 +49,7 @@ public class JsonAdaptedPolicyTest {
     }
 
     @Test
-    public void toModelType_validPolicyValues_withContract_returnsPolicy() throws Exception {
+    public void toModelType_validPolicyValuesWithContract_returnsPolicy() throws Exception {
         SAMPLE_POLICY.addContract(VALID_CONTRACTS.get(0).toModelType());
         JsonAdaptedPolicy policy = new JsonAdaptedPolicy(SAMPLE_POLICY);
         assertEquals(SAMPLE_POLICY, policy.toModelType());
