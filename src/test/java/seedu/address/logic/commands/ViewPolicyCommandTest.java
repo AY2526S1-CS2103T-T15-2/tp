@@ -45,9 +45,12 @@ public class ViewPolicyCommandTest {
                 new IdContainsKeywordsPredicate(Collections.singletonList("abcdef"));
         IdContainsKeywordsPredicate secondPredicate =
                 new IdContainsKeywordsPredicate(Collections.singletonList("xyz123"));
+        IdContainsKeywordsPredicate nullPredicate =
+                new IdContainsKeywordsPredicate(null);
 
         ViewPolicyCommand viewFirstPolicyCommand = new ViewPolicyCommand(firstPredicate);
         ViewPolicyCommand viewSecondPolicyCommand = new ViewPolicyCommand(secondPredicate);
+        ViewPolicyCommand viewThirdPolicyCommand = new ViewPolicyCommand(nullPredicate);
 
         // same object -> returns true
         assertTrue(viewFirstPolicyCommand.equals(viewFirstPolicyCommand));
@@ -64,6 +67,13 @@ public class ViewPolicyCommandTest {
 
         // different person -> returns false
         assertFalse(viewFirstPolicyCommand.equals(viewSecondPolicyCommand));
+
+        // both null predicates
+        ViewPolicyCommand viewThirdPolicyCommandCopy = new ViewPolicyCommand(nullPredicate);
+        assertTrue(viewThirdPolicyCommand.equals(viewThirdPolicyCommandCopy));
+
+        // one null predicate
+        assertFalse(viewFirstPolicyCommand.equals(viewThirdPolicyCommand));
     }
 
     @Test
