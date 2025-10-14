@@ -33,10 +33,12 @@ import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.IdContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.PolicyUtil;
+
 
 public class AddressBookParserTest {
 
@@ -117,7 +119,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewPolicy() throws Exception {
-        assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD) instanceof ViewPolicyCommand);
+        List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
+        ViewPolicyCommand command = (ViewPolicyCommand) parser.parseCommand(
+                ViewPolicyCommand.COMMAND_WORD
+                        + " p: " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewPolicyCommand(new IdContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD + " -a") instanceof ViewPolicyCommand);
     }
 
     @Test
