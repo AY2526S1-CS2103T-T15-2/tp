@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedContract> contracts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,8 +40,28 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("nric") String nric, @JsonProperty("email") String email,
-            @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("contracts") List<JsonAdaptedContract> contracts) {
+        this.name = name;
+        this.phone = phone;
+        this.nric = nric;
+        this.email = email;
+        this.address = address;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
+        if (contracts != null) {
+            this.contracts.addAll(contracts);
+        }
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     */
+    @JsonCreator
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                             @JsonProperty("nric") String nric, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.nric = nric;
@@ -62,6 +84,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        contracts.addAll(source.getContracts().stream()
+                .map(JsonAdaptedContract::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -71,8 +96,12 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<Contract> personContracts = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        for (JsonAdaptedContract contract : contracts) {
+            personContracts.add(contract.toModelType());
         }
 
         if (name == null) {
@@ -120,7 +149,8 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelNric, modelEmail, modelAddress, modelTags);
+        final Set<Contract> modelContracts = new HashSet<>(personContracts);
+        return new Person(modelName, modelPhone, modelNric, modelEmail, modelAddress, modelTags, modelContracts);
     }
 
 }

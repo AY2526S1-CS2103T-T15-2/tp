@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.BENSON;
 import static seedu.address.testutil.TypicalData.CARL;
 import static seedu.address.testutil.TypicalData.DANIEL;
+import static seedu.address.testutil.TypicalData.getTypicalPersons;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
@@ -55,12 +57,39 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
+    private static final List<Person> personsWithContracts = getTypicalPersons().stream().limit(3).toList();
+    private static final Person ALICE_WITH_CONTRACT = personsWithContracts.get(0);
+    private static final String VALID_NAME_4 = ALICE_WITH_CONTRACT.getName().toString();
+    private static final String VALID_PHONE_4 = ALICE_WITH_CONTRACT.getPhone().toString();
+    private static final String VALID_NRIC_4 = ALICE_WITH_CONTRACT.getNric().toString();
+    private static final String VALID_EMAIL_4 = ALICE_WITH_CONTRACT.getEmail().toString();
+    private static final String VALID_ADDRESS_4 = ALICE_WITH_CONTRACT.getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS_4 = ALICE_WITH_CONTRACT.getTags().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList());
+    private static final List<JsonAdaptedContract> VALID_CONTRACTS = ALICE_WITH_CONTRACT.getContracts().stream()
+            .map(JsonAdaptedContract::new)
+            .collect(Collectors.toUnmodifiableList());
+    private static final JsonAdaptedContract INVALID_CONTRACT = new JsonAdaptedContract(
+            "#C123A",
+            VALID_NAME_4,
+            VALID_NRIC_4,
+            "abcdef",
+            "2023-01-01"
+    );
+
 
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
         assertEquals(BENSON, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_validPersonDetails_withContract_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(ALICE_WITH_CONTRACT);
+        assertEquals(ALICE_WITH_CONTRACT, person.toModelType());
     }
 
     @Test
@@ -146,6 +175,17 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_NRIC,
                         VALID_EMAIL, VALID_ADDRESS, invalidTags);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidContracts_throwsIllegalValueException() {
+        List<JsonAdaptedContract> invalidContracts = new ArrayList<>(VALID_CONTRACTS);
+        List<JsonAdaptedTag> validTags = new ArrayList<>(VALID_TAGS);
+        invalidContracts.add(INVALID_CONTRACT);
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME_4, VALID_PHONE_4, VALID_NRIC_4,
+                        VALID_EMAIL_4, VALID_ADDRESS_4, validTags, invalidContracts);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

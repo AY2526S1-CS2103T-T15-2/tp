@@ -164,6 +164,9 @@ public class TypicalData {
     }
 
     public static List<Person> getTypicalPersons() {
+        ALICE.addContract(CONTRACT_A);
+        BENSON.addContract(CONTRACT_B);
+        CARL.addContract(CONTRACT_C);
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
