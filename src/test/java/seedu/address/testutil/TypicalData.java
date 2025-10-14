@@ -171,6 +171,9 @@ public class TypicalData {
     }
 
     public static List<Policy> getTypicalPolicies() {
+        LIFE.addContract(CONTRACT_A);
+        HEALTH.addContract(CONTRACT_B);
+        PROPERTY.addContract(CONTRACT_C);
         return new ArrayList<>(Arrays.asList(LIFE, HEALTH, PROPERTY));
     }
 

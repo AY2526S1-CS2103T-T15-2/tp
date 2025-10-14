@@ -4,10 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Jackson-friendly version of {@link Policy}.
@@ -19,6 +25,7 @@ class JsonAdaptedPolicy {
     private final String name;
     private final String details;
     private final String id;
+    private final List<JsonAdaptedContract> contracts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPolicy} with the given policy details.
@@ -30,6 +37,22 @@ class JsonAdaptedPolicy {
         this.name = name;
         this.details = details;
         this.id = id;
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedPolicy} with the given policy details.
+     */
+    @JsonCreator
+    public JsonAdaptedPolicy(@JsonProperty("name") String name,
+                             @JsonProperty("details") String details,
+                             @JsonProperty("id") String id,
+                             @JsonProperty("contracts") List<JsonAdaptedContract> contracts) {
+        this.name = name;
+        this.details = details;
+        this.id = id;
+        if (contracts != null) {
+            this.contracts.addAll(contracts);
+        }
     }
 
     /**
@@ -47,6 +70,10 @@ class JsonAdaptedPolicy {
      * @throws IllegalValueException if there were any data constraints violated in the adapted policy.
      */
     public Policy toModelType() throws IllegalValueException {
+        final List<Contract> policyContracts = new ArrayList<>();
+        for (JsonAdaptedContract contract : contracts) {
+            policyContracts.add(contract.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     PolicyName.class.getSimpleName()));
@@ -74,7 +101,8 @@ class JsonAdaptedPolicy {
         }
         final PolicyId modelPolicyId = new PolicyId(id);
 
-        return new Policy(modelPolicyName, modelPolicyDetails, modelPolicyId);
+        final Set<Contract> modelContracts = new HashSet<>(policyContracts);
+        return new Policy(modelPolicyName, modelPolicyDetails, modelPolicyId, modelContracts);
     }
 
 }

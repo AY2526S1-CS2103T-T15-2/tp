@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPolicy.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalData.getTypicalPolicies;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,10 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class JsonAdaptedPolicyTest {
     private static final String INVALID_NAME = "Medical*";
@@ -24,8 +29,28 @@ public class JsonAdaptedPolicyTest {
     private static final Policy SAMPLE_POLICY = new Policy(
             new PolicyName(VALID_NAME), new PolicyDetails(VALID_DETAILS), new PolicyId(VALID_ID));
 
+    private static final List<Policy> policiesWithContracts = getTypicalPolicies();
+    private static final Policy LIFE_POLICY_WITH_CONTRACT = policiesWithContracts.get(0);
+    private static final List<JsonAdaptedContract> VALID_CONTRACTS = LIFE_POLICY_WITH_CONTRACT.getContracts().stream()
+            .map(JsonAdaptedContract::new)
+            .collect(Collectors.toUnmodifiableList());
+    private static final JsonAdaptedContract INVALID_CONTRACT = new JsonAdaptedContract(
+            "#C123A",
+            "Alice Pauline",
+            "S1234567A",
+            "abcdef",
+            "2023-01-01"
+    );
+
     @Test
     public void toModelType_validPolicyValues_returnsPolicy() throws Exception {
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(SAMPLE_POLICY);
+        assertEquals(SAMPLE_POLICY, policy.toModelType());
+    }
+
+    @Test
+    public void toModelType_validPolicyValues_withContract_returnsPolicy() throws Exception {
+        SAMPLE_POLICY.addContract(VALID_CONTRACTS.get(0).toModelType());
         JsonAdaptedPolicy policy = new JsonAdaptedPolicy(SAMPLE_POLICY);
         assertEquals(SAMPLE_POLICY, policy.toModelType());
     }
@@ -70,6 +95,15 @@ public class JsonAdaptedPolicyTest {
         JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, VALID_DETAILS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, policy::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidContract_throwsIllegalValueException() {
+        List<JsonAdaptedContract> invalidContracts = new ArrayList<>(VALID_CONTRACTS);
+        invalidContracts.add(INVALID_CONTRACT);
+        JsonAdaptedPolicy policy =
+                new JsonAdaptedPolicy(VALID_NAME, VALID_DETAILS, VALID_ID, invalidContracts);
+        assertThrows(IllegalValueException.class, policy::toModelType);
     }
 
 }
