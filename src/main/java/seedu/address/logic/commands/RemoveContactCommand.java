@@ -15,9 +15,9 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class RemoveContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "remove_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the NRIC used in the displayed person list.\n"
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
 
     private final NricContainsKeywordsPredicate predicate;
 
-    public DeleteCommand(NricContainsKeywordsPredicate predicate) {
+    public RemoveContactCommand(NricContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -65,12 +65,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof RemoveContactCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return predicate.equals(otherDeleteCommand.predicate);
+        RemoveContactCommand otherRemoveContactCommand = (RemoveContactCommand) other;
+        return predicate.equals(otherRemoveContactCommand.predicate);
     }
 
     @Override
