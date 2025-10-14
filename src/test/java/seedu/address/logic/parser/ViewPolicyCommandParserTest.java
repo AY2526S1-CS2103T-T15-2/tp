@@ -1,14 +1,14 @@
 package seedu.address.logic.parser;
 
-import java.util.Arrays;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREAMBLE_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;

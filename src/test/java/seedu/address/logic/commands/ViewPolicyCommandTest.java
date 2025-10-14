@@ -1,11 +1,5 @@
 package seedu.address.logic.commands;
 
-import java.util.Arrays;
-import java.util.Collections;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,6 +8,12 @@ import static seedu.address.testutil.TypicalData.HEALTH;
 import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalData.PROPERTY;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
