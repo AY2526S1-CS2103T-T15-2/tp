@@ -174,6 +174,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds the given contract to the corresponding person in the address book.
+     * The person must exist in the address book.
+     */
+    public void addContractToPerson(Contract contract) {
+        requireNonNull(contract);
+        for (Person person : persons) {
+            if (person.getNric().equals(contract.getNric())) {
+                person.addContract(contract);
+                break;
+            }
+        }
+    }
+
+    /**
      * Removes the given contract.
      * The contract must exist in the address book.
      */
@@ -188,6 +202,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setContracts(List<Contract> contracts) {
         this.contracts.setContracts(contracts);
+    }
+
+    /**
+     * Returns true if a person has the given contract.
+     */
+    public boolean personHasContract(Contract contract, Person person) {
+        requireNonNull(contract);
+        requireNonNull(person);
+        for (Person p : persons) {
+            if (p.equals(person)) {
+                return p.getContracts().contains(contract);
+            }
+        }
+        return false;
     }
 
     //// util methods

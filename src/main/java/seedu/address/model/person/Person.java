@@ -29,7 +29,7 @@ public class Person {
     private final Set<Contract> contracts = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructor when constructing Person with contracts.
      */
     public Person(Name name, Phone phone, Nric nric, Email email, Address address, Set<Tag> tags,
                   Set<Contract> contracts) {
@@ -41,6 +41,20 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.contracts.addAll(contracts);
+    }
+
+    /**
+     * Main constructor when constructing Person
+     * Constructor without contracts.
+     */
+    public Person(Name name, Phone phone, Nric nric, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, nric);
+        this.name = name;
+        this.phone = phone;
+        this.nric = nric;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -90,6 +104,14 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Adds a contract to the person's set of contracts.
+     * @param contract The contract to be added.
+     */
+    public void addContract(Contract contract) {
+        contracts.add(contract);
     }
 
     /**

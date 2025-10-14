@@ -194,27 +194,37 @@ public class AddContactCommandTest {
         }
 
         public boolean hasContract(Contract contract) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addContract(Contract contract) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void addContractToPerson(Contract contract) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Contract> getFilteredContractList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredContractList(Predicate<Contract> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void removeContract(Contract contract) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public boolean personHasContract(Contract contract, Person person) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
