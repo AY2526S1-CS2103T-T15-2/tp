@@ -57,42 +57,42 @@ public class JsonAdaptedPolicyTest {
 
     @Test
     public void toModelType_invalidPolicyName_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(INVALID_NAME, VALID_DETAILS, VALID_ID);
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(INVALID_NAME, VALID_DETAILS, VALID_ID, VALID_CONTRACTS);
         String expectedMessage = PolicyName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, policy::toModelType);
     }
 
     @Test
     public void toModelType_nullPolicyName_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(null, VALID_DETAILS, VALID_ID);
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(null, VALID_DETAILS, VALID_ID, VALID_CONTRACTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, policy::toModelType);
     }
 
     @Test
     public void toModelType_invalidPolicyDetails_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, INVALID_DETAILS, VALID_ID);
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, INVALID_DETAILS, VALID_ID, VALID_CONTRACTS);
         String expectedMessage = PolicyDetails.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, policy::toModelType);
     }
 
     @Test
     public void toModelType_nullPolicyDetails_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, null, VALID_ID);
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, null, VALID_ID, VALID_CONTRACTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyDetails.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, policy::toModelType);
     }
 
     @Test
     public void toModelType_invalidPolicyId_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, VALID_DETAILS, INVALID_ID);
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, VALID_DETAILS, INVALID_ID, VALID_CONTRACTS);
         String expectedMessage = PolicyId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, policy::toModelType);
     }
 
     @Test
     public void toModelType_nullPolicyId_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, VALID_DETAILS, null);
+        JsonAdaptedPolicy policy = new JsonAdaptedPolicy(VALID_NAME, VALID_DETAILS, null, VALID_CONTRACTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, policy::toModelType);
     }

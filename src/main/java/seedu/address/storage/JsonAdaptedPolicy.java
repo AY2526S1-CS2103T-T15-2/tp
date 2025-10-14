@@ -33,18 +33,6 @@ class JsonAdaptedPolicy {
     @JsonCreator
     public JsonAdaptedPolicy(@JsonProperty("name") String name,
                              @JsonProperty("details") String details,
-                             @JsonProperty("id") String id) {
-        this.name = name;
-        this.details = details;
-        this.id = id;
-    }
-
-    /**
-     * Constructs a {@code JsonAdaptedPolicy} with the given policy details.
-     */
-    @JsonCreator
-    public JsonAdaptedPolicy(@JsonProperty("name") String name,
-                             @JsonProperty("details") String details,
                              @JsonProperty("id") String id,
                              @JsonProperty("contracts") List<JsonAdaptedContract> contracts) {
         this.name = name;
@@ -58,7 +46,6 @@ class JsonAdaptedPolicy {
     /**
      * Converts a given {@code Policy} into this class for Jackson use.
      */
-    @JsonCreator
     public JsonAdaptedPolicy(Policy source) {
         name = source.getName().value;
         details = source.getDetails().value;

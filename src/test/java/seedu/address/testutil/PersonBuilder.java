@@ -126,6 +126,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code contracts} into a {@code Set<Contract>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withContracts(List<Contract> contracts) {
+        this.contracts = new HashSet<>(contracts);
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, nric, email, address, tags, contracts);
     }
