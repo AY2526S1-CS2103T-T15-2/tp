@@ -193,11 +193,11 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new NricContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
-        //different filteredPolicyList -> returns false
+        // different filteredPolicyList -> returns false
         modelManager.updateFilteredPolicyList(x -> x.equals(LIFE));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
-        //different filteredContractList -> returns false
+        // different filteredContractList -> returns false
         modelManager.updateFilteredContractList(x -> x.equals(CONTRACT_A));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

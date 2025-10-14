@@ -10,7 +10,11 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.INVALID_DETAILS
 import static seedu.address.logic.commands.PolicyCommandTestUtil.INVALID_POLICY_NAME_DESC;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_NAME_DESC_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_NAME_DESC_HOME;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_B_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -21,6 +25,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.AddPolicyCommandMultiple;
 import seedu.address.logic.commands.AddPolicyCommandType;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
@@ -38,6 +43,10 @@ public class AddPolicyCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,
                 new AddPolicyCommand(unassign(expectedPolicy)));
+
+        // file option
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_PATH_A_DESC,
+                new AddPolicyCommandMultiple(POLICY_PATH_A));
     }
 
     @Test
@@ -56,6 +65,10 @@ public class AddPolicyCommandParserTest {
         assertParseFailure(parser, validExpectedPolicyString + POLICY_NAME_DESC_HEALTH_B + DETAILS_DESC_HEALTH_B
                         + validExpectedPolicyString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_DETAILS));
+
+        // multiple files
+        assertParseFailure(parser, POLICY_PATH_A_DESC + POLICY_PATH_B_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_FILE));
 
         // invalid value followed by valid value
 
@@ -79,6 +92,20 @@ public class AddPolicyCommandParserTest {
     }
 
     @Test
+    public void parse_mixedOptions_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE);
+
+        // name, details, and file provided
+        assertParseFailure(parser, POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME + POLICY_PATH_A_DESC, expectedMessage);
+
+        // name and file provided
+        assertParseFailure(parser, POLICY_NAME_DESC_HOME + POLICY_PATH_A_DESC, expectedMessage);
+
+        // details and file provided
+        assertParseFailure(parser, DETAILS_DESC_HOME + POLICY_PATH_A_DESC, expectedMessage);
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE);
 
@@ -87,6 +114,9 @@ public class AddPolicyCommandParserTest {
 
         // missing details prefix
         assertParseFailure(parser, DETAILS_DESC_HOME, expectedMessage);
+
+        // no arguments
+        assertParseFailure(parser, "", expectedMessage);
     }
 
     @Test
