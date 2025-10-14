@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
 
 /**
  * The API of the Model component.
@@ -107,6 +108,12 @@ public interface Model {
     void addPolicy(Policy policy);
 
     /**
+     * Adds policies from the given file.
+     * Every {@code policy} must not already exist in the address book.
+     */
+    void addPolicyFile(Path filePath);
+
+    /**
      * Replaces the given policy {@code target} with {@code editedPolicy}.
      * {@code target} must exist in the address book.
      * The policy id of {@code editedPolicy} must not be the same as another existing policy in the address book.
@@ -147,4 +154,9 @@ public interface Model {
      * The contract must exist in the address book.
      */
     void removeContract(Contract contract);
+
+    /**
+     * Generates a policy id not present in the currentaddress book.
+     */
+    PolicyId generateUniquePolicyId();
 }

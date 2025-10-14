@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.policy.Policy;
-import seedu.address.testutil.PolicyBuilder;
+import seedu.address.model.policy.PolicyDetails;
+import seedu.address.model.policy.PolicyName;
+import seedu.address.model.policy.UnassignedPolicy;
 
 public class AddPolicyCommandTest {
 
@@ -20,16 +22,20 @@ public class AddPolicyCommandTest {
 
     @Test
     public void equals() {
-        Policy policy = new PolicyBuilder().withName("Life Insurance").build();
-        Policy otherPolicy = new PolicyBuilder().withName("Healthcare").build();
-        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(policy);
-        AddPolicyCommand addPolicyCommandOther = new AddPolicyCommand(otherPolicy);
+        UnassignedPolicy unassignedPolicy = new UnassignedPolicy(
+                new PolicyName("Life Insurance"), new PolicyDetails("details")
+        );
+        UnassignedPolicy otherUnassignedPolicy = new UnassignedPolicy(
+                new PolicyName("Healthcare"), new PolicyDetails("details")
+        );
+        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(unassignedPolicy);
+        AddPolicyCommand addPolicyCommandOther = new AddPolicyCommand(otherUnassignedPolicy);
 
         // same object -> returns true
         assertTrue(addPolicyCommand.equals(addPolicyCommand));
 
         // same values -> returns true
-        AddPolicyCommand addPolicyCommandCopy = new AddPolicyCommand(policy);
+        AddPolicyCommand addPolicyCommandCopy = new AddPolicyCommand(unassignedPolicy);
         assertTrue(addPolicyCommand.equals(addPolicyCommandCopy));
 
         // different types -> returns false
@@ -44,8 +50,9 @@ public class AddPolicyCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(LIFE);
-        String expected = AddPolicyCommand.class.getCanonicalName() + "{toAdd=" + LIFE + "}";
+        UnassignedPolicy unassignedPolicy = unassign(LIFE);
+        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(unassignedPolicy);
+        String expected = AddPolicyCommand.class.getCanonicalName() + "{toAdd=" + unassignedPolicy + "}";
         assertEquals(expected, addPolicyCommand.toString());
     }
 }

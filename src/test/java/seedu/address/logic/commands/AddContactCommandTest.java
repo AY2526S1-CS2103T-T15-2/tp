@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddContactCommandTest {
@@ -179,6 +180,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void addPolicyFile(Path filePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPolicy(Policy target, Policy editedPolicy) {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,27 +200,32 @@ public class AddContactCommandTest {
         }
 
         public boolean hasContract(Contract contract) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addContract(Contract contract) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Contract> getFilteredContractList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredContractList(Predicate<Contract> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void removeContract(Contract contract) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public PolicyId generateUniquePolicyId() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

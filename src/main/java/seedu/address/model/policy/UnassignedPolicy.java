@@ -7,23 +7,21 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a Policy of a Contract.
+ * Represents a Policy of a Contract without an id.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Policy {
+public class UnassignedPolicy {
 
     private final PolicyName policyName;
     private final PolicyDetails policyDetails;
-    private final PolicyId policyId;
 
     /**
      * Fields must be present and not null.
      */
-    public Policy(PolicyName policyName, PolicyDetails policyDetails, PolicyId policyId) {
+    public UnassignedPolicy(PolicyName policyName, PolicyDetails policyDetails) {
         requireAllNonNull(policyName, policyDetails);
         this.policyName = policyName;
         this.policyDetails = policyDetails;
-        this.policyId = policyId;
     }
 
     public PolicyName getName() {
@@ -34,20 +32,11 @@ public class Policy {
         return policyDetails;
     }
 
-    public PolicyId getId() {
-        return policyId;
-    }
-
     /**
-     * Returns true if both policies have the same policy id.
+     * Assigns an id to this policy.
      */
-    public boolean hasSameId(Policy otherPolicy) {
-        if (otherPolicy == this) {
-            return true;
-        }
-
-        return otherPolicy != null
-                && otherPolicy.getId().equals(getId());
+    public Policy assignId(PolicyId policyId) {
+        return new Policy(policyName, policyDetails, policyId);
     }
 
     @Override
@@ -57,18 +46,18 @@ public class Policy {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Policy)) {
+        if (!(other instanceof UnassignedPolicy)) {
             return false;
         }
 
-        Policy otherPolicy = (Policy) other;
-        return policyName.equals(otherPolicy.policyName) && policyDetails.equals(otherPolicy.policyDetails)
-                && policyId.equals(otherPolicy.policyId);
+        UnassignedPolicy otherUnassignedPolicy = (UnassignedPolicy) other;
+        return policyName.equals(otherUnassignedPolicy.policyName)
+                && policyDetails.equals(otherUnassignedPolicy.policyDetails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(policyName, policyDetails, policyId);
+        return Objects.hash(policyName, policyDetails);
     }
 
     @Override
@@ -76,7 +65,6 @@ public class Policy {
         return new ToStringBuilder(this)
                 .add("name", policyName)
                 .add("details", policyDetails)
-                .add("id", policyId)
                 .toString();
     }
 }

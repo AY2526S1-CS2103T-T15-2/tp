@@ -2,15 +2,19 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.PolicyFileParser;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.UnassignedPolicy;
 import seedu.address.model.policy.UniquePolicyList;
 
 /**
@@ -138,6 +142,29 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds policies from a file to the address book.
+     * Policies are assigned unique ids upon insertion.
+     */
+    public void addPolicyFile(Path filePath) {
+        List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(filePath);
+        for (UnassignedPolicy unassignedPolicy: unassignedPolicies) {
+            PolicyId policyId = generateUniquePolicyId();
+            policies.add(unassignedPolicy.assignId(policyId));
+        }
+    }
+
+    /**
+     * Generates a policy id not present in the address book.
+     */
+    public PolicyId generateUniquePolicyId() {
+        PolicyId policyId;
+        do {
+            policyId = PolicyId.generate();
+        } while (policies.containsId(policyId));
+        return policyId;
+    }
+
+    /**
      * Replaces the given policy {@code target} in the list with {@code editedPolicy}.
      * {@code target} must exist in the address book.
      * The policy id of {@code editedPolicy} must not be the same as another existing policy in the address book.
@@ -235,5 +262,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
-
 }

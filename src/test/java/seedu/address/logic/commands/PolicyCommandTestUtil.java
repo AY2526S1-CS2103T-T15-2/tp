@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.nio.file.Path;
 
 /**
  * Contains additional helper methods for testing policy commands.
@@ -24,4 +27,9 @@ public class PolicyCommandTestUtil {
     public static final String INVALID_POLICY_NAME_DESC = " " + PREFIX_NAME + INVALID_POLICY_NAME;
     public static final String INVALID_DETAILS_DESC = " " + PREFIX_DETAILS;
 
+    public static final String POLICY_PATH_A_STRING = "policy_file_example.txt";
+    public static final String POLICY_PATH_B_STRING = "other_file.txt";
+    public static final Path POLICY_PATH_A = Path.of(POLICY_PATH_A_STRING);
+    public static final String POLICY_PATH_A_DESC = " " + PREFIX_FILE + POLICY_PATH_A_STRING;
+    public static final String POLICY_PATH_B_DESC = " " + PREFIX_FILE + POLICY_PATH_B_STRING;
 }

@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -11,16 +10,23 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.INVALID_DETAILS
 import static seedu.address.logic.commands.PolicyCommandTestUtil.INVALID_POLICY_NAME_DESC;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_NAME_DESC_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_NAME_DESC_HOME;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_B_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.HOME;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPolicyCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.AddPolicyCommandMultiple;
+import seedu.address.logic.commands.AddPolicyCommandType;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyName;
@@ -30,32 +36,21 @@ public class AddPolicyCommandParserTest {
 
     private AddPolicyCommandParser parser = new AddPolicyCommandParser();
 
-    /**
-     * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
-     * equals to {@code expectedCommand}.
-     * Modified for {@code AddPolicyCommandParser}.
-     */
-    public static void assertPolicyParseSuccess(AddPolicyCommandParser parser, String userInput,
-            AddPolicyCommand expectedCommand) {
-        try {
-            AddPolicyCommand command = parser.parse(userInput);
-            assertTrue(expectedCommand.weakEquals(command));
-        } catch (ParseException pe) {
-            throw new IllegalArgumentException("Invalid userInput.", pe);
-        }
-    }
-
     @Test
     public void parse_allFieldsPresent_success() {
         Policy expectedPolicy = new PolicyBuilder(HOME).build();
 
         // whitespace only preamble
-        assertPolicyParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,
-                new AddPolicyCommand(expectedPolicy));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,
+                new AddPolicyCommand(unassign(expectedPolicy)));
+
+        // file option
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_PATH_A_DESC,
+                new AddPolicyCommandMultiple(POLICY_PATH_A));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedValue_failure() {
         String validExpectedPolicyString = POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME;
 
         // multiple names
@@ -70,6 +65,10 @@ public class AddPolicyCommandParserTest {
         assertParseFailure(parser, validExpectedPolicyString + POLICY_NAME_DESC_HEALTH_B + DETAILS_DESC_HEALTH_B
                         + validExpectedPolicyString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_DETAILS));
+
+        // multiple files
+        assertParseFailure(parser, POLICY_PATH_A_DESC + POLICY_PATH_B_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_FILE));
 
         // invalid value followed by valid value
 
@@ -93,14 +92,31 @@ public class AddPolicyCommandParserTest {
     }
 
     @Test
+    public void parse_mixedOptions_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE);
+
+        // name, details, and file provided
+        assertParseFailure(parser, POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME + POLICY_PATH_A_DESC, expectedMessage);
+
+        // name and file provided
+        assertParseFailure(parser, POLICY_NAME_DESC_HOME + POLICY_PATH_A_DESC, expectedMessage);
+
+        // details and file provided
+        assertParseFailure(parser, DETAILS_DESC_HOME + POLICY_PATH_A_DESC, expectedMessage);
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, POLICY_NAME_DESC_HOME, expectedMessage);
 
         // missing details prefix
         assertParseFailure(parser, DETAILS_DESC_HOME, expectedMessage);
+
+        // no arguments
+        assertParseFailure(parser, "", expectedMessage);
     }
 
     @Test
@@ -116,6 +132,6 @@ public class AddPolicyCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE));
     }
 }

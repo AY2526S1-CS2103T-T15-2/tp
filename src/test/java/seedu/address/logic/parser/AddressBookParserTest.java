@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -20,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.AddPolicyCommandMultiple;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -69,7 +73,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addPolicy() throws Exception {
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(PolicyUtil.getAddPolicyCommand(LIFE));
-        assertTrue(command.weakEquals(new AddPolicyCommand(LIFE)));
+        assertEquals(new AddPolicyCommand(unassign(LIFE)), command);
+    }
+
+    @Test
+    public void parseCommand_addPolicyFile() throws Exception {
+        AddPolicyCommandMultiple command = (AddPolicyCommandMultiple) parser.parseCommand(
+                AddPolicyCommandMultiple.COMMAND_WORD + POLICY_PATH_A_DESC);
+        assertEquals(new AddPolicyCommandMultiple(POLICY_PATH_A), command);
     }
 
     @Test
