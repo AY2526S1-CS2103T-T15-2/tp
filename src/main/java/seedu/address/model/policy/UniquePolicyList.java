@@ -49,6 +49,19 @@ public class UniquePolicyList implements Iterable<Policy> {
     }
 
     /**
+     * Adds a list of policies to the list.
+     * The policies must not already exist in the list.
+     */
+    public void addAll(List<Policy> toAdd) {
+        requireNonNull(toAdd);
+        if (toAdd.stream().anyMatch(this::contains)) {
+            throw new DuplicatePolicyException();
+        }
+
+        internalList.addAll(toAdd);
+    }
+
+    /**
      * Replaces the policy {@code target} in the list with {@code editedPolicy}.
      * {@code target} must exist in the list.
      * The policy id of {@code editedPolicy} must not be the same as another existing policy in the list.

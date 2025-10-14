@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPolicyCommand;
@@ -18,7 +18,7 @@ import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
 
 /**
- * Parses input arguments and creates a new AddPolicyCommand object
+ * Parses input arguments and creates a new AddPolicyCommandType object
  */
 public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
 
@@ -44,8 +44,8 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
             } else if (arePrefixesPresent(argMultimap, PREFIX_FILE)
                     && arePrefixesAbsent(argMultimap, PREFIX_NAME, PREFIX_DETAILS)) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
-                File file = ParserUtil.parseFile(argMultimap.getValue(PREFIX_FILE).get());
-                return new AddPolicyCommandMultiple(file);
+                Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get());
+                return new AddPolicyCommandMultiple(filePath);
             }
         }
 

@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.PolicyFileParser;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
@@ -135,6 +137,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPolicy(Policy p) {
         policies.add(p);
+    }
+
+    /**
+     * Adds a policy to the address book.
+     * The policy must not already exist in the address book.
+     */
+    public void addPolicyFile(Path filePath) {
+        policies.addAll(PolicyFileParser.readFile(filePath));
     }
 
     /**

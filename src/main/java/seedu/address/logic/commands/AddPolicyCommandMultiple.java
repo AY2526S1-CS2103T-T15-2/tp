@@ -1,16 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.io.File;
+import java.nio.file.Path;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.policy.Policy;
 
 /**
  * Adds multiple policies from a file.
@@ -19,14 +15,14 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policies added from file: %1$s";
 
-    private final File toAdd;
+    private final Path toAdd;
 
     /**
-     * Creates an AddPolicyCommandMultiple to add policies from a {@code File}
+     * Creates an AddPolicyCommandMultiple to add policies from a {@code Path}
      */
-    public AddPolicyCommandMultiple(File file) {
-        requireNonNull(file);
-        toAdd = file;
+    public AddPolicyCommandMultiple(Path filePath) {
+        requireNonNull(filePath);
+        toAdd = filePath;
     }
 
     @Override
@@ -34,7 +30,7 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
         requireNonNull(model);
 
         model.addPolicyFile(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getPath()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     /**

@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -180,7 +179,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void addPolicyFile(File file) {
+        public void addPolicyFile(Path filePath) {
             throw new AssertionError("This method should not be called.");
         }
 
