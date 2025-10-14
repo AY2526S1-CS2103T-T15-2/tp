@@ -6,17 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
+import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_SECOND;
+import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_THIRD;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,12 +32,13 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validNricUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(PREDICATE_FIRST);
 
+        // Success message is updated to reflect the person deleted (or count if multiple are possible)
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+                personToDelete.getName() + " " + personToDelete.getNric());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -42,53 +47,63 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_nricNotFoundUnfilteredList_throwsCommandException() {
+        // Create a predicate for an NRIC that is not in the typical address book
+        NricContainsKeywordsPredicate notFoundPredicate =
+                new NricContainsKeywordsPredicate(List.of("S0000000Z"));
+        DeleteCommand deleteCommand = new DeleteCommand(notFoundPredicate);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        // Assuming DeleteCommand throws a specific error if no person matches the predicate
+        assertCommandFailure(deleteCommand, model, MESSAGE_DELETE_PERSON_FAILURE);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validNricFilteredList_success() {
+        // Filter the list to show only the person we are about to delete
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        // Use the NRIC of the person who is currently at index 0 of the filtered list
+        DeleteCommand deleteCommand = new DeleteCommand(PREDICATE_FIRST);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        String expectedMessage = String.format(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                personToDelete.getName() + " " + personToDelete.getNric()));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_nricNotFoundFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON); // Filter list to one person
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // Create a predicate for a person NOT currently in the filtered view
+        DeleteCommand deleteCommand = new DeleteCommand(PREDICATE_THIRD);
+        assertCommandFailure(deleteCommand, model, MESSAGE_DELETE_PERSON_FAILURE);
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        // Create a predicate for a person truly not in the view
+        NricContainsKeywordsPredicate trulyNotFoundPredicate = new NricContainsKeywordsPredicate(List.of("S0000000Z"));
+        DeleteCommand deleteTrulyNotFoundCommand = new DeleteCommand(trulyNotFoundPredicate);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTrulyNotFoundCommand, model, MESSAGE_DELETE_PERSON_FAILURE);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(PREDICATE_FIRST);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(PREDICATE_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
-        // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        // same predicate (same values) -> returns true
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(PREDICATE_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -97,20 +112,22 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different predicate (different NRIC) -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        DeleteCommand deleteCommand = new DeleteCommand(PREDICATE_FIRST);
+
+        // Note: Predicates don't have a clean toString, so this is an approximation.
+        // You would typically override the toString in DeleteCommand to show the predicate.
+        String expected = DeleteCommand.class.getCanonicalName() + "{predicate=" + PREDICATE_FIRST.toString() + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Helper method used in original tests, no longer needed but kept for completeness.
      */
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);

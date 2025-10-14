@@ -8,6 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
+import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,8 +60,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + NRIC_FIRST_PERSON);
+        assertEquals(new DeleteCommand(PREDICATE_FIRST), command);
     }
 
     @Test
