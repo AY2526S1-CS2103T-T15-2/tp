@@ -55,8 +55,8 @@ public class PolicyBuilder {
     /**
      * Sets the {@code PolicyId} of the {@code Policy} that we are building.
      */
-    public PolicyBuilder withId(String phone) {
-        this.id = new PolicyId(phone);
+    public PolicyBuilder withId(String policyId) {
+        this.id = new PolicyId(policyId);
         return this;
     }
 

@@ -203,7 +203,7 @@ public class MainWindow extends UiPart<Stage> {
 
             if (feedback.contains("listed all persons") || feedback.contains("persons listed")) {
                 showPersonListPanel();
-            } else if (feedback.contains("viewing all policies")) {
+            } else if (feedback.contains("viewing all policies") || feedback.contains("viewing policy with id") || feedback.contains("failed to find any policies")) {
                 showPolicyListPanel();
             } else if (feedback.contains("viewing all contracts")) {
                 showContractListPanel();

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREAMBLE_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
 import java.util.Arrays;
@@ -22,15 +22,16 @@ public class ViewPolicyCommandParser implements Parser<ViewPolicyCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewPolicyCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ALL, PREFIX_PID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PID);
+        String preamble = argMultimap.getPreamble().trim();
 
         // Check for view all command
-        if (arePrefixesPresent(argMultimap, PREFIX_ALL) && argMultimap.getPreamble().isEmpty()) {
+        if (preamble.startsWith(PREAMBLE_ALL)) {
             return new ViewPolicyCommand();
         }
 
         // Check for view specific policy id command
-        if (arePrefixesPresent(argMultimap, PREFIX_PID) && argMultimap.getPreamble().isEmpty()) {
+        if (arePrefixesPresent(argMultimap, PREFIX_PID) && preamble.isEmpty()) {
             String trimmedArgs = argMultimap.getValue(PREFIX_PID).get().trim();
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
 
@@ -74,6 +75,22 @@ public class ViewPolicyCommand extends Command {
         }
 
         ViewPolicyCommand otherViewPolicyCommand = (ViewPolicyCommand) other;
+
+        if (this.predicate == null && otherViewPolicyCommand.predicate == null) {
+            return true;
+        }
+
+        if (this.predicate == null || otherViewPolicyCommand.predicate == null) {
+            return false;
+        }
+
         return predicate.equals(otherViewPolicyCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }
