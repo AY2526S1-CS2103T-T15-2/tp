@@ -55,7 +55,7 @@ public class PolicyFileParserTest {
     }
 
     @Test
-    public void missingFile_throwParserIOException() {
+    public void missingFile_throwParserIoException() {
         Path path = TEST_DATA_FOLDER.resolve("nonexistentPolicyFile.txt");
         assertThrows(ParserIoException.class, () -> PolicyFileParser.readFile(path));
     }
