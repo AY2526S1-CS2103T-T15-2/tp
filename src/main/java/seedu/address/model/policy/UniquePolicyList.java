@@ -37,6 +37,14 @@ public class UniquePolicyList implements Iterable<Policy> {
     }
 
     /**
+     * Returns true if the list contains a policy with the given id.
+     */
+    public boolean containsId(PolicyId toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(policy -> policy.getId().equals(toCheck));
+    }
+
+    /**
      * Adds a policy to the list.
      * The policy must not already exist in the list.
      */
@@ -46,19 +54,6 @@ public class UniquePolicyList implements Iterable<Policy> {
             throw new DuplicatePolicyException();
         }
         internalList.add(toAdd);
-    }
-
-    /**
-     * Adds a list of policies to the list.
-     * The policies must not already exist in the list.
-     */
-    public void addAll(List<Policy> toAdd) {
-        requireNonNull(toAdd);
-        if (toAdd.stream().anyMatch(this::contains)) {
-            throw new DuplicatePolicyException();
-        }
-
-        internalList.addAll(toAdd);
     }
 
     /**

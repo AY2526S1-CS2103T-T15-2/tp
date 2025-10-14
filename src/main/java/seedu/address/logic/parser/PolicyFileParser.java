@@ -11,10 +11,9 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.parser.exceptions.InvalidLineException;
 import seedu.address.logic.parser.exceptions.ParserIOException;
-import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
-import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
+import seedu.address.model.policy.UnassignedPolicy;
 
 public class PolicyFileParser {
 
@@ -32,9 +31,9 @@ public class PolicyFileParser {
     /**
      * Reads and parses policies from the given text file.
      */
-    public static List<Policy> readFile(Path filePath) {
+    public static List<UnassignedPolicy> readFile(Path filePath) {
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
-            ArrayList<Policy> policies = new ArrayList<>();
+            ArrayList<UnassignedPolicy> policies = new ArrayList<>();
             String line;
             int lineNumber = 0;
 
@@ -49,13 +48,12 @@ public class PolicyFileParser {
         }
     }
 
-    private static Policy parseLine(int lineNumber, String line) {
+    private static UnassignedPolicy parseLine(int lineNumber, String line) {
         Matcher m = PATTERN.matcher(line);
         if (m.find()) {
-            return new Policy(
+            return new UnassignedPolicy(
                     new PolicyName(m.group(GROUP_NAME).trim()),
-                    new PolicyDetails(m.group(GROUP_DETAILS).trim()),
-                    PolicyId.generate()
+                    new PolicyDetails(m.group(GROUP_DETAILS).trim())
             );
         } else {
             throw new InvalidLineException(String.format(MESSAGE_INVALID_LINE, lineNumber));

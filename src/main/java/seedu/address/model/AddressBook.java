@@ -13,6 +13,8 @@ import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.UnassignedPolicy;
 import seedu.address.model.policy.UniquePolicyList;
 
 /**
@@ -144,7 +146,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The policy must not already exist in the address book.
      */
     public void addPolicyFile(Path filePath) {
-        policies.addAll(PolicyFileParser.readFile(filePath));
+        List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(filePath);
+        for (UnassignedPolicy unassignedPolicy: unassignedPolicies) {
+            PolicyId policyId = generateUniquePolicyId();
+            policies.add(unassignedPolicy.assignId(policyId));
+        }
+    }
+
+    /**
+     * Generates a policy id not present in the address book.
+     */
+    public PolicyId generateUniquePolicyId() {
+        PolicyId policyId;
+        do {
+            policyId = PolicyId.generate();
+        } while (policies.containsId(policyId));
+        return policyId;
     }
 
     /**
@@ -245,5 +262,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
-
 }

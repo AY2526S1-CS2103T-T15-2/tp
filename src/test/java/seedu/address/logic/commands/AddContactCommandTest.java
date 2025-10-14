@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddContactCommandTest {
@@ -219,6 +220,11 @@ public class AddContactCommandTest {
 
         @Override
         public void removeContract(Contract contract) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public PolicyId generateUniquePolicyId() {
             throw new AssertionError("This method should not be called.");
         }
     }

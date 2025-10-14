@@ -16,6 +16,4 @@ public sealed abstract class AddPolicyCommandType
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Life Insurance "
             + PREFIX_DETAILS + "This policy... ";
-
-    public abstract boolean isSameCommand(Object other);
 }

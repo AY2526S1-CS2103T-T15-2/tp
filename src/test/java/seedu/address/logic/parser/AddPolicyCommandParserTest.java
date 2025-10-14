@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -14,6 +13,8 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_NAME_DES
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.HOME;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.AddPolicyCommandType;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyName;
@@ -31,28 +31,13 @@ public class AddPolicyCommandParserTest {
 
     private AddPolicyCommandParser parser = new AddPolicyCommandParser();
 
-    /**
-     * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
-     * equals to {@code expectedCommand}.
-     * Modified for {@code AddPolicyCommandParser}.
-     */
-    public static void assertPolicyParseSuccess(AddPolicyCommandParser parser, String userInput,
-                                                AddPolicyCommandType expectedCommand) {
-        try {
-            AddPolicyCommandType command = parser.parse(userInput);
-            assertTrue(expectedCommand.isSameCommand(command));
-        } catch (ParseException pe) {
-            throw new IllegalArgumentException("Invalid userInput.", pe);
-        }
-    }
-
     @Test
     public void parse_allFieldsPresent_success() {
         Policy expectedPolicy = new PolicyBuilder(HOME).build();
 
         // whitespace only preamble
-        assertPolicyParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,
-                new AddPolicyCommand(expectedPolicy));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,
+                new AddPolicyCommand(unassign(expectedPolicy)));
     }
 
     @Test

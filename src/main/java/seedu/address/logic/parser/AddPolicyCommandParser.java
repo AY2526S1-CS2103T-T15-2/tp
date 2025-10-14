@@ -12,10 +12,9 @@ import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.AddPolicyCommandMultiple;
 import seedu.address.logic.commands.AddPolicyCommandType;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
-import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
+import seedu.address.model.policy.UnassignedPolicy;
 
 /**
  * Parses input arguments and creates a new AddPolicyCommandType object
@@ -36,15 +35,15 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DETAILS);
                 PolicyName policyName = ParserUtil.parsePolicyName(argMultimap.getValue(PREFIX_NAME).get());
                 PolicyDetails policyDetails = ParserUtil.parsePolicyDetails(argMultimap.getValue(PREFIX_DETAILS).get());
-                PolicyId policyId = PolicyId.generate();
 
-                Policy policy = new Policy(policyName, policyDetails, policyId);
+                UnassignedPolicy unassignedPolicy = new UnassignedPolicy(policyName, policyDetails);
 
-                return new AddPolicyCommand(policy);
+                return new AddPolicyCommand(unassignedPolicy);
             } else if (arePrefixesPresent(argMultimap, PREFIX_FILE)
                     && arePrefixesAbsent(argMultimap, PREFIX_NAME, PREFIX_DETAILS)) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
                 Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get());
+
                 return new AddPolicyCommandMultiple(filePath);
             }
         }

@@ -33,14 +33,6 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
-    /**
-     * Tests for equality of commands.
-     * Mainly used for testing the correctness of the parser.
-     */
-    public boolean isSameCommand(Object other) {
-        return equals(other);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

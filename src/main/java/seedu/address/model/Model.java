@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
 
 /**
  * The API of the Model component.
@@ -153,4 +154,9 @@ public interface Model {
      * The contract must exist in the address book.
      */
     void removeContract(Contract contract);
+
+    /**
+     * Generates a policy id not present in the currentaddress book.
+     */
+    PolicyId generateUniquePolicyId();
 }

@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -161,6 +162,11 @@ public class ModelManager implements Model {
     @Override
     public void removeContract(Contract contract) {
         addressBook.removeContract(contract);
+    }
+
+    @Override
+    public PolicyId generateUniquePolicyId() {
+        return addressBook.generateUniquePolicyId();
     }
 
     //=========== Filtered Person List Accessors =============================================================
