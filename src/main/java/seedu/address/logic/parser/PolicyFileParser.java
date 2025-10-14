@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.parser.exceptions.InvalidLineException;
-import seedu.address.logic.parser.exceptions.ParserIOException;
+import seedu.address.logic.parser.exceptions.ParserIoException;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyName;
 import seedu.address.model.policy.UnassignedPolicy;
@@ -47,7 +47,7 @@ public class PolicyFileParser {
 
             return policies;
         } catch (IOException e) {
-            throw new ParserIOException(e.toString());
+            throw new ParserIoException(e.toString());
         }
     }
 

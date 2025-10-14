@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 /**
  * Represents commands invoked by {@code add_policy}.
  */
-public sealed abstract class AddPolicyCommandType
+public abstract sealed class AddPolicyCommandType
         extends Command
         permits AddPolicyCommand, AddPolicyCommandMultiple {
 
