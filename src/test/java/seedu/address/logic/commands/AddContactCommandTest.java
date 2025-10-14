@@ -208,6 +208,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void addContractToPolicy(Contract contract) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Contract> getFilteredContractList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -224,6 +229,11 @@ public class AddContactCommandTest {
 
         @Override
         public boolean personHasContract(Contract contract, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean policyHasContract(Contract contract, Policy policy) {
             throw new AssertionError("This method should not be called.");
         }
     }

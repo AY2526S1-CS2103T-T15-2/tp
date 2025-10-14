@@ -2,9 +2,13 @@ package seedu.address.model.policy;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contract.Contract;
 
 /**
  * Represents a Policy of a Contract.
@@ -15,6 +19,7 @@ public class Policy {
     private final PolicyName policyName;
     private final PolicyDetails policyDetails;
     private final PolicyId policyId;
+    private final Set<Contract> contracts = new HashSet<>();
 
     /**
      * Fields must be present and not null.
@@ -24,6 +29,18 @@ public class Policy {
         this.policyName = policyName;
         this.policyDetails = policyDetails;
         this.policyId = policyId;
+    }
+
+    /**
+     * Constructor when constructing Policy with contracts.
+     */
+    public Policy(PolicyName policyName, PolicyDetails policyDetails, PolicyId policyId,
+                  Set<Contract> contracts) {
+        requireAllNonNull(policyName, policyDetails);
+        this.policyName = policyName;
+        this.policyDetails = policyDetails;
+        this.policyId = policyId;
+        this.contracts.addAll(contracts);
     }
 
     public PolicyName getName() {
@@ -38,6 +55,10 @@ public class Policy {
         return policyId;
     }
 
+    public Set<Contract> getContracts() {
+        return Collections.unmodifiableSet(contracts);
+    }
+
     /**
      * Returns true if both policies have the same policy id.
      */
@@ -48,6 +69,14 @@ public class Policy {
 
         return otherPolicy != null
                 && otherPolicy.getId().equals(getId());
+    }
+
+    /**
+     * Adds the given contract.
+     * {@code contract} must not already exist in the policy.
+     */
+    public void addContract(Contract contract) {
+        contracts.add(contract);
     }
 
     /**

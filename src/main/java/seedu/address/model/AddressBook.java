@@ -188,6 +188,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds the given contract to the corresponding policy in the address book.
+     * The policy must exist in the address book.
+     */
+    public void addContractToPolicy(Contract contract) {
+        requireNonNull(contract);
+        for (Policy policy : policies) {
+            if (policy.getId().equals(contract.getPId())) {
+                policy.addContract(contract);
+                break;
+            }
+        }
+    }
+
+    /**
      * Removes the given contract.
      * The contract must exist in the address book.
      */
@@ -212,6 +226,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         for (Person p : persons) {
             if (p.equals(person)) {
+                return p.getContracts().contains(contract);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a policy has the given contract.
+     */
+    public boolean policyHasContract(Contract contract, Policy policy) {
+        requireNonNull(contract);
+        requireNonNull(policy);
+        for (Policy p : policies) {
+            if (p.equals(policy)) {
                 return p.getContracts().contains(contract);
             }
         }

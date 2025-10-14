@@ -139,6 +139,12 @@ public interface Model {
      */
     void addContractToPerson(Contract contract);
 
+    /**
+     * Links the given contract to the corresponding policy in the address book.
+     * The policy must exist in the address book.
+     */
+    void addContractToPolicy(Contract contract);
+
     /** Returns an unmodifiable view of the filtered contract list */
     ObservableList<Contract> getFilteredContractList();
 
@@ -159,4 +165,10 @@ public interface Model {
      * The person must exist in the address book.
      */
     boolean personHasContract(Contract contract, Person person);
+
+    /**
+     * Returns true if a policy has the given contract.
+     * The policy must exist in the address book.
+     */
+    boolean policyHasContract(Contract contract, Policy policy);
 }

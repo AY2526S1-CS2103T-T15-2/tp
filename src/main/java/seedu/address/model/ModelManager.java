@@ -158,9 +158,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addContractToPolicy(Contract contract) {
+        addressBook.addContractToPolicy(contract);
+    }
+
+    @Override
     public boolean personHasContract(Contract contract, Person person) {
         requireAllNonNull(contract, person);
         return addressBook.personHasContract(contract, person);
+    }
+
+    @Override
+    public boolean policyHasContract(Contract contract, Policy policy) {
+        requireAllNonNull(contract, policy);
+        return addressBook.policyHasContract(contract, policy);
     }
 
     @Override
