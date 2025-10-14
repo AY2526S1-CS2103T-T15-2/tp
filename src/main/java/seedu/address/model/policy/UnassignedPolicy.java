@@ -32,6 +32,9 @@ public class UnassignedPolicy {
         return policyDetails;
     }
 
+    /**
+     * Assigns an id to this policy.
+     */
     public Policy assignId(PolicyId policyId) {
         return new Policy(policyName, policyDetails, policyId);
     }

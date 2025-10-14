@@ -15,6 +15,9 @@ import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyName;
 import seedu.address.model.policy.UnassignedPolicy;
 
+/**
+ * Contains utility methods for reading and parsing policies from text files.
+ */
 public class PolicyFileParser {
 
     private static final String DELIMITER = "`";

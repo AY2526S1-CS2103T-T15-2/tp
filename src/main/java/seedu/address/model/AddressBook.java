@@ -142,8 +142,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a policy to the address book.
-     * The policy must not already exist in the address book.
+     * Adds policies from a file to the address book.
+     * Policies are assigned unique ids upon insertion.
      */
     public void addPolicyFile(Path filePath) {
         List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(filePath);
