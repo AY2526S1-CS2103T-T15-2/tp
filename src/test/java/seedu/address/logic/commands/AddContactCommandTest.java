@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -179,6 +180,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void addPolicyFile(File file) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPolicy(Policy target, Policy editedPolicy) {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,27 +200,27 @@ public class AddContactCommandTest {
         }
 
         public boolean hasContract(Contract contract) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addContract(Contract contract) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Contract> getFilteredContractList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredContractList(Predicate<Contract> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void removeContract(Contract contract) {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 

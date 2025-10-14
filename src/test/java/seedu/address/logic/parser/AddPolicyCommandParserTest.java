@@ -95,7 +95,7 @@ public class AddPolicyCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, POLICY_NAME_DESC_HOME, expectedMessage);
@@ -117,6 +117,6 @@ public class AddPolicyCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE));
     }
 }

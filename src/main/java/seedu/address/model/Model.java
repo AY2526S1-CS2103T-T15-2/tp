@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
@@ -105,6 +106,12 @@ public interface Model {
      * {@code policy} must not already exist in the address book.
      */
     void addPolicy(Policy policy);
+
+    /**
+     * Adds policies from the given file.
+     * Every {@code policy} must not already exist in the address book.
+     */
+    void addPolicyFile(File file);
 
     /**
      * Replaces the given policy {@code target} with {@code editedPolicy}.

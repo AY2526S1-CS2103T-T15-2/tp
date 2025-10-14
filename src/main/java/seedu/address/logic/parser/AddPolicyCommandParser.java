@@ -5,11 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.io.File;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.AddPolicyCommandMultiple;
 import seedu.address.logic.commands.AddPolicyCommandType;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
@@ -43,11 +44,12 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
             } else if (arePrefixesPresent(argMultimap, PREFIX_FILE)
                     && arePrefixesAbsent(argMultimap, PREFIX_NAME, PREFIX_DETAILS)) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
-                return null;
+                File file = ParserUtil.parseFile(argMultimap.getValue(PREFIX_FILE).get());
+                return new AddPolicyCommandMultiple(file);
             }
         }
 
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommandType.MESSAGE_USAGE));
     }
 
     /**

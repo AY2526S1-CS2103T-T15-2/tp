@@ -7,7 +7,7 @@ import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.model.policy.Policy;
 
 /**
- * A utility class for Person.
+ * A utility class for Policy.
  */
 public class PolicyUtil {
 
