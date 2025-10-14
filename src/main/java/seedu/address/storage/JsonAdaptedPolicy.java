@@ -58,6 +58,7 @@ class JsonAdaptedPolicy {
     /**
      * Converts a given {@code Policy} into this class for Jackson use.
      */
+    @JsonCreator
     public JsonAdaptedPolicy(Policy source) {
         name = source.getName().value;
         details = source.getDetails().value;
