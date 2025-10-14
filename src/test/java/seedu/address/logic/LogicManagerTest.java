@@ -22,6 +22,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -37,6 +38,8 @@ import seedu.address.testutil.PersonBuilder;
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
+
+    private static final String INVALID_NRIC = "S0000000Z";
 
     @TempDir
     public Path temporaryFolder;
@@ -61,7 +64,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String removeContactCommand = "delete S0000000Z";
+        String removeContactCommand = RemoveContactCommand.COMMAND_WORD + " " + INVALID_NRIC;
         assertCommandException(removeContactCommand, MESSAGE_DELETE_PERSON_FAILURE);
     }
 
