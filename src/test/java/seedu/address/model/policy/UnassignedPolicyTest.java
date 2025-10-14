@@ -23,7 +23,7 @@ public class UnassignedPolicyTest {
                 && policy.getId().equals(policyId)
         );
     }
-    
+
     @Test
     public void equals() {
         UnassignedPolicy unassignedPolicy = unassign(HOME);
