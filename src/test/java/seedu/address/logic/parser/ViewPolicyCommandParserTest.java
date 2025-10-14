@@ -46,7 +46,7 @@ public class ViewPolicyCommandParserTest {
     public void parse_anyArgs_returnsViewPolicyCommand() {
         ViewPolicyCommand expectedViewPolicyCommand =
                 new ViewPolicyCommand();
-        assertParseSuccess(parser, " " + PREAMBLE_ALL, expectedViewPolicyCommand);
-        assertParseSuccess(parser, " " + PREAMBLE_ALL + " nonsense", expectedViewPolicyCommand);
+        assertParseSuccess(parser, PREAMBLE_ALL, expectedViewPolicyCommand);
+        assertParseSuccess(parser, PREAMBLE_ALL + " nonsense", expectedViewPolicyCommand);
     }
 }
