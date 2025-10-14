@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
@@ -24,20 +25,27 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPolicyCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DETAILS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DETAILS, PREFIX_FILE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DETAILS) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
+        if (argMultimap.getPreamble().isEmpty()) {
+            if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DETAILS)
+                    && arePrefixesAbsent(argMultimap, PREFIX_FILE)) {
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DETAILS);
+                PolicyName policyName = ParserUtil.parsePolicyName(argMultimap.getValue(PREFIX_NAME).get());
+                PolicyDetails policyDetails = ParserUtil.parsePolicyDetails(argMultimap.getValue(PREFIX_DETAILS).get());
+                PolicyId policyId = PolicyId.generate();
+
+                Policy policy = new Policy(policyName, policyDetails, policyId);
+
+                return new AddPolicyCommand(policy);
+            } else if (arePrefixesPresent(argMultimap, PREFIX_FILE)
+                    && arePrefixesAbsent(argMultimap, PREFIX_NAME, PREFIX_DETAILS)) {
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
+                return null;
+            }
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DETAILS);
-        PolicyName policyName = ParserUtil.parsePolicyName(argMultimap.getValue(PREFIX_NAME).get());
-        PolicyDetails policyDetails = ParserUtil.parsePolicyDetails(argMultimap.getValue(PREFIX_DETAILS).get());
-        PolicyId policyId = PolicyId.generate();
-
-        Policy policy = new Policy(policyName, policyDetails, policyId);
-
-        return new AddPolicyCommand(policy);
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -46,6 +54,14 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if all the prefixes contain empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesAbsent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
 }
