@@ -125,6 +125,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addContractToPerson_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPolicy(LIFE);
+        modelManager.addContract(CONTRACT_A);
+        modelManager.addContractToPerson(CONTRACT_A);
+        assertTrue(modelManager.personHasContract(CONTRACT_A, ALICE));
+    }
+
+    @Test
+    public void addContractToPolicy_policyInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPolicy(LIFE);
+        modelManager.addContract(CONTRACT_A);
+        modelManager.addContractToPolicy(CONTRACT_A);
+        assertTrue(modelManager.policyHasContract(CONTRACT_A, LIFE));
+    }
+
+    @Test
     public void removeContract_policyInAddressBook_returnsFalse() {
         modelManager.addContract(CONTRACT_A);
         modelManager.removeContract(CONTRACT_A);

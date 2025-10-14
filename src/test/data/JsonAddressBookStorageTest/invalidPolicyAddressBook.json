@@ -3,6 +3,7 @@
   "policies": [ {
     "name": "Invalid name!!!",
     "details": "details",
-    "id": "123456"
+    "id": "123456",
+    "contracts": []
   } ]
 }

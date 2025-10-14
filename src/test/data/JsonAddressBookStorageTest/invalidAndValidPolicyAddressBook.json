@@ -3,10 +3,12 @@
   "policies": [ {
     "name": "Life Insurance",
     "details": "details",
-    "id": "invalid id"
+    "id": "invalid id",
+    "contracts": []
   }, {
     "name": "Healthcare - B",
     "details": "other details",
-    "id": "123456"
+    "id": "123456",
+    "contracts": []
   } ]
 }

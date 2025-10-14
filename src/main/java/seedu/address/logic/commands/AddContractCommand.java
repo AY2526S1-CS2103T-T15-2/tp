@@ -50,6 +50,8 @@ public class AddContractCommand extends Command {
         }
 
         model.addContract(toAdd);
+        model.addContractToPerson(toAdd);
+        model.addContractToPolicy(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()));
     }
 

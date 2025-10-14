@@ -1,14 +1,19 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.ContractId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.PolicyId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,6 +27,13 @@ public class PersonBuilder {
     public static final String DEFAULT_NRIC = "S1234567A";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final List<Contract> DEFAULT_CONTRACTS = List.of(new Contract(
+            new ContractId("C1234A"),
+            new Name("Alice Pauline"),
+            new Nric("S1234567A"),
+            new PolicyId("abcdef"),
+            LocalDate.parse("2023-01-01")
+    ));
 
     private Name name;
     private Phone phone;
@@ -29,6 +41,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Contract> contracts;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +53,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        contracts = new HashSet<>();
     }
 
     /**
@@ -52,6 +66,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        contracts = new HashSet<>(personToCopy.getContracts());
     }
 
     /**
@@ -102,8 +117,25 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code contracts} of the {@code Person} that we are building to the DEFAULT_CONTRACTS.
+     * @return
+     */
+    public PersonBuilder withDefaultContract() {
+        this.contracts = new HashSet<>(DEFAULT_CONTRACTS);
+        return this;
+    }
+
+    /**
+     * Parses the {@code contracts} into a {@code Set<Contract>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withContracts(List<Contract> contracts) {
+        this.contracts = new HashSet<>(contracts);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, nric, email, address, tags);
+        return new Person(name, phone, nric, email, address, tags, contracts);
     }
 
 }

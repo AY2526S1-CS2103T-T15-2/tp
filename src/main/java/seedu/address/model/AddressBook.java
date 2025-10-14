@@ -201,6 +201,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds the given contract to the corresponding person in the address book.
+     * The person must exist in the address book.
+     */
+    public void addContractToPerson(Contract contract) {
+        requireNonNull(contract);
+        for (Person person : persons) {
+            if (person.getNric().equals(contract.getNric())) {
+                person.addContract(contract);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Adds the given contract to the corresponding policy in the address book.
+     * The policy must exist in the address book.
+     */
+    public void addContractToPolicy(Contract contract) {
+        requireNonNull(contract);
+        for (Policy policy : policies) {
+            if (policy.getId().equals(contract.getPId())) {
+                policy.addContract(contract);
+                break;
+            }
+        }
+    }
+
+    /**
      * Removes the given contract.
      * The contract must exist in the address book.
      */
@@ -215,6 +243,34 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setContracts(List<Contract> contracts) {
         this.contracts.setContracts(contracts);
+    }
+
+    /**
+     * Returns true if a person has the given contract.
+     */
+    public boolean personHasContract(Contract contract, Person person) {
+        requireNonNull(contract);
+        requireNonNull(person);
+        for (Person p : persons) {
+            if (p.equals(person)) {
+                return p.getContracts().contains(contract);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a policy has the given contract.
+     */
+    public boolean policyHasContract(Contract contract, Policy policy) {
+        requireNonNull(contract);
+        requireNonNull(policy);
+        for (Policy p : policies) {
+            if (p.equals(policy)) {
+                return p.getContracts().contains(contract);
+            }
+        }
+        return false;
     }
 
     //// util methods

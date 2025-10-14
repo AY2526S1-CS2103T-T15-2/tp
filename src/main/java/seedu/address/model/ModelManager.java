@@ -160,6 +160,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addContractToPerson(Contract contract) {
+        addressBook.addContractToPerson(contract);
+    }
+
+    @Override
+    public void addContractToPolicy(Contract contract) {
+        addressBook.addContractToPolicy(contract);
+    }
+
+    @Override
+    public boolean personHasContract(Contract contract, Person person) {
+        requireAllNonNull(contract, person);
+        return addressBook.personHasContract(contract, person);
+    }
+
+    @Override
+    public boolean policyHasContract(Contract contract, Policy policy) {
+        requireAllNonNull(contract, policy);
+        return addressBook.policyHasContract(contract, policy);
+    }
+
+    @Override
     public void removeContract(Contract contract) {
         addressBook.removeContract(contract);
     }
@@ -212,7 +234,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredContracts.setPredicate(predicate);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -231,5 +252,4 @@ public class ModelManager implements Model {
                 && filteredPolicies.equals(otherModelManager.filteredPolicies)
                 && filteredContracts.equals(otherModelManager.filteredContracts);
     }
-
 }
