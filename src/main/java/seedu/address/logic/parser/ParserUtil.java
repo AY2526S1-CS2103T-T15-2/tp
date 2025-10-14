@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -169,6 +171,16 @@ public class ParserUtil {
             throw new ParseException(PolicyDetails.MESSAGE_CONSTRAINTS);
         }
         return new PolicyDetails(trimmedPolicyDetails);
+    }
+
+    /**
+     * Parses a {@code String policyDetails} into an {@code PolicyDetails}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Path parsePath(String filePath) {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        return Paths.get(trimmedFilePath);
     }
 
     /**

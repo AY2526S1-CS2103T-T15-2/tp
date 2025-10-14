@@ -51,6 +51,7 @@
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           <StackPane fx:id="policyListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <StackPane fx:id="contractListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

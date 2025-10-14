@@ -4,10 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
+import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,25 +23,28 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.AddPolicyCommandMultiple;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
 import seedu.address.logic.commands.ViewContractCommand;
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.IdContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.PolicyUtil;
+
 
 public class AddressBookParserTest {
 
@@ -57,15 +65,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        RemoveContactCommand command = (RemoveContactCommand) parser.parseCommand(
+                RemoveContactCommand.COMMAND_WORD + " " + NRIC_FIRST_PERSON);
+        assertEquals(new RemoveContactCommand(PREDICATE_FIRST), command);
     }
 
     @Test
     public void parseCommand_addPolicy() throws Exception {
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(PolicyUtil.getAddPolicyCommand(LIFE));
-        assertTrue(command.weakEquals(new AddPolicyCommand(LIFE)));
+        assertEquals(new AddPolicyCommand(unassign(LIFE)), command);
+    }
+
+    @Test
+    public void parseCommand_addPolicyFile() throws Exception {
+        AddPolicyCommandMultiple command = (AddPolicyCommandMultiple) parser.parseCommand(
+                AddPolicyCommandMultiple.COMMAND_WORD + POLICY_PATH_A_DESC);
+        assertEquals(new AddPolicyCommandMultiple(POLICY_PATH_A), command);
     }
 
     @Test
@@ -95,7 +110,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new NricContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -117,7 +132,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewPolicy() throws Exception {
-        assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD) instanceof ViewPolicyCommand);
+        List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
+        ViewPolicyCommand command = (ViewPolicyCommand) parser.parseCommand(
+                ViewPolicyCommand.COMMAND_WORD
+                        + " p: " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewPolicyCommand(new IdContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD + " -a") instanceof ViewPolicyCommand);
     }
 
     @Test

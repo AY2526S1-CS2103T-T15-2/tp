@@ -5,8 +5,8 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":RemoveContactCommandParser" as RemoveContactCommandParser LOGIC_COLOR
+participant "d:RemoveContactCommand" as RemoveContactCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -14,56 +14,56 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("remove_contact 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("remove_contact 1")
 activate AddressBookParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create RemoveContactCommandParser
+AddressBookParser -> RemoveContactCommandParser
+activate RemoveContactCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+RemoveContactCommandParser --> AddressBookParser
+deactivate RemoveContactCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+AddressBookParser -> RemoveContactCommandParser : parse("1")
+activate RemoveContactCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create RemoveContactCommand
+RemoveContactCommandParser -> RemoveContactCommand
+activate RemoveContactCommand
 
-DeleteCommand --> DeleteCommandParser :
-deactivate DeleteCommand
+RemoveContactCommand --> RemoveContactCommandParser :
+deactivate RemoveContactCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+RemoveContactCommandParser --> AddressBookParser : d
+deactivate RemoveContactCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+RemoveContactCommandParser -[hidden]-> AddressBookParser
+destroy RemoveContactCommandParser
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
-activate DeleteCommand
+LogicManager -> RemoveContactCommand : execute(m)
+activate RemoveContactCommand
 
-DeleteCommand -> Model : deletePerson(1)
+RemoveContactCommand -> Model : deletePerson(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> RemoveContactCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+RemoveContactCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> RemoveContactCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+RemoveContactCommand --> LogicManager : r
+deactivate RemoveContactCommand
 
 [<--LogicManager
 deactivate LogicManager

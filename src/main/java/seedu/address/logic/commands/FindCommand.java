@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NricContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -15,20 +16,40 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose nrics contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " T1234567A S1234892B T0549223e";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NricContainsKeywordsPredicate predicate;
+    private final boolean showAllContacts;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    /**
+     * Initialises find command with NRICs to search
+     * @param predicate
+     */
+    public FindCommand(NricContainsKeywordsPredicate predicate) {
+        this.showAllContacts = false;
         this.predicate = predicate;
+    }
+
+    /**
+     * Initialises find command to find all contacts
+     * @param showAllContacts
+     */
+    public FindCommand(boolean showAllContacts) {
+        this.showAllContacts = showAllContacts;
+        this.predicate = null;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (showAllContacts) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        }
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
