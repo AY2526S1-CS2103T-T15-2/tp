@@ -247,6 +247,16 @@ public class AddContactCommandTest {
         public boolean policyHasContract(Contract contract, Policy policy) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void removeContractFromPerson(Contract contract) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeContractFromPolicy(Contract contract) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -211,7 +211,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Person person : persons) {
             if (person.getNric().equals(contract.getNric())) {
                 person.addContract(contract);
-                break;
+                return;
             }
         }
         throw new PersonNotFoundException();
@@ -226,7 +226,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Policy policy : policies) {
             if (policy.getId().equals(contract.getPId())) {
                 policy.addContract(contract);
-                break;
+                return;
             }
         }
         throw new PolicyNotFoundException();
@@ -249,7 +249,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Person person : persons) {
             if (person.getNric().equals(contract.getNric())) {
                 person.removeContract(contract);
-                break;
+                return;
             }
         }
         throw new PersonNotFoundException();
@@ -263,7 +263,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Policy policy : policies) {
             if (policy.getId().equals(contract.getPId())) {
                 policy.removeContract(contract);
-                break;
+                return;
             }
         }
         throw new PolicyNotFoundException();
