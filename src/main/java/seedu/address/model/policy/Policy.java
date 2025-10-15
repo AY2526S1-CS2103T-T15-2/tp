@@ -80,6 +80,14 @@ public class Policy {
     }
 
     /**
+     * Removes the given contract.
+     * {@code contract} must exist in the policy.
+     */
+    public void removeContract(Contract contract) {
+        contracts.remove(contract);
+    }
+
+    /**
      * Tests for equality of policies excluding the policy id.
      * Mainly used for testing the correctness of the parser.
      */

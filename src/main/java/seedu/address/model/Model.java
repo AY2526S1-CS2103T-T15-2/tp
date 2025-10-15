@@ -180,6 +180,16 @@ public interface Model {
     boolean policyHasContract(Contract contract, Policy policy);
 
     /**
+     * Removes the given contract from the corresponding person in the address book.
+     */
+    void removeContractFromPerson(Contract contract);
+
+    /**
+     * Removes the given contract from the corresponding policy in the address book.
+     */
+    void removeContractFromPolicy(Contract contract);
+
+    /**
      * Generates a policy id not present in the currentaddress book.
      */
     PolicyId generateUniquePolicyId();
