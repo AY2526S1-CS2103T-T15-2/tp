@@ -115,6 +115,14 @@ public class Person {
     }
 
     /**
+     * Removes a contract from the person's set of contracts.
+     * @param contract The contract to be removed.
+     */
+    public void removeContract(Contract contract) {
+        contracts.remove(contract);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
