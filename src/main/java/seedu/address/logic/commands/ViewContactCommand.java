@@ -12,9 +12,9 @@ import seedu.address.model.person.NricContainsKeywordsPredicate;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class ViewContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "view_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose nrics contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
      * Initialises find command with NRICs to search
      * @param predicate
      */
-    public FindCommand(NricContainsKeywordsPredicate predicate) {
+    public ViewContactCommand(NricContainsKeywordsPredicate predicate) {
         this.showAllContacts = false;
         this.predicate = predicate;
     }
@@ -37,7 +37,7 @@ public class FindCommand extends Command {
      * Initialises find command to find all contacts
      * @param showAllContacts
      */
-    public FindCommand(boolean showAllContacts) {
+    public ViewContactCommand(boolean showAllContacts) {
         this.showAllContacts = showAllContacts;
         this.predicate = null;
     }
@@ -62,12 +62,12 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof ViewContactCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        ViewContactCommand otherViewContactCommand = (ViewContactCommand) other;
+        return predicate.equals(otherViewContactCommand.predicate);
     }
 
     @Override
