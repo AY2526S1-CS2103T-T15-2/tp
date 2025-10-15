@@ -11,4 +11,5 @@ public class TypicalId {
     public static final ContractId CONTRACT_B_ID = new ContractId("C1234B");
     public static final PolicyId VALID_POLICY_ID = new PolicyId("P1234A");
     public static final PolicyId VALID_POLICY_ID_2 = new PolicyId("abcdef");
+    public static final PolicyId VALID_POLICY_ID_3 = new PolicyId("xyz123");
 }
