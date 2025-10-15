@@ -14,12 +14,14 @@ import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_SECOND;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_THIRD;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
@@ -35,6 +37,13 @@ public class RemoveContactCommandTest {
     public void execute_validNricUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         RemoveContactCommand removeContactCommand = new RemoveContactCommand(PREDICATE_FIRST);
+
+        // remove the person's contracts
+        Set<Contract> contractToDelete = personToDelete.getContracts();
+        for (Contract contract : contractToDelete) {
+            model.removeContract(contract);
+            personToDelete.removeContract(contract);
+        }
 
         // Success message is updated to reflect the person deleted (or count if multiple are possible)
         String expectedMessage = String.format(RemoveContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
@@ -66,6 +75,13 @@ public class RemoveContactCommandTest {
         RemoveContactCommand removeContactCommand = new RemoveContactCommand(PREDICATE_FIRST);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        // remove the person's contracts
+        Set<Contract> contractToDelete = personToDelete.getContracts();
+        for (Contract contract : contractToDelete) {
+            model.removeContract(contract);
+            personToDelete.removeContract(contract);
+        }
 
         String expectedMessage = String.format(String.format(RemoveContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 personToDelete.getName() + " " + personToDelete.getNric()));
