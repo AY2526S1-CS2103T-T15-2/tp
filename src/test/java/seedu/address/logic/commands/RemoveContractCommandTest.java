@@ -34,6 +34,8 @@ public class RemoveContractCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.removeContract(CONTRACT_A);
+        expectedModel.removeContractFromPerson(CONTRACT_A);
+        expectedModel.removeContractFromPolicy(CONTRACT_A);
 
         assertCommandSuccess(removeContractCommand, model, expectedMessage, expectedModel);
     }

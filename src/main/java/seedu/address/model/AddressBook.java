@@ -12,10 +12,12 @@ import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.UnassignedPolicy;
 import seedu.address.model.policy.UniquePolicyList;
+import seedu.address.model.policy.exceptions.PolicyNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -204,28 +206,30 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds the given contract to the corresponding person in the address book.
      * The person must exist in the address book.
      */
-    public void addContractToPerson(Contract contract) {
+    public void addContractToPerson(Contract contract) throws PersonNotFoundException {
         requireNonNull(contract);
         for (Person person : persons) {
             if (person.getNric().equals(contract.getNric())) {
                 person.addContract(contract);
-                break;
+                return;
             }
         }
+        throw new PersonNotFoundException();
     }
 
     /**
      * Adds the given contract to the corresponding policy in the address book.
      * The policy must exist in the address book.
      */
-    public void addContractToPolicy(Contract contract) {
+    public void addContractToPolicy(Contract contract) throws PolicyNotFoundException {
         requireNonNull(contract);
         for (Policy policy : policies) {
             if (policy.getId().equals(contract.getPId())) {
                 policy.addContract(contract);
-                break;
+                return;
             }
         }
+        throw new PolicyNotFoundException();
     }
 
     /**
@@ -235,6 +239,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeContract(Contract contract) {
         requireNonNull(contract);
         contracts.remove(contract);
+    }
+
+    /**
+     * Removes the given contract from the corresponding person in the address book.
+     */
+    public void removeContractFromPerson(Contract contract) throws PersonNotFoundException {
+        requireNonNull(contract);
+        for (Person person : persons) {
+            if (person.getNric().equals(contract.getNric())) {
+                person.removeContract(contract);
+                return;
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
+    /**
+     * Removes the given contract from the corresponding policy in the address book.
+     */
+    public void removeContractFromPolicy(Contract contract) throws PolicyNotFoundException {
+        requireNonNull(contract);
+        for (Policy policy : policies) {
+            if (policy.getId().equals(contract.getPId())) {
+                policy.removeContract(contract);
+                return;
+            }
+        }
+        throw new PolicyNotFoundException();
     }
 
     /**

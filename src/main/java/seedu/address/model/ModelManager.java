@@ -187,6 +187,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeContractFromPerson(Contract contract) {
+        requireAllNonNull(contract);
+        addressBook.removeContractFromPerson(contract);
+    }
+
+    @Override
+    public void removeContractFromPolicy(Contract contract) {
+        requireAllNonNull(contract);
+        addressBook.removeContractFromPolicy(contract);
+    }
+
+    @Override
     public PolicyId generateUniquePolicyId() {
         return addressBook.generateUniquePolicyId();
     }
