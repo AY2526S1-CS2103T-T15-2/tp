@@ -1,3 +1,4 @@
 Life Insurance`This policy coverage for family...
 Healthcare - A`Other policy details 123
 Property`Non-alphanumeric characters *^$+-
+Travel - A`This policy covers flights to European countries
