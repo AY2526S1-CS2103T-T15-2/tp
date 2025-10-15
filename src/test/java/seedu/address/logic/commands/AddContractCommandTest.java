@@ -18,7 +18,10 @@ import seedu.address.model.contract.ContractId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.PolicyName;
 import seedu.address.testutil.PersonBuilder;
 
 
@@ -77,14 +80,19 @@ public class AddContractCommandTest {
     public void validNric_success() {
         Model modelStub = new ModelManager();
         modelStub.addPerson(PERSON_WITH_VALID_ID);
+        Policy policyStub = new Policy(new PolicyName("stub"),
+                new PolicyDetails("none"), new PolicyId(VALID_PID));
+        modelStub.addPolicy(policyStub);
 
         Contract contractWithValidNric = new Contract(
                 new Nric(VALID_NRIC),
                 new PolicyId(VALID_PID),
                 LocalDate.parse(VALID_DATE));
+        ContractId contractId = contractWithValidNric.getCId();
         // crude test for now
         assertCommandSuccess(new AddContractCommand(contractWithValidNric),
-                modelStub, AddContractCommand.MESSAGE_SUCCESS, modelStub);
+                modelStub, String.format(AddContractCommand.MESSAGE_SUCCESS, contractId.toString()),
+                modelStub);
     }
 
     @Test
