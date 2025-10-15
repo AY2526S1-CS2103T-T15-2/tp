@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_2;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
 
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -34,7 +35,7 @@ public class RemovePolicyCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_noExistingContractsUnderPolicy_remove_success() {
+    public void execute_noExistingContractsUnderPolicy_removeSuccess() {
         RemovePolicyCommand removePolicyCommand = new RemovePolicyCommand(VALID_POLICY_ID_3);
 
         String expectedMessage = String.format(RemovePolicyCommand.MESSAGE_REMOVE_POLICY_SUCCESS, VALID_POLICY_ID_3);
@@ -46,7 +47,7 @@ public class RemovePolicyCommandTest {
     }
 
     @Test
-    public void execute_existingContractsUnderPolicy_pending_success() {
+    public void execute_existingContractsUnderPolicy_pendingSuccess() {
         RemovePolicyCommand removePolicyCommand = new RemovePolicyCommand(VALID_POLICY_ID_2);
 
         String expectedMessage = String.format(RemovePolicyCommand.MESSAGE_REMOVE_POLICY_PENDING, CONTRACT_A_ID);

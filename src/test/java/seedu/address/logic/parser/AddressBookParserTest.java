@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_D
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
-import static seedu.address.testutil.TypicalId.VALID_POLICY_ID;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
