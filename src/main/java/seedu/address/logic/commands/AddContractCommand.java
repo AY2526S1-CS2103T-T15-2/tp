@@ -5,10 +5,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.ContractId;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.policy.PolicyId;
 
 /**
  * Adds a contract to iCon.
@@ -30,8 +40,9 @@ public class AddContractCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New contract added with the following ID: %s";
     public static final String MESSAGE_DUPLICATE_CONTRACT = "This contract already exists in iCon";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist in iCon";
 
-    private final Contract toAdd;
+    private Contract toAdd;
 
     /**
      * Creates an AddContract to add the specified {@code Contract}
@@ -44,6 +55,27 @@ public class AddContractCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // get nric from preloaded contract and load person to get name
+        Nric nric = toAdd.getNric();
+        FilteredList<Person> personFilteredList = model.getFilteredPersonList()
+                .filtered(new NricContainsKeywordsPredicate(List.of(nric.toString())));
+        if (personFilteredList.isEmpty()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+        Person person = personFilteredList.get(0);
+        if (person == null || !person.getNric().equals(nric)) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+
+        // fill in necessary fields
+        Name name = person.getName();
+        PolicyId policyId = toAdd.getPId();
+        LocalDate date = toAdd.getDate();
+        ContractId contractId = toAdd.getCId();
+
+        // initialise new contract
+        toAdd = new Contract(contractId, name, nric, policyId, date);
 
         if (model.hasContract(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTRACT);
