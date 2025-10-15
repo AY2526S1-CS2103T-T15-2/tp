@@ -31,4 +31,16 @@ public class RemovePolicyCommandParserTest {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemovePolicyCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_emptyInput_throwsParseException() {
+        assertParseFailure(parser, "    ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemovePolicyCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_badPreamble_throwsParseException() {
+        assertParseFailure(parser, "bad preamble" + PREFIX_PID + "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemovePolicyCommand.MESSAGE_USAGE));
+    }
 }
