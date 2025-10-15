@@ -97,6 +97,12 @@ public class TypicalData {
             new PolicyId("Abc123")
     );
 
+    public static final Policy TRAVEL = new Policy(
+            new PolicyName("Travel - A"),
+            new PolicyDetails("This policy covers flights to European countries"),
+            new PolicyId("xyz123")
+    );
+
     // Manually added - Policy's details found in {@code PolicyCommandTestUtil}
     public static final Policy HOME = new PolicyBuilder().withName(VALID_POLICY_NAME_HOME)
             .withDetails(VALID_DETAILS_HOME).withId(VALID_POLICY_ID_HOME).build();
@@ -174,7 +180,7 @@ public class TypicalData {
         LIFE.addContract(CONTRACT_A);
         HEALTH.addContract(CONTRACT_B);
         PROPERTY.addContract(CONTRACT_C);
-        return new ArrayList<>(Arrays.asList(LIFE, HEALTH, PROPERTY));
+        return new ArrayList<>(Arrays.asList(LIFE, HEALTH, PROPERTY, TRAVEL));
     }
 
     public static List<Contract> getTypicalContracts() {

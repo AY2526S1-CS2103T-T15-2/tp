@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID;
@@ -22,7 +23,7 @@ public class RemovePolicyCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsRemovePolicyCommand() {
-        assertParseSuccess(parser, "P1234A", new RemovePolicyCommand(VALID_POLICY_ID));
+        assertParseSuccess(parser, " " + PREFIX_PID + "P1234A", new RemovePolicyCommand(VALID_POLICY_ID));
     }
 
     @Test

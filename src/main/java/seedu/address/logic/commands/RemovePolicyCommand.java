@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,11 +78,14 @@ public class RemovePolicyCommand extends Command {
     /**
      * Returns a policy with policy id in the policy list
      */
-    public Policy getPolicyInList(List<Policy> policyList, PolicyId policyId) {
-        return policyList.stream()
+    public Policy getPolicyInList(List<Policy> policyList, PolicyId policyId) throws CommandException {
+        Optional<Policy> maybePolicy = policyList.stream()
                 .filter(p -> p.getId().equals(policyId))
-                .findFirst()
-                .get();
+                .findFirst();
+        if (maybePolicy.isEmpty()) {
+            throw new CommandException("Unable to get policy");
+        }
+        return maybePolicy.get();
     }
 
     @Override

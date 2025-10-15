@@ -120,6 +120,11 @@
         "dateSigned" : "2023-03-01"
       }
     ]
+  }, {
+    "name" : "Travel - A",
+    "details" : "This policy covers flights to European countries",
+    "id" : "xyz123",
+    "contracts" : [ ]
   } ],
   "contracts": [ {
     "cId" : "C1234A",

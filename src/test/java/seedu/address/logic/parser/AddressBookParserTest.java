@@ -10,6 +10,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID;
+import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
@@ -86,8 +87,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_removePolicy() throws Exception {
         RemovePolicyCommand command = (RemovePolicyCommand) parser.parseCommand(
-                RemovePolicyCommand.COMMAND_WORD + " " + VALID_POLICY_ID);
-        assertEquals(new RemovePolicyCommand(VALID_POLICY_ID), command);
+                RemovePolicyCommand.COMMAND_WORD + " " + "p:" + VALID_POLICY_ID_3);
+        assertEquals(new RemovePolicyCommand(VALID_POLICY_ID_3), command);
     }
 
     @Test
