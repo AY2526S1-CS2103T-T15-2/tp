@@ -16,7 +16,7 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policies added from file: %1$s";
 
-    public static final String MESSAGE_IOEXCEPTION = "Error encountered when reading file";
+    public static final String MESSAGE_IOEXCEPTION = "Error encountered when reading file: %1$s";
 
     private final Path toAdd;
 
@@ -35,7 +35,7 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
         try {
             model.addPolicyFile(toAdd);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_IOEXCEPTION, e);
+            throw new CommandException(String.format(MESSAGE_IOEXCEPTION, e.getMessage()), e);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
