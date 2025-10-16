@@ -29,11 +29,19 @@ public class UniquePolicyList implements Iterable<Policy> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent policy as the given argument.
+     * Returns true if the list contains a policy with the same id as the given argument.
      */
-    public boolean contains(Policy toCheck) {
+    public boolean containsSameId(Policy toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::hasSameId);
+    }
+
+    /**
+     * Returns true if the list contains a policy with the same fields as the given argument.
+     */
+    public boolean containsSamePolicy(Policy toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePolicy);
     }
 
     /**
@@ -50,7 +58,7 @@ public class UniquePolicyList implements Iterable<Policy> {
      */
     public void add(Policy toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (containsSameId(toAdd) && containsSamePolicy(toAdd)) {
             throw new DuplicatePolicyException();
         }
         internalList.add(toAdd);
@@ -69,7 +77,7 @@ public class UniquePolicyList implements Iterable<Policy> {
             throw new PolicyNotFoundException();
         }
 
-        if (!target.hasSameId(editedPolicy) && contains(editedPolicy)) {
+        if (!target.hasSameId(editedPolicy) && containsSameId(editedPolicy)) {
             throw new DuplicatePolicyException();
         }
 
