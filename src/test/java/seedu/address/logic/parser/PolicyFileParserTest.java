@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.InvalidLineException;
-import seedu.address.logic.parser.exceptions.ParserIoException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.UnassignedPolicy;
 import seedu.address.testutil.TypicalData;
@@ -31,7 +31,7 @@ public class PolicyFileParserTest {
     }
 
     @Test
-    public void typicalPoliciesFile_success() {
+    public void typicalPoliciesFile_success() throws IOException {
         Path path = TEST_DATA_FOLDER.resolve("typicalPoliciesFile.txt");
         List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(path);
         assertTrue(comparePolicies(unassignedPolicies, TypicalData.getTypicalPolicies()));
@@ -55,8 +55,8 @@ public class PolicyFileParserTest {
     }
 
     @Test
-    public void missingFile_throwParserIoException() {
+    public void missingFile_throwIoException() {
         Path path = TEST_DATA_FOLDER.resolve("nonexistentPolicyFile.txt");
-        assertThrows(ParserIoException.class, () -> PolicyFileParser.readFile(path));
+        assertThrows(IOException.class, () -> PolicyFileParser.readFile(path));
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,6 +15,8 @@ import seedu.address.model.Model;
 public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policies added from file: %1$s";
+
+    public static final String MESSAGE_IOEXCEPTION = "Error encountered when reading file: %1$s";
 
     private final Path toAdd;
 
@@ -29,7 +32,12 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.addPolicyFile(toAdd);
+        try {
+            model.addPolicyFile(toAdd);
+        } catch (IOException e) {
+            throw new CommandException(String.format(MESSAGE_IOEXCEPTION, e.getMessage()), e);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
