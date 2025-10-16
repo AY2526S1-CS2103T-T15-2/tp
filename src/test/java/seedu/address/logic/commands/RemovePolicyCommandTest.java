@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalData.TRAVEL;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalId.CONTRACT_A_ID;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_2;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
 
@@ -47,14 +46,9 @@ public class RemovePolicyCommandTest {
     }
 
     @Test
-    public void execute_existingContractsUnderPolicy_pendingSuccess() {
+    public void execute_existingContractsUnderPolicy_throwsCommandException() {
         RemovePolicyCommand removePolicyCommand = new RemovePolicyCommand(VALID_POLICY_ID_2);
-
-        String expectedMessage = String.format(RemovePolicyCommand.MESSAGE_REMOVE_POLICY_PENDING, CONTRACT_A_ID);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
-        assertCommandSuccess(removePolicyCommand, model, expectedMessage, expectedModel);
+        assertThrows(CommandException.class, () -> removePolicyCommand.execute(model));
     }
 
     @Test
