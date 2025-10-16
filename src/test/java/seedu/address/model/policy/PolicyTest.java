@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_DETAILS_H
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HOME;
 import static seedu.address.testutil.TypicalData.HEALTH_B;
 import static seedu.address.testutil.TypicalData.HOME;
 
@@ -35,6 +36,27 @@ public class PolicyTest {
         // id differs in case, all other attributes same -> returns false
         editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HOME.toLowerCase()).build();
         assertFalse(HOME.hasSameId(editedPolicy));
+    }
+
+    @Test
+    public void isSamePolicy() {
+        // same object -> returns true
+        assertTrue(HOME.isSamePolicy(HOME));
+
+        // null -> returns false
+        assertFalse(HOME.isSamePolicy(null));
+
+        // same id, all other attributes different -> returns false
+        Policy editedPolicy = new PolicyBuilder(HEALTH_B).withId(VALID_POLICY_ID_HOME).build();
+        assertFalse(HOME.isSamePolicy(editedPolicy));
+
+        // different id, all other attributes same -> returns true
+        editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build();
+        assertTrue(HOME.isSamePolicy(editedPolicy));
+
+        // name differs in case -> returns false
+        editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_NAME_HOME.toLowerCase()).build();
+        assertFalse(HOME.isSamePolicy(editedPolicy));
     }
 
     @Test
