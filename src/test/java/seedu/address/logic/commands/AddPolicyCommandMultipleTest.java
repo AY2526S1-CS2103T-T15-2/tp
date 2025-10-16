@@ -5,11 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalId.CONTRACT_A_ID;
-import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_2;
 
 import java.io.IOException;
 import java.nio.file.Path;
