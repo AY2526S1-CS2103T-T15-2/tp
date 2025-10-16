@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -147,7 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds policies from a file to the address book.
      * Policies are assigned unique ids upon insertion.
      */
-    public void addPolicyFile(Path filePath) {
+    public void addPolicyFile(Path filePath) throws IOException {
         List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(filePath);
         for (UnassignedPolicy unassignedPolicy: unassignedPolicies) {
             PolicyId policyId = generateUniquePolicyId();
