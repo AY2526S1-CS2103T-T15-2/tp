@@ -60,18 +60,6 @@ public class Policy {
     }
 
     /**
-     * Returns true if both policies have the same policy id.
-     */
-    public boolean hasSameId(Policy otherPolicy) {
-        if (otherPolicy == this) {
-            return true;
-        }
-
-        return otherPolicy != null
-                && otherPolicy.getId().equals(getId());
-    }
-
-    /**
      * Adds the given contract.
      * {@code contract} must not already exist in the policy.
      */
@@ -100,10 +88,22 @@ public class Policy {
     }
 
     /**
-     * Tests for equality of policies excluding the policy id.
-     * Mainly used for testing the correctness of the parser.
+     * Returns true if both policies have the same policy id.
      */
-    public boolean weakEquals(Object other) {
+    public boolean hasSameId(Policy otherPolicy) {
+        if (otherPolicy == this) {
+            return true;
+        }
+
+        return otherPolicy != null
+                && otherPolicy.getId().equals(getId());
+    }
+
+    /**
+     * Tests for equality of policies excluding the policy id.
+     * This defines a weaker notion of equality between two policies.
+     */
+    public boolean isSamePolicy(Object other) {
         if (other == this) {
             return true;
         }

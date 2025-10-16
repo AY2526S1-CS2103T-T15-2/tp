@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_DETAILS_HEALTH_B;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.HEALTH_B;
@@ -26,26 +27,33 @@ public class UniquePolicyListTest {
 
     @Test
     public void contains_nullPolicy_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePolicyList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniquePolicyList.containsSameId(null));
     }
 
     @Test
     public void contains_policyNotInList_returnsFalse() {
-        assertFalse(uniquePolicyList.contains(HOME));
+        assertFalse(uniquePolicyList.containsSameId(HOME));
     }
 
     @Test
     public void contains_policyInList_returnsTrue() {
         uniquePolicyList.add(HOME);
-        assertTrue(uniquePolicyList.contains(HOME));
+        assertTrue(uniquePolicyList.containsSameId(HOME));
     }
 
     @Test
-    public void contains_policyWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_policyWithSameIdInList_returnsTrue() {
         uniquePolicyList.add(HOME);
         Policy editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_NAME_HEALTH_B)
                 .withDetails(VALID_DETAILS_HEALTH_B).build();
-        assertTrue(uniquePolicyList.contains(editedPolicy));
+        assertTrue(uniquePolicyList.containsSameId(editedPolicy));
+    }
+
+    @Test
+    public void contains_policyWithSameFieldsInList_returnsTrue() {
+        uniquePolicyList.add(HOME);
+        Policy editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build();
+        assertTrue(uniquePolicyList.containsSamePolicy(editedPolicy));
     }
 
     @Test
