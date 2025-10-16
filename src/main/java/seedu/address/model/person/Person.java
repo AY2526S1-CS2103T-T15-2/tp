@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.ContractId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -91,6 +93,13 @@ public class Person {
      */
     public Set<Contract> getContracts() {
         return Collections.unmodifiableSet(contracts);
+    }
+
+    public String getContractIdsAsString() {
+        return contracts.stream()
+                .map(Contract::getCId)
+                .map(ContractId::toString)
+                .collect(Collectors.joining(", "));
     }
 
     /**

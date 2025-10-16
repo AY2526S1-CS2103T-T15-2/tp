@@ -28,6 +28,8 @@ public class RemoveContactCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_FAILURE = "Could not delete person "
             + "since no such NRIC exists within current contact list.";
+    public static final String MESSAGE_REMOVE_CONTACT_PENDING = "Contracts exists under this policy. "
+            + "Please remove before proceeding: %1$s";
 
     private final NricContainsKeywordsPredicate predicate;
 
@@ -46,6 +48,13 @@ public class RemoveContactCommand extends Command {
         }
         Index personIndex = Index.fromZeroBased(index);
         Person person = lastShownList.get(personIndex.getZeroBased());
+
+        //check for existing contracts
+        if (!person.getContracts().isEmpty()) {
+            String existingContractIds = person.getContractIdsAsString();
+            throw new CommandException(String.format(MESSAGE_REMOVE_CONTACT_PENDING, existingContractIds));
+        }
+
         model.deletePerson(person);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 person.getName() + " " + person.getNric()));

@@ -11,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
 import static seedu.address.testutil.TypicalData.BOB;
+import static seedu.address.testutil.TypicalData.CONTRACT_A;
+import static seedu.address.testutil.TypicalData.CONTRACT_B;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,6 +51,26 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void checkContractIdString_success() {
+        String validContractIdString = CONTRACT_A.getCId().toString();
+        Person firstPerson = ALICE;
+        firstPerson.addContract(CONTRACT_A);
+
+        assertEquals(validContractIdString, firstPerson.getContractIdsAsString());
+    }
+
+    @Test
+    public void checkMultipleContractIdString_success() {
+        String validContractIdString = CONTRACT_B.getCId().toString()
+                + ", " + CONTRACT_A.getCId().toString();
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        firstPerson.addContract(CONTRACT_A);
+        firstPerson.addContract(CONTRACT_B);
+
+        assertEquals(validContractIdString, firstPerson.getContractIdsAsString());
     }
 
     @Test
