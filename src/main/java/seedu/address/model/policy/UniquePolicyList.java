@@ -58,7 +58,7 @@ public class UniquePolicyList implements Iterable<Policy> {
      */
     public void add(Policy toAdd) {
         requireNonNull(toAdd);
-        if (containsSameId(toAdd) && containsSamePolicy(toAdd)) {
+        if (containsSameId(toAdd) || containsSamePolicy(toAdd)) {
             throw new DuplicatePolicyException();
         }
         internalList.add(toAdd);
