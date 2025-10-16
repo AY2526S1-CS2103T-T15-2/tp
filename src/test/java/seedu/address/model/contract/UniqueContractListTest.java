@@ -40,7 +40,7 @@ public class UniqueContractListTest {
                 CONTRACT_B.getName(),
                 CONTRACT_A.getNric(),
                 CONTRACT_A.getPId(),
-                CONTRACT_B.getDate()
+                CONTRACT_A.getDate()
         );
         assertTrue(uniqueContractList.contains(editedContractA));
     }

@@ -79,7 +79,8 @@ public class Contract {
 
         return otherContract != null
                 && otherContract.getNric().equals(getNric())
-                && otherContract.getPId().equals(getPId());
+                && otherContract.getPId().equals(getPId())
+                && otherContract.getDate().equals(getDate());
     }
 
     @Override

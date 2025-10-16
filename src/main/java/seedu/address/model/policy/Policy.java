@@ -76,6 +76,9 @@ public class Policy {
      * {@code contract} must not already exist in the policy.
      */
     public void addContract(Contract contract) {
+        if (containsContract(contract)) {
+            return;
+        }
         contracts.add(contract);
     }
 
@@ -85,6 +88,15 @@ public class Policy {
      */
     public void removeContract(Contract contract) {
         contracts.remove(contract);
+    }
+
+    /**
+     * Returns true if the policy has the given contract.
+     * @param contract The contract to be checked.
+     * @return True if the policy has the given contract, false otherwise.
+     */
+    private boolean containsContract(Contract contract) {
+        return contracts.stream().anyMatch(contract::isSameContract);
     }
 
     /**
