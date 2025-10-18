@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_DETAILS_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HEALTH_B;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.HEALTH_B;
@@ -31,29 +32,40 @@ public class UniquePolicyListTest {
     }
 
     @Test
-    public void contains_policyNotInList_returnsFalse() {
+    public void containsSameId_policyIdNotInList_returnsFalse() {
         assertFalse(uniquePolicyList.containsSameId(HOME));
     }
 
     @Test
-    public void contains_policyInList_returnsTrue() {
+    public void containsSameId_policyWithSameIdInList_returnsTrue() {
         uniquePolicyList.add(HOME);
-        assertTrue(uniquePolicyList.containsSameId(HOME));
-    }
-
-    @Test
-    public void contains_policyWithSameIdInList_returnsTrue() {
-        uniquePolicyList.add(HOME);
-        Policy editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_NAME_HEALTH_B)
-                .withDetails(VALID_DETAILS_HEALTH_B).build();
+        Policy editedPolicy = new PolicyBuilder(HEALTH_B).withId(VALID_POLICY_ID_HOME).build();
         assertTrue(uniquePolicyList.containsSameId(editedPolicy));
     }
 
     @Test
-    public void contains_policyWithSameFieldsInList_returnsTrue() {
+    public void containsSamePolicy_policyNotInList_returnsFalse() {
+        assertFalse(uniquePolicyList.containsSamePolicy(HOME));
+    }
+
+    @Test
+    public void containsSamePolicy_policyWithSameFieldsInList_returnsTrue() {
         uniquePolicyList.add(HOME);
         Policy editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build();
         assertTrue(uniquePolicyList.containsSamePolicy(editedPolicy));
+    }
+
+    @Test
+    public void containsId_policyIdNotInList_returnsFalse() {
+        PolicyId policyId = new PolicyId(VALID_POLICY_ID_HOME);
+        assertFalse(uniquePolicyList.containsId(policyId));
+    }
+
+    @Test
+    public void containsId_policyWithIdInList_returnsTrue() {
+        uniquePolicyList.add(HOME);
+        PolicyId policyId = new PolicyId(VALID_POLICY_ID_HOME);
+        assertTrue(uniquePolicyList.containsId(policyId));
     }
 
     @Test
@@ -65,6 +77,25 @@ public class UniquePolicyListTest {
     public void add_duplicatePolicy_throwsDuplicatePolicyException() {
         uniquePolicyList.add(HOME);
         assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.add(HOME));
+    }
+
+    @Test
+    public void addAll_nullPolicyList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePolicyList.addAll(null));
+    }
+
+    @Test
+    public void addAll_duplicatePolicy_throwsDuplicatePolicyException() {
+        uniquePolicyList.add(HOME);
+        List<Policy> policies = List.of(HEALTH_B, HOME);
+        assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.addAll(policies));
+    }
+
+    @Test
+    public void addAll_duplicatePolicyInList_throwsDuplicatePolicyException() {
+        uniquePolicyList.add(HOME);
+        List<Policy> policies = List.of(HEALTH_B, HEALTH_B);
+        assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.addAll(policies));
     }
 
     @Test

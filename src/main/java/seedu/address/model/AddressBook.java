@@ -134,7 +134,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a policy with the same id as {@code policy} exists in the address book.
+     * Returns true if a policy with the same fields as {@code policy} exists in the address book.
      */
     public boolean hasSamePolicyFields(Policy policy) {
         requireNonNull(policy);
