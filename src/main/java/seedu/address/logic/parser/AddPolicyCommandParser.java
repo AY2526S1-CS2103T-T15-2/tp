@@ -9,8 +9,8 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPolicyCommand;
-import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.AddPolicyCommandType;
+import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyName;
