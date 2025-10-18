@@ -134,7 +134,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPolicy(Policy policy) {
         requireNonNull(policy);
-        return policies.contains(policy);
+        return policies.containsSameId(policy);
     }
 
     /**

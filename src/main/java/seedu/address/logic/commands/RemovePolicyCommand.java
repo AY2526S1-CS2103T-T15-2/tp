@@ -58,7 +58,7 @@ public class RemovePolicyCommand extends Command {
                         .map(Contract::getCId)
                         .map(ContractId::toString)
                         .collect(Collectors.joining(", "));
-                return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_PENDING, existingContractIds));
+                throw new CommandException(String.format(MESSAGE_REMOVE_POLICY_PENDING, existingContractIds));
             }
             model.removePolicy(policyToRemove);
             return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove.getId()));
