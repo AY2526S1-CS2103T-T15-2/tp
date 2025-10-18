@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.parser.exceptions.InvalidLineException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyName;
 import seedu.address.model.policy.UnassignedPolicy;
@@ -33,7 +33,7 @@ public class PolicyFileParser {
     /**
      * Reads and parses policies from the given text file.
      */
-    public static List<UnassignedPolicy> readFile(Path filePath) throws IOException {
+    public static List<UnassignedPolicy> readFile(Path filePath) throws IOException, ParseException {
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
             ArrayList<UnassignedPolicy> policies = new ArrayList<>();
             String line;
@@ -48,7 +48,7 @@ public class PolicyFileParser {
         }
     }
 
-    private static UnassignedPolicy parseLine(int lineNumber, String line) {
+    private static UnassignedPolicy parseLine(int lineNumber, String line) throws ParseException {
         Matcher m = PATTERN.matcher(line);
         if (m.find()) {
             return new UnassignedPolicy(
@@ -56,7 +56,7 @@ public class PolicyFileParser {
                     new PolicyDetails(m.group(GROUP_DETAILS).trim())
             );
         } else {
-            throw new InvalidLineException(String.format(MESSAGE_INVALID_LINE, lineNumber));
+            throw new ParseException(String.format(MESSAGE_INVALID_LINE, lineNumber));
         }
     }
 }

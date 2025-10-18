@@ -2,6 +2,7 @@ package seedu.address.model.policy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.policy.Policy.policiesAreUnique;
 
 import java.util.Iterator;
 import java.util.List;
@@ -65,6 +66,26 @@ public class UniquePolicyList implements Iterable<Policy> {
     }
 
     /**
+     * Adds a list of policies to this list.
+     * The policies must not already exist in this list, and the added list must not have duplicates.
+     */
+    public void addAll(List<Policy> toAdd) {
+        requireNonNull(toAdd);
+
+        for (Policy policy: toAdd) {
+            if (containsSameId(policy) || containsSamePolicy(policy)) {
+                throw new DuplicatePolicyException();
+            }
+        }
+
+        if (!policiesAreUnique(toAdd)) {
+            throw new DuplicatePolicyException();
+        }
+
+        internalList.addAll(toAdd);
+    }
+
+    /**
      * Replaces the policy {@code target} in the list with {@code editedPolicy}.
      * {@code target} must exist in the list.
      * The policy id of {@code editedPolicy} must not be the same as another existing policy in the list.
@@ -106,7 +127,7 @@ public class UniquePolicyList implements Iterable<Policy> {
      */
     public void setPolicies(List<Policy> policies) {
         requireAllNonNull(policies);
-        if (!policiesAreUnique(policies)) {
+        if (!policiesHaveUniqueIds(policies)) {
             throw new DuplicatePolicyException();
         }
 
@@ -151,9 +172,9 @@ public class UniquePolicyList implements Iterable<Policy> {
     }
 
     /**
-     * Returns true if {@code policies} contains only unique policies.
+     * Returns true if {@code policies} contains only unique policy ids.
      */
-    private boolean policiesAreUnique(List<Policy> policies) {
+    private boolean policiesHaveUniqueIds(List<Policy> policies) {
         for (int i = 0; i < policies.size() - 1; i++) {
             for (int j = i + 1; j < policies.size(); j++) {
                 if (policies.get(i).hasSameId(policies.get(j))) {

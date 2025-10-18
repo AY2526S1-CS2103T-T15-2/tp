@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,7 +12,7 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.exceptions.InvalidLineException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.UnassignedPolicy;
 import seedu.address.testutil.TypicalData;
@@ -31,9 +32,14 @@ public class PolicyFileParserTest {
     }
 
     @Test
-    public void typicalPoliciesFile_success() throws IOException {
+    public void typicalPoliciesFile_success() {
         Path path = TEST_DATA_FOLDER.resolve("typicalPoliciesFile.txt");
-        List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(path);
+        List<UnassignedPolicy> unassignedPolicies = null;
+        try {
+            unassignedPolicies = PolicyFileParser.readFile(path);
+        } catch (Exception e) {
+            fail();
+        }
         assertTrue(comparePolicies(unassignedPolicies, TypicalData.getTypicalPolicies()));
     }
 
@@ -45,13 +51,13 @@ public class PolicyFileParserTest {
     @Test
     public void invalidPolicyFile_throwInvalidLineException() {
         Path path = TEST_DATA_FOLDER.resolve("invalidPolicyFile.txt");
-        assertThrows(InvalidLineException.class, () -> PolicyFileParser.readFile(path));
+        assertThrows(ParseException.class, () -> PolicyFileParser.readFile(path));
     }
 
     @Test
     public void invalidAndValidPolicyFile_throwInvalidLineException() {
         Path path = TEST_DATA_FOLDER.resolve("invalidAndValidPolicyFile.txt");
-        assertThrows(InvalidLineException.class, () -> PolicyFileParser.readFile(path));
+        assertThrows(ParseException.class, () -> PolicyFileParser.readFile(path));
     }
 
     @Test

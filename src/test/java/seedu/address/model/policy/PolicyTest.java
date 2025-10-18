@@ -10,6 +10,9 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NA
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HOME;
 import static seedu.address.testutil.TypicalData.HEALTH_B;
 import static seedu.address.testutil.TypicalData.HOME;
+import static seedu.address.testutil.TypicalData.LIFE;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +60,20 @@ public class PolicyTest {
         // name differs in case -> returns false
         editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_NAME_HOME.toLowerCase()).build();
         assertFalse(HOME.isSamePolicy(editedPolicy));
+    }
+
+    @Test
+    public void policiesAreUnique() {
+        // unique policies -> returns true
+        assertTrue(Policy.policiesAreUnique(List.of(HOME, HEALTH_B, LIFE)));
+
+        // non-unique policies -> return false
+        assertFalse(Policy.policiesAreUnique(List.of(HOME, HEALTH_B, HOME)));
+
+        // non-unique policies with different ids -> return false
+        assertFalse(Policy.policiesAreUnique(
+                List.of(HOME, LIFE, new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build())
+        ));
     }
 
     @Test
