@@ -93,28 +93,28 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPolicy_policyNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPolicy(LIFE));
+    public void hasSamePolicyId_policyIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSamePolicyId(LIFE));
     }
 
     @Test
-    public void hasPolicy_policyInAddressBook_returnsTrue() {
+    public void hasSamePolicyId_policyIdInAddressBook_returnsTrue() {
         modelManager.addPolicy(LIFE);
-        assertTrue(modelManager.hasPolicy(LIFE));
+        assertTrue(modelManager.hasSamePolicyId(LIFE));
     }
 
     @Test
     public void removePolicy_policyInAddressBook_returnsFalse() {
         modelManager.addPolicy(LIFE);
         modelManager.removePolicy(LIFE);
-        assertFalse(modelManager.hasPolicy(LIFE));
+        assertFalse(modelManager.hasSamePolicyId(LIFE));
     }
 
     @Test
     public void setPolicy_policyInAddressBook_returnsTrue() {
         modelManager.addPolicy(LIFE);
         modelManager.setPolicy(LIFE, LIFE);
-        assertTrue(modelManager.hasPolicy(LIFE));
+        assertTrue(modelManager.hasSamePolicyId(LIFE));
     }
 
     @Test

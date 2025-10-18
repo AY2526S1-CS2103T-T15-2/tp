@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalData.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -165,7 +166,12 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public boolean hasPolicy(Policy id) {
+        public boolean hasSamePolicyId(Policy id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSamePolicyFields(Policy policy) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -180,7 +186,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void addPolicyFile(Path filePath) {
+        public void addPolicies(List<Policy> policies) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -225,6 +231,11 @@ public class AddContactCommandTest {
 
         @Override
         public PolicyId generateUniquePolicyId() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<PolicyId> generateUniquePolicyIds(int length) {
             throw new AssertionError("This method should not be called.");
         }
 

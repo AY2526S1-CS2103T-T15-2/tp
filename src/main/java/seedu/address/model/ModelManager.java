@@ -3,8 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -103,9 +102,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPolicy(Policy policy) {
+    public boolean hasSamePolicyId(Policy policy) {
         requireNonNull(policy);
-        return addressBook.hasPolicy(policy);
+        return addressBook.hasSamePolicyId(policy);
+    }
+
+    @Override
+    public boolean hasSamePolicyFields(Policy policy) {
+        requireNonNull(policy);
+        return addressBook.hasSamePolicyFields(policy);
     }
 
     @Override
@@ -131,8 +136,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPolicyFile(Path filePath) throws IOException, ParseException {
-        addressBook.addPolicyFile(filePath);
+    public void addPolicies(List<Policy> policies) {
+        addressBook.addPolicies(policies);
         updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
     }
 
@@ -203,6 +208,11 @@ public class ModelManager implements Model {
     @Override
     public PolicyId generateUniquePolicyId() {
         return addressBook.generateUniquePolicyId();
+    }
+
+    @Override
+    public List<PolicyId> generateUniquePolicyIds(int length) {
+        return addressBook.generateUniquePolicyIds(length);
     }
 
     //=========== Filtered Person List Accessors =============================================================

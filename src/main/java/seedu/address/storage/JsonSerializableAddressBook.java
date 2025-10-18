@@ -70,7 +70,7 @@ class JsonSerializableAddressBook {
         /* Convert policies */
         for (JsonAdaptedPolicy jsonAdaptedPolicy : policies) {
             Policy policy = jsonAdaptedPolicy.toModelType();
-            if (addressBook.hasPolicy(policy)) {
+            if (addressBook.hasSamePolicyId(policy)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_POLICY);
             }
             addressBook.addPolicy(policy);

@@ -15,6 +15,7 @@ import seedu.address.model.policy.UnassignedPolicy;
 public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the address book";
 
     private final UnassignedPolicy toAdd;
 
@@ -29,8 +30,12 @@ public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         Policy policy = toAdd.assignId(model.generateUniquePolicyId());
+
+        if (model.hasSamePolicyFields(policy)) {
+            throw new CommandException(MESSAGE_DUPLICATE_POLICY);
+        }
+
         model.addPolicy(policy);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(policy)));
     }
