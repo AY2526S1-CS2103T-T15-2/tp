@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.PolicyFileParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
@@ -148,7 +149,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds policies from a file to the address book.
      * Policies are assigned unique ids upon insertion.
      */
-    public void addPolicyFile(Path filePath) throws IOException {
+    public void addPolicyFile(Path filePath) throws IOException, ParseException {
         List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(filePath);
         for (UnassignedPolicy unassignedPolicy: unassignedPolicies) {
             PolicyId policyId = generateUniquePolicyId();

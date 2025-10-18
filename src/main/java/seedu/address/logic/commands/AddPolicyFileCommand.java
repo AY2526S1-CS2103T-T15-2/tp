@@ -7,12 +7,13 @@ import java.nio.file.Path;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
  * Adds multiple policies from a file.
  */
-public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
+public non-sealed class AddPolicyFileCommand extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policies added from file: %1$s";
 
@@ -21,9 +22,9 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
     private final Path toAdd;
 
     /**
-     * Creates an AddPolicyCommandMultiple to add policies from a {@code Path}
+     * Creates an AddPolicyFileCommand to add policies from a {@code Path}
      */
-    public AddPolicyCommandMultiple(Path filePath) {
+    public AddPolicyFileCommand(Path filePath) {
         requireNonNull(filePath);
         toAdd = filePath;
     }
@@ -36,6 +37,8 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
             model.addPolicyFile(toAdd);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IOEXCEPTION, e.getMessage()), e);
+        } catch (ParseException e) {
+            throw new CommandException(e.getMessage(), e);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
@@ -48,11 +51,11 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddPolicyCommandMultiple)) {
+        if (!(other instanceof AddPolicyFileCommand)) {
             return false;
         }
 
-        AddPolicyCommandMultiple otherAddPolicyCommand = (AddPolicyCommandMultiple) other;
+        AddPolicyFileCommand otherAddPolicyCommand = (AddPolicyFileCommand) other;
         return toAdd.equals(otherAddPolicyCommand.toAdd);
     }
 

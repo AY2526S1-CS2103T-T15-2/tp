@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPolicyCommand;
-import seedu.address.logic.commands.AddPolicyCommandMultiple;
+import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.AddPolicyCommandType;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
@@ -46,7 +46,7 @@ public class AddPolicyCommandParserTest {
 
         // file option
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_PATH_A_DESC,
-                new AddPolicyCommandMultiple(POLICY_PATH_A));
+                new AddPolicyFileCommand(POLICY_PATH_A));
     }
 
     @Test

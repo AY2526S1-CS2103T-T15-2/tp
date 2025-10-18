@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -130,7 +131,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPolicyFile(Path filePath) throws IOException {
+    public void addPolicyFile(Path filePath) throws IOException, ParseException {
         addressBook.addPolicyFile(filePath);
         updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
     }

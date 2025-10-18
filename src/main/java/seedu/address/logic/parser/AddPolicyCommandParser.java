@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPolicyCommand;
-import seedu.address.logic.commands.AddPolicyCommandMultiple;
+import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.AddPolicyCommandType;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.PolicyDetails;
@@ -44,7 +44,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
                 Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get());
 
-                return new AddPolicyCommandMultiple(filePath);
+                return new AddPolicyFileCommand(filePath);
             }
         }
 

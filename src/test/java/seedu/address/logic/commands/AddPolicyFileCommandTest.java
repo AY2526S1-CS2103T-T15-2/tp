@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -19,7 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class AddPolicyCommandMultipleTest {
+public class AddPolicyFileCommandTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "PolicyFileParserTest");
 
@@ -27,23 +26,23 @@ public class AddPolicyCommandMultipleTest {
 
     @Test
     public void constructor_nullPolicy_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddPolicyCommandMultiple(null));
+        assertThrows(NullPointerException.class, () -> new AddPolicyFileCommand(null));
     }
 
     @Test
     public void execute_missingFile_throwsCommandException() {
         Path path = TEST_DATA_FOLDER.resolve("nonexistentPolicyFile.txt");
-        AddPolicyCommandMultiple addPolicyCommand = new AddPolicyCommandMultiple(path);
+        AddPolicyFileCommand addPolicyCommand = new AddPolicyFileCommand(path);
 
-        IOException exception = null;
+        Exception exception = null;
         try {
             PolicyFileParser.readFile(path);
             fail();
-        } catch (IOException e) {
+        } catch (Exception e) {
             exception = e;
         }
 
-        String expectedMessage = String.format(AddPolicyCommandMultiple.MESSAGE_IOEXCEPTION, exception.getMessage());
+        String expectedMessage = String.format(AddPolicyFileCommand.MESSAGE_IOEXCEPTION, exception.getMessage());
 
         assertCommandFailure(addPolicyCommand, model, expectedMessage);
     }
@@ -52,14 +51,14 @@ public class AddPolicyCommandMultipleTest {
     public void equals() {
         Path path = Path.of("example");
         Path otherPath = Path.of("different");
-        AddPolicyCommandMultiple addPolicyCommand = new AddPolicyCommandMultiple(path);
-        AddPolicyCommandMultiple addPolicyCommandOther = new AddPolicyCommandMultiple(otherPath);
+        AddPolicyFileCommand addPolicyCommand = new AddPolicyFileCommand(path);
+        AddPolicyFileCommand addPolicyCommandOther = new AddPolicyFileCommand(otherPath);
 
         // same object -> returns true
         assertTrue(addPolicyCommand.equals(addPolicyCommand));
 
         // same values -> returns true
-        AddPolicyCommandMultiple addPolicyCommandCopy = new AddPolicyCommandMultiple(path);
+        AddPolicyFileCommand addPolicyCommandCopy = new AddPolicyFileCommand(path);
         assertTrue(addPolicyCommand.equals(addPolicyCommandCopy));
 
         // different types -> returns false
@@ -75,8 +74,8 @@ public class AddPolicyCommandMultipleTest {
     @Test
     public void toStringMethod() {
         Path path = Path.of("example");
-        AddPolicyCommandMultiple addPolicyCommand = new AddPolicyCommandMultiple(path);
-        String expected = AddPolicyCommandMultiple.class.getCanonicalName() + "{toAdd=" + path + "}";
+        AddPolicyFileCommand addPolicyCommand = new AddPolicyFileCommand(path);
+        String expected = AddPolicyFileCommand.class.getCanonicalName() + "{toAdd=" + path + "}";
         assertEquals(expected, addPolicyCommand.toString());
     }
 }

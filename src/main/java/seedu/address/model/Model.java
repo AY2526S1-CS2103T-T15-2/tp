@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -112,7 +113,7 @@ public interface Model {
      * Adds policies from the given file.
      * Every {@code policy} must not already exist in the address book.
      */
-    void addPolicyFile(Path filePath) throws IOException;
+    void addPolicyFile(Path filePath) throws IOException, ParseException;
 
     /**
      * Replaces the given policy {@code target} with {@code editedPolicy}.
