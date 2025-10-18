@@ -25,8 +25,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPolicyCommand;
-import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.AddPolicyCommandType;
+import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyName;
