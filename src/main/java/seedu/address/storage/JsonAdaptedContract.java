@@ -25,6 +25,7 @@ public class JsonAdaptedContract {
     private final String nric;
     private final String pId;
     private final String dateSigned;
+    private final String expiryDate;
 
     /**
      * Constructs a {@code JsonAdaptedContract} with the given contract details.
@@ -32,12 +33,14 @@ public class JsonAdaptedContract {
     @JsonCreator
     public JsonAdaptedContract(@JsonProperty("cId") String cId, @JsonProperty("name") String name,
                                @JsonProperty("nric") String nric, @JsonProperty("pId") String pId,
-                               @JsonProperty("dateSigned") String dateSigned) {
+                               @JsonProperty("dateSigned") String dateSigned,
+                               @JsonProperty("expiryDate") String expiryDate) {
         this.cId = cId;
         this.name = name;
         this.nric = nric;
         this.pId = pId;
         this.dateSigned = dateSigned;
+        this.expiryDate = expiryDate;
     }
 
     /**
@@ -49,6 +52,7 @@ public class JsonAdaptedContract {
         nric = source.getNric().toString();
         pId = source.getPId().toString();
         dateSigned = source.getDate().toString();
+        expiryDate = source.getExpiryDate().toString();
     }
 
     /**
@@ -101,6 +105,13 @@ public class JsonAdaptedContract {
             throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
         }
         final LocalDate modelDateSigned = LocalDate.parse(dateSigned);
-        return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned);
+
+        try {
+            LocalDate.parse(expiryDate);
+        } catch (Exception e) {
+            throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
+        }
+        final LocalDate modelExpiryDate = LocalDate.parse(expiryDate);
+        return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned, modelExpiryDate);
     }
 }

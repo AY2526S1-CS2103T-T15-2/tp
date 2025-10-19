@@ -114,7 +114,8 @@ public class TypicalData {
             ALICE.getName(),
             ALICE.getNric(),
             LIFE.getId(),
-            LocalDate.parse("2023-01-01")
+            LocalDate.parse("2023-01-01"),
+            LocalDate.parse("2025-01-01")
     );
 
     public static final Contract CONTRACT_B = new Contract(
@@ -122,7 +123,8 @@ public class TypicalData {
             BENSON.getName(),
             BENSON.getNric(),
             HEALTH.getId(),
-            LocalDate.parse("2023-02-01")
+            LocalDate.parse("2023-02-01"),
+            LocalDate.parse("2025-02-01")
     );
 
     public static final Contract CONTRACT_C = new Contract(
@@ -130,7 +132,8 @@ public class TypicalData {
             CARL.getName(),
             CARL.getNric(),
             PROPERTY.getId(),
-            LocalDate.parse("2023-03-01")
+            LocalDate.parse("2023-03-01"),
+            LocalDate.parse("2025-03-01")
     );
 
     // Spare contracts not added into TypicalAddressBook
@@ -139,7 +142,8 @@ public class TypicalData {
             DANIEL.getName(),
             DANIEL.getNric(),
             LIFE.getId(),
-            LocalDate.parse("2023-04-01")
+            LocalDate.parse("2023-04-01"),
+            LocalDate.parse("2025-04-01")
     );
 
     public static final Contract CONTRACT_E = new Contract(
@@ -147,7 +151,8 @@ public class TypicalData {
             ELLE.getName(),
             ELLE.getNric(),
             HEALTH.getId(),
-            LocalDate.parse("2023-05-01")
+            LocalDate.parse("2023-05-01"),
+            LocalDate.parse("2025-05-01")
     );
 
     private TypicalData() {} // prevents instantiation
