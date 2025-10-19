@@ -11,7 +11,7 @@ import seedu.address.model.person.Nric;
  */
 public class Appointment {
 
-    private final AppointmentId aId;;
+    private final AppointmentId aId;
     private final Nric nric;
     private final LocalDate appDate;
     private final AppointmentDetails details;

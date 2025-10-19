@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -37,7 +37,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_DETAILS + "Discuss coverage";
 
     public static final String MESSAGE_SUCCESS = "New appointment added with the following ID: %s";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT= "This appointment already exists in iCon";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in iCon";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist in iCon";
 
     private Appointment toAdd;

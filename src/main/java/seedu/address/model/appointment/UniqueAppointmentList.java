@@ -16,8 +16,8 @@ import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
  * An appointment is considered unique by comparing using {@code Appointment#isSameAppointment(Appointment)}.
  * As such, adding and updating of appointments uses Appointment#isSameAppointment(Appointment) for equality to ensure
  * that the appointment being added or updated is unique in terms of identity in the UniqueAppointmentList.
- * However, the removal of an appointment uses Appointment#equals(Object) to ensure that the appointment with exactly the
- * same fields will be removed.
+ * However, the removal of an appointment uses Appointment#equals(Object) to ensure that the appointment with exactly
+ * the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *

@@ -30,7 +30,8 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         if (!arePrefixesPresent(arguMultimap, PREFIX_NRIC, PREFIX_DATE, PREFIX_DETAILS)
                 || !arguMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_DATE, PREFIX_DETAILS);
