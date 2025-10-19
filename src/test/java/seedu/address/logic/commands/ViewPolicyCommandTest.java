@@ -63,7 +63,7 @@ public class ViewPolicyCommandTest {
         // null -> returns false
         assertFalse(viewFirstPolicyCommand.equals(null));
 
-        // different person -> returns false
+        // different view command -> returns false
         assertFalse(viewFirstPolicyCommand.equals(viewSecondPolicyCommand));
 
         // both null predicates

@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
                 showPersonListPanel();
             } else if (isPolicyFeedback(feedback)) {
                 showPolicyListPanel();
-            } else if (feedback.contains("viewing all contracts")) {
+            } else if (isContractFeedback(feedback)) {
                 showContractListPanel();
             }
 
@@ -246,6 +246,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private boolean isPolicyFeedback(String feedback) {
         return Stream.of("viewing all policies", "viewing policy with id", "failed to find any policies")
+                        .anyMatch(feedback::contains);
+    }
+
+    private boolean isContractFeedback(String feedback) {
+        return Stream.of("viewing all contracts", "viewing contract with id", "failed to find any contracts")
                         .anyMatch(feedback::contains);
     }
 }
