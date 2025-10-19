@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
@@ -26,9 +27,9 @@ public class AddContractCommandParser implements Parser<AddContractCommand> {
      */
     public AddContractCommand parse(String args) throws ParseException {
         ArgumentMultimap arguMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY);
 
-        if (!arePrefixesPresent(arguMultimap, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE)
+        if (!arePrefixesPresent(arguMultimap, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY)
                 || !arguMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE));
         }
@@ -37,8 +38,9 @@ public class AddContractCommandParser implements Parser<AddContractCommand> {
         PolicyId pid = ParserUtil.parsePolicyId(arguMultimap.getValue(PREFIX_PID).get());
         Nric nric = ParserUtil.parseNric(arguMultimap.getValue(PREFIX_NRIC).get());
         LocalDate date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
+        LocalDate expiry = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_EXPIRY).get());
 
-        Contract contract = new Contract(nric, pid, date);
+        Contract contract = new Contract(nric, pid, date, expiry);
 
         return new AddContractCommand(contract);
     }
