@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -19,6 +20,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Policy> PREDICATE_SHOW_ALL_POLICIES = unused -> true;
     Predicate<Contract> PREDICATE_SHOW_ALL_CONTRACTS = unused -> true;
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -194,4 +196,39 @@ public interface Model {
      * Generates a policy id not present in the currentaddress book.
      */
     PolicyId generateUniquePolicyId();
+
+    /**
+     * Returns true if an Appointment with the same identity as {@code appointment} exists in the address book.
+     */
+    boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Removes the given appointment.
+     * The appointment must exist in the address book.
+     */
+    void removeAppointment(Appointment target);
+
+    /**
+     * Adds the given appointment.
+     * {@code appointment} must not already exist in the address book.
+     */
+    void addAppointment(Appointment appointment);
+
+    /**
+     * Replaces the given appointment {@code target} with {@code editedAppointment}.
+     * {@code target} must exist in the address book.
+     * The appointment identity of {@code editedAppointment} must not be the same as another existing appointment
+     * in the address book.
+     */
+    void setAppointment(Appointment target, Appointment editedAppointment);
+
+    /** Returns an unmodifiable view of the filtered appointment list */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
+    /**
+     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
 }

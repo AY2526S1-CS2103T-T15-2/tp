@@ -12,6 +12,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -225,5 +227,20 @@ public class ParserUtil {
             throw new ParseException("Date should be in the format yyyy-MM-dd");
         }
         return parsedDate;
+    }
+
+    /**
+     * Parses a {@code String appointmentDetails} into an {@code AppointmentDetails}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointmentDetails} is invalid.
+     */
+    public static AppointmentDetails parseAppointmentDetails(String appointmentDetails) throws ParseException {
+        requireNonNull(appointmentDetails);
+        String trimmedAppointmentDetails = appointmentDetails.trim();
+        if (!AppointmentDetails.isValidAppointmentDetails(trimmedAppointmentDetails)) {
+            throw new ParseException(AppointmentDetails.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentDetails(trimmedAppointmentDetails);
     }
 }
