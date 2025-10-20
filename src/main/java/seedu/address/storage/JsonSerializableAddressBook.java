@@ -40,10 +40,19 @@ class JsonSerializableAddressBook {
                                        @JsonProperty("policies") List<JsonAdaptedPolicy> policies,
                                        @JsonProperty("contracts") List<JsonAdaptedContract> contracts,
                                        @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
-        this.persons.addAll(persons);
-        this.policies.addAll(policies);
-        this.contracts.addAll(contracts);
-        this.appointments.addAll(appointments);
+        if (persons != null) {
+            this.persons.addAll(persons);
+        }
+        if (policies != null) {
+            this.policies.addAll(policies);
+        }
+        if (contracts != null) {
+            this.contracts.addAll(contracts);
+        }
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
+        }
+
     }
 
     /**

@@ -49,7 +49,7 @@ public class ContractTest {
         assertFalse(contract.getCId().equals(editedContract.getCId()));
 
         // id differs in case, all other attributes same -> returns false
-        editedContract = editedContract = new Contract(
+        editedContract = new Contract(
                 new ContractId("ABCDEF"),
                 new Name("Test"),
                 new Nric("S1234567A"),

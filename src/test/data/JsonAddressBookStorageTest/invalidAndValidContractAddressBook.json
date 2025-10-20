@@ -24,5 +24,6 @@
     "nric": "S1234567B",
     "pId": "abcdef",
     "dateSigned": "2023-10-12"
-  } ]
+  } ],
+  "appointments": []
 }

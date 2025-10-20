@@ -83,6 +83,10 @@ public class AddAppointmentCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getAId().toString()));
     }
 
+    public Appointment getAppointment() {
+        return toAdd;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

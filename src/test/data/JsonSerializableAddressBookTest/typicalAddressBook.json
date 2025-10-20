@@ -144,5 +144,21 @@
     "nric": "S1234567C",
     "pId" : "Abc123",
     "dateSigned" : "2023-03-01"
+  } ],
+  "appointments": [ {
+    "aId": "A1234A",
+    "nric": "S1234567A",
+    "appDate": "2025-01-01",
+    "details": "Placeholder details"
+  }, {
+    "aId": "ABC123",
+    "nric": "S1234567B",
+    "appDate": "1999-12-30",
+    "details": "Appointment details 123"
+  }, {
+    "aId": "123abc",
+    "nric": "S1234567C",
+    "appDate": "2025-01-01",
+    "details": "Placeholder details"
   } ]
 }
