@@ -18,12 +18,14 @@ public class ContractBuilder {
     public static final String DEFAULT_NRIC = "S1234567A";
     public static final String DEFAULT_POLICY_ID = "P1234A";
     public static final LocalDate DEFAULT_DATE = LocalDate.parse("2023-01-01");
+    public static final LocalDate DEFAULT_EXPIRY = LocalDate.parse("2024-01-01");
 
     private ContractId cId;
     private Name name;
     private Nric nric;
     private PolicyId pId;
     private LocalDate dateSigned;
+    private LocalDate expiry;
 
     /**
      * Creates a {@code ContractBuilder} with the default details.
@@ -34,6 +36,7 @@ public class ContractBuilder {
         nric = new Nric(DEFAULT_NRIC);
         pId = new PolicyId(DEFAULT_POLICY_ID);
         dateSigned = DEFAULT_DATE;
+        expiry = DEFAULT_EXPIRY;
     }
 
     /**
@@ -79,7 +82,15 @@ public class ContractBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ContractId} of the {@code Contract} that we are building.
+     */
+    public ContractBuilder withCId(String cId) {
+        this.cId = new ContractId(cId);
+        return this;
+    }
+
     public Contract build() {
-        return new Contract(cId, name, nric, pId, dateSigned);
+        return new Contract(cId, name, nric, pId, dateSigned, expiry);
     }
 }
