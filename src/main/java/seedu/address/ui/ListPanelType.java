@@ -7,5 +7,6 @@ public enum ListPanelType {
     CONTACT,
     POLICY,
     CONTRACT,
+    /** Type denoting no change to the currently shown list panel. */
     CURRENT,
 }
