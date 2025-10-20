@@ -6,13 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_INSERTION_ORDER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortContactCommand;
-import seedu.address.logic.commands.ViewContactCommand;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.PersonComparatorType;
 
 public class SortContactCommandParserTest {
