@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -156,6 +157,36 @@ public class ModelStub implements Model {
 
     @Override
     public List<PolicyId> generateUniquePolicyIds(int length) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void removeAppointment(Appointment target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
