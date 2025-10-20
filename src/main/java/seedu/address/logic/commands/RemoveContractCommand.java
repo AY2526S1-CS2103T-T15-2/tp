@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Removes a contract from iCon.
@@ -45,7 +46,8 @@ public class RemoveContractCommand extends Command {
             model.removeContract(contractToRemove);
             model.removeContractFromPerson(contractToRemove);
             model.removeContractFromPolicy(contractToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove.getCId()));
+            return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove.getCId()),
+                    ListPanelType.CONTRACT);
         } else {
             throw new CommandException(Messages.MESSAGE_CONTRACT_NOT_FOUND);
         }

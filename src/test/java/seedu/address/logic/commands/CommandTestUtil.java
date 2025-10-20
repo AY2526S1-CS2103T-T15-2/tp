@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains helper methods for testing commands.
@@ -96,8 +97,8 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            ListPanelType listPanelType, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, listPanelType);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
