@@ -7,6 +7,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
 import seedu.address.model.person.Person;
@@ -26,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueContractList contracts;
     private final UniquePolicyList policies;
+    private final UniqueAppointmentList appointments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -37,13 +40,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         contracts = new UniqueContractList();
-    }
-
-    /*
-    * Non-static init block for Policy list
-    */
-    {
         policies = new UniquePolicyList();
+        appointments = new UniqueAppointmentList();
     }
 
     public AddressBook() {
@@ -76,6 +74,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the appointment list with {@code appointments}.
+     * {@code appointments} must not contain duplicate appointments.
+     */
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments.setAppointments(appointments);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -84,6 +90,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
         setPolicies(newData.getPolicyList());
         setContracts(newData.getContractList());
+        setAppointments(newData.getAppointmentList());
     }
 
     //// person-level operations
@@ -203,6 +210,42 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePolicy(Policy key) {
         policies.remove(key);
+    }
+
+    /**
+     * Returns true if an appointment with the same id as {@code appointment} exists in the address book.
+     */
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(appointment);
+    }
+
+    /**
+     * Adds an appointment to the address book.
+     * The appointment must not already exist in the address book.
+     */
+    public void addAppointment(Appointment a) {
+        appointments.add(a);
+    }
+
+    /**
+     * Replaces the given appointment {@code target} in the list with {@code editedAppointment}.
+     * {@code target} must exist in the address book.
+     * The appointment id of {@code editedAppointment} must not be the same as another existing appointment
+     * in the address book.
+     */
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        requireNonNull(editedAppointment);
+
+        appointments.setAppointment(target, editedAppointment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeAppointment(Appointment key) {
+        appointments.remove(key);
     }
 
     /**
@@ -333,6 +376,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .add("persons", persons)
                 .add("policies", policies)
                 .add("contracts", contracts)
+                .add("appointments", appointments)
                 .toString();
     }
 
@@ -344,6 +388,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Policy> getPolicyList() {
         return policies.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Appointment> getAppointmentList() {
+        return appointments.asUnmodifiableObservableList();
     }
 
     @Override

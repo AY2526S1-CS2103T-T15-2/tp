@@ -1,5 +1,16 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_DATE_A;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_DATE_B;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_DETAILS_A;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_DETAILS_B;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_ID_A;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_ID_B;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_ID_C;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_ID_D;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_ID_E;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_NRIC_1;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_NRIC_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -25,8 +36,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDetails;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
@@ -114,7 +129,8 @@ public class TypicalData {
             ALICE.getName(),
             ALICE.getNric(),
             LIFE.getId(),
-            LocalDate.parse("2023-01-01")
+            LocalDate.parse("2023-01-01"),
+            LocalDate.parse("2025-01-01")
     );
 
     public static final Contract CONTRACT_B = new Contract(
@@ -122,7 +138,8 @@ public class TypicalData {
             BENSON.getName(),
             BENSON.getNric(),
             HEALTH.getId(),
-            LocalDate.parse("2023-02-01")
+            LocalDate.parse("2023-02-01"),
+            LocalDate.parse("2025-02-01")
     );
 
     public static final Contract CONTRACT_C = new Contract(
@@ -130,7 +147,8 @@ public class TypicalData {
             CARL.getName(),
             CARL.getNric(),
             PROPERTY.getId(),
-            LocalDate.parse("2023-03-01")
+            LocalDate.parse("2023-03-01"),
+            LocalDate.parse("2025-03-01")
     );
 
     // Spare contracts not added into TypicalAddressBook
@@ -139,7 +157,8 @@ public class TypicalData {
             DANIEL.getName(),
             DANIEL.getNric(),
             LIFE.getId(),
-            LocalDate.parse("2023-04-01")
+            LocalDate.parse("2023-04-01"),
+            LocalDate.parse("2025-04-01")
     );
 
     public static final Contract CONTRACT_E = new Contract(
@@ -147,8 +166,41 @@ public class TypicalData {
             ELLE.getName(),
             ELLE.getNric(),
             HEALTH.getId(),
-            LocalDate.parse("2023-05-01")
+            LocalDate.parse("2023-05-01"),
+            LocalDate.parse("2025-05-01")
     );
+
+    public static final Appointment APPOINTMENT_A = new Appointment(
+            new AppointmentId(VALID_APPOINTMENT_ID_A),
+            new Nric(VALID_APPOINTMENT_NRIC_1),
+            LocalDate.parse(VALID_APPOINTMENT_DATE_A),
+            new AppointmentDetails(VALID_APPOINTMENT_DETAILS_A)
+    );
+
+    public static final Appointment APPOINTMENT_B = new Appointment(
+            new AppointmentId(VALID_APPOINTMENT_ID_B),
+            new Nric(VALID_APPOINTMENT_NRIC_2),
+            LocalDate.parse(VALID_APPOINTMENT_DATE_B),
+            new AppointmentDetails(VALID_APPOINTMENT_DETAILS_B)
+    );
+
+    public static final Appointment APPOINTMENT_C = new Appointment(
+            new AppointmentId(VALID_APPOINTMENT_ID_C),
+            CARL.getNric(),
+            LocalDate.parse(VALID_APPOINTMENT_DATE_A),
+            new AppointmentDetails(VALID_APPOINTMENT_DETAILS_A)
+    );
+
+    // Manually added - Appointment's details found in {@code AppointmentCommandTestUtil} (not in Typical AddressBook)
+    public static final Appointment APPOINTMENT_D = new AppointmentBuilder().withId(VALID_APPOINTMENT_ID_D)
+            .withNric(VALID_NRIC_BOB)
+            .withDate(LocalDate.parse(VALID_APPOINTMENT_DATE_A))
+            .withDetails(VALID_APPOINTMENT_DETAILS_A).build();
+    public static final Appointment APPOINTMENT_E = new AppointmentBuilder().withId(VALID_APPOINTMENT_ID_E)
+            .withNric(VALID_NRIC_AMY)
+            .withDate(LocalDate.parse(VALID_APPOINTMENT_DATE_B))
+            .withDetails(VALID_APPOINTMENT_DETAILS_B).build();
+
 
     private TypicalData() {} // prevents instantiation
 
@@ -165,6 +217,9 @@ public class TypicalData {
         }
         for (Contract contract : getTypicalContracts()) {
             ab.addContract(contract);
+        }
+        for (Appointment appointment : getTypicalAppointments()) {
+            ab.addAppointment(appointment);
         }
         return ab;
     }
@@ -185,5 +240,9 @@ public class TypicalData {
 
     public static List<Contract> getTypicalContracts() {
         return new ArrayList<>(Arrays.asList(CONTRACT_A, CONTRACT_B, CONTRACT_C));
+    }
+
+    public static List<Appointment> getTypicalAppointments() {
+        return new ArrayList<>(Arrays.asList(APPOINTMENT_A, APPOINTMENT_B, APPOINTMENT_C));
     }
 }

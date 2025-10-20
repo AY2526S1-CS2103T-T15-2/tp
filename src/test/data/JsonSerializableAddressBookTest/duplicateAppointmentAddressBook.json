@@ -1,0 +1,16 @@
+{
+  "persons": [],
+  "policies": [],
+  "contracts": [],
+  "appointments": [ {
+    "aId": "A1234A",
+    "nric": "S1234567B",
+    "appDate": "2025-10-10",
+    "details": "Details"
+  }, {
+    "aId": "A1234A",
+    "nric": "S1234567B",
+    "appDate": "2025-10-10",
+    "details": "Details"
+  } ]
+}

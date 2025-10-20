@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
@@ -19,6 +20,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.PolicyId;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Adds a contract to iCon.
@@ -33,10 +35,12 @@ public class AddContractCommand extends Command {
             + PREFIX_PID + "POLICY_ID "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_DATE + "DATE_SIGNED "
+            + PREFIX_EXPIRY + "EXPIRY_DATE"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PID + "68g354f7"
             + PREFIX_NRIC + "T0123456A "
-            + PREFIX_DATE + "2025-01-13 ";
+            + PREFIX_DATE + "2025-01-13 "
+            + PREFIX_EXPIRY + "2027-01-13 ";
 
     public static final String MESSAGE_SUCCESS = "New contract added with the following ID: %s";
     public static final String MESSAGE_DUPLICATE_CONTRACT = "This contract already exists in iCon";
@@ -73,9 +77,10 @@ public class AddContractCommand extends Command {
         PolicyId policyId = toAdd.getPId();
         LocalDate date = toAdd.getDate();
         ContractId contractId = toAdd.getCId();
+        LocalDate expiry = toAdd.getExpiryDate();
 
         // initialise new contract
-        toAdd = new Contract(contractId, name, nric, policyId, date);
+        toAdd = new Contract(contractId, name, nric, policyId, date, expiry);
 
         if (model.hasContract(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTRACT);
@@ -84,7 +89,7 @@ public class AddContractCommand extends Command {
         model.addContract(toAdd);
         model.addContractToPerson(toAdd);
         model.addContractToPolicy(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()), ListPanelType.CONTRACT);
     }
 
     @Override

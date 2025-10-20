@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -200,14 +199,11 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            String feedback = commandResult.getFeedbackToUser().toLowerCase();
-
-            if (feedback.contains("listed all persons") || feedback.contains("persons listed")) {
-                showPersonListPanel();
-            } else if (isPolicyFeedback(feedback)) {
-                showPolicyListPanel();
-            } else if (feedback.contains("viewing all contracts")) {
-                showContractListPanel();
+            switch (commandResult.listPanelType) {
+            case CONTACT -> showPersonListPanel();
+            case POLICY -> showPolicyListPanel();
+            case CONTRACT -> showContractListPanel();
+            default -> { }
             }
 
             if (commandResult.isShowHelp()) {
@@ -242,10 +238,5 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.setVisible(false);
         policyListPanelPlaceholder.setVisible(false);
         contractListPanelPlaceholder.setVisible(true);
-    }
-
-    private boolean isPolicyFeedback(String feedback) {
-        return Stream.of("viewing all policies", "viewing policy with id", "failed to find any policies")
-                        .anyMatch(feedback::contains);
     }
 }
