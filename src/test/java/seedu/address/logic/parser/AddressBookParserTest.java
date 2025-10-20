@@ -21,13 +21,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditContactCommand;
+import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -64,9 +65,9 @@ public class AddressBookParserTest {
     public void parseCommand_editContact() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -113,6 +114,13 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_addAppointment() throws Exception {
+        assertTrue(parser.parseCommand(
+                AddAppointmentCommand.COMMAND_WORD + " ic:S1234567A dt:2024-12-12 d:Details")
+                instanceof AddAppointmentCommand);
     }
 
     @Test

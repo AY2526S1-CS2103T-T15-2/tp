@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -129,7 +130,8 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
-                + ", policies=" + addressBook.getPolicyList() + ", contracts=" + addressBook.getContractList() + "}";
+                + ", policies=" + addressBook.getPolicyList() + ", contracts=" + addressBook.getContractList()
+                + ", appointments=" + addressBook.getAppointmentList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -169,6 +171,7 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Policy> policies = FXCollections.observableArrayList();
         private final ObservableList<Contract> contracts = FXCollections.observableArrayList();
+        private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -187,6 +190,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Contract> getContractList() {
             return contracts;
+        }
+
+        @Override
+        public ObservableList<Appointment> getAppointmentList() {
+            return appointments;
         }
     }
 

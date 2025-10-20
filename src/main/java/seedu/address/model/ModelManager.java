@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -28,9 +29,10 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
     private final FilteredList<Policy> filteredPolicies;
     private final FilteredList<Contract> filteredContracts;
-    private final SortedList<Person> sortedPersons;
+    private final FilteredList<Appointment> filteredAppointments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,9 +45,10 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
         filteredPolicies = new FilteredList<>(this.addressBook.getPolicyList());
         filteredContracts = new FilteredList<>(this.addressBook.getContractList());
-        sortedPersons = new SortedList<>(filteredPersons);
+        filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }
 
     public ModelManager() {
@@ -118,6 +121,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return addressBook.hasAppointment(appointment);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -125,6 +134,11 @@ public class ModelManager implements Model {
     @Override
     public void removePolicy(Policy policy) {
         addressBook.removePolicy(policy);
+    }
+
+    @Override
+    public void removeAppointment(Appointment appointment) {
+        addressBook.removeAppointment(appointment);
     }
 
     @Override
@@ -142,7 +156,12 @@ public class ModelManager implements Model {
     @Override
     public void addPolicies(List<Policy> policies) {
         addressBook.addPolicies(policies);
-        updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        addressBook.addAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override
@@ -157,6 +176,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPolicy);
 
         addressBook.setPolicy(target, editedPolicy);
+    }
+
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        requireAllNonNull(target, editedAppointment);
+
+        addressBook.setAppointment(target, editedAppointment);
     }
 
     @Override
@@ -257,6 +283,15 @@ public class ModelManager implements Model {
         return filteredContracts;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Appointment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return filteredAppointments;
+    }
+
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
@@ -268,6 +303,12 @@ public class ModelManager implements Model {
     public void updateFilteredPolicyList(Predicate<Policy> predicate) {
         requireNonNull(predicate);
         filteredPolicies.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        filteredAppointments.setPredicate(predicate);
     }
 
     @Override
@@ -297,6 +338,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredPolicies.equals(otherModelManager.filteredPolicies)
-                && filteredContracts.equals(otherModelManager.filteredContracts);
+                && filteredContracts.equals(otherModelManager.filteredContracts)
+                && filteredAppointments.equals(otherModelManager.filteredAppointments);
     }
 }
