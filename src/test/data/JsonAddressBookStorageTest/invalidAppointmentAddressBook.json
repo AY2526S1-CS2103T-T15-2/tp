@@ -1,0 +1,18 @@
+{
+  "persons": [  {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "nric": "S1234567B",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "owesMoney", "friends" ]
+  } ],
+  "policies": [],
+  "contracts": [],
+  "appointments": [ {
+    "aId": "invalid id",
+    "nric": "S1234567B",
+    "appDate": "2025-10-10",
+    "details": "Details"
+  } ]
+}

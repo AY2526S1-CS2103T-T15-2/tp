@@ -5,8 +5,10 @@ package seedu.address.logic.parser;
  */
 public class CliSyntax {
 
-    /* Prefix definitions */
+    /* Preamble definitions */
     public static final String PREAMBLE_ALL = "-a";
+
+    /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n:");
     public static final Prefix PREFIX_PHONE = new Prefix("p:");
     public static final Prefix PREFIX_NRIC = new Prefix("ic:");

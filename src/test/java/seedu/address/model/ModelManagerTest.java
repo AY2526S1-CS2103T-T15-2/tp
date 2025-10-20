@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
+import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
+import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
 import static seedu.address.testutil.TypicalData.BENSON;
 import static seedu.address.testutil.TypicalData.CONTRACT_A;
 import static seedu.address.testutil.TypicalData.CONTRACT_B;
@@ -150,6 +152,31 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasAppointment_appointmentNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasAppointment(APPOINTMENT_A));
+    }
+
+    @Test
+    public void hasAppointment_appointmentInAddressBook_returnsTrue() {
+        modelManager.addAppointment(APPOINTMENT_A);
+        assertTrue(modelManager.hasAppointment(APPOINTMENT_A));
+    }
+
+    @Test
+    public void removeAppointment_appointmentInAddressBook_returnsFalse() {
+        modelManager.addAppointment(APPOINTMENT_A);
+        modelManager.removeAppointment(APPOINTMENT_A);
+        assertFalse(modelManager.hasAppointment(APPOINTMENT_A));
+    }
+
+    @Test
+    public void setAppointment_appointmentInAddressBook_returnsTrue() {
+        modelManager.addAppointment(APPOINTMENT_A);
+        modelManager.setAppointment(APPOINTMENT_A, APPOINTMENT_A);
+        assertTrue(modelManager.hasAppointment(APPOINTMENT_A));
+    }
+
+    @Test
     public void hasContract_policyNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasContract(CONTRACT_D));
     }
@@ -170,6 +197,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getFilteredAppointmentList().remove(0));
+    }
+
+    @Test
     public void updateFilteredContractList_modifyList_throwsUnsupportedOperationException() {
         modelManager.addContract(CONTRACT_A);
         modelManager.addContract(CONTRACT_B);
@@ -181,6 +214,22 @@ public class ModelManagerTest {
     @Test
     public void updatedFilteredContractList_nullPredicate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.updateFilteredContractList(null));
+    }
+
+    @Test
+    public void updateFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
+        modelManager.addAppointment(APPOINTMENT_A);
+        modelManager.addAppointment(APPOINTMENT_B);
+        modelManager.updateFilteredAppointmentList(x -> x.equals(APPOINTMENT_A));
+        assertEquals(1, modelManager.getFilteredAppointmentList().size());
+        assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getFilteredAppointmentList().remove(0));
+    }
+
+    @Test
+    public void updatedFilteredAppointmentList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                modelManager.updateFilteredAppointmentList(null));
     }
 
     @Test
@@ -217,6 +266,10 @@ public class ModelManagerTest {
 
         // different filteredContractList -> returns false
         modelManager.updateFilteredContractList(x -> x.equals(CONTRACT_A));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different filteredAppointmentList -> returns false
+        modelManager.updateFilteredAppointmentList(x -> x.equals(APPOINTMENT_A));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
