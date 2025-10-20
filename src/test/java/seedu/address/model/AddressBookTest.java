@@ -26,7 +26,6 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
-import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalData;
 

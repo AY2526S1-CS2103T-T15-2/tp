@@ -21,8 +21,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentTest;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -200,8 +198,8 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> modelManager.getFilteredAppointmentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getFilteredAppointmentList().remove(0));
     }
 
     @Test
@@ -224,14 +222,14 @@ public class ModelManagerTest {
         modelManager.addAppointment(APPOINTMENT_B);
         modelManager.updateFilteredAppointmentList(x -> x.equals(APPOINTMENT_A));
         assertEquals(1, modelManager.getFilteredAppointmentList().size());
-        assertThrows(UnsupportedOperationException.class,
-                () -> modelManager.getFilteredAppointmentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getFilteredAppointmentList().remove(0));
     }
 
     @Test
     public void updatedFilteredAppointmentList_nullPredicate_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> modelManager.updateFilteredAppointmentList(null));
+        assertThrows(NullPointerException.class, () ->
+                modelManager.updateFilteredAppointmentList(null));
     }
 
     @Test

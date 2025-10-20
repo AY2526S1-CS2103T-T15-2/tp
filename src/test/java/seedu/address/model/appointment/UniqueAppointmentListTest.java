@@ -45,20 +45,20 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void setAppointment_nullTargetAppointment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniqueAppointmentList.setAppointment(null, APPOINTMENT_A));
+        assertThrows(NullPointerException.class, () ->
+                uniqueAppointmentList.setAppointment(null, APPOINTMENT_A));
     }
 
     @Test
     public void setAppointment_nullEditedAppointment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniqueAppointmentList.setAppointment(APPOINTMENT_A, null));
+        assertThrows(NullPointerException.class, () ->
+                uniqueAppointmentList.setAppointment(APPOINTMENT_A, null));
     }
 
     @Test
     public void setAppointment_targetAppointmentNotInList_throwsAppointmentNotFoundException() {
-        assertThrows(AppointmentNotFoundException.class,
-                () -> uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_A));
+        assertThrows(AppointmentNotFoundException.class, () ->
+                uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_A));
     }
 
     @Test
@@ -98,8 +98,8 @@ public class UniqueAppointmentListTest {
     public void setAppointment_editedAppointmentHasNonUniqueIdentity_throwsDuplicateAppointmentException() {
         uniqueAppointmentList.add(APPOINTMENT_A);
         uniqueAppointmentList.add(APPOINTMENT_B);
-        assertThrows(DuplicateAppointmentException.class,
-                () -> uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_B));
+        assertThrows(DuplicateAppointmentException.class, () ->
+                uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_B));
     }
 
     @Test
@@ -122,8 +122,8 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void setAppointments_nullUniqueAppointmentList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniqueAppointmentList.setAppointments((UniqueAppointmentList) null));
+        assertThrows(NullPointerException.class, () ->
+                uniqueAppointmentList.setAppointments((UniqueAppointmentList) null));
     }
 
     @Test
@@ -137,8 +137,8 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void setAppointments_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniqueAppointmentList.setAppointments((java.util.List<Appointment>) null));
+        assertThrows(NullPointerException.class, () ->
+                uniqueAppointmentList.setAppointments((java.util.List<Appointment>) null));
     }
 
     @Test
@@ -152,14 +152,14 @@ public class UniqueAppointmentListTest {
     @Test
     public void setAppointments_listWithDuplicateAppointments_throwsDuplicateAppointmentException() {
         java.util.List<Appointment> listWithDuplicateAppointments = java.util.List.of(APPOINTMENT_A, APPOINTMENT_A);
-        assertThrows(DuplicateAppointmentException.class, ()
-                -> uniqueAppointmentList.setAppointments(listWithDuplicateAppointments));
+        assertThrows(DuplicateAppointmentException.class, () ->
+                uniqueAppointmentList.setAppointments(listWithDuplicateAppointments));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueAppointmentList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniqueAppointmentList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

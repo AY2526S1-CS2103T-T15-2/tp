@@ -19,6 +19,7 @@ import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ListPanelType;
 
 
 public class AddAppointmentCommandTest {
@@ -84,6 +85,7 @@ public class AddAppointmentCommandTest {
         // crude test for now
         assertCommandSuccess(new AddAppointmentCommand(appointmentWithValidNric),
                 modelStub, String.format(AddAppointmentCommand.MESSAGE_SUCCESS, appointmentId.toString()),
+                ListPanelType.CURRENT,
                 modelStub);
     }
 

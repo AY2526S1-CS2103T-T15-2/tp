@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_D;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_E;

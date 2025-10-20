@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DATE_DESC_A;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DATE_DESC_B;
+import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DETAILS_DESC_A;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DETAILS_DESC_B;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_NRIC_DESC_A;
-import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DETAILS_DESC_A;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_NRIC_DESC_B;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.INVALID_APPOINTMENT_DATE_DESC;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.INVALID_APPOINTMENT_DETAILS_DESC;
@@ -17,7 +17,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,6 @@ import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
-import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.person.Nric;
 import seedu.address.testutil.AppointmentBuilder;
 
@@ -56,7 +54,7 @@ public class AddAppointmentCommandParserTest {
 
     @Test
     public void parse_repeatedValue_failure() {
-    String validExpectedAppointmentString = APPOINTMENT_NRIC_DESC_A + APPOINTMENT_DATE_DESC_A
+        String validExpectedAppointmentString = APPOINTMENT_NRIC_DESC_A + APPOINTMENT_DATE_DESC_A
             + APPOINTMENT_DETAILS_DESC_A;
 
         // multiple nrics
