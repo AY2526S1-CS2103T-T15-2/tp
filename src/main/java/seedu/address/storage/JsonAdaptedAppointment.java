@@ -73,12 +73,12 @@ public class JsonAdaptedAppointment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDate.class.getSimpleName()));
         }
+        final LocalDate modelDate;
         try {
-            LocalDate.parse(appDate);
+            modelDate = LocalDate.parse(appDate);
         } catch (Exception e) {
             throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
         }
-        final LocalDate modelDate = LocalDate.parse(appDate);
 
         if (details == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
