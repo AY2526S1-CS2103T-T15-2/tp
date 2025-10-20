@@ -6,7 +6,6 @@ package seedu.address.logic.parser;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final String PREAMBLE_ALL = "-a";
     public static final Prefix PREFIX_NAME = new Prefix("n:");
     public static final Prefix PREFIX_PHONE = new Prefix("p:");
     public static final Prefix PREFIX_NRIC = new Prefix("ic:");
@@ -18,5 +17,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_PID = new Prefix("p:");
     public static final Prefix PREFIX_DATE = new Prefix("dt:");
     public static final Prefix PREFIX_EXPIRY = new Prefix("e:");
+
+    /* Flag definitions */
+    public static final String FLAG_ALL = "-a";
+    public static final String FLAG_ALPHABETICAL_ORDER = "-a";
+    public static final String FLAG_INSERTION_ORDER = "-i";
 
 }
