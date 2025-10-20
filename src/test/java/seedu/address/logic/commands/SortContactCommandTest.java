@@ -22,7 +22,7 @@ public class SortContactCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() {
+    public void execute_sortByComparatorType_successful() {
         ModelStubAcceptingComparator modelStub = new ModelStubAcceptingComparator();
 
         CommandResult commandResult = new SortContactCommand(PersonComparatorType.UNORDERED).execute(modelStub);
