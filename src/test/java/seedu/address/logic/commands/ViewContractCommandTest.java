@@ -19,7 +19,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
-
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -38,7 +37,8 @@ public class ViewContractCommandTest {
 
     @Test
     public void execute_viewIsNotFiltered_showsSameView() {
-        assertCommandSuccess(new ViewContractCommand(), model, ViewContractCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+        assertCommandSuccess(new ViewContractCommand(), model, ViewContractCommand.MESSAGE_SUCCESS_ALL,
+                ListPanelType.CONTRACT, expectedModel);
     }
 
     @Test
