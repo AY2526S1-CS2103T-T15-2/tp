@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -17,10 +16,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 
 public class AddContractCommandParserTest {
-
-    private static final String VALID_NAME_1 = "Rachel Green";
-    private static final String VALID_NAME_2 = "Monica Geller";
-    private static final String INVALID_NAME = "R@chel";
 
     private static final String VALID_NRIC_1 = "S1234567A";
     private static final String VALID_NRIC_2 = "S7654321B";
@@ -52,16 +47,22 @@ public class AddContractCommandParserTest {
     private AddContractCommandParser parser = new AddContractCommandParser();
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
-        String validExpectedContractString = " " + PREFIX_NAME + VALID_NAME_1
+    public void testMethod() {
+        String validExpectedContractString = " " + PREFIX_PID + VALID_PID_1
                 + " " + PREFIX_NRIC + VALID_NRIC_1
-                + " " + PREFIX_PID + VALID_PID_1
                 + " " + PREFIX_DATE + VALID_DATE_1
                 + " " + PREFIX_EXPIRY + VALID_EXPIRY_1;
 
-        // multiple names
-        assertParseFailure(parser, " " + PREFIX_NAME + VALID_NAME_2 + validExpectedContractString,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_EXPIRY + VALID_EXPIRY_2 + validExpectedContractString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EXPIRY));
+    }
+
+    @Test
+    public void parse_repeatedNonTagValue_failure() {
+        String validExpectedContractString = " " + PREFIX_PID + VALID_PID_1
+                + " " + PREFIX_NRIC + VALID_NRIC_1
+                + " " + PREFIX_DATE + VALID_DATE_1
+                + " " + PREFIX_EXPIRY + VALID_EXPIRY_1;
 
         // multiple nrics
         assertParseFailure(parser, " " + PREFIX_NRIC + VALID_NRIC_2 + validExpectedContractString,
@@ -81,18 +82,13 @@ public class AddContractCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser, validExpectedContractString
-                        + " " + PREFIX_NAME + VALID_NAME_2
                         + " " + PREFIX_NRIC + VALID_NRIC_2
                         + " " + PREFIX_PID + VALID_PID_2
                         + " " + PREFIX_DATE + VALID_DATE_2
                         + " " + PREFIX_EXPIRY + VALID_EXPIRY_2,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC, PREFIX_PID, PREFIX_DATE, PREFIX_EXPIRY));
 
         // invalid value followed by valid value
-
-        // invalid name
-        assertParseFailure(parser, " " + PREFIX_NAME + INVALID_NAME + validExpectedContractString,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE));
 
         // invalid nric
         assertParseFailure(parser, " " + PREFIX_NRIC + INVALID_NRIC + validExpectedContractString,
@@ -152,8 +148,8 @@ public class AddContractCommandParserTest {
         assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC + INVALID_EXPIRY_DESC_1,
                 "Date should be in the format yyyy-MM-dd");
 
-        // invalid Expiry(Invalid date format)
-        assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC + INVALID_EXPIRY_DESC_2,
+        // invalid Expiry(Invalid period)
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + INVALID_EXPIRY_DESC_2,
                 "Signing date comes after expiry date");
 
         // non-empty preamble

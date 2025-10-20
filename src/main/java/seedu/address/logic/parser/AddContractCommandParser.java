@@ -34,7 +34,7 @@ public class AddContractCommandParser implements Parser<AddContractCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE));
         }
 
-        arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NRIC, PREFIX_DATE);
+        arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY);
         PolicyId pid = ParserUtil.parsePolicyId(arguMultimap.getValue(PREFIX_PID).get());
         Nric nric = ParserUtil.parseNric(arguMultimap.getValue(PREFIX_NRIC).get());
         LocalDate date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
