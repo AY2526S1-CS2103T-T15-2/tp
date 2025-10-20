@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.exceptions.InvalidContractDatesException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
@@ -106,12 +107,19 @@ public class JsonAdaptedContract {
         }
         final LocalDate modelDateSigned = LocalDate.parse(dateSigned);
 
+        if (expiryDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LocalDate.class.getSimpleName()));
+        }
         try {
             LocalDate.parse(expiryDate);
         } catch (Exception e) {
             throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
         }
         final LocalDate modelExpiryDate = LocalDate.parse(expiryDate);
+        if (modelExpiryDate.isBefore(modelDateSigned)) {
+            throw new InvalidContractDatesException();
+        }
         return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned, modelExpiryDate);
     }
 }

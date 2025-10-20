@@ -130,7 +130,7 @@ public class JsonAdaptedContractTest {
     @Test
     public void toModelType_invalidPeriodExpiry_throwsIllegalValueException() {
         JsonAdaptedContract contract =
-                new JsonAdaptedContract(VALID_CID, VALID_NAME, VALID_NRIC, VALID_PID, INVALID_DATE,
+                new JsonAdaptedContract(VALID_CID, VALID_NAME, VALID_NRIC, VALID_PID, VALID_DATE,
                         INVALID_PERIOD_EXPIRY);
         String expectedMessage = "Signing date comes after expiry date";
         assertThrows(InvalidContractDatesException.class, expectedMessage, contract::toModelType);
