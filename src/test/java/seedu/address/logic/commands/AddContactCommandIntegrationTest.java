@@ -13,6 +13,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddContactCommand}.
@@ -36,6 +37,7 @@ public class AddContactCommandIntegrationTest {
         assertCommandSuccess(new AddContactCommand(validPerson), model,
                 String.format(seedu.address.logic.commands.AddContactCommand.MESSAGE_SUCCESS,
                         Messages.format(validPerson)),
+                ListPanelType.CONTACT,
                 expectedModel);
     }
 

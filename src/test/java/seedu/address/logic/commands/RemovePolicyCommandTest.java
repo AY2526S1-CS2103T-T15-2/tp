@@ -24,6 +24,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.testutil.TypicalData;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -42,7 +43,7 @@ public class RemovePolicyCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.removePolicy(TRAVEL);
 
-        assertCommandSuccess(removePolicyCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(removePolicyCommand, model, expectedMessage, ListPanelType.POLICY, expectedModel);
     }
 
     @Test

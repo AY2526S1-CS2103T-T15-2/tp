@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -57,7 +58,7 @@ public class RemoveContactCommand extends Command {
 
         model.deletePerson(person);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                person.getName() + " " + person.getNric()));
+                person.getName() + " " + person.getNric()), ListPanelType.CONTACT);
     }
 
     private static int findIndex(List<Person> list, NricContainsKeywordsPredicate predicate) {

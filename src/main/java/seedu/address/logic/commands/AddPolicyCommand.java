@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.UnassignedPolicy;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Adds a policy.
@@ -32,7 +33,7 @@ public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
 
         Policy policy = toAdd.assignId(model.generateUniquePolicyId());
         model.addPolicy(policy);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(policy)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(policy)), ListPanelType.POLICY);
     }
 
     @Override

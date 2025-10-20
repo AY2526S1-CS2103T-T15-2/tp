@@ -13,7 +13,8 @@
         "name" : "Alice Pauline",
         "nric": "S1234567A",
         "pId" : "abcdef",
-        "dateSigned" : "2023-01-01"
+        "dateSigned" : "2023-01-01",
+        "expiryDate": "2025-01-01"
       }
     ]
   }, {
@@ -29,7 +30,8 @@
         "name" : "Benson Meier",
         "nric": "S1234567B",
         "pId" : "123456",
-        "dateSigned" : "2023-02-01"
+        "dateSigned" : "2023-02-01",
+        "expiryDate": "2025-02-01"
       }
     ]
   }, {
@@ -45,7 +47,8 @@
         "name" : "Carl Kurz",
         "nric": "S1234567C",
         "pId" : "Abc123",
-        "dateSigned" : "2023-03-01"
+        "dateSigned" : "2023-03-01",
+        "expiryDate": "2025-03-01"
       }
     ]
   }, {
@@ -91,7 +94,8 @@
         "name" : "Alice Pauline",
         "nric": "S1234567A",
         "pId" : "abcdef",
-        "dateSigned" : "2023-01-01"
+        "dateSigned" : "2023-01-01",
+        "expiryDate": "2025-01-01"
       }
     ]
   }, {
@@ -104,7 +108,8 @@
         "name" : "Benson Meier",
         "nric": "S1234567B",
         "pId" : "123456",
-        "dateSigned" : "2023-02-01"
+        "dateSigned" : "2023-02-01",
+        "expiryDate": "2025-02-01"
       }
     ]
   }, {
@@ -117,7 +122,8 @@
         "name" : "Carl Kurz",
         "nric": "S1234567C",
         "pId" : "Abc123",
-        "dateSigned" : "2023-03-01"
+        "dateSigned" : "2023-03-01",
+        "expiryDate": "2025-03-01"
       }
     ]
   }, {
@@ -131,19 +137,22 @@
     "name" : "Alice Pauline",
     "nric": "S1234567A",
     "pId" : "abcdef",
-    "dateSigned" : "2023-01-01"
+    "dateSigned" : "2023-01-01",
+    "expiryDate": "2025-01-01"
   }, {
     "cId" : "C1234B",
     "name" : "Benson Meier",
     "nric": "S1234567B",
     "pId" : "123456",
-    "dateSigned" : "2023-02-01"
+    "dateSigned" : "2023-02-01",
+    "expiryDate": "2025-02-01"
   }, {
     "cId" : "C1234C",
     "name" : "Carl Kurz",
     "nric": "S1234567C",
     "pId" : "Abc123",
-    "dateSigned" : "2023-03-01"
+    "dateSigned" : "2023-03-01",
+    "expiryDate": "2025-03-01"
   } ],
   "appointments": [ {
     "aId": "A1234A",

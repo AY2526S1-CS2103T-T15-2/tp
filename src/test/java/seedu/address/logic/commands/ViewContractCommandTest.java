@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewContractCommand.
@@ -26,6 +27,7 @@ public class ViewContractCommandTest {
 
     @Test
     public void execute_viewIsNotFiltered_showsSameView() {
-        assertCommandSuccess(new ViewContractCommand(), model, ViewContractCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ViewContractCommand(), model, ViewContractCommand.MESSAGE_SUCCESS,
+                ListPanelType.CONTRACT, expectedModel);
     }
 }

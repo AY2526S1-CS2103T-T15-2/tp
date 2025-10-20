@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
+import seedu.address.ui.ListPanelType;
 
 
 /**
@@ -52,14 +53,16 @@ public class ViewPolicyCommand extends Command {
         requireNonNull(model);
         if (viewAll) {
             model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
-            return new CommandResult(MESSAGE_SUCCESS_ALL);
+            return new CommandResult(MESSAGE_SUCCESS_ALL, ListPanelType.POLICY);
         } else {
             model.updateFilteredPolicyList((predicate));
             if (model.getFilteredPolicyList().isEmpty()) {
-                return new CommandResult(String.format(MESSAGE_NO_ID_MATCH));
+                return new CommandResult(String.format(MESSAGE_NO_ID_MATCH), ListPanelType.POLICY);
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC,
-                                                    String.join(", ", predicate.getKeywords())));
+            return new CommandResult(
+                    String.format(MESSAGE_SUCCESS_SPECIFIC, String.join(", ", predicate.getKeywords())),
+                    ListPanelType.POLICY
+            );
         }
     }
 

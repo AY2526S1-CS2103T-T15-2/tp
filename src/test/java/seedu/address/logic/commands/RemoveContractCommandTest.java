@@ -16,6 +16,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.ui.ListPanelType;
 
 
 /**
@@ -37,7 +38,7 @@ public class RemoveContractCommandTest {
         expectedModel.removeContractFromPerson(CONTRACT_A);
         expectedModel.removeContractFromPolicy(CONTRACT_A);
 
-        assertCommandSuccess(removeContractCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(removeContractCommand, model, expectedMessage, ListPanelType.CONTRACT, expectedModel);
     }
 
     @Test

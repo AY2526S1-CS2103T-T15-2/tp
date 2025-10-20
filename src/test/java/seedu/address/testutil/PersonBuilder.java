@@ -32,7 +32,8 @@ public class PersonBuilder {
             new Name("Alice Pauline"),
             new Nric("S1234567A"),
             new PolicyId("abcdef"),
-            LocalDate.parse("2023-01-01")
+            LocalDate.parse("2023-01-01"),
+            LocalDate.parse("2025-01-01")
     ));
 
     private Name name;
