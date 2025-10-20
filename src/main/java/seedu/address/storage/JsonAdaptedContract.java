@@ -100,23 +100,23 @@ public class JsonAdaptedContract {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDate.class.getSimpleName()));
         }
+        final LocalDate modelDateSigned;
         try {
-            LocalDate.parse(dateSigned);
+            modelDateSigned = LocalDate.parse(dateSigned);
         } catch (Exception e) {
             throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
         }
-        final LocalDate modelDateSigned = LocalDate.parse(dateSigned);
 
         if (expiryDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDate.class.getSimpleName()));
         }
+        final LocalDate modelExpiryDate;
         try {
-            LocalDate.parse(expiryDate);
+            modelExpiryDate = LocalDate.parse(expiryDate);
         } catch (Exception e) {
             throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
         }
-        final LocalDate modelExpiryDate = LocalDate.parse(expiryDate);
         if (modelExpiryDate.isBefore(modelDateSigned)) {
             throw new InvalidContractDatesException();
         }
