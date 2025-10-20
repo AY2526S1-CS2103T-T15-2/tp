@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
 import static seedu.address.testutil.TypicalData.BENSON;
+import static seedu.address.testutil.TypicalData.CARL;
 import static seedu.address.testutil.TypicalData.CONTRACT_A;
 import static seedu.address.testutil.TypicalData.CONTRACT_B;
 import static seedu.address.testutil.TypicalData.CONTRACT_D;
@@ -15,11 +16,16 @@ import static seedu.address.testutil.TypicalData.LIFE;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonComparatorType;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -160,6 +166,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getSortedPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
     public void getFilteredPolicyList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPolicyList().remove(0));
     }
@@ -181,6 +192,24 @@ public class ModelManagerTest {
     @Test
     public void updatedFilteredContractList_nullPredicate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.updateFilteredContractList(null));
+    }
+
+    @Test
+    public void sortPersons() {
+        ObservableList<Person> persons = FXCollections.observableArrayList(BENSON, ALICE, CARL);
+        persons.forEach(modelManager::addPerson);
+
+        // Make sure the internal filtered person list has the correct persons
+        assertEquals(persons, modelManager.getFilteredPersonList());
+
+        // Sort alphabetically
+        ObservableList<Person> expectedPersons = FXCollections.observableArrayList(ALICE, BENSON, CARL);
+        modelManager.sortPersons(PersonComparatorType.ALPHABETICAL.comparator);
+        assertEquals(expectedPersons, modelManager.getSortedPersonList());
+
+        // Sort by insertion order
+        modelManager.sortPersons(PersonComparatorType.UNORDERED.comparator);
+        assertEquals(persons, modelManager.getSortedPersonList());
     }
 
     @Test

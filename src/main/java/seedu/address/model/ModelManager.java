@@ -220,6 +220,15 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns an unmodifiable view of the sorted list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getSortedPersonList() {
+        return sortedPersons;
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Policy} backed by the internal list of
      * {@code versionedAddressBook}
      */
@@ -235,15 +244,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Contract> getFilteredContractList() {
         return filteredContracts;
-    }
-
-    /**
-     * Returns an unmodifiable view of the sorted list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getSortedPersonList() {
-        return sortedPersons;
     }
 
 
