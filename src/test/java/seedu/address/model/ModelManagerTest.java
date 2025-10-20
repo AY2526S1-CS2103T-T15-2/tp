@@ -3,6 +3,8 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HEALTH_B;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
@@ -12,6 +14,8 @@ import static seedu.address.testutil.TypicalData.BENSON;
 import static seedu.address.testutil.TypicalData.CONTRACT_A;
 import static seedu.address.testutil.TypicalData.CONTRACT_B;
 import static seedu.address.testutil.TypicalData.CONTRACT_D;
+import static seedu.address.testutil.TypicalData.HEALTH_B;
+import static seedu.address.testutil.TypicalData.HOME;
 import static seedu.address.testutil.TypicalData.LIFE;
 
 import java.nio.file.Path;
@@ -23,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PolicyBuilder;
 
 public class ModelManagerTest {
 
@@ -95,28 +100,39 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPolicy_policyNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPolicy(LIFE));
+    public void hasSamePolicyId_policyIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSamePolicyId(HOME));
     }
 
     @Test
-    public void hasPolicy_policyInAddressBook_returnsTrue() {
-        modelManager.addPolicy(LIFE);
-        assertTrue(modelManager.hasPolicy(LIFE));
+    public void hasSamePolicyId_policyIdInAddressBook_returnsTrue() {
+        modelManager.addPolicy(new PolicyBuilder(HEALTH_B).withId(VALID_POLICY_ID_HOME).build());
+        assertTrue(modelManager.hasSamePolicyId(HOME));
+    }
+
+    @Test
+    public void hasSamePolicyFields_policyNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSamePolicyFields(HOME));
+    }
+
+    @Test
+    public void hasSamePolicyFields_policyInAddressBook_returnsTrue() {
+        modelManager.addPolicy(new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build());
+        assertTrue(modelManager.hasSamePolicyFields(HOME));
     }
 
     @Test
     public void removePolicy_policyInAddressBook_returnsFalse() {
         modelManager.addPolicy(LIFE);
         modelManager.removePolicy(LIFE);
-        assertFalse(modelManager.hasPolicy(LIFE));
+        assertFalse(modelManager.hasSamePolicyId(LIFE));
     }
 
     @Test
     public void setPolicy_policyInAddressBook_returnsTrue() {
         modelManager.addPolicy(LIFE);
         modelManager.setPolicy(LIFE, LIFE);
-        assertTrue(modelManager.hasPolicy(LIFE));
+        assertTrue(modelManager.hasSamePolicyId(LIFE));
     }
 
     @Test

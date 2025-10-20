@@ -24,7 +24,7 @@ import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
-import seedu.address.logic.commands.AddPolicyCommandMultiple;
+import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -79,9 +79,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPolicyFile() throws Exception {
-        AddPolicyCommandMultiple command = (AddPolicyCommandMultiple) parser.parseCommand(
-                AddPolicyCommandMultiple.COMMAND_WORD + POLICY_PATH_A_DESC);
-        assertEquals(new AddPolicyCommandMultiple(POLICY_PATH_A), command);
+        AddPolicyFileCommand command = (AddPolicyFileCommand) parser.parseCommand(
+                AddPolicyFileCommand.COMMAND_WORD + POLICY_PATH_A_DESC);
+        assertEquals(new AddPolicyFileCommand(POLICY_PATH_A), command);
     }
 
     @Test

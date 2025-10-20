@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
  */
 public abstract sealed class AddPolicyCommandType
         extends Command
-        permits AddPolicyCommand, AddPolicyCommandMultiple {
+        permits AddPolicyCommand, AddPolicyFileCommand {
 
     public static final String COMMAND_WORD = "add_policy";
 

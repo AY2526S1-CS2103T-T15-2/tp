@@ -2,13 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.PolicyFileParser;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.contract.Contract;
@@ -18,7 +16,6 @@ import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
-import seedu.address.model.policy.UnassignedPolicy;
 import seedu.address.model.policy.UniquePolicyList;
 import seedu.address.model.policy.exceptions.PolicyNotFoundException;
 
@@ -138,9 +135,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a policy with the same id as {@code policy} exists in the address book.
      */
-    public boolean hasPolicy(Policy policy) {
+    public boolean hasSamePolicyId(Policy policy) {
         requireNonNull(policy);
         return policies.containsSameId(policy);
+    }
+
+    /**
+     * Returns true if a policy with the same fields as {@code policy} exists in the address book.
+     */
+    public boolean hasSamePolicyFields(Policy policy) {
+        requireNonNull(policy);
+        return policies.containsSamePolicy(policy);
     }
 
     /**
@@ -152,15 +157,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds policies from a file to the address book.
-     * Policies are assigned unique ids upon insertion.
+     * Adds all policies from the list to the address book.
+     * Every policy must not already exist in the address book or have duplicates in the list.
      */
-    public void addPolicyFile(Path filePath) throws IOException {
-        List<UnassignedPolicy> unassignedPolicies = PolicyFileParser.readFile(filePath);
-        for (UnassignedPolicy unassignedPolicy: unassignedPolicies) {
-            PolicyId policyId = generateUniquePolicyId();
-            policies.add(unassignedPolicy.assignId(policyId));
-        }
+    public void addPolicies(List<Policy> policyList) {
+        policies.addAll(policyList);
     }
 
     /**
@@ -172,6 +173,24 @@ public class AddressBook implements ReadOnlyAddressBook {
             policyId = PolicyId.generate();
         } while (policies.containsId(policyId));
         return policyId;
+    }
+
+    /**
+     * Generates a list of pairwise unique policy ids that are not present in the address book.
+     * @param length Must be a nonnegative integer.
+     */
+    public List<PolicyId> generateUniquePolicyIds(int length) {
+        assert length >= 0;
+        ArrayList<PolicyId> policyIds = new ArrayList<>(length);
+
+        while (policyIds.size() < length) {
+            PolicyId policyId = PolicyId.generate();
+            if (!policies.containsId(policyId) && !policyIds.contains(policyId)) {
+                policyIds.add(policyId);
+            }
+        }
+
+        return policyIds;
     }
 
     /**

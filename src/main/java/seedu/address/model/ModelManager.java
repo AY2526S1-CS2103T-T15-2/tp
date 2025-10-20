@@ -3,8 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -105,9 +105,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPolicy(Policy policy) {
+    public boolean hasSamePolicyId(Policy policy) {
         requireNonNull(policy);
-        return addressBook.hasPolicy(policy);
+        return addressBook.hasSamePolicyId(policy);
+    }
+
+    @Override
+    public boolean hasSamePolicyFields(Policy policy) {
+        requireNonNull(policy);
+        return addressBook.hasSamePolicyFields(policy);
     }
 
     @Override
@@ -144,15 +150,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addAppointment(Appointment appointment) {
-        addressBook.addAppointment(appointment);
-        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    public void addPolicies(List<Policy> policies) {
+        addressBook.addPolicies(policies);
     }
 
     @Override
-    public void addPolicyFile(Path filePath) throws IOException {
-        addressBook.addPolicyFile(filePath);
-        updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
+    public void addAppointment(Appointment appointment) {
+        addressBook.addAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override
@@ -229,6 +234,11 @@ public class ModelManager implements Model {
     @Override
     public PolicyId generateUniquePolicyId() {
         return addressBook.generateUniquePolicyId();
+    }
+
+    @Override
+    public List<PolicyId> generateUniquePolicyIds(int length) {
+        return addressBook.generateUniquePolicyIds(length);
     }
 
     //=========== Filtered Person List Accessors =============================================================

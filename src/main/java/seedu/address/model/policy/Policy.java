@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -115,6 +116,20 @@ public class Policy {
 
         Policy otherPolicy = (Policy) other;
         return policyName.equals(otherPolicy.policyName) && policyDetails.equals(otherPolicy.policyDetails);
+    }
+
+    /**
+     * Returns true if {@code policies} contains only unique policies by {@link Policy#isSamePolicy}.
+     */
+    public static boolean policiesAreUnique(List<Policy> policies) {
+        for (int i = 0; i < policies.size() - 1; i++) {
+            for (int j = i + 1; j < policies.size(); j++) {
+                if (policies.get(i).isSamePolicy(policies.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

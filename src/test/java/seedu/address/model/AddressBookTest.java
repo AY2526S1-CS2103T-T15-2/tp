@@ -107,8 +107,8 @@ public class AddressBookTest {
         assertThrows(NullPointerException.class, () -> addressBook.setPolicy(policy, null));
         assertThrows(NullPointerException.class, () -> addressBook.setPolicy(null, editedPolicy));
         addressBook.setPolicy(policy, editedPolicy);
-        assertTrue(addressBook.hasPolicy(editedPolicy));
-        assertFalse(addressBook.hasPolicy(policy));
+        assertTrue(addressBook.hasSamePolicyId(editedPolicy));
+        assertFalse(addressBook.hasSamePolicyId(policy));
     }
 
     @Test
