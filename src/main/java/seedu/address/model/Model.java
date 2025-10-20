@@ -1,8 +1,8 @@
 package seedu.address.model;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -104,7 +104,12 @@ public interface Model {
     /**
      * Returns true if a policy with the same id as {@code policy} exists in the address book.
      */
-    boolean hasPolicy(Policy id);
+    boolean hasSamePolicyId(Policy policy);
+
+    /**
+     * Returns true if a policy with the same id as {@code policy} exists in the address book.
+     */
+    boolean hasSamePolicyFields(Policy policy);
 
     /**
      * Deletes the given policy.
@@ -119,10 +124,10 @@ public interface Model {
     void addPolicy(Policy policy);
 
     /**
-     * Adds policies from the given file.
-     * Every {@code policy} must not already exist in the address book.
+     * Adds all policies from the list.
+     * Every {@code policy} must not already exist in the address book or have duplicates in the list.
      */
-    void addPolicyFile(Path filePath) throws IOException;
+    void addPolicies(List<Policy> policies);
 
     /**
      * Replaces the given policy {@code target} with {@code editedPolicy}.
@@ -201,7 +206,12 @@ public interface Model {
     void removeContractFromPolicy(Contract contract);
 
     /**
-     * Generates a policy id not present in the currentaddress book.
+     * Generates a policy id not present in the current address book.
      */
     PolicyId generateUniquePolicyId();
+
+    /**
+     * Generates a list of pairwise unique policy ids that are not present in the current address book.
+     */
+    List<PolicyId> generateUniquePolicyIds(int length);
 }
