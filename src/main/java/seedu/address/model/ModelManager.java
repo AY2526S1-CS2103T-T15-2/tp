@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contract.Contract;
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Policy> filteredPolicies;
     private final FilteredList<Contract> filteredContracts;
+    private final SortedList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +45,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPolicies = new FilteredList<>(this.addressBook.getPolicyList());
         filteredContracts = new FilteredList<>(this.addressBook.getContractList());
+        sortedPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -205,7 +208,7 @@ public class ModelManager implements Model {
         return addressBook.generateUniquePolicyId();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -225,16 +228,29 @@ public class ModelManager implements Model {
         return filteredPolicies;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Contract} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Contract> getFilteredContractList() {
+        return filteredContracts;
+    }
+
+    /**
+     * Returns an unmodifiable view of the sorted list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getSortedPersonList() {
+        return sortedPersons;
+    }
+
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void sortPersons(Comparator<Person> comparator) {
-        // TODO
     }
 
     @Override
@@ -244,15 +260,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Contract> getFilteredContractList() {
-        return filteredContracts;
-    }
-
-    @Override
     public void updateFilteredContractList(Predicate<Contract> predicate) {
         requireNonNull(predicate);
         filteredContracts.setPredicate(predicate);
     }
+
+    @Override
+    public void sortPersons(Comparator<Person> comparator) {
+        sortedPersons.setComparator(comparator);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
