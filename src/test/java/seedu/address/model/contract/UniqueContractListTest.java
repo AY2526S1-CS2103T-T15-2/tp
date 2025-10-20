@@ -40,7 +40,8 @@ public class UniqueContractListTest {
                 CONTRACT_B.getName(),
                 CONTRACT_A.getNric(),
                 CONTRACT_A.getPId(),
-                CONTRACT_A.getDate()
+                CONTRACT_A.getDate(),
+                CONTRACT_A.getExpiryDate()
         );
         assertTrue(uniqueContractList.contains(editedContractA));
     }
@@ -88,7 +89,8 @@ public class UniqueContractListTest {
                 CONTRACT_B.getName(),
                 CONTRACT_A.getNric(),
                 CONTRACT_A.getPId(),
-                CONTRACT_B.getDate()
+                CONTRACT_B.getDate(),
+                CONTRACT_B.getExpiryDate()
         );
         uniqueContractList.setContract(CONTRACT_A, editedContractA);
         UniqueContractList expectedUniqueContractList = new UniqueContractList();

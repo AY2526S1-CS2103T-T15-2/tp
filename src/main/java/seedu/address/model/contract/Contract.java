@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contract.exceptions.InvalidContractDatesException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
@@ -18,6 +19,7 @@ public class Contract {
     private final Nric nric;
     private final PolicyId pId;
     private final LocalDate dateSigned;
+    private final LocalDate expiryDate;
 
     /**
      * Constructor for a Creating a new Contract object.
@@ -25,12 +27,17 @@ public class Contract {
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
-    public Contract(Nric nric, PolicyId pId, LocalDate date) {
+    public Contract(Nric nric, PolicyId pId, LocalDate date, LocalDate expiry) {
         this.cId = ContractId.generate();
         this.name = new Name("Placeholder");
         this.nric = nric;
         this.pId = pId;
-        this.dateSigned = date;
+        if (date.isBefore(expiry)) {
+            this.dateSigned = date;
+            this.expiryDate = expiry;
+        } else {
+            throw new InvalidContractDatesException();
+        }
     }
 
     /**
@@ -41,12 +48,17 @@ public class Contract {
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
-    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId, LocalDate date) {
+    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId, LocalDate date, LocalDate expiry) {
         this.cId = cId;
         this.name = name;
         this.nric = nric;
         this.pId = pId;
-        this.dateSigned = date;
+        if (date.isBefore(expiry)) {
+            this.dateSigned = date;
+            this.expiryDate = expiry;
+        } else {
+            throw new InvalidContractDatesException();
+        }
     }
 
     public ContractId getCId() {
@@ -69,6 +81,10 @@ public class Contract {
         return dateSigned;
     }
 
+    public LocalDate getExpiryDate() {
+        return expiryDate;
+    }
+
     /**
      * Checks if the given contract is the same as this contract.
      */
@@ -80,7 +96,8 @@ public class Contract {
         return otherContract != null
                 && otherContract.getNric().equals(getNric())
                 && otherContract.getPId().equals(getPId())
-                && otherContract.getDate().equals(getDate());
+                && otherContract.getDate().equals(getDate())
+                && otherContract.getExpiryDate().equals(getExpiryDate());
     }
 
     @Override
@@ -98,12 +115,13 @@ public class Contract {
                 && otherContract.getName().equals(getName())
                 && otherContract.getNric().equals(getNric())
                 && otherContract.getPId().equals(getPId())
-                && otherContract.getDate().equals(getDate());
+                && otherContract.getDate().equals(getDate())
+                && otherContract.getExpiryDate().equals(getExpiryDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cId, name, nric, pId, dateSigned);
+        return Objects.hash(cId, name, nric, pId, dateSigned, expiryDate);
     }
 
     @Override
@@ -114,6 +132,7 @@ public class Contract {
                 .add("nric", nric)
                 .add("pId", pId)
                 .add("dateSigned", dateSigned)
+                .add("expiryDate", expiryDate)
                 .toString();
     }
 
