@@ -13,7 +13,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.AppointmentDetails;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -241,5 +243,27 @@ public class ParserUtil {
             throw new ParseException(AppointmentDetails.MESSAGE_CONSTRAINTS);
         }
         return new AppointmentDetails(trimmedAppointmentDetails);
+    }
+    /**
+     * Parses a {@code String premium} into a {@code ContractPremium}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code premium} is invalid.
+     */
+
+    public static ContractPremium parseContractPremium(String premium) throws ParseException {
+        requireNonNull(premium);
+        String trimmedPremium = premium.trim();
+        float premiumValue;
+        try {
+            premiumValue = Float.parseFloat(trimmedPremium);
+        } catch (NumberFormatException e) {
+            throw new ParseException(ContractPremium.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!ContractPremium.isValidContractPremium(premiumValue)) {
+            throw new ParseException(ContractPremium.MESSAGE_CONSTRAINTS);
+        }
+        return new ContractPremium(premiumValue);
     }
 }

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 
@@ -27,20 +29,21 @@ public class AddContractCommandParser implements Parser<AddContractCommand> {
      */
     public AddContractCommand parse(String args) throws ParseException {
         ArgumentMultimap arguMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY);
+                ArgumentTokenizer.tokenize(args, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY, PREFIX_PREMIUM);
 
-        if (!arePrefixesPresent(arguMultimap, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY)
+        if (!arePrefixesPresent(arguMultimap, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY, PREFIX_PREMIUM)
                 || !arguMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE));
         }
 
-        arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY);
+        arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY, PREFIX_PREMIUM);
         PolicyId pid = ParserUtil.parsePolicyId(arguMultimap.getValue(PREFIX_PID).get());
         Nric nric = ParserUtil.parseNric(arguMultimap.getValue(PREFIX_NRIC).get());
         LocalDate date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
         LocalDate expiry = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_EXPIRY).get());
+        ContractPremium premium = ParserUtil.parseContractPremium(arguMultimap.getValue(PREFIX_PREMIUM).get());
 
-        Contract contract = new Contract(nric, pid, date, expiry);
+        Contract contract = new Contract(nric, pid, date, expiry, premium);
 
         return new AddContractCommand(contract);
     }

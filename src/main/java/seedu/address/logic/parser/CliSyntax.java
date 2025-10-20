@@ -21,5 +21,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_CID = new Prefix("c:");
     public static final Prefix PREFIX_DATE = new Prefix("dt:");
     public static final Prefix PREFIX_EXPIRY = new Prefix("e:");
-
+    public static final Prefix PREFIX_PREMIUM = new Prefix("pr:");
 }
