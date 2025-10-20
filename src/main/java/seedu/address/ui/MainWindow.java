@@ -203,7 +203,7 @@ public class MainWindow extends UiPart<Stage> {
             case CONTACT -> showPersonListPanel();
             case POLICY -> showPolicyListPanel();
             case CONTRACT -> showContractListPanel();
-            case CURRENT -> {}
+            default -> { }
             }
 
             if (commandResult.isShowHelp()) {

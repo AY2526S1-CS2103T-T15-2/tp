@@ -12,6 +12,9 @@ import seedu.address.ui.ListPanelType;
  */
 public class CommandResult {
 
+    /** The type of list panel that should be shown to the user. */
+    public final ListPanelType listPanelType;
+
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -19,9 +22,6 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-
-    /** The type of list panel that should be shown to the user. */
-    public final ListPanelType listPanelType;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
