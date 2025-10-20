@@ -17,6 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_FILE = new Prefix("f:");
     public static final Prefix PREFIX_PID = new Prefix("p:");
     public static final Prefix PREFIX_DATE = new Prefix("dt:");
-
+    public static final Prefix PREFIX_EXPIRY = new Prefix("e:");
 
 }

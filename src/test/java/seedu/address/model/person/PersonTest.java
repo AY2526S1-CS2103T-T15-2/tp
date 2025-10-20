@@ -64,8 +64,8 @@ public class PersonTest {
 
     @Test
     public void checkMultipleContractIdString_success() {
-        String validContractIdString = CONTRACT_B.getCId().toString()
-                + ", " + CONTRACT_A.getCId().toString();
+        String validContractIdString = CONTRACT_A.getCId().toString()
+                + ", " + CONTRACT_B.getCId().toString();
         Person firstPerson = new PersonBuilder(ALICE).build();
         firstPerson.addContract(CONTRACT_A);
         firstPerson.addContract(CONTRACT_B);
