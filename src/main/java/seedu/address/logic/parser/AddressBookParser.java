@@ -103,7 +103,7 @@ public class AddressBookParser {
             return new RemoveContractCommandParser().parse(arguments);
 
         case ViewContractCommand.COMMAND_WORD:
-            return new ViewContractCommand();
+            return new ViewContractCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
