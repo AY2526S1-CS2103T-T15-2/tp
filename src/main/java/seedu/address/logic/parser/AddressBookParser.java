@@ -14,7 +14,7 @@ import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.commands.AddPolicyCommandType;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditContactCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -63,8 +63,8 @@ public class AddressBookParser {
         case AddContactCommand.COMMAND_WORD:
             return new AddContactCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditContactCommand.COMMAND_WORD:
+            return new EditContactCommandParser().parse(arguments);
 
         case RemoveContactCommand.COMMAND_WORD:
             return new RemoveContactCommandParser().parse(arguments);
