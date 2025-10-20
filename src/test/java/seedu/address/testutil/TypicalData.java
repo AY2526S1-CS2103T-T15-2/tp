@@ -30,6 +30,7 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HOME;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +42,7 @@ import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -130,7 +132,8 @@ public class TypicalData {
             ALICE.getNric(),
             LIFE.getId(),
             LocalDate.parse("2023-01-01"),
-            LocalDate.parse("2025-01-01")
+            LocalDate.parse("2025-01-01"),
+            new ContractPremium( new BigDecimal("500.00"))
     );
 
     public static final Contract CONTRACT_B = new Contract(
@@ -139,7 +142,8 @@ public class TypicalData {
             BENSON.getNric(),
             HEALTH.getId(),
             LocalDate.parse("2023-02-01"),
-            LocalDate.parse("2025-02-01")
+            LocalDate.parse("2025-02-01"),
+            new ContractPremium(new BigDecimal("1000.00"))
     );
 
     public static final Contract CONTRACT_C = new Contract(
@@ -148,7 +152,8 @@ public class TypicalData {
             CARL.getNric(),
             PROPERTY.getId(),
             LocalDate.parse("2023-03-01"),
-            LocalDate.parse("2025-03-01")
+            LocalDate.parse("2025-03-01"),
+            new ContractPremium(new BigDecimal("2000.00"))
     );
 
     // Spare contracts not added into TypicalAddressBook
@@ -158,7 +163,8 @@ public class TypicalData {
             DANIEL.getNric(),
             LIFE.getId(),
             LocalDate.parse("2023-04-01"),
-            LocalDate.parse("2025-04-01")
+            LocalDate.parse("2025-04-01"),
+            new ContractPremium(new BigDecimal("3000.00"))
     );
 
     public static final Contract CONTRACT_E = new Contract(
@@ -167,7 +173,8 @@ public class TypicalData {
             ELLE.getNric(),
             HEALTH.getId(),
             LocalDate.parse("2023-05-01"),
-            LocalDate.parse("2025-05-01")
+            LocalDate.parse("2025-05-01"),
+            new ContractPremium(new BigDecimal("1500.00"))
     );
 
     public static final Appointment APPOINTMENT_A = new Appointment(

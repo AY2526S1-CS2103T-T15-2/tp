@@ -50,7 +50,8 @@ public class Contract {
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
-    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId, LocalDate date, LocalDate expiry, ContractPremium premium) {
+    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId,
+                    LocalDate date, LocalDate expiry, ContractPremium premium) {
         this.cId = cId;
         this.name = name;
         this.nric = nric;

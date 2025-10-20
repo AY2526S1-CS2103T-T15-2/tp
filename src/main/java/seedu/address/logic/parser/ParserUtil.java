@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -13,7 +14,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.AppointmentDetails;
-import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Address;
@@ -254,9 +254,9 @@ public class ParserUtil {
     public static ContractPremium parseContractPremium(String premium) throws ParseException {
         requireNonNull(premium);
         String trimmedPremium = premium.trim();
-        float premiumValue;
+        BigDecimal premiumValue;
         try {
-            premiumValue = Float.parseFloat(trimmedPremium);
+            premiumValue = new BigDecimal(trimmedPremium);
         } catch (NumberFormatException e) {
             throw new ParseException(ContractPremium.MESSAGE_CONSTRAINTS);
         }

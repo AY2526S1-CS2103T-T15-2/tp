@@ -1,36 +1,44 @@
 package seedu.address.model.contract;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+/**
+ * Represents a Contract's premium.
+ * Guarantees: immutable; is valid as declared in {@link #isValidContractPremium(BigDecimal)}
+ */
 public class ContractPremium {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Contract premium should be a non-negative number.";
-    public final float value;
+    public final BigDecimal value;
 
     /**
      * Constructs a {@code ContractPremium}.
      *
      * @param value A valid premium value.
      */
-    public ContractPremium(float value) {
+    public ContractPremium(BigDecimal value) {
         requireNonNull(value);
         checkArgument(isValidContractPremium(value), MESSAGE_CONSTRAINTS);
-        //Rounds up to the nearest 2 decimal places
-        this.value = (float) (Math.ceil(value * 100)) / 100;
+        // Rounds up to the nearest 2 decimal places
+        this.value = value.setScale(2, RoundingMode.CEILING);
     }
+
     /**
-     * Returns true if a given float is a valid premium.
+     * Returns true if a given {@code BigDecimal} is a valid premium.
      */
-    public static boolean isValidContractPremium(float test) {
-        return test >= 0;
+    public static boolean isValidContractPremium(BigDecimal test) {
+        requireNonNull(test);
+        return test.compareTo(BigDecimal.ZERO) >= 0;
     }
 
     @Override
     public String toString() {
-        return String.format("%.2f", value);
+        return value.toPlainString();
     }
 
     @Override
@@ -39,12 +47,11 @@ public class ContractPremium {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ContractPremium)) {
             return false;
         }
 
         ContractPremium otherContractPremium = (ContractPremium) other;
-        return value == otherContractPremium.value;
+        return value.compareTo(otherContractPremium.value) == 0;
     }
 }

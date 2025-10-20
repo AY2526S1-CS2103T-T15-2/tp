@@ -37,7 +37,7 @@ public class AddContractCommand extends Command {
             + PREFIX_PID + "POLICY_ID "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_DATE + "DATE_SIGNED "
-            + PREFIX_EXPIRY + "EXPIRY_DATE"
+            + PREFIX_EXPIRY + "EXPIRY_DATE "
             + PREFIX_PREMIUM + "PREMIUM_AMOUNT "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PID + "68g354f7"

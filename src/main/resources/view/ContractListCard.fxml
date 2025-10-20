@@ -29,6 +29,8 @@
             <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
             <Label fx:id="pId" styleClass="cell_small_label" text="\$pId" />
             <Label fx:id="dateSigned" styleClass="cell_small_label" text="\$dateSigned" />
+            <Label fx:id="expiry" styleClass="cell_small_label" text="\$expiry" />
+            <Label fx:id="premium" styleClass="cell_small_label" text="\$premium" />
         </VBox>
     </GridPane>
 </HBox>
