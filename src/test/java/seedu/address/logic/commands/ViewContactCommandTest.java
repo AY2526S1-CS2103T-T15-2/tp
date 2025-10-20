@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ViewContactCommand}.
@@ -60,7 +61,7 @@ public class ViewContactCommandTest {
         NricContainsKeywordsPredicate predicate = preparePredicate(" ");
         ViewContactCommand command = new ViewContactCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -70,7 +71,7 @@ public class ViewContactCommandTest {
         NricContainsKeywordsPredicate predicate = preparePredicate("S1234567C T1234567A T1234567B");
         ViewContactCommand command = new ViewContactCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 

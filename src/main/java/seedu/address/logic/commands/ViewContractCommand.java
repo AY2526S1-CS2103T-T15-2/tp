@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTRACTS;
 
 import seedu.address.model.Model;
+import seedu.address.ui.ListPanelType;
 
 
 /**
@@ -20,7 +21,7 @@ public class ViewContractCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContractList(PREDICATE_SHOW_ALL_CONTRACTS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, ListPanelType.CONTRACT);
     }
 }
 

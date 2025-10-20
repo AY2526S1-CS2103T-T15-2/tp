@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Adds multiple policies from a file.
@@ -38,7 +39,7 @@ public non-sealed class AddPolicyCommandMultiple extends AddPolicyCommandType {
             throw new CommandException(String.format(MESSAGE_IOEXCEPTION, e.getMessage()), e);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ListPanelType.POLICY);
     }
 
     @Override

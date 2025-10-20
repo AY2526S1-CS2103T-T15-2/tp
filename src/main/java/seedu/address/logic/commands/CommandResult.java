@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Represents the result of a command execution.
@@ -19,13 +20,17 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The type of list panel that should be shown to the user. */
+    public final ListPanelType listPanelType;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, ListPanelType listPanelType) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.listPanelType = requireNonNull(listPanelType);
     }
 
     /**
@@ -33,7 +38,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, ListPanelType.CURRENT);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}
+     * and {@code listPanelType}, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, ListPanelType listPanelType) {
+        this(feedbackToUser, false, false, listPanelType);
     }
 
     public String getFeedbackToUser() {
@@ -62,12 +75,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && listPanelType == otherCommandResult.listPanelType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, listPanelType);
     }
 
     @Override
@@ -76,6 +90,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("listPanelType", listPanelType)
                 .toString();
     }
 

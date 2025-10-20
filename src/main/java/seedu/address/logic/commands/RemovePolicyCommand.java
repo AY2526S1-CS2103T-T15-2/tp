@@ -17,6 +17,7 @@ import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Removes a policy identified using policy id from the address book.
@@ -61,7 +62,8 @@ public class RemovePolicyCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_REMOVE_POLICY_PENDING, existingContractIds));
             }
             model.removePolicy(policyToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove.getId()));
+            return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove.getId()),
+                    ListPanelType.POLICY);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_POLICY_ID);
         }

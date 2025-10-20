@@ -19,6 +19,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.PolicyId;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Adds a contract to iCon.
@@ -84,7 +85,7 @@ public class AddContractCommand extends Command {
         model.addContract(toAdd);
         model.addContractToPerson(toAdd);
         model.addContractToPolicy(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()), ListPanelType.CONTRACT);
     }
 
     @Override
