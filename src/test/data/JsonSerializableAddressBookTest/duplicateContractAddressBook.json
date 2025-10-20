@@ -15,5 +15,6 @@
     "pId": "P1234A",
     "dateSigned": "2023-10-10",
     "expiryDate": "2025-10-10"
-  } ]
+  } ],
+  "appointments": []
 }

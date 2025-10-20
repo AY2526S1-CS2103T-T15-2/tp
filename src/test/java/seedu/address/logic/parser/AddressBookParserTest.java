@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
@@ -156,6 +157,13 @@ public class AddressBookParserTest {
     public void parseCommand_removeContract() throws Exception {
         assertTrue(parser.parseCommand(RemoveContractCommand.COMMAND_WORD + " C1234A")
                 instanceof RemoveContractCommand);
+    }
+
+    @Test
+    public void parseCommand_addAppointment() throws Exception {
+        assertTrue(parser.parseCommand(
+                AddAppointmentCommand.COMMAND_WORD + " ic:S1234567A dt:2024-12-12 d:Details")
+                instanceof AddAppointmentCommand);
     }
 
     @Test

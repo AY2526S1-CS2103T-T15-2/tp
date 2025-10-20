@@ -23,6 +23,7 @@ import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ListPanelType;
 
 
 public class AddContractCommandTest {
@@ -95,6 +96,7 @@ public class AddContractCommandTest {
         // crude test for now
         assertCommandSuccess(new AddContractCommand(contractWithValidNric),
                 modelStub, String.format(AddContractCommand.MESSAGE_SUCCESS, contractId.toString()),
+                ListPanelType.CONTRACT,
                 modelStub);
     }
 

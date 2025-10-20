@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewPolicyCommand.
@@ -36,7 +37,8 @@ public class ViewPolicyCommandTest {
 
     @Test
     public void execute_viewIsNotFiltered_showsSameView() {
-        assertCommandSuccess(new ViewPolicyCommand(), model, ViewPolicyCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+        assertCommandSuccess(new ViewPolicyCommand(), model, ViewPolicyCommand.MESSAGE_SUCCESS_ALL,
+                ListPanelType.POLICY, expectedModel);
     }
 
     @Test
@@ -81,7 +83,7 @@ public class ViewPolicyCommandTest {
         IdContainsKeywordsPredicate predicate = preparePredicate(" ");
         ViewPolicyCommand command = new ViewPolicyCommand(predicate);
         expectedModel.updateFilteredPolicyList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, ListPanelType.POLICY, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPolicyList());
     }
 
@@ -92,7 +94,7 @@ public class ViewPolicyCommandTest {
                 String.join(", ", predicate.getKeywords()));
         ViewPolicyCommand command = new ViewPolicyCommand(predicate);
         expectedModel.updateFilteredPolicyList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, ListPanelType.POLICY, expectedModel);
         assertEquals(Arrays.asList(LIFE, HEALTH, PROPERTY), model.getFilteredPolicyList());
     }
 

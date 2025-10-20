@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTRACTS;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
+import seedu.address.ui.ListPanelType;
 
 
 /**
@@ -53,14 +54,14 @@ public class ViewContractCommand extends Command {
         requireNonNull(model);
         if (viewAll) {
             model.updateFilteredContractList(PREDICATE_SHOW_ALL_CONTRACTS);
-            return new CommandResult(MESSAGE_SUCCESS_ALL);
+            return new CommandResult(MESSAGE_SUCCESS_ALL, ListPanelType.CONTRACT);
         } else {
             model.updateFilteredContractList((predicate));
             if (model.getFilteredContractList().isEmpty()) {
-                return new CommandResult(String.format(MESSAGE_NO_ID_MATCH));
+                return new CommandResult(String.format(MESSAGE_NO_ID_MATCH), ListPanelType.CONTRACT);
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC,
-                    String.join(", ", predicate.getKeywords())));
+                    String.join(", ", predicate.getKeywords())), ListPanelType.CONTRACT);
 
         }
     }

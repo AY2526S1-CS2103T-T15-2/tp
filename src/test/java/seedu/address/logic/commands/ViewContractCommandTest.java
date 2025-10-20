@@ -20,6 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
 
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewContractCommand.
@@ -83,7 +84,7 @@ public class ViewContractCommandTest {
         ContractIdContainsKeywordsPredicate predicate = preparePredicate(" ");
         ViewContractCommand command = new ViewContractCommand(predicate);
         expectedModel.updateFilteredContractList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, ListPanelType.CONTRACT, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredContractList());
     }
 
@@ -94,7 +95,7 @@ public class ViewContractCommandTest {
                 String.join(", ", predicate.getKeywords()));
         ViewContractCommand command = new ViewContractCommand(predicate);
         expectedModel.updateFilteredContractList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, ListPanelType.CONTRACT, expectedModel);
         assertEquals(Arrays.asList(CONTRACT_A, CONTRACT_B, CONTRACT_C), model.getFilteredContractList());
     }
 

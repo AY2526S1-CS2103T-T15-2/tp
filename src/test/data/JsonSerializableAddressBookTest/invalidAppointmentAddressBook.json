@@ -1,0 +1,11 @@
+{
+  "persons": [],
+  "policies": [],
+  "contracts": [],
+  "appointments": [ {
+    "aId": "invalid id",
+    "nric": "S1234567B",
+    "appDate": "2025-10-10",
+    "details": "The Details"
+  } ]
+}

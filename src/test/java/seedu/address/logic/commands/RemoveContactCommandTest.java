@@ -24,6 +24,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -52,7 +53,7 @@ public class RemoveContactCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(removeContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(removeContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class RemoveContactCommandTest {
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        assertCommandSuccess(removeContactCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(removeContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
     }
 
     @Test

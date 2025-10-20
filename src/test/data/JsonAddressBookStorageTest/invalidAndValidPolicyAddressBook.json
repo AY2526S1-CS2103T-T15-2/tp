@@ -10,5 +10,7 @@
     "details": "other details",
     "id": "123456",
     "contracts": []
-  } ]
+  } ],
+  "contracts": [],
+  "appointments": []
 }
