@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -87,11 +88,20 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered and sorted person list */
+    ObservableList<Person> getSortedPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the comparator of the sorted list to sort by the given {@code comparator}.
+     * @param comparator {@code Comparator<Person>} or {@code null} for no sorting.
+     */
+    void sortPersons(Comparator<Person> comparator);
 
     /**
      * Returns true if a policy with the same id as {@code policy} exists in the address book.

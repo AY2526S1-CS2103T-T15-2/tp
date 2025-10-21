@@ -18,19 +18,17 @@
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
             <HBox spacing="0.5" alignment="CENTER_LEFT">
-                <Label fx:id="cId" text="\$cId" styleClass="cell_big_label">
+                <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
+                <Label fx:id="aid" text="\$first" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="name" text="\$name" styleClass="cell_small_label" />
+            <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
             <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
-            <Label fx:id="pId" styleClass="cell_small_label" text="\$pId" />
-            <Label fx:id="dateSigned" styleClass="cell_small_label" text="\$dateSigned" />
-            <Label fx:id="expiryDate" styleClass="cell_small_label" text="\$expiryDate" />
-            <Label fx:id="premium" styleClass="cell_small_label" text="\$premium" />
+            <Label fx:id="details" styleClass="cell_small_label" text="\$details" />
         </VBox>
     </GridPane>
 </HBox>

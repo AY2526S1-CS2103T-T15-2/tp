@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -82,7 +83,17 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Person> getSortedPersonList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void sortPersons(Comparator<Person> comparator) {
         throw new AssertionError("This method should not be called.");
     }
 

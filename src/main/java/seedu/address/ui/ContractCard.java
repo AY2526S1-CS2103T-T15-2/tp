@@ -36,7 +36,7 @@ public class ContractCard extends UiPart<Region> {
     @FXML
     private Label dateSigned;
     @FXML
-    private Label expiry;
+    private Label expiryDate;
     @FXML
     private Label premium;
 
@@ -51,7 +51,7 @@ public class ContractCard extends UiPart<Region> {
         name.setText("Name: " + contract.getName().fullName);
         nric.setText("NRIC: " + contract.getNric().nric);
         dateSigned.setText("Date Signed: " + contract.getDate().toString());
-        expiry.setText("Expiry Date: " + contract.getExpiryDate().toString());
+        expiryDate.setText("Expiry Date: " + contract.getExpiryDate().toString());
         premium.setText("Premium Amount: $" + contract.getPremium().toString());
     }
 }

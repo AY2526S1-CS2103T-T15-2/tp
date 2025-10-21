@@ -144,6 +144,17 @@ public class Person {
     }
 
     /**
+     * Compares two persons' name alphabetically.
+     * Used as a comparator to sort contacts.
+     */
+    public static int compareNameAlphabetical(Person person, Person otherPerson) {
+        return String.CASE_INSENSITIVE_ORDER.compare(
+                person.name.fullName,
+                otherPerson.name.fullName
+        );
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
