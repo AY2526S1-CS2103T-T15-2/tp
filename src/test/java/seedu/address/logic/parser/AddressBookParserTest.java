@@ -34,10 +34,12 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
+import seedu.address.logic.commands.ViewAppointmentCommand;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.commands.ViewContractCommand;
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentIdContainsKeywordsPredicate;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -164,6 +166,17 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(
                 AddAppointmentCommand.COMMAND_WORD + " ic:S1234567A dt:2024-12-12 d:Details")
                 instanceof AddAppointmentCommand);
+    }
+
+    @Test
+    public void parseCommand_viewAppointment() throws Exception {
+        List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
+        ViewAppointmentCommand command = (ViewAppointmentCommand) parser.parseCommand(
+                ViewAppointmentCommand.COMMAND_WORD
+                        + " a: " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " -a")
+                instanceof ViewAppointmentCommand);
     }
 
     @Test

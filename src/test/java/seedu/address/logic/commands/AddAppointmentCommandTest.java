@@ -85,7 +85,7 @@ public class AddAppointmentCommandTest {
         // crude test for now
         assertCommandSuccess(new AddAppointmentCommand(appointmentWithValidNric),
                 modelStub, String.format(AddAppointmentCommand.MESSAGE_SUCCESS, appointmentId.toString()),
-                ListPanelType.CURRENT,
+                ListPanelType.APPOINTMENT,
                 modelStub);
     }
 
