@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -46,7 +46,7 @@ public class ViewPolicyCommandParserTest {
     public void parse_anyArgs_returnsViewPolicyCommand() {
         ViewPolicyCommand expectedViewPolicyCommand =
                 new ViewPolicyCommand();
-        assertParseSuccess(parser, FLAG_ALL, expectedViewPolicyCommand);
-        assertParseSuccess(parser, FLAG_ALL + " nonsense", expectedViewPolicyCommand);
+        assertParseSuccess(parser, FLAG_LIST_ALL, expectedViewPolicyCommand);
+        assertParseSuccess(parser, FLAG_LIST_ALL + " nonsense", expectedViewPolicyCommand);
     }
 }

@@ -18,6 +18,7 @@ import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ListPanelType;
 
 /**
  * Adds an appointment to iCon.
@@ -80,7 +81,7 @@ public class AddAppointmentCommand extends Command {
         }
 
         model.addAppointment(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getAId().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getAId().toString()), ListPanelType.APPOINTMENT);
     }
 
     public Appointment getAppointment() {

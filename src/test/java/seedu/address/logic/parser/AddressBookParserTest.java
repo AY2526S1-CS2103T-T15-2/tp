@@ -36,10 +36,13 @@ import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
 import seedu.address.logic.commands.SortContactCommand;
+import seedu.address.logic.commands.ViewAppointmentCommand;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.commands.ViewContractCommand;
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentIdContainsKeywordsPredicate;
+import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonComparatorType;
@@ -124,6 +127,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_viewAppointment() throws Exception {
+        List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
+        ViewAppointmentCommand command = (ViewAppointmentCommand) parser.parseCommand(
+                ViewAppointmentCommand.COMMAND_WORD
+                        + " a: " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " -a")
+                instanceof ViewAppointmentCommand);
+    }
+
+    @Test
     public void parseCommand_addPolicy() throws Exception {
         AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(PolicyUtil.getAddPolicyCommand(LIFE));
         assertEquals(new AddPolicyCommand(unassign(LIFE)), command);
@@ -168,7 +182,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewContract() throws Exception {
-        assertTrue(parser.parseCommand(ViewContractCommand.COMMAND_WORD) instanceof ViewContractCommand);
+        List<String> keywords = Arrays.asList("C1234A", "C1234B", "C1234C");
+        ViewContractCommand command = (ViewContractCommand) parser.parseCommand(
+                ViewContractCommand.COMMAND_WORD + " c: "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewContractCommand(new ContractIdContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
