@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +35,7 @@ public class PersonBuilder {
             new PolicyId("abcdef"),
             LocalDate.parse("2023-01-01"),
             LocalDate.parse("2025-01-01"),
-            new ContractPremium(new BigDecimal(1000.00))
+            new ContractPremium("1000.00")
     ));
 
     private Name name;

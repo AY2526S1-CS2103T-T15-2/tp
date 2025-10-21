@@ -30,7 +30,6 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HOME;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,7 +132,7 @@ public class TypicalData {
             LIFE.getId(),
             LocalDate.parse("2023-01-01"),
             LocalDate.parse("2025-01-01"),
-            new ContractPremium(new BigDecimal("1000.00"))
+            new ContractPremium("1000.00")
     );
 
     public static final Contract CONTRACT_B = new Contract(
@@ -143,7 +142,7 @@ public class TypicalData {
             HEALTH.getId(),
             LocalDate.parse("2023-02-01"),
             LocalDate.parse("2025-02-01"),
-            new ContractPremium(new BigDecimal("1500.00"))
+            new ContractPremium("1500.00")
     );
 
     public static final Contract CONTRACT_C = new Contract(
@@ -153,7 +152,7 @@ public class TypicalData {
             PROPERTY.getId(),
             LocalDate.parse("2023-03-01"),
             LocalDate.parse("2025-03-01"),
-            new ContractPremium(new BigDecimal("2000.00"))
+            new ContractPremium("2000.00")
     );
 
     // Spare contracts not added into TypicalAddressBook
@@ -164,7 +163,7 @@ public class TypicalData {
             LIFE.getId(),
             LocalDate.parse("2023-04-01"),
             LocalDate.parse("2025-04-01"),
-            new ContractPremium(new BigDecimal("3000.00"))
+            new ContractPremium("3000.00")
     );
 
     public static final Contract CONTRACT_E = new Contract(
@@ -174,7 +173,7 @@ public class TypicalData {
             HEALTH.getId(),
             LocalDate.parse("2023-05-01"),
             LocalDate.parse("2025-05-01"),
-            new ContractPremium(new BigDecimal("1500.00"))
+            new ContractPremium("1500.00")
     );
 
     public static final Appointment APPOINTMENT_A = new Appointment(

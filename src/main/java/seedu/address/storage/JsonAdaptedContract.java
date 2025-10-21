@@ -129,16 +129,11 @@ public class JsonAdaptedContract {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     seedu.address.model.contract.ContractPremium.class.getSimpleName()));
         }
-        final java.math.BigDecimal premiumValue;
-        try {
-            premiumValue = new java.math.BigDecimal(premium.trim());
-        } catch (NumberFormatException e) {
+
+        if (!ContractPremium.isValidContractPremium(premium)) {
             throw new IllegalValueException(ContractPremium.MESSAGE_CONSTRAINTS);
         }
-        if (!ContractPremium.isValidContractPremium(premiumValue)) {
-            throw new IllegalValueException(ContractPremium.MESSAGE_CONSTRAINTS);
-        }
-        final ContractPremium modelPremium = new ContractPremium(premiumValue);
+        final ContractPremium modelPremium = new ContractPremium(premium);
 
         return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned, modelExpiryDate, modelPremium);
     }

@@ -23,19 +23,6 @@ public class ContractPremium {
     /**
      * Constructs a {@code ContractPremium}.
      *
-     * @param value A valid premium value.
-     */
-    public ContractPremium(BigDecimal value) {
-        requireNonNull(value);
-        BigDecimal normalized = value.setScale(SCALE, RoundingMode.HALF_UP);
-        checkArgument(isValidContractPremium(normalized), MESSAGE_CONSTRAINTS);
-        // Rounds up to the nearest 2 decimal places
-        this.value = normalized;
-    }
-
-    /**
-     * Constructs a {@code ContractPremium}.
-     *
      * @param value A valid premium value in string format.
      */
     public ContractPremium(String value) {
@@ -50,7 +37,7 @@ public class ContractPremium {
     /**
      * Returns true if a given {@code BigDecimal} is a valid premium.
      */
-    public static boolean isValidContractPremium(BigDecimal test) {
+    private static boolean isValidContractPremium(BigDecimal test) {
         if (test == null) {
             return false;
         }

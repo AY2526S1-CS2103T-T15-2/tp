@@ -3,8 +3,6 @@ package seedu.address.model.contract;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.math.BigDecimal;
-
 import org.junit.jupiter.api.Test;
 
 public class ContractPremiumTest {
@@ -12,8 +10,7 @@ public class ContractPremiumTest {
     @Test
     public void isValidContractPremium() {
         // null premium
-        assertFalse(ContractPremium.isValidContractPremium((String) null));
-        assertFalse(ContractPremium.isValidContractPremium((BigDecimal) null));
+        assertFalse(ContractPremium.isValidContractPremium(null));
 
         // invalid premiums
         assertFalse(ContractPremium.isValidContractPremium("")); // empty string
