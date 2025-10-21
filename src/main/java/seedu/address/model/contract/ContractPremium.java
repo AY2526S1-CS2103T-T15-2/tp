@@ -46,28 +46,34 @@ public class ContractPremium {
         // Rounds up to the nearest 2 decimal places
         this.value = normalized;
     }
-    /**
-     * Constructs a {@code ContractPremium}.
-     *
-     * @param value A valid premium value in double format.
-     */
-    public ContractPremium(double value) {
-        BigDecimal decimalValue = BigDecimal.valueOf(value);
-        BigDecimal normalized = decimalValue.setScale(SCALE, RoundingMode.HALF_UP);
-        checkArgument(isValidContractPremium(normalized), MESSAGE_CONSTRAINTS);
-        // Rounds up to the nearest 2 decimal places
-        this.value = normalized;
-    }
 
     /**
      * Returns true if a given {@code BigDecimal} is a valid premium.
      */
     public static boolean isValidContractPremium(BigDecimal test) {
-        requireNonNull(test);
+        if (test == null) {
+            return false;
+        }
         try {
             BigDecimal normalized = test.setScale(SCALE, RoundingMode.HALF_UP);
             return normalized.compareTo(BigDecimal.ZERO) >= 0;
         } catch (ArithmeticException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if a given {@code String} is a valid premium.
+     */
+    public static boolean isValidContractPremium(String test) {
+        if (test == null) {
+            return false;
+        }
+        try {
+            BigDecimal value = new BigDecimal(test);
+            BigDecimal normalized = value.setScale(SCALE, RoundingMode.HALF_UP);
+            return normalized.compareTo(BigDecimal.ZERO) >= 0;
+        } catch (NumberFormatException | ArithmeticException e) {
             return false;
         }
     }
