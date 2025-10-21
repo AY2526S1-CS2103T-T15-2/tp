@@ -341,6 +341,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given contract {@code target} in the list with {@code editedContract}.
+     * {@code target} must exist in the address book.
+     * The contract identity of {@code editedContract} must not be the same as another existing contract
+     * in the address book.
+     */
+    public void setContract(Contract target, Contract editedContract) {
+        requireNonNull(editedContract);
+        contracts.setContract(target, editedContract);
+    }
+
+    /**
      * Returns true if a person has the given contract.
      */
     public boolean personHasContract(Contract contract, Person person) {

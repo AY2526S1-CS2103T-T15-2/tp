@@ -48,6 +48,7 @@ public class ContractBuilder {
         nric = contractToCopy.getNric();
         pId = contractToCopy.getPId();
         dateSigned = contractToCopy.getDate();
+        expiry = contractToCopy.getExpiryDate();
     }
 
     /**
@@ -79,6 +80,14 @@ public class ContractBuilder {
      */
     public ContractBuilder withDate(LocalDate date) {
         this.dateSigned = date;
+        return this;
+    }
+
+    /**
+     * Sets the {@code LocalDate} expiry date of the {@code Contract} that we are building.
+     */
+    public ContractBuilder withExpiryDate(LocalDate expiry) {
+        this.expiry = expiry;
         return this;
     }
 

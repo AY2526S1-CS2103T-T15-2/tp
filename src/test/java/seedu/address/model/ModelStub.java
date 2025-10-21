@@ -176,6 +176,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setContract(Contract target, Contract editedContract) {
+
+    }
+
+    @Override
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         throw new AssertionError("This method should not be called.");
     }
