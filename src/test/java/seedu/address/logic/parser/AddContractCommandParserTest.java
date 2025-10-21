@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddContractCommand;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 
@@ -160,20 +161,20 @@ public class AddContractCommandParserTest {
 
         // invalid Date
         assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC + EXPIRY_DESC + PREMIUM_DESC,
-                "Date should be in the format yyyy-MM-dd");
+                Messages.MESSAGE_INVALID_DATE_FORMAT);
 
         // invalid Expiry(Invalid date format)
         assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC
                         + INVALID_EXPIRY_DESC_1 + PREMIUM_DESC,
-                "Date should be in the format yyyy-MM-dd");
+                Messages.MESSAGE_INVALID_DATE_FORMAT);
 
         // invalid Expiry(Invalid period)
         assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + INVALID_EXPIRY_DESC_2 + PREMIUM_DESC,
-                "Signing date comes after expiry date");
+                Messages.MESSAGE_INVALID_EXPIRY_DATE);
 
         // invalid Premium(negative value)
         assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC + INVALID_PREMIUM_DESC,
-                "Contract premium should be a non-negative number.");
+                ContractPremium.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC,

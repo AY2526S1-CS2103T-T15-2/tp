@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.contract.exceptions.InvalidContractDatesException;
@@ -115,7 +116,7 @@ public class JsonAdaptedContractTest {
         JsonAdaptedContract contract =
                 new JsonAdaptedContract(VALID_CID, VALID_NAME, VALID_NRIC, VALID_PID,
                         INVALID_DATE, VALID_EXPIRY, VALID_PREMIUM);
-        String expectedMessage = "Date should be in the format dd-MM-yyyy";
+        String expectedMessage = Messages.MESSAGE_INVALID_DATE_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, contract::toModelType);
     }
 
@@ -132,7 +133,7 @@ public class JsonAdaptedContractTest {
         JsonAdaptedContract contract =
                 new JsonAdaptedContract(VALID_CID, VALID_NAME, VALID_NRIC, VALID_PID,
                         VALID_DATE, INVALID_EXPIRY, VALID_PREMIUM);
-        String expectedMessage = "Date should be in the format dd-MM-yyyy";
+        String expectedMessage = Messages.MESSAGE_INVALID_DATE_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, contract::toModelType);
     }
 
@@ -141,7 +142,7 @@ public class JsonAdaptedContractTest {
         JsonAdaptedContract contract =
                 new JsonAdaptedContract(VALID_CID, VALID_NAME, VALID_NRIC, VALID_PID,
                         VALID_DATE, INVALID_PERIOD_EXPIRY, VALID_PREMIUM);
-        String expectedMessage = "Signing date comes after expiry date";
+        String expectedMessage = Messages.MESSAGE_INVALID_EXPIRY_DATE;
         assertThrows(InvalidContractDatesException.class, expectedMessage, contract::toModelType);
     }
 
@@ -158,7 +159,7 @@ public class JsonAdaptedContractTest {
         JsonAdaptedContract contract =
                 new JsonAdaptedContract(VALID_CID, VALID_NAME, VALID_NRIC, VALID_PID,
                         VALID_DATE, VALID_EXPIRY, INVALID_PREMIUM);
-        String expectedMessage = "Contract premium should be a non-negative number.";
+        String expectedMessage = ContractPremium.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contract::toModelType);
     }
 
