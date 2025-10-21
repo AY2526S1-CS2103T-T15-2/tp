@@ -170,7 +170,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addContract() throws Exception {
         assertTrue(parser.parseCommand(
-                AddContractCommand.COMMAND_WORD + " p:P1234A ic:S1234567A dt:2024-12-12 e: 2025-12-12")
+                AddContractCommand.COMMAND_WORD + " p:P1234A ic:S1234567A dt:2024-12-12 e: 2025-12-12 pr:1000.00")
                 instanceof AddContractCommand);
     }
 

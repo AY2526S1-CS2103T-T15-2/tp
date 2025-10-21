@@ -37,6 +37,8 @@ public class ContractCard extends UiPart<Region> {
     private Label dateSigned;
     @FXML
     private Label expiryDate;
+    @FXML
+    private Label premium;
 
     /**
      * Creates a {@code PolicyCode} with the given {@code Policy} and index to display.
@@ -50,5 +52,6 @@ public class ContractCard extends UiPart<Region> {
         nric.setText("NRIC: " + contract.getNric().nric);
         dateSigned.setText("Date Signed: " + contract.getDate().toString());
         expiryDate.setText("Expiry Date: " + contract.getExpiryDate().toString());
+        premium.setText("Premium Amount: $" + contract.getPremium().toString());
     }
 }
