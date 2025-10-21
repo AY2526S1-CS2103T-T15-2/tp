@@ -76,7 +76,8 @@ public class JsonAdaptedPersonTest {
             VALID_NRIC_4,
             "abcdef",
             "2023-01-01",
-            "2025-01-01"
+            "2025-01-01",
+            "1000.00"
     );
 
 

@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,7 +35,8 @@ public class PersonBuilder {
             new Nric("S1234567A"),
             new PolicyId("abcdef"),
             LocalDate.parse("2023-01-01"),
-            LocalDate.parse("2025-01-01")
+            LocalDate.parse("2025-01-01"),
+            new ContractPremium(new BigDecimal(1000.00))
     ));
 
     private Name name;

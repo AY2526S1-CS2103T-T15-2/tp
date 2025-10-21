@@ -133,7 +133,7 @@ public class TypicalData {
             LIFE.getId(),
             LocalDate.parse("2023-01-01"),
             LocalDate.parse("2025-01-01"),
-            new ContractPremium( new BigDecimal("500.00"))
+            new ContractPremium(new BigDecimal("1000.00"))
     );
 
     public static final Contract CONTRACT_B = new Contract(
@@ -143,7 +143,7 @@ public class TypicalData {
             HEALTH.getId(),
             LocalDate.parse("2023-02-01"),
             LocalDate.parse("2025-02-01"),
-            new ContractPremium(new BigDecimal("1000.00"))
+            new ContractPremium(new BigDecimal("1500.00"))
     );
 
     public static final Contract CONTRACT_C = new Contract(

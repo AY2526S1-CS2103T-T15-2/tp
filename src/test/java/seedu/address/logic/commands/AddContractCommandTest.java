@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -33,6 +34,7 @@ public class AddContractCommandTest {
     private static final String VALID_PID = "abcdef";
     private static final String VALID_DATE = "2000-01-01";
     private static final String VALID_EXPIRY = "2020-01-01";
+    private static final String VALID_PREMIUM = "1000.00";
     private static final Person PERSON_WITH_VALID_ID = new PersonBuilder().build();
 
     @Test
@@ -43,9 +45,11 @@ public class AddContractCommandTest {
     @Test
     public void equals() {
         Contract contract = new Contract(new ContractId("C1234A"), new Name("Alice"), new Nric("S1234567D"),
-                new PolicyId("P1234A"), LocalDate.parse("2023-01-01"), LocalDate.parse("2025-01-01"));
+                new PolicyId("P1234A"), LocalDate.parse("2023-01-01"), LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         Contract otherContract = new Contract(new ContractId("C1234B"), new Name("Bob"), new Nric("S7654321D"),
-                new PolicyId("P1234B"), LocalDate.parse("2023-02-01"), LocalDate.parse("2025-02-01"));
+                new PolicyId("P1234B"), LocalDate.parse("2023-02-01"), LocalDate.parse("2025-02-01"),
+                new ContractPremium("1000.00"));
         AddContractCommand addContractCommand = new AddContractCommand(contract);
         AddContractCommand addContractCommandOther = new AddContractCommand(otherContract);
 
@@ -74,7 +78,8 @@ public class AddContractCommandTest {
                 new Nric(INVALID_NRIC),
                 new PolicyId(VALID_PID),
                 LocalDate.parse(VALID_DATE),
-                LocalDate.parse(VALID_EXPIRY));
+                LocalDate.parse(VALID_EXPIRY),
+                new ContractPremium(VALID_PREMIUM));
         assertCommandFailure(new AddContractCommand(contractWithInvalidNric),
                 modelStub, AddContractCommand.MESSAGE_PERSON_NOT_FOUND);
     }
@@ -91,7 +96,8 @@ public class AddContractCommandTest {
                 new Nric(VALID_NRIC),
                 new PolicyId(VALID_PID),
                 LocalDate.parse(VALID_DATE),
-                LocalDate.parse(VALID_EXPIRY));
+                LocalDate.parse(VALID_EXPIRY),
+                new ContractPremium(VALID_PREMIUM));
         ContractId contractId = contractWithValidNric.getCId();
         // crude test for now
         assertCommandSuccess(new AddContractCommand(contractWithValidNric),
@@ -103,7 +109,8 @@ public class AddContractCommandTest {
     @Test
     public void toStringMethod() {
         Contract contract = new Contract(new ContractId("C1234A"), new Name("Alice"), new Nric("S1234567D"),
-                new PolicyId("P1234A"), LocalDate.parse("2023-01-01"), LocalDate.parse("2025-01-01"));
+                new PolicyId("P1234A"), LocalDate.parse("2023-01-01"), LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         AddContractCommand addContractCommand = new AddContractCommand(contract);
         String expected = AddContractCommand.class.getCanonicalName() + "{toAdd=" + contract + "}";
         assertEquals(expected, addContractCommand.toString());

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import org.junit.jupiter.api.Test;
@@ -34,15 +35,21 @@ public class AddContractCommandParserTest {
     private static final String INVALID_EXPIRY_DATE_INVALID_FORMAT = "01-10-2025";
     private static final String INVALID_EXPIRY_INVALID_PERIOD = "2000-01-01";
 
+    private static final String VALID_PREMIUM_1 = "1000.00";
+    private static final String VALID_PREMIUM_2 = "1500.00";
+    private static final String INVALID_PREMIUM = "-500.00";
+
     private static final String PID_DESC = " " + PREFIX_PID + VALID_PID_1;
     private static final String NRIC_DESC = " " + PREFIX_NRIC + VALID_NRIC_1;
     private static final String DATE_DESC = " " + PREFIX_DATE + VALID_DATE_1;
     private static final String EXPIRY_DESC = " " + PREFIX_EXPIRY + VALID_EXPIRY_1;
+    private static final String PREMIUM_DESC = " " + PREFIX_PREMIUM + VALID_PREMIUM_1;
     private static final String INVALID_PID_DESC = " " + PREFIX_PID + INVALID_PID;
     private static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + INVALID_NRIC;
     private static final String INVALID_DATE_DESC = " " + PREFIX_DATE + INVALID_DATE;
     private static final String INVALID_EXPIRY_DESC_1 = " " + PREFIX_EXPIRY + INVALID_EXPIRY_DATE_INVALID_FORMAT;
     private static final String INVALID_EXPIRY_DESC_2 = " " + PREFIX_EXPIRY + INVALID_EXPIRY_INVALID_PERIOD;
+    private static final String INVALID_PREMIUM_DESC = " " + PREFIX_PREMIUM + INVALID_PREMIUM;
 
     private AddContractCommandParser parser = new AddContractCommandParser();
 
@@ -51,7 +58,8 @@ public class AddContractCommandParserTest {
         String validExpectedContractString = " " + PREFIX_PID + VALID_PID_1
                 + " " + PREFIX_NRIC + VALID_NRIC_1
                 + " " + PREFIX_DATE + VALID_DATE_1
-                + " " + PREFIX_EXPIRY + VALID_EXPIRY_1;
+                + " " + PREFIX_EXPIRY + VALID_EXPIRY_1
+                + " " + PREFIX_PREMIUM + VALID_PREMIUM_1;
 
         assertParseFailure(parser, " " + PREFIX_EXPIRY + VALID_EXPIRY_2 + validExpectedContractString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EXPIRY));
@@ -62,7 +70,8 @@ public class AddContractCommandParserTest {
         String validExpectedContractString = " " + PREFIX_PID + VALID_PID_1
                 + " " + PREFIX_NRIC + VALID_NRIC_1
                 + " " + PREFIX_DATE + VALID_DATE_1
-                + " " + PREFIX_EXPIRY + VALID_EXPIRY_1;
+                + " " + PREFIX_EXPIRY + VALID_EXPIRY_1
+                + " " + PREFIX_PREMIUM + VALID_PREMIUM_1;
 
         // multiple nrics
         assertParseFailure(parser, " " + PREFIX_NRIC + VALID_NRIC_2 + validExpectedContractString,
@@ -85,8 +94,10 @@ public class AddContractCommandParserTest {
                         + " " + PREFIX_NRIC + VALID_NRIC_2
                         + " " + PREFIX_PID + VALID_PID_2
                         + " " + PREFIX_DATE + VALID_DATE_2
-                        + " " + PREFIX_EXPIRY + VALID_EXPIRY_2,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC, PREFIX_PID, PREFIX_DATE, PREFIX_EXPIRY));
+                        + " " + PREFIX_EXPIRY + VALID_EXPIRY_2
+                        + " " + PREFIX_PREMIUM + VALID_PREMIUM_2,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC, PREFIX_PID, PREFIX_DATE,
+                        PREFIX_EXPIRY, PREFIX_PREMIUM));
 
         // invalid value followed by valid value
 
@@ -111,6 +122,10 @@ public class AddContractCommandParserTest {
         assertParseFailure(parser, " " + PREFIX_EXPIRY + INVALID_EXPIRY_INVALID_PERIOD
                         + validExpectedContractString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EXPIRY));
+
+        // invalid premium(negative value)
+        assertParseFailure(parser, " " + PREFIX_PREMIUM + INVALID_PREMIUM + validExpectedContractString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PREMIUM));
     }
 
     @Test
@@ -118,39 +133,47 @@ public class AddContractCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContractCommand.MESSAGE_USAGE);
 
         // missing pId prefix
-        assertParseFailure(parser, NRIC_DESC + DATE_DESC + EXPIRY_DESC, expectedMessage);
+        assertParseFailure(parser, NRIC_DESC + DATE_DESC + EXPIRY_DESC + PREMIUM_DESC, expectedMessage);
 
         // missing Nric prefix
-        assertParseFailure(parser, PID_DESC + DATE_DESC + EXPIRY_DESC, expectedMessage);
+        assertParseFailure(parser, PID_DESC + DATE_DESC + EXPIRY_DESC + PREMIUM_DESC, expectedMessage);
 
         // missing date prefix
-        assertParseFailure(parser, PID_DESC + NRIC_DESC + EXPIRY_DESC, expectedMessage);
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + EXPIRY_DESC + PREMIUM_DESC, expectedMessage);
 
         // missing expiry prefix
-        assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC, expectedMessage);
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + PREMIUM_DESC, expectedMessage);
+
+        // missing premium prefix
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid pId
-        assertParseFailure(parser, INVALID_PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC,
+        assertParseFailure(parser, INVALID_PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC + PREMIUM_DESC,
                 PolicyId.MESSAGE_CONSTRAINTS);
 
         // invalid Nric
-        assertParseFailure(parser, PID_DESC + INVALID_NRIC_DESC + DATE_DESC + EXPIRY_DESC,
+        assertParseFailure(parser, PID_DESC + INVALID_NRIC_DESC + DATE_DESC + EXPIRY_DESC + PREMIUM_DESC,
                 Nric.MESSAGE_CONSTRAINTS);
 
         // invalid Date
-        assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC + EXPIRY_DESC,
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC + EXPIRY_DESC + PREMIUM_DESC,
                 "Date should be in the format yyyy-MM-dd");
 
         // invalid Expiry(Invalid date format)
-        assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC + INVALID_EXPIRY_DESC_1,
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + INVALID_DATE_DESC
+                        + INVALID_EXPIRY_DESC_1 + PREMIUM_DESC,
                 "Date should be in the format yyyy-MM-dd");
 
         // invalid Expiry(Invalid period)
-        assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + INVALID_EXPIRY_DESC_2,
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + INVALID_EXPIRY_DESC_2 + PREMIUM_DESC,
                 "Signing date comes after expiry date");
+
+        // invalid Premium(negative value)
+        assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC + INVALID_PREMIUM_DESC,
+                "Contract premium should be a non-negative number.");
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC,

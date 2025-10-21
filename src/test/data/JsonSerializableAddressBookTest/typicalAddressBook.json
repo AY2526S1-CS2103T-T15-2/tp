@@ -14,7 +14,8 @@
         "nric": "S1234567A",
         "pId" : "abcdef",
         "dateSigned" : "2023-01-01",
-        "expiryDate": "2025-01-01"
+        "expiryDate": "2025-01-01",
+        "premium": "1000.00"
       }
     ]
   }, {
@@ -31,7 +32,8 @@
         "nric": "S1234567B",
         "pId" : "123456",
         "dateSigned" : "2023-02-01",
-        "expiryDate": "2025-02-01"
+        "expiryDate": "2025-02-01",
+        "premium": "1500.00"
       }
     ]
   }, {
@@ -48,7 +50,8 @@
         "nric": "S1234567C",
         "pId" : "Abc123",
         "dateSigned" : "2023-03-01",
-        "expiryDate": "2025-03-01"
+        "expiryDate": "2025-03-01",
+        "premium": "2000.00"
       }
     ]
   }, {
@@ -95,7 +98,8 @@
         "nric": "S1234567A",
         "pId" : "abcdef",
         "dateSigned" : "2023-01-01",
-        "expiryDate": "2025-01-01"
+        "expiryDate": "2025-01-01",
+        "premium": "1000.00"
       }
     ]
   }, {
@@ -109,7 +113,8 @@
         "nric": "S1234567B",
         "pId" : "123456",
         "dateSigned" : "2023-02-01",
-        "expiryDate": "2025-02-01"
+        "expiryDate": "2025-02-01",
+        "premium": "1500.00"
       }
     ]
   }, {
@@ -123,7 +128,8 @@
         "nric": "S1234567C",
         "pId" : "Abc123",
         "dateSigned" : "2023-03-01",
-        "expiryDate": "2025-03-01"
+        "expiryDate": "2025-03-01",
+        "premium": "2000.00"
       }
     ]
   }, {
@@ -138,21 +144,24 @@
     "nric": "S1234567A",
     "pId" : "abcdef",
     "dateSigned" : "2023-01-01",
-    "expiryDate": "2025-01-01"
+    "expiryDate": "2025-01-01",
+    "premium": "1000.00"
   }, {
     "cId" : "C1234B",
     "name" : "Benson Meier",
     "nric": "S1234567B",
     "pId" : "123456",
     "dateSigned" : "2023-02-01",
-    "expiryDate": "2025-02-01"
+    "expiryDate": "2025-02-01",
+    "premium": "1500.00"
   }, {
     "cId" : "C1234C",
     "name" : "Carl Kurz",
     "nric": "S1234567C",
     "pId" : "Abc123",
     "dateSigned" : "2023-03-01",
-    "expiryDate": "2025-03-01"
+    "expiryDate": "2025-03-01",
+    "premium": "2000.00"
   } ],
   "appointments": [ {
     "aId": "A1234A",

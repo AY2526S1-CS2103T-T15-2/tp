@@ -25,7 +25,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
 
         // same object -> returns true
         assertTrue(contract.isSameContract(contract));
@@ -40,7 +41,8 @@ public class ContractTest {
                 new Nric("T1234567A"),
                 new PolicyId("abceef"),
                 LocalDate.parse("2023-01-02"),
-                LocalDate.parse("2025-01-02"));
+                LocalDate.parse("2025-01-02"),
+                new ContractPremium("2000.00"));
         assertEquals(contract.getCId(), editedContract.getCId());
 
         // different id, all other attributes same -> returns false
@@ -50,7 +52,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertFalse(contract.getCId().equals(editedContract.getCId()));
 
         // id differs in case, all other attributes same -> returns false
@@ -60,7 +63,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertFalse(contract.getCId().equals(editedContract.getCId()));
     }
 
@@ -72,7 +76,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
 
         // same values -> returns true
         Contract contractCopy = new Contract(
@@ -81,7 +86,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertTrue(contract.isSameContract(contractCopy));
         assertTrue(contract.equals(contractCopy));
 
@@ -101,7 +107,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertFalse(contract.equals(differentContract));
 
         // different name -> returns false
@@ -111,7 +118,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertFalse(contract.equals(editedContract));
 
         // different NRIC -> returns false
@@ -121,7 +129,8 @@ public class ContractTest {
                 new Nric("T1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertFalse(contract.equals(editedContract));
 
         // different PolicyId -> returns false
@@ -131,7 +140,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("bcdefg"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertFalse(contract.equals(editedContract));
 
         // different Date -> returns false
@@ -141,7 +151,8 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-02"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         assertFalse(contract.equals(editedContract));
 
         // different Expiry -> returns false
@@ -151,7 +162,20 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-02"));
+                LocalDate.parse("2025-01-02"),
+                new ContractPremium("1000.00"));
+        assertFalse(contract.equals(editedContract));
+
+        // different Premium -> returns false
+        // different Expiry -> returns false
+        editedContract = new Contract(
+                new ContractId("abcdef"),
+                new Name("Test"),
+                new Nric("S1234567A"),
+                new PolicyId("abcdef"),
+                LocalDate.parse("2023-01-01"),
+                LocalDate.parse("2025-01-02"),
+                new ContractPremium("1234.00"));
         assertFalse(contract.equals(editedContract));
 
         // hashcode same for same object
@@ -166,14 +190,16 @@ public class ContractTest {
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-01"),
-                LocalDate.parse("2025-01-01"));
+                LocalDate.parse("2025-01-01"),
+                new ContractPremium("1000.00"));
         String expected = Contract.class.getCanonicalName()
                 + "{cId=" + contract.getCId()
                 + ", name=" + contract.getName()
                 + ", nric=" + contract.getNric()
                 + ", pId=" + contract.getPId()
                 + ", dateSigned=" + contract.getDate()
-                + ", expiryDate=" + contract.getExpiryDate() + "}";
+                + ", expiryDate=" + contract.getExpiryDate()
+                + ", premium=" + contract.getPremium() + "}";
         assertEquals(expected, contract.toString());
     }
 
@@ -183,13 +209,15 @@ public class ContractTest {
                 new Nric("T1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-02"),
-                LocalDate.parse("2025-01-02")
+                LocalDate.parse("2025-01-02"),
+                new ContractPremium("1000.00")
         );
         Contract contract2 = new Contract(
                 new Nric("S1234567A"),
                 new PolicyId("abcdef"),
                 LocalDate.parse("2023-01-02"),
-                LocalDate.parse("2025-01-02")
+                LocalDate.parse("2025-01-02"),
+                new ContractPremium("1000.00")
         );
         assertNotEquals(contract1, contract2);
     }
@@ -200,7 +228,17 @@ public class ContractTest {
         PolicyId policyId = new PolicyId("abcdef");
         LocalDate date = LocalDate.parse("2025-10-19");
         LocalDate expiry = LocalDate.parse("2000-01-01");
-        assertThrows(InvalidContractDatesException.class, () -> new Contract(nric, policyId, date, expiry));
+        ContractPremium premium = new ContractPremium("1000.00");
+        assertThrows(InvalidContractDatesException.class, () -> new Contract(nric, policyId, date, expiry, premium));
     }
 
+    @Test
+    public void invalidPremiumThrowsException() {
+        Nric nric = new Nric("T1234567A");
+        PolicyId policyId = new PolicyId("abcdef");
+        LocalDate date = LocalDate.parse("2025-10-19");
+        LocalDate expiry = LocalDate.parse("2025-10-21");
+        assertThrows(IllegalArgumentException.class, () -> new Contract(nric, policyId, date,
+                expiry, new ContractPremium("-1000.00")));
+    }
 }
