@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREAMBLE_ALL;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -44,7 +44,7 @@ public class ViewContractCommandParserTest {
     @Test
     public void parse_anyArgs_returnsViewContractCommand() {
         ViewContractCommand expectedViewContractcommand = new ViewContractCommand();
-        assertParseSuccess(parser, " " + PREAMBLE_ALL, expectedViewContractcommand);
-        assertParseSuccess(parser, PREAMBLE_ALL + " nonsense", expectedViewContractcommand);
+        assertParseSuccess(parser, " " + FLAG_LIST_ALL, expectedViewContractcommand);
+        assertParseSuccess(parser, FLAG_LIST_ALL + " nonsense", expectedViewContractcommand);
     }
 }

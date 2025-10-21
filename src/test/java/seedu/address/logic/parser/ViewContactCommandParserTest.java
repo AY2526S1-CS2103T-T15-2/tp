@@ -22,7 +22,7 @@ public class ViewContactCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsViewContactCommand() {
         // no leading and trailing whitespaces
         ViewContactCommand expectedViewContactCommand =
                 new ViewContactCommand(new NricContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));

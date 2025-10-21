@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
@@ -34,6 +35,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
+import seedu.address.logic.commands.SortContactCommand;
 import seedu.address.logic.commands.ViewAppointmentCommand;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.commands.ViewContractCommand;
@@ -43,6 +45,7 @@ import seedu.address.model.appointment.AppointmentIdContainsKeywordsPredicate;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonComparatorType;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -55,10 +58,26 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addContact() throws Exception {
         Person person = new PersonBuilder().build();
         AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddContactCommand(person));
         assertEquals(new AddContactCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_editContact() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_removeContact() throws Exception {
+        RemoveContactCommand command = (RemoveContactCommand) parser.parseCommand(
+                RemoveContactCommand.COMMAND_WORD + " " + NRIC_FIRST_PERSON);
+        assertEquals(new RemoveContactCommand(PREDICATE_FIRST), command);
     }
 
     @Test
@@ -68,10 +87,54 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        RemoveContactCommand command = (RemoveContactCommand) parser.parseCommand(
-                RemoveContactCommand.COMMAND_WORD + " " + NRIC_FIRST_PERSON);
-        assertEquals(new RemoveContactCommand(PREDICATE_FIRST), command);
+    public void parseCommand_viewContact() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        ViewContactCommand command = (ViewContactCommand) parser.parseCommand(
+                ViewContactCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewContactCommand(new NricContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_sortContact() throws Exception {
+        SortContactCommand command = (SortContactCommand) parser.parseCommand(
+                SortContactCommand.COMMAND_WORD + " " + FLAG_ALPHABETICAL_ORDER);
+        assertEquals(new SortContactCommand(PersonComparatorType.ALPHABETICAL), command);
+    }
+
+    @Test
+    public void parseCommand_list() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_exit() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_help() throws Exception {
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_addAppointment() throws Exception {
+        assertTrue(parser.parseCommand(
+                AddAppointmentCommand.COMMAND_WORD + " ic:S1234567A dt:2024-12-12 d:Details")
+                instanceof AddAppointmentCommand);
+    }
+
+    @Test
+    public void parseCommand_viewAppointment() throws Exception {
+        List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
+        ViewAppointmentCommand command = (ViewAppointmentCommand) parser.parseCommand(
+                ViewAppointmentCommand.COMMAND_WORD
+                        + " a: " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " -a")
+                instanceof ViewAppointmentCommand);
     }
 
     @Test
@@ -92,50 +155,6 @@ public class AddressBookParserTest {
         RemovePolicyCommand command = (RemovePolicyCommand) parser.parseCommand(
                 RemovePolicyCommand.COMMAND_WORD + " " + "p:" + VALID_POLICY_ID_3);
         assertEquals(new RemovePolicyCommand(VALID_POLICY_ID_3), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
-    }
-
-    @Test
-    public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        ViewContactCommand command = (ViewContactCommand) parser.parseCommand(
-                ViewContactCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new ViewContactCommand(new NricContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
-    public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
-    }
-
-    @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    }
-
-    @Test
-    public void parseCommand_viewContract() throws Exception {
-        List<String> keywords = Arrays.asList("C1234A", "C1234B", "C1234C");
-        ViewContractCommand command = (ViewContractCommand) parser.parseCommand(
-                ViewContractCommand.COMMAND_WORD + " c: "
-                        + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new ViewContractCommand(new ContractIdContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -162,21 +181,12 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addAppointment() throws Exception {
-        assertTrue(parser.parseCommand(
-                AddAppointmentCommand.COMMAND_WORD + " ic:S1234567A dt:2024-12-12 d:Details")
-                instanceof AddAppointmentCommand);
-    }
-
-    @Test
-    public void parseCommand_viewAppointment() throws Exception {
-        List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
-        ViewAppointmentCommand command = (ViewAppointmentCommand) parser.parseCommand(
-                ViewAppointmentCommand.COMMAND_WORD
-                        + " a: " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(keywords)), command);
-        assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " -a")
-                instanceof ViewAppointmentCommand);
+    public void parseCommand_viewContract() throws Exception {
+        List<String> keywords = Arrays.asList("C1234A", "C1234B", "C1234C");
+        ViewContractCommand command = (ViewContractCommand) parser.parseCommand(
+                ViewContractCommand.COMMAND_WORD + " c: "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewContractCommand(new ContractIdContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

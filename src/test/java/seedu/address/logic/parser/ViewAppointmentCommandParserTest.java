@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREAMBLE_ALL;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -48,7 +48,7 @@ public class ViewAppointmentCommandParserTest {
     public void parse_anyArgs_returnsViewAppointmentCommand() {
         ViewAppointmentCommand expectedViewAppointmentCommand =
                 new ViewAppointmentCommand();
-        assertParseSuccess(parser, PREAMBLE_ALL, expectedViewAppointmentCommand);
-        assertParseSuccess(parser, PREAMBLE_ALL + " nonsense", expectedViewAppointmentCommand);
+        assertParseSuccess(parser, FLAG_LIST_ALL, expectedViewAppointmentCommand);
+        assertParseSuccess(parser, FLAG_LIST_ALL + " nonsense", expectedViewAppointmentCommand);
     }
 }

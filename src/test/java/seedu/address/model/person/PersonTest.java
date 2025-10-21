@@ -74,6 +74,22 @@ public class PersonTest {
     }
 
     @Test
+    public void compareNameAlphabetical() {
+        // same name -> returns 0
+        assertEquals(0, Person.compareNameAlphabetical(ALICE, ALICE));
+
+        // same name in different case -> returns 0
+        assertEquals(0, Person.compareNameAlphabetical(ALICE,
+                new PersonBuilder(ALICE).withName(ALICE.getName().fullName.toUpperCase()).build()));
+
+        // first person's name < second person's name alphabetically -> returns -1
+        assertEquals(-1, Person.compareNameAlphabetical(ALICE, BOB));
+
+        // first person's name > second person's name alphabetically -> returns 1
+        assertEquals(1, Person.compareNameAlphabetical(BOB, ALICE));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
