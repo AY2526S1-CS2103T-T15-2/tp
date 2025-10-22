@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
@@ -42,6 +44,7 @@ public class EditContractCommand extends Command {
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_DATE + "DATE SIGNED] "
             + "[" + PREFIX_EXPIRY + "EXPIRY DATE] "
+            + "[" + PREFIX_PREMIUM + "PREMIUM] "
             + "Example: "
             + COMMAND_WORD + PREFIX_CID + " C1234a "
             + PREFIX_NRIC + "T1234567B "
@@ -105,8 +108,10 @@ public class EditContractCommand extends Command {
         Nric updatedNric = editContractDescriptor.getNric().orElse(contractToEdit.getNric());
         LocalDate updatedDateSigned = editContractDescriptor.getDate().orElse(contractToEdit.getDate());
         LocalDate updatedExpiryDate = editContractDescriptor.getExpiryDate().orElse(contractToEdit.getExpiryDate());
+        ContractPremium updatedPremium = editContractDescriptor.getPremium().orElse(contractToEdit.getPremium());
 
-        return new Contract(updatedCId, updatedName, updatedNric, updatedPid, updatedDateSigned, updatedExpiryDate);
+        return new Contract(updatedCId, updatedName, updatedNric, updatedPid, updatedDateSigned, updatedExpiryDate,
+                updatedPremium);
     }
 
     @Override
@@ -143,6 +148,7 @@ public class EditContractCommand extends Command {
         private Name name;
         private LocalDate dateSigned;
         private LocalDate expiryDate;
+        private ContractPremium premium;
 
         public EditContractDescriptor() {}
 
@@ -157,10 +163,11 @@ public class EditContractCommand extends Command {
             setName(toCopy.name);
             setDate(toCopy.dateSigned);
             setExpiryDate(toCopy.expiryDate);
+            setPremium(toCopy.premium);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(pId, nric, name, dateSigned, expiryDate);
+            return CollectionUtil.isAnyNonNull(pId, nric, name, dateSigned, expiryDate, premium);
         }
 
         public void setCId(ContractId cId) {
@@ -236,6 +243,14 @@ public class EditContractCommand extends Command {
 
         public Optional<LocalDate> getExpiryDate() {
             return Optional.ofNullable(expiryDate);
+        }
+
+        public void setPremium(ContractPremium premium) {
+            this.premium = premium;
+        }
+
+        public Optional<ContractPremium> getPremium() {
+            return Optional.ofNullable(premium);
         }
 
         @Override

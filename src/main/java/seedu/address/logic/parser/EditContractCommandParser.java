@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 
 import seedu.address.logic.commands.EditContractCommand;
 import seedu.address.logic.commands.EditContractCommand.EditContractDescriptor;
@@ -26,7 +27,8 @@ public class EditContractCommandParser implements Parser<EditContractCommand> {
     public EditContractCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultiMap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CID, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY);
+                ArgumentTokenizer.tokenize(args, PREFIX_CID, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY,
+                        PREFIX_PREMIUM);
 
         String contractId;
         ContractId cId;
@@ -58,6 +60,10 @@ public class EditContractCommandParser implements Parser<EditContractCommand> {
         }
         if (argMultiMap.getValue(PREFIX_EXPIRY).isPresent()) {
             editContractDescriptor.setExpiryDate(ParserUtil.parseDate(argMultiMap.getValue(PREFIX_EXPIRY).get()));
+        }
+        if (argMultiMap.getValue(PREFIX_PREMIUM).isPresent()) {
+            editContractDescriptor.setPremium(ParserUtil.parseContractPremium(argMultiMap.getValue(PREFIX_PREMIUM)
+                    .get()));
         }
 
         if (!editContractDescriptor.isAnyFieldEdited()) {
