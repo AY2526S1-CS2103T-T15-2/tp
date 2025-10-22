@@ -26,6 +26,8 @@ import seedu.address.ui.ListPanelType;
  */
 public class RemoveAppointmentCommandTest {
 
+    private static final String EXPECTED_PREFIX_STRING = "seedu.address.logic.commands.RemoveAppointmentCommand{aId=";
+
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -90,8 +92,7 @@ public class RemoveAppointmentCommandTest {
     public void toString_test() {
         RemoveAppointmentCommand removeAppointmentCommand =
                 new RemoveAppointmentCommand(new AppointmentId(VALID_APPOINTMENT_ID_A));
-        String expectedString = "seedu.address.logic.commands.RemoveAppointmentCommand{aId="
-                + VALID_APPOINTMENT_ID_A + "}";
+        String expectedString = EXPECTED_PREFIX_STRING + VALID_APPOINTMENT_ID_A + "}";
         assertEquals(expectedString, removeAppointmentCommand.toString());
     }
 
