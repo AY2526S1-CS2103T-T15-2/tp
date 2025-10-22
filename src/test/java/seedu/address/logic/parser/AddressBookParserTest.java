@@ -32,6 +32,7 @@ import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveAppointmentCommand;
 import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
@@ -135,6 +136,12 @@ public class AddressBookParserTest {
         assertEquals(new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(keywords)), command);
         assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " -a")
                 instanceof ViewAppointmentCommand);
+    }
+
+    @Test
+    public void parseCommand_removeAppointment() throws Exception {
+        assertTrue(parser.parseCommand(RemoveAppointmentCommand.COMMAND_WORD + " A1234A")
+                instanceof RemoveAppointmentCommand);
     }
 
     @Test
