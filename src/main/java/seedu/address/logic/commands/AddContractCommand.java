@@ -32,13 +32,13 @@ public class AddContractCommand extends Command {
 
     public static final String COMMAND_WORD = "add_contract";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contract to iCon. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contract to iCon.\n"
             + "Parameters: "
             + PREFIX_PID + "POLICY_ID "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_DATE + "DATE_SIGNED "
             + PREFIX_EXPIRY + "EXPIRY_DATE "
-            + PREFIX_PREMIUM + "PREMIUM_AMOUNT "
+            + PREFIX_PREMIUM + "PREMIUM_AMOUNT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PID + "68g354f7"
             + PREFIX_NRIC + "T0123456A "
