@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREAMBLE_ALL;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
 import java.util.Arrays;
@@ -26,7 +26,7 @@ public class ViewPolicyCommandParser implements Parser<ViewPolicyCommand> {
         String preamble = argMultimap.getPreamble().trim();
 
         // Check for view all command
-        if (preamble.startsWith(PREAMBLE_ALL)) {
+        if (preamble.startsWith(FLAG_LIST_ALL)) {
             return new ViewPolicyCommand();
         }
 

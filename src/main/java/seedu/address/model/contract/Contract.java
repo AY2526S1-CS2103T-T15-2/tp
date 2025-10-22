@@ -20,6 +20,7 @@ public class Contract {
     private final PolicyId pId;
     private final LocalDate dateSigned;
     private final LocalDate expiryDate;
+    private final ContractPremium premium;
 
     /**
      * Constructor for a Creating a new Contract object.
@@ -27,11 +28,12 @@ public class Contract {
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
-    public Contract(Nric nric, PolicyId pId, LocalDate date, LocalDate expiry) {
+    public Contract(Nric nric, PolicyId pId, LocalDate date, LocalDate expiry, ContractPremium premium) {
         this.cId = ContractId.generate();
         this.name = new Name("Placeholder");
         this.nric = nric;
         this.pId = pId;
+        this.premium = premium;
         if (date.isBefore(expiry)) {
             this.dateSigned = date;
             this.expiryDate = expiry;
@@ -48,11 +50,13 @@ public class Contract {
      * @param pId ID of policy
      * @param date Date the contract was signed
      */
-    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId, LocalDate date, LocalDate expiry) {
+    public Contract(ContractId cId, Name name, Nric nric, PolicyId pId,
+                    LocalDate date, LocalDate expiry, ContractPremium premium) {
         this.cId = cId;
         this.name = name;
         this.nric = nric;
         this.pId = pId;
+        this.premium = premium;
         if (date.isBefore(expiry)) {
             this.dateSigned = date;
             this.expiryDate = expiry;
@@ -85,6 +89,10 @@ public class Contract {
         return expiryDate;
     }
 
+    public ContractPremium getPremium() {
+        return premium;
+    }
+
     /**
      * Checks if the given contract is the same as this contract.
      */
@@ -97,7 +105,8 @@ public class Contract {
                 && otherContract.getNric().equals(getNric())
                 && otherContract.getPId().equals(getPId())
                 && otherContract.getDate().equals(getDate())
-                && otherContract.getExpiryDate().equals(getExpiryDate());
+                && otherContract.getExpiryDate().equals(getExpiryDate())
+                && otherContract.getPremium().equals(getPremium());
     }
 
     @Override
@@ -116,7 +125,8 @@ public class Contract {
                 && otherContract.getNric().equals(getNric())
                 && otherContract.getPId().equals(getPId())
                 && otherContract.getDate().equals(getDate())
-                && otherContract.getExpiryDate().equals(getExpiryDate());
+                && otherContract.getExpiryDate().equals(getExpiryDate())
+                && otherContract.getPremium().equals(getPremium());
     }
 
     @Override
@@ -133,6 +143,7 @@ public class Contract {
                 .add("pId", pId)
                 .add("dateSigned", dateSigned)
                 .add("expiryDate", expiryDate)
+                .add("premium", premium)
                 .toString();
     }
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
@@ -19,6 +20,7 @@ public class ContractBuilder {
     public static final String DEFAULT_POLICY_ID = "P1234A";
     public static final LocalDate DEFAULT_DATE = LocalDate.parse("2023-01-01");
     public static final LocalDate DEFAULT_EXPIRY = LocalDate.parse("2024-01-01");
+    public static final String DEFAULT_PREMIUM = "1000.00";
 
     private ContractId cId;
     private Name name;
@@ -26,6 +28,7 @@ public class ContractBuilder {
     private PolicyId pId;
     private LocalDate dateSigned;
     private LocalDate expiry;
+    private ContractPremium premium;
 
     /**
      * Creates a {@code ContractBuilder} with the default details.
@@ -37,6 +40,7 @@ public class ContractBuilder {
         pId = new PolicyId(DEFAULT_POLICY_ID);
         dateSigned = DEFAULT_DATE;
         expiry = DEFAULT_EXPIRY;
+        premium = new ContractPremium(DEFAULT_PREMIUM);
     }
 
     /**
@@ -49,6 +53,7 @@ public class ContractBuilder {
         pId = contractToCopy.getPId();
         dateSigned = contractToCopy.getDate();
         expiry = contractToCopy.getExpiryDate();
+        premium = contractToCopy.getPremium();
     }
 
     /**
@@ -100,6 +105,6 @@ public class ContractBuilder {
     }
 
     public Contract build() {
-        return new Contract(cId, name, nric, pId, dateSigned, expiry);
+        return new Contract(cId, name, nric, pId, dateSigned, expiry, premium);
     }
 }

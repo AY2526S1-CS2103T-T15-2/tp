@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
@@ -35,12 +37,14 @@ public class AddContractCommand extends Command {
             + PREFIX_PID + "POLICY_ID "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_DATE + "DATE_SIGNED "
-            + PREFIX_EXPIRY + "EXPIRY_DATE"
+            + PREFIX_EXPIRY + "EXPIRY_DATE "
+            + PREFIX_PREMIUM + "PREMIUM_AMOUNT "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PID + "68g354f7"
             + PREFIX_NRIC + "T0123456A "
             + PREFIX_DATE + "2025-01-13 "
-            + PREFIX_EXPIRY + "2027-01-13 ";
+            + PREFIX_EXPIRY + "2027-01-13 "
+            + PREFIX_PREMIUM + "1200.50 ";
 
     public static final String MESSAGE_SUCCESS = "New contract added with the following ID: %s";
     public static final String MESSAGE_DUPLICATE_CONTRACT = "This contract already exists in iCon";
@@ -78,9 +82,10 @@ public class AddContractCommand extends Command {
         LocalDate date = toAdd.getDate();
         ContractId contractId = toAdd.getCId();
         LocalDate expiry = toAdd.getExpiryDate();
+        ContractPremium premium = toAdd.getPremium();
 
         // initialise new contract
-        toAdd = new Contract(contractId, name, nric, policyId, date, expiry);
+        toAdd = new Contract(contractId, name, nric, policyId, date, expiry, premium);
 
         if (model.hasContract(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTRACT);

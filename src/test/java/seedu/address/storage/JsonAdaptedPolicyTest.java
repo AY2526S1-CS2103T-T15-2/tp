@@ -40,7 +40,8 @@ public class JsonAdaptedPolicyTest {
             "S1234567A",
             "abcdef",
             "2023-01-01",
-            "2025-01-01"
+            "2025-01-01",
+            "1000.00"
     );
 
     @Test

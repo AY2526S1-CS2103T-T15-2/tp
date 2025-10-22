@@ -2,12 +2,13 @@ package seedu.address.model.policy;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contract.Contract;
 
@@ -20,7 +21,7 @@ public class Policy {
     private final PolicyName policyName;
     private final PolicyDetails policyDetails;
     private final PolicyId policyId;
-    private final Set<Contract> contracts = new HashSet<>();
+    private final ObservableSet<Contract> contracts = FXCollections.observableSet(new HashSet<>());
 
     /**
      * Fields must be present and not null.
@@ -56,8 +57,8 @@ public class Policy {
         return policyId;
     }
 
-    public Set<Contract> getContracts() {
-        return Collections.unmodifiableSet(contracts);
+    public ObservableSet<Contract> getContracts() {
+        return FXCollections.unmodifiableObservableSet(contracts);
     }
 
     /**

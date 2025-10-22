@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.contract.exceptions.InvalidContractDatesException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -27,6 +29,7 @@ public class JsonAdaptedContract {
     private final String pId;
     private final String dateSigned;
     private final String expiryDate;
+    private final String premium;
 
     /**
      * Constructs a {@code JsonAdaptedContract} with the given contract details.
@@ -35,13 +38,14 @@ public class JsonAdaptedContract {
     public JsonAdaptedContract(@JsonProperty("cId") String cId, @JsonProperty("name") String name,
                                @JsonProperty("nric") String nric, @JsonProperty("pId") String pId,
                                @JsonProperty("dateSigned") String dateSigned,
-                               @JsonProperty("expiryDate") String expiryDate) {
+                               @JsonProperty("expiryDate") String expiryDate, @JsonProperty("premium") String premium) {
         this.cId = cId;
         this.name = name;
         this.nric = nric;
         this.pId = pId;
         this.dateSigned = dateSigned;
         this.expiryDate = expiryDate;
+        this.premium = premium;
     }
 
     /**
@@ -54,6 +58,7 @@ public class JsonAdaptedContract {
         pId = source.getPId().toString();
         dateSigned = source.getDate().toString();
         expiryDate = source.getExpiryDate().toString();
+        premium = source.getPremium().toString();
     }
 
     /**
@@ -104,7 +109,7 @@ public class JsonAdaptedContract {
         try {
             modelDateSigned = LocalDate.parse(dateSigned);
         } catch (Exception e) {
-            throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_DATE_FORMAT);
         }
 
         if (expiryDate == null) {
@@ -115,11 +120,22 @@ public class JsonAdaptedContract {
         try {
             modelExpiryDate = LocalDate.parse(expiryDate);
         } catch (Exception e) {
-            throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_DATE_FORMAT);
         }
         if (modelExpiryDate.isBefore(modelDateSigned)) {
             throw new InvalidContractDatesException();
         }
-        return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned, modelExpiryDate);
+
+        if (premium == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    seedu.address.model.contract.ContractPremium.class.getSimpleName()));
+        }
+
+        if (!ContractPremium.isValidContractPremium(premium)) {
+            throw new IllegalValueException(ContractPremium.MESSAGE_CONSTRAINTS);
+        }
+        final ContractPremium modelPremium = new ContractPremium(premium);
+
+        return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned, modelExpiryDate, modelPremium);
     }
 }
