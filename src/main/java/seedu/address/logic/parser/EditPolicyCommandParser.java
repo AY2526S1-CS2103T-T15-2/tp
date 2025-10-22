@@ -23,23 +23,21 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
      */
     public EditPolicyCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PID, PREFIX_NAME, PREFIX_DETAILS);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID, PREFIX_NAME, PREFIX_DETAILS);
-        PolicyId policyId;
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPolicyCommand.MESSAGE_USAGE));
+        }
+
 
         if (argMultimap.getValue(PREFIX_PID).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPolicyCommand.MESSAGE_USAGE));
         }
 
-        try {
-            policyId = ParserUtil.parsePolicyId(argMultimap.getValue(PREFIX_PID).get());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPolicyCommand.MESSAGE_USAGE), pe);
-        }
-
+        PolicyId policyId = ParserUtil.parsePolicyId(argMultimap.getValue(PREFIX_PID).get());
         EditPolicyDescriptor editPolicyDescriptor = new EditPolicyDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

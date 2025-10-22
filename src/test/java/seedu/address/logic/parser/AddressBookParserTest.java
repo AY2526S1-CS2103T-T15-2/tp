@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_ID_DESC_HOME;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
+import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
@@ -29,6 +31,8 @@ import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.EditContactCommand;
 import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditPolicyCommand;
+import seedu.address.logic.commands.EditPolicyCommand.EditPolicyDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -47,9 +51,13 @@ import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonComparatorType;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyId;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditPolicyDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PolicyBuilder;
 import seedu.address.testutil.PolicyUtil;
 
 
@@ -148,6 +156,16 @@ public class AddressBookParserTest {
         AddPolicyFileCommand command = (AddPolicyFileCommand) parser.parseCommand(
                 AddPolicyFileCommand.COMMAND_WORD + POLICY_PATH_A_DESC);
         assertEquals(new AddPolicyFileCommand(POLICY_PATH_A), command);
+    }
+
+    @Test
+    public void parseCommand_editPolicy() throws Exception {
+        Policy policy = new PolicyBuilder().build();
+        PolicyId policyId = new PolicyId(VALID_POLICY_ID_HOME);
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(policy).build();
+        EditPolicyCommand command = (EditPolicyCommand) parser.parseCommand(EditPolicyCommand.COMMAND_WORD
+                + POLICY_ID_DESC_HOME + " " + PolicyUtil.getEditPolicyDescriptorDetails(descriptor));
+        assertEquals(new EditPolicyCommand(policyId, descriptor), command);
     }
 
     @Test

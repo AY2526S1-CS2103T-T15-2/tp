@@ -58,6 +58,9 @@ public class EditPolicyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Update filter to all policies first regardless of what is currently shown
+        model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
         Policy policyToEdit = model.getFilteredPolicyList()
                 .stream()
                 .filter(policy -> policy.getId().equals(policyId))
@@ -73,7 +76,6 @@ public class EditPolicyCommand extends Command {
         }
 
         model.setPolicy(policyToEdit, editedPolicy);
-        model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
         return new CommandResult(String.format(MESSAGE_EDIT_POLICY_SUCCESS, Messages.format(editedPolicy)),
                 ListPanelType.POLICY);
     }
@@ -110,8 +112,8 @@ public class EditPolicyCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", policyId)
-                .add("editPersonDescriptor", editPolicyDescriptor)
+                .add("policyId", policyId)
+                .add("editPolicyDescriptor", editPolicyDescriptor)
                 .toString();
     }
 
