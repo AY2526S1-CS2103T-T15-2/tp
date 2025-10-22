@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.AppointmentDetails;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Address;
@@ -211,6 +212,19 @@ public class ParserUtil {
             throw new ParseException(ContractId.MESSAGE_CONSTRAINTS);
         }
         return new ContractId(trimmedId);
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code AppointmentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static AppointmentId parseAppointmentId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!AppointmentId.isValidAppointmentId(trimmedId)) {
+            throw new ParseException(AppointmentId.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentId(trimmedId);
     }
 
     /**

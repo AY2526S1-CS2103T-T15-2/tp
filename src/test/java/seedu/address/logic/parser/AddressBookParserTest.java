@@ -7,6 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
@@ -32,6 +33,7 @@ import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveAppointmentCommand;
 import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
@@ -135,6 +137,13 @@ public class AddressBookParserTest {
         assertEquals(new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(keywords)), command);
         assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " -a")
                 instanceof ViewAppointmentCommand);
+    }
+
+    @Test
+    public void parseCommand_removeAppointment() throws Exception {
+        assertTrue(parser.parseCommand(RemoveAppointmentCommand.COMMAND_WORD + " "
+                + PREFIX_AID + " A1234A")
+                instanceof RemoveAppointmentCommand);
     }
 
     @Test
