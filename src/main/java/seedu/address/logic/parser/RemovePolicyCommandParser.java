@@ -24,6 +24,7 @@ public class RemovePolicyCommandParser implements Parser<RemovePolicyCommand> {
         if (!arePrefixesPresent(arguMultimap, PREFIX_PID) || !arguMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemovePolicyCommand.MESSAGE_USAGE));
         }
+        arguMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID);
         PolicyId id = ParserUtil.parsePolicyId(arguMultimap.getValue(PREFIX_PID).get());
         return new RemovePolicyCommand(id);
     }

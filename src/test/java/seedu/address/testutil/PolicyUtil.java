@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.EditPolicyCommand.EditPolicyDescriptor;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.UnassignedPolicy;
 
@@ -34,5 +35,12 @@ public class PolicyUtil {
      */
     public static UnassignedPolicy unassign(Policy policy) {
         return new UnassignedPolicy(policy.getName(), policy.getDetails());
+    }
+
+    public static String getEditPolicyDescriptorDetails(EditPolicyDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.value).append(" "));
+        descriptor.getDetails().ifPresent(details -> sb.append(PREFIX_DETAILS).append(details.value).append(" "));
+        return sb.toString();
     }
 }

@@ -80,6 +80,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Appointment> getSortedAppointmentList() {
+        return model.getSortedAppointmentList();
+    }
+
+    @Override
     public ObservableList<Policy> getFilteredPolicyList() {
         return model.getFilteredPolicyList();
     }

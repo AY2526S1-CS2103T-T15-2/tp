@@ -104,4 +104,31 @@ public class Appointment {
                 .add("details", details)
                 .toString();
     }
+
+    /**
+     * Compares two appointments' IDs alphabetically.
+     * Used as a comparator to sort appointments.
+     */
+    public static int compareNameAlphabetical(Appointment appointment, Appointment otherAppointment) {
+        return String.CASE_INSENSITIVE_ORDER.compare(
+                appointment.aId.toString(),
+                otherAppointment.aId.toString()
+        );
+    }
+
+    /**
+     * Compares two appointments' dates in ascending order.
+     * Used as a comparator to sort appointments.
+     */
+    public static int compareDateAscending(Appointment appointment, Appointment otherAppointment) {
+        return appointment.getDate().compareTo(otherAppointment.getDate());
+    }
+
+    /**
+     * Compares two appointments' dates in descending order.
+     * Used as a comparator to sort appointments.
+     */
+    public static int compareDateDescending(Appointment appointment, Appointment otherAppointment) {
+        return otherAppointment.getDate().compareTo(appointment.getDate());
+    }
 }

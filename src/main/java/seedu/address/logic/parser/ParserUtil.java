@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.AppointmentDetails;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Address;
@@ -214,6 +216,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String id} into an {@code AppointmentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static AppointmentId parseAppointmentId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!AppointmentId.isValidAppointmentId(trimmedId)) {
+            throw new ParseException(AppointmentId.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentId(trimmedId);
+    }
+
+    /**
      * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      */
@@ -224,7 +239,7 @@ public class ParserUtil {
         try {
             parsedDate = LocalDate.parse(trimmedDate);
         } catch (Exception e) {
-            throw new ParseException("Date should be in the format yyyy-MM-dd");
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
         return parsedDate;
     }

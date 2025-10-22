@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DATE_DESC_A;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DATE_DESC_B;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.APPOINTMENT_DETAILS_DESC_A;
@@ -138,7 +139,7 @@ public class AddAppointmentCommandParserTest {
 
         // invalid date
         userInputToTest = APPOINTMENT_NRIC_DESC_A + INVALID_APPOINTMENT_DATE_DESC + APPOINTMENT_DETAILS_DESC_A;
-        assertParseFailure(parser, userInputToTest, "Date should be in the format yyyy-MM-dd");
+        assertParseFailure(parser, userInputToTest, MESSAGE_INVALID_DATE_FORMAT);
 
         // invalid details
         userInputToTest = APPOINTMENT_NRIC_DESC_A + APPOINTMENT_DATE_DESC_A + INVALID_APPOINTMENT_DETAILS_DESC;

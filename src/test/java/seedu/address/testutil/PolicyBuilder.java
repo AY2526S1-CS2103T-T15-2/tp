@@ -39,16 +39,16 @@ public class PolicyBuilder {
     /**
      * Sets the {@code PolicyName} of the {@code Policy} that we are building.
      */
-    public PolicyBuilder withName(String name) {
-        this.name = new PolicyName(name);
+    public PolicyBuilder withName(String policyName) {
+        this.name = new PolicyName(policyName);
         return this;
     }
 
     /**
      * Sets the {@code PolicyDetails} of the {@code Policy} that we are building.
      */
-    public PolicyBuilder withDetails(String address) {
-        this.details = new PolicyDetails(address);
+    public PolicyBuilder withDetails(String policyDetails) {
+        this.details = new PolicyDetails(policyDetails);
         return this;
     }
 
