@@ -22,6 +22,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PREMIUM = new Prefix("pr:");
 
     /* Flag definitions */
+    public static final String INVALID_FLAG = "-";
     public static final String FLAG_LIST_ALL = "-a";
     public static final String FLAG_ALPHABETICAL_ORDER = "-a";
     public static final String FLAG_INSERTION_ORDER = "-i";

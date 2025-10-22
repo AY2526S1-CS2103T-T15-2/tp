@@ -29,9 +29,9 @@ public class SortAppointmentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_ALPHABETICAL = "Showing appointments by alphabetical order.";
 
-    private static final String MESSAGE_SUCCESS_DATE_ASCENDING = "Showing appointments by date ascending order.";
+    public static final String MESSAGE_SUCCESS_DATE_ASCENDING = "Showing appointments by date ascending order.";
 
-    private static final String MESSAGE_SUCCESS_DATE_DESCENDING = "Showing appointments by date descending order.";
+    public static final String MESSAGE_SUCCESS_DATE_DESCENDING = "Showing appointments by date descending order.";
 
     private final AppointmentComparatorType comparatorType;
 

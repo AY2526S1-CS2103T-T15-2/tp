@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
 import static seedu.address.logic.parser.CliSyntax.FLAG_INSERTION_ORDER;
+import static seedu.address.logic.parser.CliSyntax.INVALID_FLAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -42,6 +43,10 @@ public class SortAppointmentCommandParserTest {
 
         // one flag with other arguments
         assertParseFailure(parser, FLAG_INSERTION_ORDER + " extra text",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortAppointmentCommand.MESSAGE_USAGE));
+
+        // invalid flag
+        assertParseFailure(parser, INVALID_FLAG,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortAppointmentCommand.MESSAGE_USAGE));
     }
 

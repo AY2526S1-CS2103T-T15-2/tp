@@ -33,6 +33,14 @@ public class SortAppointmentCommandTest {
         commandResult = new SortAppointmentCommand(AppointmentComparatorType.ALPHABETICAL).execute(modelStub);
         assertEquals(commandResult,
                 new CommandResult(SortAppointmentCommand.MESSAGE_SUCCESS_ALPHABETICAL, ListPanelType.APPOINTMENT));
+
+        commandResult = new SortAppointmentCommand(AppointmentComparatorType.DATE_ASCENDING).execute(modelStub);
+        assertEquals(commandResult,
+                new CommandResult(SortAppointmentCommand.MESSAGE_SUCCESS_DATE_ASCENDING, ListPanelType.APPOINTMENT));
+
+        commandResult = new SortAppointmentCommand(AppointmentComparatorType.DATE_DESCENDING).execute(modelStub);
+        assertEquals(commandResult,
+                new CommandResult(SortAppointmentCommand.MESSAGE_SUCCESS_DATE_DESCENDING, ListPanelType.APPOINTMENT));
     }
 
     @Test
