@@ -25,7 +25,7 @@ public class RemoveAppointmentCommand extends Command {
             + "Appointment ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " gVVGzn";
 
-    public static final String MESSAGE_REMOVE_APPOINTMENT_SUCCESS = "Removed Contract: %1$s";
+    public static final String MESSAGE_REMOVE_APPOINTMENT_SUCCESS = "Removed Appointment: %1$s";
 
     private final AppointmentId aId;
 
