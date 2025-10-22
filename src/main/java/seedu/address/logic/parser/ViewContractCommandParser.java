@@ -37,6 +37,7 @@ public class ViewContractCommandParser implements Parser<ViewContractCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                                         ViewContractCommand.MESSAGE_USAGE));
             }
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CID);
             String[] idKeyWords = trimmedArgs.split("\\s+");
             return new ViewContractCommand(new ContractIdContainsKeywordsPredicate(Arrays.asList(idKeyWords)));
         }

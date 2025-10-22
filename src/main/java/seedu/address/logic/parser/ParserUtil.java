@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -238,7 +239,7 @@ public class ParserUtil {
         try {
             parsedDate = LocalDate.parse(trimmedDate);
         } catch (Exception e) {
-            throw new ParseException("Date should be in the format yyyy-MM-dd");
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
         return parsedDate;
     }
