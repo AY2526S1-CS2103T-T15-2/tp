@@ -42,6 +42,7 @@ public class RemoveContactCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        assert lastShownList != null;
 
         int index = findIndex(lastShownList, predicate);
         if (index == -1) {
