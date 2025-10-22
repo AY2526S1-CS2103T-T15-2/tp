@@ -84,6 +84,10 @@ public class EditContractCommand extends Command {
             }
 
             model.setContract(contractToEdit, editedContract);
+            model.removeContractFromPerson(contractToEdit);
+            model.removeContractFromPolicy(contractToEdit);
+            model.addContractToPerson(editedContract);
+            model.addContractToPolicy(editedContract);
             model.updateFilteredContractList(Model.PREDICATE_SHOW_ALL_CONTRACTS);
             return new CommandResult(String.format(MESSAGE_EDIT_CONTRACT_SUCCESS, editedContract.getCId().toString()),
                     ListPanelType.CONTRACT);
