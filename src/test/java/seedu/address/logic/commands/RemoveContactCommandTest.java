@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_THIRD;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -32,7 +33,12 @@ import seedu.address.ui.ListPanelType;
  */
 public class RemoveContactCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_validNricUnfilteredList_success() {
