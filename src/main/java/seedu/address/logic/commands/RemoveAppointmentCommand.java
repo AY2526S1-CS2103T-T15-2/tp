@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
+import seedu.address.model.appointment.AppointmentListUtil;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -38,17 +39,11 @@ public class RemoveAppointmentCommand extends Command {
         requireNonNull(model);
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
-        if (lastShownList.stream().anyMatch(x -> x.getAId().equals(aId))) {
-            Appointment appointmentToRemove = lastShownList.stream()
-                    .filter(x -> x.getAId().equals(aId))
-                    .findFirst()
-                    .get();
-            model.removeAppointment(appointmentToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_APPOINTMENT_SUCCESS, appointmentToRemove.getAId()),
-                    ListPanelType.APPOINTMENT);
-        } else {
-            throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
-        }
+        Appointment appointmentToRemove = AppointmentListUtil.findById(lastShownList, aId)
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND));
+        model.removeAppointment(appointmentToRemove);
+        return new CommandResult(String.format(MESSAGE_REMOVE_APPOINTMENT_SUCCESS, appointmentToRemove.getAId()),
+                ListPanelType.APPOINTMENT);
     }
 
     @Override
