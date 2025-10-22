@@ -104,4 +104,15 @@ public class Appointment {
                 .add("details", details)
                 .toString();
     }
+
+    /**
+     * Compares two appointments' IDs alphabetically.
+     * Used as a comparator to sort appointments.
+     */
+    public static int compareNameAlphabetical(Appointment appointment, Appointment otherAppointment) {
+        return String.CASE_INSENSITIVE_ORDER.compare(
+                appointment.aId.toString(),
+                otherAppointment.aId.toString()
+        );
+    }
 }

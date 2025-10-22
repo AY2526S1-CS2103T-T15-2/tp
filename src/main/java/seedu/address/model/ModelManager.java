@@ -28,10 +28,11 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
+    private final SortedList<Appointment> sortedAppointments;
     private final FilteredList<Policy> filteredPolicies;
     private final FilteredList<Contract> filteredContracts;
+    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Appointment> filteredAppointments;
 
     /**
@@ -45,10 +46,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
         sortedPersons = new SortedList<>(filteredPersons);
+        sortedAppointments = new SortedList<>(filteredAppointments);
         filteredPolicies = new FilteredList<>(this.addressBook.getPolicyList());
         filteredContracts = new FilteredList<>(this.addressBook.getContractList());
-        filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }
 
     public ModelManager() {
@@ -266,6 +268,15 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns an unmodifiable view of the sorted list of {@code Appointment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Appointment> getSortedAppointmentList() {
+        return sortedAppointments;
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Policy} backed by the internal list of
      * {@code versionedAddressBook}
      */
@@ -320,6 +331,11 @@ public class ModelManager implements Model {
     @Override
     public void sortPersons(Comparator<Person> comparator) {
         sortedPersons.setComparator(comparator);
+    }
+
+    @Override
+    public void sortAppointments(Comparator<Appointment> comparator) {
+        sortedAppointments.setComparator(comparator);
     }
 
     @Override
