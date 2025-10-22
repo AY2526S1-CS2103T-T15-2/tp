@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
@@ -76,7 +78,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_removeContact() throws Exception {
         RemoveContactCommand command = (RemoveContactCommand) parser.parseCommand(
-                RemoveContactCommand.COMMAND_WORD + " " + NRIC_FIRST_PERSON);
+                RemoveContactCommand.COMMAND_WORD + " " + PREFIX_NRIC + NRIC_FIRST_PERSON);
         assertEquals(new RemoveContactCommand(PREDICATE_FIRST), command);
     }
 
@@ -179,7 +181,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_removeContract() throws Exception {
-        assertTrue(parser.parseCommand(RemoveContractCommand.COMMAND_WORD + " C1234A")
+        assertTrue(parser.parseCommand(RemoveContractCommand.COMMAND_WORD + " " + PREFIX_CID + " C1234A")
                 instanceof RemoveContractCommand);
     }
 
