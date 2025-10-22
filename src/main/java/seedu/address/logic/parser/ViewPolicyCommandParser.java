@@ -37,6 +37,7 @@ public class ViewPolicyCommandParser implements Parser<ViewPolicyCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                                         ViewPolicyCommand.MESSAGE_USAGE));
             }
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID);
             String[] idKeyWords = trimmedArgs.split("\\s+");
             return new ViewPolicyCommand(new IdContainsKeywordsPredicate(Arrays.asList(idKeyWords)));
         }

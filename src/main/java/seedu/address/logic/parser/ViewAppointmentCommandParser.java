@@ -37,6 +37,7 @@ public class ViewAppointmentCommandParser implements Parser<ViewAppointmentComma
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ViewAppointmentCommand.MESSAGE_USAGE));
             }
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AID);
             String[] idKeyWords = trimmedArgs.split("\\s+");
             return new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(Arrays.asList(idKeyWords)));
         }

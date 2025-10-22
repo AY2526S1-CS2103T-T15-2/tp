@@ -90,8 +90,11 @@ public class AddressBookParserTest {
     public void parseCommand_viewContact() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         ViewContactCommand command = (ViewContactCommand) parser.parseCommand(
-                ViewContactCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                ViewContactCommand.COMMAND_WORD
+                        + " ic: " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new ViewContactCommand(new NricContainsKeywordsPredicate(keywords)), command);
+        assertTrue(parser.parseCommand(ViewContactCommand.COMMAND_WORD + " -a")
+                instanceof ViewContactCommand);
     }
 
     @Test
