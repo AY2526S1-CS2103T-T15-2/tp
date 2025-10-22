@@ -178,6 +178,7 @@ public class EditContractCommandTest {
                 .withName("Alice Pauline")
                 .withDate("2023-01-01")
                 .withExpiryDate("2024-01-01")
+                .withPremium("1000.00")
                 .build();
         EditContractCommand editContractCommand = new EditContractCommand(CONTRACT_A_ID, descriptor);
 

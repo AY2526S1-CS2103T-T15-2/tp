@@ -269,7 +269,8 @@ public class EditContractCommand extends Command {
                     && getPId().equals(otherDesciptor.getPId())
                     && getNric().equals(otherDesciptor.getNric())
                     && getDate().equals(otherDesciptor.getDate())
-                    && getExpiryDate().equals(otherDesciptor.getExpiryDate());
+                    && getExpiryDate().equals(otherDesciptor.getExpiryDate())
+                    && getPremium().equals(otherDesciptor.getPremium());
         }
 
         @Override
@@ -281,6 +282,7 @@ public class EditContractCommand extends Command {
                     .add("name", name)
                     .add("dateSigned", dateSigned)
                     .add("expiryDate", expiryDate)
+                    .add("premium", premium)
                     .toString();
         }
     }

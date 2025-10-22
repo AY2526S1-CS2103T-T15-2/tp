@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalData.ALICE;
@@ -37,6 +38,8 @@ public class EditContractCommandParserTest {
     private static final String CONTRACT_EXPIRY_A = CONTRACT_A.getExpiryDate().toString();
     private static final String CONTRACT_DATE_B = CONTRACT_B.getDate().toString();
     private static final String CONTRACT_EXPIRY_B = CONTRACT_B.getExpiryDate().toString();
+    private static final String CONTRACT_PREMIUM_A = CONTRACT_A.getPremium().toString();
+    private static final String CONTRACT_PREMIUM_B = CONTRACT_B.getPremium().toString();
 
     private static final String VALID_NAME_DESC_A = PREFIX_NAME + NAME_A + " ";
     private static final String VALID_NAME_DESC_B = PREFIX_NAME + NAME_B + " ";
@@ -50,6 +53,8 @@ public class EditContractCommandParserTest {
     private static final String VALID_DATE_DESC_B = PREFIX_DATE + CONTRACT_DATE_B + " ";
     private static final String VALID_EXPIRY_DESC_A = PREFIX_EXPIRY + CONTRACT_EXPIRY_A + " ";
     private static final String VALID_EXPIRY_DESC_B = PREFIX_EXPIRY + CONTRACT_EXPIRY_B + " ";
+    private static final String VALID_PREMIUM_DESC_A = PREFIX_NAME + CONTRACT_PREMIUM_A + " ";
+    private static final String VALID_PREMIUM_DESC_B = PREFIX_PREMIUM + CONTRACT_PREMIUM_B + " ";
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditContractCommand.MESSAGE_USAGE);
@@ -60,13 +65,14 @@ public class EditContractCommandParserTest {
     public void parse_allFieldsPresent_success() {
         String userInput = EditContractCommand.COMMAND_WORD + " " + VALID_CID_DESC_A + VALID_PID_DESC_B
                 + VALID_NRIC_DESC_B + VALID_DATE_DESC_B
-                + VALID_EXPIRY_DESC_B;
+                + VALID_EXPIRY_DESC_B + VALID_PREMIUM_DESC_B;
         EditContractDescriptor descriptor = new EditContractDescriptorBuilder()
                 .withCId(CONTRACT_ID_A)
                 .withPId(POLICY_ID_HEALTH)
                 .withNric(NRIC_B)
                 .withDate(CONTRACT_DATE_B)
                 .withExpiryDate(CONTRACT_EXPIRY_B)
+                .withPremium(CONTRACT_PREMIUM_B)
                 .build();
         EditContractCommand expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -143,6 +149,15 @@ public class EditContractCommandParserTest {
         descriptor = new EditContractDescriptorBuilder()
                 .withCId(CONTRACT_ID_A)
                 .withExpiryDate(CONTRACT_EXPIRY_B)
+                .build();
+        expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // premium
+        userInput = EditContractCommand.COMMAND_WORD + " " + VALID_CID_DESC_A + VALID_PREMIUM_DESC_B;
+        descriptor = new EditContractDescriptorBuilder()
+                .withCId(CONTRACT_ID_A)
+                .withPremium(CONTRACT_PREMIUM_B)
                 .build();
         expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);

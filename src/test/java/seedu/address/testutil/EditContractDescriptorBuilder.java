@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import seedu.address.logic.commands.EditContractCommand.EditContractDescriptor;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
+import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
@@ -35,6 +36,7 @@ public class EditContractDescriptorBuilder {
         descriptor.setName(contract.getName());
         descriptor.setDate(contract.getDate());
         descriptor.setExpiryDate(contract.getExpiryDate());
+        descriptor.setPremium(contract.getPremium());
     }
 
     /**
@@ -82,6 +84,14 @@ public class EditContractDescriptorBuilder {
      */
     public EditContractDescriptorBuilder withExpiryDate(String date) {
         descriptor.setExpiryDate(LocalDate.parse(date));
+        return this;
+    }
+
+    /**
+     * Sets the {@code premium} of the {@code EditContractDescriptor} that we are building.
+     */
+    public EditContractDescriptorBuilder withPremium(String premium) {
+        descriptor.setPremium(new ContractPremium(premium));
         return this;
     }
 
