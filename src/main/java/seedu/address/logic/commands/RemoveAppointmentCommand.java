@@ -24,7 +24,7 @@ public class RemoveAppointmentCommand extends Command {
             + ": Removes an appointment from iCon. "
             + "Parameters: "
             + "Appointment ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " gVVGzn";
+            + "Example: " + COMMAND_WORD + " a: gVVGzn";
 
     public static final String MESSAGE_REMOVE_APPOINTMENT_SUCCESS = "Removed Appointment: %1$s";
 
