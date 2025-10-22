@@ -97,6 +97,12 @@ public class AddressBookParser {
         case ViewAppointmentCommand.COMMAND_WORD:
             return new ViewAppointmentCommandParser().parse(arguments);
 
+        case RemoveAppointmentCommand.COMMAND_WORD:
+            return new RemoveAppointmentCommandParser().parse(arguments);
+
+        case SortAppointmentCommand.COMMAND_WORD:
+            return new SortAppointmentCommandParser().parse(arguments);
+
         case AddPolicyCommandType.COMMAND_WORD:
             return new AddPolicyCommandParser().parse(arguments);
 
