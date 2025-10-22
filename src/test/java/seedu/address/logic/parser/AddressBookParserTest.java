@@ -9,9 +9,11 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
@@ -105,7 +107,7 @@ public class AddressBookParserTest {
                 ViewContactCommand.COMMAND_WORD
                         + " ic: " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new ViewContactCommand(new NricContainsKeywordsPredicate(keywords)), command);
-        assertTrue(parser.parseCommand(ViewContactCommand.COMMAND_WORD + " -a")
+        assertTrue(parser.parseCommand(ViewContactCommand.COMMAND_WORD + " " + FLAG_LIST_ALL)
                 instanceof ViewContactCommand);
     }
 
@@ -148,7 +150,7 @@ public class AddressBookParserTest {
                 ViewAppointmentCommand.COMMAND_WORD
                         + " a: " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new ViewAppointmentCommand(new AppointmentIdContainsKeywordsPredicate(keywords)), command);
-        assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " -a")
+        assertTrue(parser.parseCommand(ViewAppointmentCommand.COMMAND_WORD + " " + FLAG_LIST_ALL)
                 instanceof ViewAppointmentCommand);
     }
 
@@ -185,7 +187,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_removePolicy() throws Exception {
         RemovePolicyCommand command = (RemovePolicyCommand) parser.parseCommand(
-                RemovePolicyCommand.COMMAND_WORD + " " + "p:" + VALID_POLICY_ID_3);
+                RemovePolicyCommand.COMMAND_WORD + " " + PREFIX_PID + VALID_POLICY_ID_3);
         assertEquals(new RemovePolicyCommand(VALID_POLICY_ID_3), command);
     }
 
@@ -193,8 +195,8 @@ public class AddressBookParserTest {
     public void parseCommand_viewPolicy() throws Exception {
         List<String> keywords = Arrays.asList("abcdef", "123456", "abc123");
         ViewPolicyCommand command = (ViewPolicyCommand) parser.parseCommand(
-                ViewPolicyCommand.COMMAND_WORD
-                        + " p: " + keywords.stream().collect(Collectors.joining(" ")));
+                ViewPolicyCommand.COMMAND_WORD + " "
+                        + PREFIX_PID + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new ViewPolicyCommand(new IdContainsKeywordsPredicate(keywords)), command);
         assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD + " -a") instanceof ViewPolicyCommand);
     }
@@ -216,7 +218,7 @@ public class AddressBookParserTest {
     public void parseCommand_viewContract() throws Exception {
         List<String> keywords = Arrays.asList("C1234A", "C1234B", "C1234C");
         ViewContractCommand command = (ViewContractCommand) parser.parseCommand(
-                ViewContractCommand.COMMAND_WORD + " c: "
+                ViewContractCommand.COMMAND_WORD + " " + PREFIX_CID
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new ViewContractCommand(new ContractIdContainsKeywordsPredicate(keywords)), command);
     }
