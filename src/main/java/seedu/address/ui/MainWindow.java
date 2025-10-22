@@ -134,7 +134,7 @@ public class MainWindow extends UiPart<Stage> {
         contractListPanel = new ContractListPanel(logic.getFilteredContractList());
         contractListPanelPlaceholder.getChildren().add(contractListPanel.getRoot());
 
-        appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
+        appointmentListPanel = new AppointmentListPanel(logic.getSortedAppointmentList());
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
 
         personListPanelPlaceholder.setVisible(true);
