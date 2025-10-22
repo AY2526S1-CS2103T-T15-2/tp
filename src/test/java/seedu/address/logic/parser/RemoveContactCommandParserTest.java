@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
@@ -22,12 +23,25 @@ public class RemoveContactCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsRemoveContactCommand() {
-        assertParseSuccess(parser, "S1234567A", new RemoveContactCommand(PREDICATE_FIRST));
+        assertParseSuccess(parser, " " + PREFIX_NRIC + "S1234567A", new RemoveContactCommand(PREDICATE_FIRST));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemoveContactCommand.MESSAGE_USAGE));
+    }
+
+
+    @Test
+    public void parse_emptyInput_throwsParseException() {
+        assertParseFailure(parser, "    ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveContactCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_badPreamble_throwsParseException() {
+        assertParseFailure(parser, "bad preamble" + PREFIX_NRIC + "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveContactCommand.MESSAGE_USAGE));
     }
 }

@@ -20,9 +20,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "This appointment ID does not exist "
-                + "in the address book.";
-    public static final String MESSAGE_CONTRACT_NOT_FOUND = "This contract ID does not exist in the address book.";
+    public static final String MESSAGE_CONTRACT_NOT_FOUND = "This contract ID does not exist in iCon.";
+    public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "This appointment ID does not exist in the iCOn.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date should be in the format yyyy-MM-dd";
     public static final String MESSAGE_INVALID_EXPIRY_DATE = "Signing date comes after expiry date";
 

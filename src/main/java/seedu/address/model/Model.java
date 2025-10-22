@@ -138,6 +138,8 @@ public interface Model {
      */
     void setPolicy(Policy target, Policy editedPolicy);
 
+    ObservableList<Appointment> getSortedAppointmentList();
+
     /** Returns an unmodifiable view of the filtered policy list */
     ObservableList<Policy> getFilteredPolicyList();
 
@@ -250,5 +252,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    /**
+     * Updates the comparator of the sorted list to sort by the given {@code comparator}.
+     * @param comparator {@code Comparator<Appointment>} or {@code null} for no sorting.
+     */
+    void sortAppointments(Comparator<Appointment> comparator);
 
 }
