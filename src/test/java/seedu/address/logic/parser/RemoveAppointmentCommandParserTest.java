@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPOINTMENT_ID_A;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -23,7 +24,7 @@ public class RemoveAppointmentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsRemoveContractCommand() {
-        assertParseSuccess(parser, VALID_APPOINTMENT_ID_A,
+        assertParseSuccess(parser, " " + PREFIX_AID + VALID_APPOINTMENT_ID_A,
                 new RemoveAppointmentCommand(new AppointmentId(VALID_APPOINTMENT_ID_A)));
     }
 

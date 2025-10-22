@@ -7,6 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.POLICY_PATH_A_DESC;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
 import static seedu.address.testutil.TypicalData.LIFE;
@@ -140,7 +141,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_removeAppointment() throws Exception {
-        assertTrue(parser.parseCommand(RemoveAppointmentCommand.COMMAND_WORD + " A1234A")
+        assertTrue(parser.parseCommand(RemoveAppointmentCommand.COMMAND_WORD + " "
+                + PREFIX_AID + " A1234A")
                 instanceof RemoveAppointmentCommand);
     }
 
