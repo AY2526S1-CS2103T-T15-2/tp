@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALPHABETICAL_ORDER;
+import static seedu.address.logic.parser.CliSyntax.FLAG_DATE_ORDER_ASCENDING;
+import static seedu.address.logic.parser.CliSyntax.FLAG_DATE_ORDER_DESCENDING;
 import static seedu.address.logic.parser.CliSyntax.FLAG_INSERTION_ORDER;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,12 +21,17 @@ public class SortAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts appointments by insertion or alphabetical name order\n"
             + "Alphabetical sorting is case-insensitive.\n"
-            + "Parameters: [SORT_FLAG = " + FLAG_INSERTION_ORDER + " or " + FLAG_ALPHABETICAL_ORDER + "]\n"
+            + "Parameters: [SORT_FLAG = " + FLAG_INSERTION_ORDER + " or " + FLAG_ALPHABETICAL_ORDER
+            + " or " + FLAG_DATE_ORDER_ASCENDING + " or " + FLAG_DATE_ORDER_DESCENDING + "]\n"
             + "Example: " + COMMAND_WORD + " " + FLAG_INSERTION_ORDER;
 
     public static final String MESSAGE_SUCCESS_UNORDERED = "Showing appointments by insertion order.";
 
     public static final String MESSAGE_SUCCESS_ALPHABETICAL = "Showing appointments by alphabetical order.";
+
+    private static final String MESSAGE_SUCCESS_DATE_ASCENDING = "Showing appointments by date ascending order.";
+
+    private static final String MESSAGE_SUCCESS_DATE_DESCENDING = "Showing appointments by date descending order.";
 
     private final AppointmentComparatorType comparatorType;
 
@@ -44,6 +51,8 @@ public class SortAppointmentCommand extends Command {
         return switch (comparatorType) {
         case UNORDERED -> new CommandResult(MESSAGE_SUCCESS_UNORDERED, ListPanelType.APPOINTMENT);
         case ALPHABETICAL -> new CommandResult(MESSAGE_SUCCESS_ALPHABETICAL, ListPanelType.APPOINTMENT);
+        case DATE_ASCENDING -> new CommandResult(MESSAGE_SUCCESS_DATE_ASCENDING, ListPanelType.APPOINTMENT);
+        case DATE_DESCENDING -> new CommandResult(MESSAGE_SUCCESS_DATE_DESCENDING, ListPanelType.APPOINTMENT);
         };
     }
 

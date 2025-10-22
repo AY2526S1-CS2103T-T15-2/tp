@@ -7,7 +7,9 @@ import java.util.Comparator;
  */
 public enum AppointmentComparatorType {
     UNORDERED(null),
-    ALPHABETICAL(Appointment::compareNameAlphabetical);
+    ALPHABETICAL(Appointment::compareNameAlphabetical),
+    DATE_ASCENDING(Appointment::compareDateAscending),
+    DATE_DESCENDING(Appointment::compareDateDescending);
 
     public final Comparator<Appointment> comparator;
 
