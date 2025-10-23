@@ -214,8 +214,8 @@ Format:
 1. `sort_contracts -ea` for expiry date ascending
 2. `sort_contracts -i` for insertion order
 
-Note: Expiry date ascending sorts contracts from the earliest expiry date to the latest. 
-    Insertion order is the order in which contracts are added by the user
+* Expiry date ascending sorts contracts from the earliest expiry date to the latest. 
+* Insertion order is the order in which contracts are added by the user
 
 ### Edit contract: `edit_contract`
 
