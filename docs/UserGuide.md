@@ -145,7 +145,64 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 </box>
 
-### Archiving data files `[coming in v2.0]`
+## Contracts
+
+### Add a contract : `add_contract`
+
+Adds a contract to iCon.
+
+Format: `add_contract p: POLICY_ID n: NRIC dt: DATE_SIGNED e: EXPIRY_DATE pr: PREMIUM_AMOUNT`
+
+* EXPIRY_DATE cannot be before DATE_SIGNED.
+* PREMIUM_AMOUNT must be a positive number.
+
+Example: `add_contract p: P1234A n: S1234567A dt: 2023-01-01 e: 2024-01-01 pr: 1200.50`
+
+### Remove a contract : `remove_contract`
+
+Removes a contract from iCon.
+
+Format: `remove_contract c:CONTRACT_ID`
+
+Example: `remove_contract c:C1234A`
+
+### View contracts : `view_contract`
+
+Displays all contracts in iCon.
+
+Format: 
+1. `view_contract -a` for viewing all contracts
+2. `view_contract c: CONTRACT_ID` for viewing a specific contract by CONTRACT_ID
+
+Example: 
+1. `view_contract -a`
+2. `view_contract c: C1234A`
+
+### Sort contracts: `sort_contracts`
+
+Sorts and displays contracts based on insertion order or expiry date ascending
+
+Format: 
+1. `sort_contracts -ea` for expiry date ascending
+2. `sort_contracts -i` for insertion order
+
+* Expiry date ascending sorts contracts from the earliest expiry date to the latest. 
+* Insertion order is the order in which contracts are added by the user
+
+### Edit contract: `edit_contract`
+
+Edits an existing contract in iCon.
+
+Format: `edit_contract c:CONTRACT_ID [p: POLICY_ID] [n: NRIC] [dt: DATE_SIGNED] [e: EXPIRY_DATE] [pr: PREMIUM_AMOUNT]`
+
+* Edits the contract with the specified `CONTRACT_ID`.
+* CONTRACT_ID is a compulsory field
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Example: `edit_contract c:C1234A p: P5678B n: S7654321B dt: 2023-02-01 e: 2024-02-01 pr: 1500.75`
+
+# Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
