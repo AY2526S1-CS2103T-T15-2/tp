@@ -14,6 +14,7 @@ public class AppointmentCommandTestUtil {
     public static final String VALID_APPOINTMENT_ID_C = "123abc";
     public static final String VALID_APPOINTMENT_ID_D = "xyzABC";
     public static final String VALID_APPOINTMENT_ID_E = "123456";
+    public static final String INVALID_APPOINTMENT_ID = "!#$%^&";
 
     public static final String VALID_APPOINTMENT_DETAILS_A = "Placeholder details";
     public static final String VALID_APPOINTMENT_DETAILS_B = "Appointment details 123";
