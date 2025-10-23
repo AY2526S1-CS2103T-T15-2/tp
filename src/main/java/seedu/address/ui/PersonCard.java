@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -56,7 +55,8 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         nric.setText(person.getNric().nric);
-        person.getContracts().forEach(contract -> contracts.getChildren().add(new Label(contract.getCId().value + " ")));
+        person.getContracts().forEach(contract -> contracts.getChildren()
+                .add(new Label(contract.getCId().value + " ")));
         if (person.getAddress() != null && !person.getAddress().value.isBlank()) {
             address.getChildren().add(new Label(person.getAddress().value));
         }
