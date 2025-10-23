@@ -9,12 +9,17 @@ import seedu.address.model.Model;
 import seedu.address.model.contract.ContractComparatorType;
 import seedu.address.ui.ListPanelType;
 
+/**
+ * Sorts all contracts by their expiry date in ascending order.
+ */
 public class SortContractCommand extends Command {
+
     public static final String COMMAND_WORD = "sort_contracts";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all contracts by their premium amount\n"
             + "in ascending order. \n"
-            + "Parameters: [SORT_FLAG = " + FLAG_EXPIRY_ORDER_ASCENDING + " or " + FLAG_INSERTION_ORDER + "]\n"
+            + "Parameters: [SORT_FLAG = " + FLAG_EXPIRY_ORDER_ASCENDING
+            + " or " + FLAG_INSERTION_ORDER + "]\n"
             + "Example: " + COMMAND_WORD + " " + FLAG_EXPIRY_ORDER_ASCENDING;
 
     public static final String MESSAGE_SUCCESS_UNORDERED = "Showing contracts by insertion order";
@@ -23,6 +28,11 @@ public class SortContractCommand extends Command {
 
     private final ContractComparatorType comparatorType;
 
+    /**
+     * Creates a SortContractCommand to sort contracts using the specified comparator type.
+     *
+     * @param comparatorType The type of comparator to use for sorting.
+     */
     public SortContractCommand(ContractComparatorType comparatorType) {
         requireNonNull(comparatorType);
         this.comparatorType = comparatorType;
@@ -39,9 +49,9 @@ public class SortContractCommand extends Command {
         requireNonNull(model);
         model.sortContracts(comparatorType.comparator);
 
-        return switch (comparatorType) {
-            case UNORDERED -> new CommandResult(MESSAGE_SUCCESS_UNORDERED, ListPanelType.CONTRACT);
-            case EXPIRY_DATE -> new CommandResult(MESSAGE_SUCCESS_EXPIRY_DATE, ListPanelType.CONTRACT);
+        return switch(comparatorType) {
+        case UNORDERED -> new CommandResult(MESSAGE_SUCCESS_UNORDERED, ListPanelType.CONTRACT);
+        case EXPIRY_DATE -> new CommandResult(MESSAGE_SUCCESS_EXPIRY_DATE, ListPanelType.CONTRACT);
         };
     }
 

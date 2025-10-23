@@ -19,13 +19,13 @@ public class SortContractCommandParser implements Parser<SortContractCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortContractCommand parse(String args) throws ParseException {
-       String preamble = args.trim();
+        String preamble = args.trim();
 
-       return switch (preamble) {
-           case FLAG_INSERTION_ORDER -> new SortContractCommand(ContractComparatorType.UNORDERED);
-           case FLAG_EXPIRY_ORDER_ASCENDING -> new SortContractCommand(ContractComparatorType.EXPIRY_DATE);
-           default -> throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                   SortContractCommand.MESSAGE_USAGE));
-       };
+        return switch(preamble) {
+        case FLAG_INSERTION_ORDER -> new SortContractCommand(ContractComparatorType.UNORDERED);
+        case FLAG_EXPIRY_ORDER_ASCENDING -> new SortContractCommand(ContractComparatorType.EXPIRY_DATE);
+        default -> throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+               SortContractCommand.MESSAGE_USAGE));
+        };
     }
 }
