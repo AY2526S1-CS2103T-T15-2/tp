@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.ALICE;
 import static seedu.address.testutil.TypicalData.BOB;
+import static seedu.address.testutil.TypicalData.CONTRACT_A;
+import static seedu.address.testutil.TypicalData.CONTRACT_B;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,6 +64,26 @@ public class PersonTest {
 
         // first person's name > second person's name alphabetically -> returns 1
         assertEquals(1, Person.compareNameAlphabetical(BOB, ALICE));
+    }
+
+    @Test
+    public void checkContractIdString_success() {
+        String validContractIdString = CONTRACT_A.getCId().toString();
+        Person firstPerson = ALICE;
+        firstPerson.addContract(CONTRACT_A);
+
+        assertEquals(validContractIdString, firstPerson.getContractIdsAsString());
+    }
+
+    @Test
+    public void checkMultipleContractIdString_success() {
+        String validContractIdString = CONTRACT_A.getCId().toString()
+                + ", " + CONTRACT_B.getCId().toString();
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        firstPerson.addContract(CONTRACT_A);
+        firstPerson.addContract(CONTRACT_B);
+
+        assertEquals(validContractIdString, firstPerson.getContractIdsAsString());
     }
 
     @Test
