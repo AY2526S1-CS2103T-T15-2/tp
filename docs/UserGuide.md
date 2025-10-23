@@ -146,6 +146,62 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+
+## Policy
+
+### Adding a policy: `add_policy`
+
+Adds a policy or a list of policies to iCon.
+
+Format:
+1. `add_policy n:NAME d:DETAILS` to add one policy; or
+2. `add_policy f:FILE_PATH` to add policies from a file
+
+**Note:** Policies loaded from a file should be formatted as lines of ``NAME`DETAILS``. For example:
+```
+Life Insurance`This policy coverage for family...
+Travel - A`This policy covers flights to European countries
+```
+
+Examples:
+* `add_policy n:Life Insurance d:This policy coverage for family...`
+* `add_policy f:policy_file.txt`
+
+### Editing a policy: `edit_policy`
+
+Edits an existing policy in iCon.
+
+Format: `edit_policy p:POLICY_ID [n:NAME] [d:DETAILS]`
+
+* Edits the policy with the specified `POLICY_ID`.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit_policy p:Abc123 n:Healthcare` edits the policy with id `Abc123` to have the name `Healtchare`.
+
+### Removing a policy: `remove_policy`
+
+Removes an existing policy in iCon.
+
+Format: `remove_policy p:POLICY_ID`
+
+* Deletes the policy with the specified `POLICY_ID`.
+
+Examples:
+* `delete_policy p:Abc123`
+
+### Viewing policies: `view_policy`
+
+Shows a list of all policies or a specific policy in iCon.
+
+Format:
+1. `view_policy -a` to view all policies; or
+2. `view_policy p:POLICY_ID` to view a specific policy
+
+Examples:
+* `view_policy p:Abc123`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -202,5 +258,9 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add policy** | `add_policy n:NAME d:DETAILS` or `add_policy f:FILE_PATH`
+**Edit policy** | `edit_policy p:POLICY_ID [n:NAME] [d:DETAILS]`
+**Remove policy** | `remove_policy p:POLICY_ID`
+**View policies** | `view_policy -a` or `view_policy p:POLICY_ID`
 **List**   | `list`
 **Help**   | `help`
