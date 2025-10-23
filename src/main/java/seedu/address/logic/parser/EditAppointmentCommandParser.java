@@ -53,7 +53,8 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
             editAppointmentDescriptor.setDate(ParserUtil.parseDate(argMultiMap.getValue(PREFIX_DATE).get()));
         }
         if (argMultiMap.getValue(PREFIX_DETAILS).isPresent()) {
-            editAppointmentDescriptor.setDetails(ParserUtil.parseAppointmentDetails(argMultiMap.getValue(PREFIX_DETAILS).get()));
+            editAppointmentDescriptor.setDetails(ParserUtil
+                    .parseAppointmentDetails(argMultiMap.getValue(PREFIX_DETAILS).get()));
         }
 
         if (!editAppointmentDescriptor.isAnyFieldEdited()) {

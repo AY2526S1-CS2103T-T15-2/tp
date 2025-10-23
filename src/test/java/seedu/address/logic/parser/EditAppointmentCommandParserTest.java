@@ -61,7 +61,7 @@ public class EditAppointmentCommandParserTest {
                 + INVALID_APPOINTMENT_DATE_DESC, MESSAGE_INVALID_DATE_FORMAT);
         // invalid appointment details
         assertParseFailure(parser, " " + PREFIX_AID + VALID_APPOINTMENT_ID_A
-                +  INVALID_APPOINTMENT_DETAILS_DESC, PolicyDetails.MESSAGE_CONSTRAINTS);
+                + INVALID_APPOINTMENT_DETAILS_DESC, PolicyDetails.MESSAGE_CONSTRAINTS);
 
         // invalid appointment nric followed by valid appointment details
         assertParseFailure(parser, " " + PREFIX_AID + VALID_APPOINTMENT_ID_A

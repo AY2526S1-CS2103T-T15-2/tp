@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -43,7 +42,6 @@ public class EditAppointmentCommand extends Command {
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the address book.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist in iCon";
 
     private final AppointmentId aId;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
@@ -70,7 +68,8 @@ public class EditAppointmentCommand extends Command {
                     .filter(a -> a.getAId().equals(aId))
                     .findFirst()
                     .get();
-            Appointment editedAppointment = createEditedAppointment(appointmentToEdit, editAppointmentDescriptor, model);
+            Appointment editedAppointment =
+                    createEditedAppointment(appointmentToEdit, editAppointmentDescriptor, model);
 
             if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
                 throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
@@ -78,8 +77,8 @@ public class EditAppointmentCommand extends Command {
 
             model.setAppointment(appointmentToEdit, editedAppointment);
             model.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
-            return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment.getAId().toString()),
-                    ListPanelType.APPOINTMENT);
+            return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS,
+                    editedAppointment.getAId().toString()), ListPanelType.APPOINTMENT);
 
         } else {
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
@@ -90,13 +89,16 @@ public class EditAppointmentCommand extends Command {
      * Creates and returns an {@code Appointment} with the details of {@code appointmentToEdit}
      * edited with {@code editaAppointmentDescriptor}.
      */
-    private static Appointment createEditedAppointment(Appointment appointmentToEdit, EditAppointmentDescriptor editAppointmentDescriptor, Model model) {
+    private static Appointment createEditedAppointment(Appointment appointmentToEdit,
+                                                       EditAppointmentDescriptor editAppointmentDescriptor,
+                                                       Model model) {
         assert appointmentToEdit != null;
 
         AppointmentId currentId = appointmentToEdit.getAId();
         Nric updatedNric = editAppointmentDescriptor.getNric().orElse(appointmentToEdit.getNric());
         LocalDate updatedAppointmentDate = editAppointmentDescriptor.getDate().orElse(appointmentToEdit.getDate());
-        AppointmentDetails updatedDetails = editAppointmentDescriptor.getDetails().orElse(appointmentToEdit.getDetails());
+        AppointmentDetails updatedDetails = editAppointmentDescriptor.getDetails()
+                .orElse(appointmentToEdit.getDetails());
 
         return new Appointment(currentId, updatedNric, updatedAppointmentDate, updatedDetails);
     }

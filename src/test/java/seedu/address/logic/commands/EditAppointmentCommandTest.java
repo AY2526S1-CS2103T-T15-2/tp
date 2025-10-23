@@ -74,7 +74,8 @@ public class EditAppointmentCommandTest {
         Appointment secondAppointment = model.getFilteredAppointmentList().get(1);
 
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(firstAppointment).build();
-        EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(secondAppointment.getAId(), descriptor);
+        EditAppointmentCommand editAppointmentCommand =
+                new EditAppointmentCommand(secondAppointment.getAId(), descriptor);
 
         assertCommandFailure(editAppointmentCommand, model, EditAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT);
     }
@@ -96,7 +97,8 @@ public class EditAppointmentCommandTest {
 
         // same values -> returns true
         EditAppointmentDescriptor copyDescriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_A).build();
-        EditAppointmentCommand commandWithSameValues = new EditAppointmentCommand(APPOINTMENT_A.getAId(), copyDescriptor);
+        EditAppointmentCommand commandWithSameValues =
+                new EditAppointmentCommand(APPOINTMENT_A.getAId(), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -120,7 +122,8 @@ public class EditAppointmentCommandTest {
     public void toStringMethod() {
         AppointmentId appointmentId = APPOINTMENT_A.getAId();
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
-        EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(appointmentId, editAppointmentDescriptor);
+        EditAppointmentCommand editAppointmentCommand =
+                new EditAppointmentCommand(appointmentId, editAppointmentDescriptor);
         String expected = EditAppointmentCommand.class.getCanonicalName() + "{aId=" + appointmentId
                 + ", editAppointmentDescriptor=" + editAppointmentDescriptor + "}";
         assertEquals(expected, editAppointmentCommand.toString());
