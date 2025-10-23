@@ -25,6 +25,7 @@ import seedu.address.logic.commands.RemoveContractCommand;
 import seedu.address.logic.commands.RemovePolicyCommand;
 import seedu.address.logic.commands.SortAppointmentCommand;
 import seedu.address.logic.commands.SortContactCommand;
+import seedu.address.logic.commands.SortContractCommand;
 import seedu.address.logic.commands.ViewAppointmentCommand;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.commands.ViewContractCommand;
@@ -124,6 +125,9 @@ public class AddressBookParser {
 
         case ViewContractCommand.COMMAND_WORD:
             return new ViewContractCommandParser().parse(arguments);
+
+        case SortContractCommand.COMMAND_WORD:
+            return new SortContractCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

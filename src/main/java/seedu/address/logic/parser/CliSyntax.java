@@ -28,6 +28,5 @@ public class CliSyntax {
     public static final String FLAG_INSERTION_ORDER = "-i";
     public static final String FLAG_DATE_ORDER_ASCENDING = "-da";
     public static final String FLAG_DATE_ORDER_DESCENDING = "-dd";
-
-
+    public static final String FLAG_EXPIRY_ORDER_ASCENDING = "-ea";
 }

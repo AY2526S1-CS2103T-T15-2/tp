@@ -52,6 +52,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the sorted list of appointments */
     ObservableList<Appointment> getSortedAppointmentList();
 
+    /** Returns an unmodifiable view of the sorted list of contracts */
+    ObservableList<Contract> getSortedContractList();
     /**
      * Returns the user prefs' address book file path.
      */
