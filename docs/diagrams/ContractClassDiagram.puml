@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniqueContractList
+
+UniqueContractList -right-> Contract
+
+Contract *--> ContractId
+Contract *--> Name
+Contract *--> Nric
+Contract *--> PolicyId
+Contract *--> LocalDate:dateSigned
+Contract *--> LocalDate:expiryDate
+Contract *--> ContractPremium
+
+@enduml
