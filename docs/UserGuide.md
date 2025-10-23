@@ -45,6 +45,70 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
+## Appointment
+
+### Adding an appointment: `add_appointment`
+
+Adds an appointment to iCon.
+
+Format: `add_appointment ic:NRIC dt:APPOINTMENTDATE d:APPOINTMENTDETAILS`
+
+Examples:
+* `add_appointment ic:T1234567A dt:2025-10-10 d:Discuss Healthcare coverage...`
+* `add_appointment ic:S9876543B dt:2026-08-09 d:Re-evaluate premium for...`
+
+
+### Viewing appointment(s) : `view_appointment`
+
+Display appointment(s) in iCon, either all or a set of specific appointments
+
+Format: 
+1. `view_appointment -a`
+2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 Id to view
+
+Examples:
+* `view_appointment -a`
+* `view_appointment a:ABCDEF`
+
+
+### Editing an appointment : `edit_appointment`
+
+Edits an existing appointment in iCon.
+
+Format: `edit_appointment a:APPOINTMENTID ic:[NRIC] dt:[APPOINTMENTDATE] d:[APPOINTMENTDETAILS]` 
+
+* Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment **must be a positive an alphanumeric, 6 characters long** …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+
+Examples:
+*  `edit_appointment a:abc123 nric:T1234567A` Edits the Nric of the appointment with id 'abc123' to be T1234567A
+*  `edit_appointment a:456XYZ dt:2020-01-01 d:This...` Edits the appointment date and appointment details of the appointment with id '456XYZ' to 2020-01-01 and "This..." respectively.
+
+### Removing an appointment : `remove_appointment`
+
+Removes the specified appointment from iCon.
+
+Format: `remove_appointment a:APPOINTMENTID`
+
+* Removes the appointment with the specified `APPOINTMENTID`.
+* The appointment id refers to the appointment id shown in the displayed appointment list.
+* The appointment **must be a positive an alphanumeric, 6 characters long** …​
+
+Examples:
+* `remove_appointment a:xyz123` removes the appointment with appointment id "xyz123" in iCon.
+
+### Sorting an appointment : `sort_appointment`
+
+Sorts the appointment in iCon by relevant flags.
+
+Format: `sort_appointment ` ins -i al -a datea -da dated -dd
+1. `sort_appointment -i` sort appointment by insertion order
+2. `sort_appointment -a` sort appointment by alphabetical order
+3. `sort_appointment -da` sort appointment by date in ascending order
+4. `sort_appointment -dd` sort appointment by date in descending order
+
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
