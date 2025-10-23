@@ -17,7 +17,7 @@ public class ContractBuilder {
     public static final String DEFAULT_CID = "C1234A";
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_NRIC = "S1234567A";
-    public static final String DEFAULT_POLICY_ID = "P1234A";
+    public static final String DEFAULT_POLICY_ID = "123456";
     public static final LocalDate DEFAULT_DATE = LocalDate.parse("2023-01-01");
     public static final LocalDate DEFAULT_EXPIRY = LocalDate.parse("2024-01-01");
     public static final String DEFAULT_PREMIUM = "1000.00";
@@ -85,6 +85,14 @@ public class ContractBuilder {
      */
     public ContractBuilder withDate(LocalDate date) {
         this.dateSigned = date;
+        return this;
+    }
+
+    /**
+     * Sets the {@code LocalDate} expiry date of the {@code Contract} that we are building.
+     */
+    public ContractBuilder withExpiryDate(LocalDate expiry) {
+        this.expiry = expiry;
         return this;
     }
 

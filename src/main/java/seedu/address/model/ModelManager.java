@@ -183,6 +183,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setContract(Contract target, Contract editedContract) {
+        requireAllNonNull(target, editedContract);
+
+        addressBook.setContract(target, editedContract);
+    }
+
+    @Override
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireAllNonNull(target, editedAppointment);
 
