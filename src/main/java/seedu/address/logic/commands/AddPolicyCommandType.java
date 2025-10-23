@@ -12,10 +12,10 @@ public abstract sealed class AddPolicyCommandType
 
     public static final String COMMAND_WORD = "add_policy";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a policy. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a policy.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_DETAILS + "DETAILS "
+            + PREFIX_DETAILS + "DETAILS\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Life Insurance "
             + PREFIX_DETAILS + "This policy... ";
