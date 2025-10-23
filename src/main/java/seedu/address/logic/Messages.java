@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 
@@ -61,5 +62,12 @@ public class Messages {
      */
     public static String format(Policy policy) {
         return policy.getName() + "; Details: " + policy.getDetails();
+    }
+
+    /**
+     * Formats the {@code policy} for display to the user.
+     */
+    public static String format(Appointment appointment) {
+        return appointment.getAId().value;
     }
 }

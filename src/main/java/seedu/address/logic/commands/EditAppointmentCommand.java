@@ -143,7 +143,7 @@ public class EditAppointmentCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
-            setAid(toCopy.aId);
+            setAId(toCopy.aId);
             setNric(toCopy.nric);
             setDate(toCopy.appDate);
             setDetails(toCopy.details);
@@ -200,10 +200,11 @@ public class EditAppointmentCommand extends Command {
             }
 
             EditAppointmentDescriptor otherEditAppointmentDescriptor = (EditAppointmentDescriptor) other;
-            return Objects.equals(aId, otherEditAppointmentDescriptor.aId)
-                    && Objects.equals(nric, otherEditAppointmentDescriptor.nric)
-                    && Objects.equals(appDate, otherEditAppointmentDescriptor.appDate)
-                    && Objects.equals(details, otherEditAppointmentDescriptor.details);
+
+            return getAId().equals(otherEditAppointmentDescriptor.getAId())
+                    && getNric().equals(otherEditAppointmentDescriptor.getNric())
+                    && getDate().equals(otherEditAppointmentDescriptor.getDate())
+                    && getDetails().equals(otherEditAppointmentDescriptor.getDetails());
         }
 
         @Override

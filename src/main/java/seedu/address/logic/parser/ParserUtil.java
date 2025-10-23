@@ -260,19 +260,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String id} into an {@code AppointmentId}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static AppointmentId parseAppointmentId(String id) throws ParseException {
-        requireNonNull(id);
-        String trimmedId = id.trim();
-        if (!AppointmentId.isValidAppointmentId(trimmedId)) {
-            throw new ParseException(AppointmentId.MESSAGE_CONSTRAINTS);
-        }
-        return new AppointmentId(trimmedId);
-    }
-
-    /**
      * Parses a {@code String premium} into a {@code ContractPremium}.
      * Leading and trailing whitespaces will be trimmed.
      *
