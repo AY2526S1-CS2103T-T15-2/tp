@@ -237,6 +237,14 @@ public interface Model {
     void addAppointment(Appointment appointment);
 
     /**
+     * Replaces the given contract {@code target} with {@code editedContract}.
+     * {@code target} must exist in the address book.
+     * The contract identity of {@code editedContract} must not be the same as another existing contract
+     * in the address book.
+     */
+    void setContract(Contract target, Contract editedContract);
+
+    /**
      * Replaces the given appointment {@code target} with {@code editedAppointment}.
      * {@code target} must exist in the address book.
      * The appointment identity of {@code editedAppointment} must not be the same as another existing appointment
