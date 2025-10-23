@@ -258,6 +258,7 @@ public class ParserUtil {
         }
         return new AppointmentDetails(trimmedAppointmentDetails);
     }
+
     /**
      * Parses a {@code String premium} into a {@code ContractPremium}.
      * Leading and trailing whitespaces will be trimmed.

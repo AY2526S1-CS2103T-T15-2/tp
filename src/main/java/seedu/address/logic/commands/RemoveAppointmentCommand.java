@@ -21,7 +21,7 @@ public class RemoveAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "remove_appointment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes an appointment from iCon. "
+            + ": Removes an appointment from iCon.\n"
             + "Parameters: "
             + "Appointment ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " a: gVVGzn";
