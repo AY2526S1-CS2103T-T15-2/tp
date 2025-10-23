@@ -147,6 +147,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void sortContracts(Comparator<Contract> comparator) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void addContractToPerson(Contract contract) {
         throw new AssertionError("This method should not be called.");
     }
@@ -158,6 +163,11 @@ public class ModelStub implements Model {
 
     @Override
     public ObservableList<Contract> getFilteredContractList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Contract> getSortedContractList() {
         throw new AssertionError("This method should not be called.");
     }
 

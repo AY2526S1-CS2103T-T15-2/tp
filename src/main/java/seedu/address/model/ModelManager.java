@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final SortedList<Person> sortedPersons;
+    private final SortedList<Contract> sortedContracts;
     private final SortedList<Appointment> sortedAppointments;
     private final FilteredList<Policy> filteredPolicies;
     private final FilteredList<Contract> filteredContracts;
@@ -47,10 +48,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
+        filteredContracts = new FilteredList<>(this.addressBook.getContractList());
         sortedPersons = new SortedList<>(filteredPersons);
+        sortedContracts = new SortedList<>(filteredContracts);
         sortedAppointments = new SortedList<>(filteredAppointments);
         filteredPolicies = new FilteredList<>(this.addressBook.getPolicyList());
-        filteredContracts = new FilteredList<>(this.addressBook.getContractList());
     }
 
     public ModelManager() {
@@ -274,6 +276,10 @@ public class ModelManager implements Model {
         return sortedPersons;
     }
 
+    @Override
+    public ObservableList<Contract> getSortedContractList() {
+        return sortedContracts;
+    }
     /**
      * Returns an unmodifiable view of the sorted list of {@code Appointment} backed by the internal list of
      * {@code versionedAddressBook}
@@ -338,6 +344,11 @@ public class ModelManager implements Model {
     @Override
     public void sortPersons(Comparator<Person> comparator) {
         sortedPersons.setComparator(comparator);
+    }
+
+    @Override
+    public void sortContracts(Comparator<Contract> comparator) {
+        sortedContracts.setComparator(comparator);
     }
 
     @Override
