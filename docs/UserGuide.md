@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# iCon User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+iCon is a **desktop app for managing contacts, contracts, policies, and appointments optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, iCon can get your management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -43,7 +43,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <box type="info" seamless>
 
@@ -67,6 +67,42 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+## Contacts
+
+### Adding contacts : `add_contact`
+
+Adds a contact to iCon
+
+Format: `add_contact n:NAME p:PHONE_NUMBER ic:NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]`
+
+### Editing contacts : `edit_contact`
+
+Edits a contact in iCon
+
+Format: `edit_contact INDEX [n:NAME] [p:PHONE_NUMBER] [ic:NRIC] [e:EMAIL] [a:ADDRESS] [t:TAG]`
+
+### Removing contacts : `remove_contact`
+
+Removes a contact in iCon
+
+Format: `remove_contact ic:NRIC`
+
+### Sorting contacts : `sort_contact`
+
+Sorts contacts in iCon by relevant flags.
+
+Format : 
+1. `sort_contact -a` in alphabetical order
+2. `sort_contact -i` in insertion order
+
+### Viewing contacts : `view_contact`
+
+Displays contact(s) in iCon, either all or a set of specific contacts
+
+Format : 
+1. `view_contact -a` 
+2. `view_contact ic:NRIC1 [NRIC2] [NRIC3] ....` at least 1 IC to view
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -75,76 +111,67 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
 
-Edits an existing person in the address book.
+## Policy
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+### Adding a policy: `add_policy`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Adds a policy or a list of policies to iCon.
+
+Format:
+1. `add_policy n:NAME d:DETAILS` to add one policy; or
+2. `add_policy f:FILE_PATH` to add policies from a file
+
+**Note:** Policies loaded from a file should be formatted as lines of ``NAME`DETAILS``. For example:
+```
+Life Insurance`This policy coverage for family...
+Travel - A`This policy covers flights to European countries
+```
+
+Examples:
+* `add_policy n:Life Insurance d:This policy coverage for family...`
+* `add_policy f:policy_file.txt`
+
+### Editing a policy: `edit_policy`
+
+Edits an existing policy in iCon.
+
+Format: `edit_policy p:POLICY_ID [n:NAME] [d:DETAILS]`
+
+* Edits the policy with the specified `POLICY_ID`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit_policy p:Abc123 n:Healthcare` edits the policy with id `Abc123` to have the name `Healtchare`.
 
-### Locating persons by name: `find`
+### Removing a policy: `remove_policy`
 
-Finds persons whose names contain any of the given keywords.
+Removes an existing policy in iCon.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `remove_policy p:POLICY_ID`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Deletes the policy with the specified `POLICY_ID`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `delete_policy p:Abc123`
 
-### Deleting a person : `delete`
+### Viewing policies: `view_policy`
 
-Deletes the specified person from the address book.
+Shows a list of all policies or a specific policy in iCon.
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format:
+1. `view_policy -a` to view all policies; or
+2. `view_policy p:POLICY_ID` to view a specific policy
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `view_policy p:Abc123`
 
 ### Clearing all entries : `clear`
 
@@ -171,9 +198,67 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
-### Archiving data files `[coming in v2.0]`
+## Contracts
+
+### Add a contract : `add_contract`
+
+Adds a contract to iCon.
+
+Format: `add_contract p: POLICY_ID n: NRIC dt: DATE_SIGNED e: EXPIRY_DATE pr: PREMIUM_AMOUNT`
+
+* EXPIRY_DATE cannot be before DATE_SIGNED.
+* PREMIUM_AMOUNT must be a positive number.
+
+Example: `add_contract p: P1234A n: S1234567A dt: 2023-01-01 e: 2024-01-01 pr: 1200.50`
+
+### Remove a contract : `remove_contract`
+
+Removes a contract from iCon.
+
+Format: `remove_contract c:CONTRACT_ID`
+
+Example: `remove_contract c:C1234A`
+
+### View contracts : `view_contract`
+
+Displays all contracts in iCon.
+
+Format: 
+1. `view_contract -a` for viewing all contracts
+2. `view_contract c: CONTRACT_ID` for viewing a specific contract by CONTRACT_ID
+
+Example: 
+1. `view_contract -a`
+2. `view_contract c: C1234A`
+
+### Sort contracts: `sort_contracts`
+
+Sorts and displays contracts based on insertion order or expiry date ascending
+
+Format: 
+1. `sort_contracts -ea` for expiry date ascending
+2. `sort_contracts -i` for insertion order
+
+* Expiry date ascending sorts contracts from the earliest expiry date to the latest. 
+* Insertion order is the order in which contracts are added by the user
+
+### Edit contract: `edit_contract`
+
+Edits an existing contract in iCon.
+
+Format: `edit_contract c:CONTRACT_ID [p: POLICY_ID] [n: NRIC] [dt: DATE_SIGNED] [e: EXPIRY_DATE] [pr: PREMIUM_AMOUNT]`
+
+* Edits the contract with the specified `CONTRACT_ID`.
+* CONTRACT_ID is a compulsory field
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Example: `edit_contract c:C1234A p: P5678B n: S7654321B dt: 2023-02-01 e: 2024-02-01 pr: 1500.75`
+
+# Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -219,4 +304,3 @@ _Details coming soon ..._
 | **View appointments**  | `view_appointment -a` OR `view_appointment a:` <br> e.g., `view_appointment a:A1234A`                                                                                 |
 | **Edit appointment**   | `edit_appointment a:APPOINTMENT_ID [ic:NRIC] [dt:DATE] [d:DETAILS]` OR <br> e.g., `edit_appointment a:A1234A dt:2025-10-31`                                           |
 | **Sort appointments**  | `sort_appointment` with flags: `-a` OR `-i` OR `-da` OR `-dd`                                                                                                         |
-

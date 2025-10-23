@@ -28,6 +28,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.ContractComparatorType;
 import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonComparatorType;
@@ -258,6 +260,25 @@ public class ModelManagerTest {
         // Sort by insertion order
         modelManager.sortPersons(PersonComparatorType.UNORDERED.comparator);
         assertEquals(persons, modelManager.getSortedPersonList());
+    }
+
+    @Test
+    public void sortContracts() {
+        ObservableList<Contract> contracts = FXCollections.observableArrayList(CONTRACT_B, CONTRACT_D, CONTRACT_A);
+        contracts.forEach(modelManager::addContract);
+
+        // Make sure the internal filtered contract list has the correct contracts
+        assertEquals(contracts, modelManager.getFilteredContractList());
+
+        // Sort by expiry date
+        ObservableList<Contract> expectedContracts =
+                FXCollections.observableArrayList(CONTRACT_A, CONTRACT_B, CONTRACT_D);
+        modelManager.sortContracts(ContractComparatorType.EXPIRY_DATE.comparator);
+        assertEquals(expectedContracts, modelManager.getSortedContractList());
+
+        // Sort by insertion order
+        modelManager.sortContracts(ContractComparatorType.UNORDERED.comparator);
+        assertEquals(contracts, modelManager.getSortedContractList());
     }
 
     @Test

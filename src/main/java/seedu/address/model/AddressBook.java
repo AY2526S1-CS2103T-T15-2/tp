@@ -274,6 +274,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Person person : persons) {
             if (person.getNric().equals(contract.getNric())) {
                 person.addContract(contract);
+                setPerson(person, person);
                 return;
             }
         }

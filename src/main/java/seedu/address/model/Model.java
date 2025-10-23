@@ -181,11 +181,20 @@ public interface Model {
      */
     void updateFilteredContractList(Predicate<Contract> predicate);
 
+    /** Returns an unmodifiable view of the sorted contract list */
+    ObservableList<Contract> getSortedContractList();
+
     /**
      * Removes the given contract.
      * The contract must exist in the address book.
      */
     void removeContract(Contract contract);
+
+    /**
+     * Updates the comparator of the sorted list to sort by the given {@code comparator}.
+     * @param comparator {@code Comparator<Contract>} or {@code null} for no sorting.
+     */
+    void sortContracts(Comparator<Contract> comparator);
 
     /**
      * Returns true if a person has the given contract.

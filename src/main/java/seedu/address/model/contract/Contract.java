@@ -109,6 +109,10 @@ public class Contract {
                 && otherContract.getPremium().equals(getPremium());
     }
 
+    public static int compareByExpiryDate(Contract c1, Contract c2) {
+        return c1.getExpiryDate().compareTo(c2.getExpiryDate());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

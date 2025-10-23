@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -94,6 +95,7 @@ public class AddContractCommand extends Command {
         model.addContract(toAdd);
         model.addContractToPerson(toAdd);
         model.addContractToPolicy(toAdd);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()), ListPanelType.CONTRACT);
     }
 
