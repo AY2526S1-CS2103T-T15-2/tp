@@ -94,7 +94,7 @@ public class EditPolicyCommand extends Command {
         PolicyName updatedName = editPolicyDescriptor.getName().orElse(policyToEdit.getName());
         PolicyDetails updatedDetails = editPolicyDescriptor.getDetails().orElse(policyToEdit.getDetails());
 
-        return new Policy(updatedName, updatedDetails, policyToEdit.getId());
+        return new Policy(updatedName, updatedDetails, policyToEdit.getId(), policyToEdit.getContracts());
     }
 
     @Override
