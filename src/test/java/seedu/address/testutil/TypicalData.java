@@ -210,8 +210,114 @@ public class TypicalData {
 
     private TypicalData() {} // prevents instantiation
 
+    // Static variable getters - creates copies of internal data
+    public static Person getAlice() {
+        return new PersonBuilder(ALICE).build();
+    }
+
+    public static Person getBenson() {
+        return new PersonBuilder(BENSON).build();
+    }
+
+    public static Person getCarl() {
+        return new PersonBuilder(CARL).build();
+    }
+
+    public static Person getDaniel() {
+        return new PersonBuilder(DANIEL).build();
+    }
+
+    public static Person getElle() {
+        return new PersonBuilder(ELLE).build();
+    }
+
+    public static Person getFiona() {
+        return new PersonBuilder(FIONA).build();
+    }
+
+    public static Person getGeorge() {
+        return new PersonBuilder(GEORGE).build();
+    }
+
+    public static Person getHoon() {
+        return new PersonBuilder(HOON).build();
+    }
+
+    public static Person getIda() {
+        return new PersonBuilder(IDA).build();
+    }
+
+    public static Person getAmy() {
+        return new PersonBuilder(AMY).build();
+    }
+
+    public static Person getBob() {
+        return new PersonBuilder(BOB).build();
+    }
+
+    public static Policy getLife() {
+        return new PolicyBuilder(LIFE).build();
+    }
+
+    public static Policy getHealth() {
+        return new PolicyBuilder(HEALTH).build();
+    }
+
+    public static Policy getProperty() {
+        return new PolicyBuilder(PROPERTY).build();
+    }
+
+    public static Policy getTravel() {
+        return new PolicyBuilder(TRAVEL).build();
+    }
+
+    public static Policy getHome() {
+        return new PolicyBuilder(HOME).build();
+    }
+
+    public static Policy getHealthB() {
+        return new PolicyBuilder(HEALTH_B).build();
+    }
+
+    // Static getters for typical persons and policies
+    public static Person getTypicalAlice() {
+        Person alice = getAlice();
+        alice.addContract(CONTRACT_A);
+        return alice;
+    }
+
+    public static Person getTypicalBenson() {
+        Person benson = getBenson();
+        benson.addContract(CONTRACT_B);
+        return benson;
+    }
+
+    public static Person getTypicalCarl() {
+        Person carl = getCarl();
+        carl.addContract(CONTRACT_C);
+        return carl;
+    }
+
+    public static Policy getTypicalLife() {
+        Policy life = getLife();
+        life.addContract(CONTRACT_A);
+        return life;
+    }
+
+    public static Policy getTypicalHealth() {
+        Policy health = getHealth();
+        health.addContract(CONTRACT_B);
+        return health;
+    }
+
+    public static Policy getTypicalProperty() {
+        Policy property = getProperty();
+        property.addContract(CONTRACT_C);
+        return property;
+    }
+
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical data.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -231,17 +337,24 @@ public class TypicalData {
     }
 
     public static List<Person> getTypicalPersons() {
-        ALICE.addContract(CONTRACT_A);
-        BENSON.addContract(CONTRACT_B);
-        CARL.addContract(CONTRACT_C);
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return List.of(
+                getTypicalAlice(),
+                getTypicalBenson(),
+                getTypicalCarl(),
+                getDaniel(),
+                getElle(),
+                getFiona(),
+                getGeorge()
+        );
     }
 
     public static List<Policy> getTypicalPolicies() {
-        LIFE.addContract(CONTRACT_A);
-        HEALTH.addContract(CONTRACT_B);
-        PROPERTY.addContract(CONTRACT_C);
-        return new ArrayList<>(Arrays.asList(LIFE, HEALTH, PROPERTY, TRAVEL));
+        return List.of(
+                getTypicalLife(),
+                getTypicalHealth(),
+                getTypicalProperty(),
+                getTravel()
+        );
     }
 
     public static List<Contract> getTypicalContracts() {
