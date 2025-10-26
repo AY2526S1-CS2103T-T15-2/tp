@@ -47,7 +47,8 @@ public class EditContractCommandParser implements Parser<EditContractCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditContractCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_CID, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY);
+        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_CID, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY,
+                PREFIX_PREMIUM);
 
         if (argMultiMap.getValue(PREFIX_PID).isPresent()) {
             editContractDescriptor.setPId(ParserUtil.parsePolicyId(argMultiMap.getValue(PREFIX_PID).get()));
