@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -19,6 +20,8 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -91,11 +94,11 @@ public class EditAppointmentCommand extends Command {
      */
     private static Appointment createEditedAppointment(Appointment appointmentToEdit,
                                                        EditAppointmentDescriptor editAppointmentDescriptor,
-                                                       Model model) {
+                                                       Model model) throws CommandException {
         assert appointmentToEdit != null;
 
         AppointmentId currentId = appointmentToEdit.getAId();
-        Nric updatedNric = editAppointmentDescriptor.getNric().orElse(appointmentToEdit.getNric());
+        Nric updatedNric = editAppointmentDescriptor.getNric(model).orElse(appointmentToEdit.getNric());
         LocalDate updatedAppointmentDate = editAppointmentDescriptor.getDate().orElse(appointmentToEdit.getDate());
         AppointmentDetails updatedDetails = editAppointmentDescriptor.getDetails()
                 .orElse(appointmentToEdit.getDetails());
@@ -171,6 +174,16 @@ public class EditAppointmentCommand extends Command {
         }
 
         public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
+        }
+
+        public Optional<Nric> getNric(Model model) throws CommandException {
+            //placeholder
+            FilteredList<Person> personFilteredList = model.getFilteredPersonList()
+                    .filtered(new NricContainsKeywordsPredicate(List.of(nric.toString())));
+            if (personFilteredList.isEmpty()) {
+                throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            }
             return Optional.ofNullable(nric);
         }
 
