@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.appointment.Appointment;
@@ -69,7 +70,7 @@ public class AddAppointmentCommandTest {
                 LocalDate.parse(VALID_DATE),
                 new AppointmentDetails("Details"));
         assertCommandFailure(new AddAppointmentCommand(appointmentWithInvalidNric),
-                modelStub, AddAppointmentCommand.MESSAGE_PERSON_NOT_FOUND);
+                modelStub, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test

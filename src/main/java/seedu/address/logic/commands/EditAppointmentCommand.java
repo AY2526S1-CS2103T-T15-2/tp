@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,8 +19,6 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -178,10 +175,11 @@ public class EditAppointmentCommand extends Command {
         }
 
         public Optional<Nric> getNric(Model model) throws CommandException {
-            //placeholder
-            FilteredList<Person> personFilteredList = model.getFilteredPersonList()
-                    .filtered(new NricContainsKeywordsPredicate(List.of(nric.toString())));
-            if (personFilteredList.isEmpty()) {
+            // Requires precondition null checker as hasPerson requires non null
+            if (nric == null) {
+                return Optional.ofNullable(nric);
+            }
+            if (!model.hasPerson(nric)) {
                 throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
             }
             return Optional.ofNullable(nric);

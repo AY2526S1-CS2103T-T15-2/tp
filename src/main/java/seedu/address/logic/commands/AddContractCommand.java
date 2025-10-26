@@ -11,6 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.time.LocalDate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contract.Contract;
@@ -45,7 +46,6 @@ public class AddContractCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New contract added with the following ID: %s";
     public static final String MESSAGE_DUPLICATE_CONTRACT = "This contract already exists in iCon";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist in iCon";
 
     private Contract toAdd;
 
@@ -63,7 +63,7 @@ public class AddContractCommand extends Command {
 
         Nric nric = toAdd.getNric();
         if (!model.hasPerson(nric)) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
         // fill in necessary fields
