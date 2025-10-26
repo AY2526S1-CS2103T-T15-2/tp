@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.contract.Contract;
@@ -81,7 +82,7 @@ public class AddContractCommandTest {
                 LocalDate.parse(VALID_EXPIRY),
                 new ContractPremium(VALID_PREMIUM));
         assertCommandFailure(new AddContractCommand(contractWithInvalidNric),
-                modelStub, AddContractCommand.MESSAGE_PERSON_NOT_FOUND);
+                modelStub, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
