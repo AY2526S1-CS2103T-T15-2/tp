@@ -17,9 +17,9 @@ public class ContractPremiumTest {
         assertFalse(ContractPremium.isValidContractPremium(" ")); // spaces only
         assertFalse(ContractPremium.isValidContractPremium("-50")); // negative value
         assertFalse(ContractPremium.isValidContractPremium("abc")); // non-numeric
+        assertFalse(ContractPremium.isValidContractPremium("0")); // zero value
 
         // valid premiums
-        assertTrue(ContractPremium.isValidContractPremium("0")); // zero value
         assertTrue(ContractPremium.isValidContractPremium("100")); // integer value
         assertTrue(ContractPremium.isValidContractPremium("99.99")); // valid decimal value
         assertTrue(ContractPremium.isValidContractPremium("0.01")); // minimum positive value

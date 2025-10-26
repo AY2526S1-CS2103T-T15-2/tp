@@ -13,7 +13,7 @@ import java.math.RoundingMode;
 public class ContractPremium {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Contract premium should be a non-negative number.";
+            "Contract premium should be more than 0.";
 
     //Used to round off to 2 decimal places
     private static final int SCALE = 2;
@@ -43,7 +43,7 @@ public class ContractPremium {
         }
         try {
             BigDecimal normalized = test.setScale(SCALE, RoundingMode.HALF_UP);
-            return normalized.compareTo(BigDecimal.ZERO) >= 0;
+            return normalized.compareTo(BigDecimal.ZERO) > 0;
         } catch (ArithmeticException e) {
             return false;
         }
@@ -59,7 +59,7 @@ public class ContractPremium {
         try {
             BigDecimal value = new BigDecimal(test);
             BigDecimal normalized = value.setScale(SCALE, RoundingMode.HALF_UP);
-            return normalized.compareTo(BigDecimal.ZERO) >= 0;
+            return normalized.compareTo(BigDecimal.ZERO) > 0;
         } catch (NumberFormatException | ArithmeticException e) {
             return false;
         }
