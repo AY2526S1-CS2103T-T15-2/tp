@@ -6,9 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -16,8 +14,6 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -57,13 +53,7 @@ public class AddAppointmentCommand extends Command {
 
         // get nric from preloaded appointment and load person to get name
         Nric nric = toAdd.getNric();
-        FilteredList<Person> personFilteredList = model.getFilteredPersonList()
-                .filtered(new NricContainsKeywordsPredicate(List.of(nric.toString())));
-        if (personFilteredList.isEmpty()) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-        }
-        Person person = personFilteredList.get(0);
-        if (person == null || !person.getNric().equals(nric)) {
+        if (!model.hasPerson(nric)) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
