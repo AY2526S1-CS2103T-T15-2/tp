@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTRACT_PERIOD;
-import static seedu.address.logic.commands.CommandUtil.isValidDateSignedAndExpiry;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -86,9 +84,7 @@ public class AddContractCommand extends Command {
         ContractId contractId = toAdd.getCId();
         LocalDate expiry = toAdd.getExpiryDate();
         ContractPremium premium = toAdd.getPremium();
-        if (!isValidDateSignedAndExpiry(date, expiry)) {
-            throw new CommandException(MESSAGE_INVALID_CONTRACT_PERIOD);
-        }
+
         // initialise new contract
         toAdd = new Contract(contractId, name, nric, policyId, date, expiry, premium);
 

@@ -14,5 +14,4 @@ public class CommandUtil {
     public static boolean isValidDateSignedAndExpiry(LocalDate signed, LocalDate expiry) {
         return signed.isBefore(expiry);
     }
-
 }

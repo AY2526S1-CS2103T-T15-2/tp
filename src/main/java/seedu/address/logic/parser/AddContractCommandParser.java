@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTRACT_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
+import static seedu.address.logic.parser.ParserUtil.isValidDateSignedAndExpiry;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -42,6 +44,9 @@ public class AddContractCommandParser implements Parser<AddContractCommand> {
         LocalDate date = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_DATE).get());
         LocalDate expiry = ParserUtil.parseDate(arguMultimap.getValue(PREFIX_EXPIRY).get());
         ContractPremium premium = ParserUtil.parseContractPremium(arguMultimap.getValue(PREFIX_PREMIUM).get());
+        if (!isValidDateSignedAndExpiry(date, expiry)) {
+            throw new ParseException(MESSAGE_INVALID_CONTRACT_PERIOD);
+        }
 
         Contract contract = new Contract(nric, pid, date, expiry, premium);
 

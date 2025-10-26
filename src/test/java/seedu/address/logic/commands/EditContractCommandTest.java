@@ -143,6 +143,17 @@ public class EditContractCommandTest {
     }
 
     @Test
+    public void execute_invalidContractPeriod_failure() {
+        EditContractDescriptor descriptor = new EditContractDescriptorBuilder()
+                .withDate("2024-01-01")
+                .withExpiryDate("2023-01-01")
+                .build();
+        EditContractCommand editContractCommand = new EditContractCommand(CONTRACT_A_ID, descriptor);
+
+        assertCommandFailure(editContractCommand, model, Messages.MESSAGE_INVALID_CONTRACT_PERIOD);
+    }
+
+    @Test
     public void equals() {
         final EditContractCommand standardCommand = new EditContractCommand(CONTRACT_A_ID,
                 new EditContractDescriptorBuilder(CONTRACT_A).withName(CONTRACT_B.getName().toString()).build());

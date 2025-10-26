@@ -170,7 +170,7 @@ public class AddContractCommandParserTest {
 
         // invalid Expiry(Invalid period)
         assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + INVALID_EXPIRY_DESC_2 + PREMIUM_DESC,
-                Messages.MESSAGE_INVALID_EXPIRY_DATE);
+                Messages.MESSAGE_INVALID_CONTRACT_PERIOD);
 
         // invalid Premium(negative value)
         assertParseFailure(parser, PID_DESC + NRIC_DESC + DATE_DESC + EXPIRY_DESC + INVALID_PREMIUM_DESC,
