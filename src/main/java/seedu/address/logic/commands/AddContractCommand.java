@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTRACT_PERIOD;
+import static seedu.address.logic.commands.CommandUtil.isValidDateSignedAndExpiry;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -100,15 +101,6 @@ public class AddContractCommand extends Command {
         model.addContractToPolicy(toAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()), ListPanelType.CONTRACT);
-    }
-
-
-    /**
-     * Checks if {@code LocalDate signed} occurs before {@code LocalDate expiry}
-     * @return
-     */
-    public static boolean isValidDateSignedAndExpiry(LocalDate signed, LocalDate expiry) {
-        return signed.isBefore(expiry);
     }
 
     @Override
