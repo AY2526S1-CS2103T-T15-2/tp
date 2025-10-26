@@ -22,6 +22,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  *
  * @see Person#isSamePerson(Person)
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class UniquePersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
@@ -34,6 +35,14 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with the given NRIC.
+     */
+    public boolean contains(Nric nric) {
+        requireNonNull(nric);
+        return internalList.stream().anyMatch(person -> person.getNric().equals(nric));
     }
 
     /**

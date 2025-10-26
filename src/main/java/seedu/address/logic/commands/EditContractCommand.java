@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTRACT_PERIOD;
+import static seedu.address.logic.commands.CommandUtil.isValidDateSignedAndExpiry;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
@@ -12,7 +14,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -23,8 +24,6 @@ import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.ui.ListPanelType;
 
@@ -113,6 +112,9 @@ public class EditContractCommand extends Command {
         LocalDate updatedDateSigned = editContractDescriptor.getDate().orElse(contractToEdit.getDate());
         LocalDate updatedExpiryDate = editContractDescriptor.getExpiryDate().orElse(contractToEdit.getExpiryDate());
         ContractPremium updatedPremium = editContractDescriptor.getPremium().orElse(contractToEdit.getPremium());
+        if (!isValidDateSignedAndExpiry(updatedDateSigned, updatedExpiryDate)) {
+            throw new CommandException(MESSAGE_INVALID_CONTRACT_PERIOD);
+        }
 
         return new Contract(updatedCId, updatedName, updatedNric, updatedPid, updatedDateSigned, updatedExpiryDate,
                 updatedPremium);
@@ -212,18 +214,8 @@ public class EditContractCommand extends Command {
          * @param model
          * @throws CommandException
          */
-        public void setName(Model model) throws CommandException {
-            FilteredList<Person> personFilteredList = model.getFilteredPersonList()
-                    .filtered(new NricContainsKeywordsPredicate(List.of(nric.toString())));
-            if (personFilteredList.isEmpty()) {
-                throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-            }
-            Person person = personFilteredList.get(0);
-            if (person == null || !person.getNric().equals(nric)) {
-                throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-            }
-
-            this.name = person.getName();
+        public void setName(Model model) {
+            this.name = model.getName(nric);
         }
 
         public Optional<Name> getName(Model model) throws CommandException {

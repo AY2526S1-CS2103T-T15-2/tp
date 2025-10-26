@@ -26,6 +26,7 @@ public class Messages {
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "This appointment ID does not exist in the iCOn.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date should be in the format yyyy-MM-dd";
     public static final String MESSAGE_INVALID_EXPIRY_DATE = "Signing date comes after expiry date";
+    public static final String MESSAGE_INVALID_CONTRACT_PERIOD = "Date signed must be before Expiry date";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

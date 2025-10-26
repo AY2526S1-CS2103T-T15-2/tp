@@ -9,9 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,8 +18,6 @@ import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.ui.ListPanelType;
 
@@ -65,20 +61,13 @@ public class AddContractCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // get nric from preloaded contract and load person to get name
         Nric nric = toAdd.getNric();
-        FilteredList<Person> personFilteredList = model.getFilteredPersonList()
-                .filtered(new NricContainsKeywordsPredicate(List.of(nric.toString())));
-        if (personFilteredList.isEmpty()) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-        }
-        Person person = personFilteredList.get(0);
-        if (person == null || !person.getNric().equals(nric)) {
+        if (!model.hasPerson(nric)) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
         // fill in necessary fields
-        Name name = person.getName();
+        Name name = model.getName(nric);
         PolicyId policyId = toAdd.getPId();
         LocalDate date = toAdd.getDate();
         ContractId contractId = toAdd.getCId();
