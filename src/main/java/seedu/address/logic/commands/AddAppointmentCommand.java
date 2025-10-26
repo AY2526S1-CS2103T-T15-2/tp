@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import java.time.LocalDate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
@@ -35,7 +36,6 @@ public class AddAppointmentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New appointment added with the following ID: %s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in iCon";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist in iCon";
 
     private Appointment toAdd;
 
@@ -54,7 +54,7 @@ public class AddAppointmentCommand extends Command {
         // get nric from preloaded appointment and load person to get name
         Nric nric = toAdd.getNric();
         if (!model.hasPerson(nric)) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
         // fill in necessary fields

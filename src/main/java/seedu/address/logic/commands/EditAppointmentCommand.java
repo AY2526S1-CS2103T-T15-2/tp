@@ -91,11 +91,11 @@ public class EditAppointmentCommand extends Command {
      */
     private static Appointment createEditedAppointment(Appointment appointmentToEdit,
                                                        EditAppointmentDescriptor editAppointmentDescriptor,
-                                                       Model model) {
+                                                       Model model) throws CommandException {
         assert appointmentToEdit != null;
 
         AppointmentId currentId = appointmentToEdit.getAId();
-        Nric updatedNric = editAppointmentDescriptor.getNric().orElse(appointmentToEdit.getNric());
+        Nric updatedNric = editAppointmentDescriptor.getNric(model).orElse(appointmentToEdit.getNric());
         LocalDate updatedAppointmentDate = editAppointmentDescriptor.getDate().orElse(appointmentToEdit.getDate());
         AppointmentDetails updatedDetails = editAppointmentDescriptor.getDetails()
                 .orElse(appointmentToEdit.getDetails());
@@ -171,6 +171,17 @@ public class EditAppointmentCommand extends Command {
         }
 
         public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
+        }
+
+        public Optional<Nric> getNric(Model model) throws CommandException {
+            // Requires precondition null checker as hasPerson requires non null
+            if (nric == null) {
+                return Optional.ofNullable(nric);
+            }
+            if (!model.hasPerson(nric)) {
+                throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            }
             return Optional.ofNullable(nric);
         }
 
