@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.contract.Contract;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
@@ -118,6 +119,13 @@ public class ModelManager implements Model {
         requireNonNull(nric);
         return addressBook.hasPerson(nric);
     }
+
+    @Override
+    public Name getName(Nric nric) {
+        requireNonNull(nric);
+        return addressBook.getName(nric);
+    }
+
     @Override
     public boolean hasSamePolicyId(Policy policy) {
         requireNonNull(policy);

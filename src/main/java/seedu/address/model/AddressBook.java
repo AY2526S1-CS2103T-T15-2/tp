@@ -11,6 +11,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -109,6 +110,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Nric nric) {
         return persons.contains(nric);
+    }
+
+    public Name getName(Nric nric) {
+        requireNonNull(nric);
+        for (Person person : persons) {
+            if (person.getNric().equals(nric)) {
+                return person.getName();
+            }
+        }
+        return null;
     }
 
     /**

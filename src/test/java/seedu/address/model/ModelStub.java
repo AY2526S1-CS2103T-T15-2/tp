@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.contract.Contract;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
@@ -64,6 +66,16 @@ public class ModelStub implements Model {
 
     @Override
     public boolean hasPerson(Person person) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasPerson(Nric nric) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Name getName(Nric nric) {
         throw new AssertionError("This method should not be called.");
     }
 
