@@ -245,6 +245,14 @@ public class ParserUtil {
     }
 
     /**
+     * Checks if {@code LocalDate signed} occurs before {@code LocalDate expiry}
+     * @return
+     */
+    public static boolean isValidDateSignedAndExpiry(LocalDate signed, LocalDate expiry) {
+        return signed.isBefore(expiry);
+    }
+
+    /**
      * Parses a {@code String appointmentDetails} into an {@code AppointmentDetails}.
      * Leading and trailing whitespaces will be trimmed.
      *
