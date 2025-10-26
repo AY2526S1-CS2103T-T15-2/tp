@@ -11,6 +11,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -101,6 +102,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same NRIC as {@code nric} exists in the address book.
+     */
+    public boolean hasPerson(Nric nric) {
+        return persons.contains(nric);
     }
 
     /**
