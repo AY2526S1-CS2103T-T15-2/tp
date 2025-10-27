@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.ALICE;
+import static seedu.address.testutil.TypicalData.getAlice;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -55,9 +55,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(getAlice()).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        List<Person> newPersons = Arrays.asList(getAlice(), editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
@@ -70,19 +70,19 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasPerson(getAlice()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        addressBook.addPerson(getAlice());
+        assertTrue(addressBook.hasPerson(getAlice()));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        addressBook.addPerson(getAlice());
+        Person editedAlice = new PersonBuilder(getAlice()).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -113,7 +113,7 @@ public class AddressBookTest {
 
     @Test
     public void addContract_hasContractInAddressBook_returnsTrue() {
-        Contract contract = TypicalData.CONTRACT_A;
+        Contract contract = TypicalData.getContractA();
         addressBook.addContract(contract);
         assertTrue(addressBook.getContractList().contains(contract));
         addressBook.removeContract(contract);
@@ -139,7 +139,7 @@ public class AddressBookTest {
     public void equals() {
         AddressBook addressBook = new AddressBook();
         AddressBook differentAddressBook = new AddressBook();
-        differentAddressBook.addPerson(ALICE);
+        differentAddressBook.addPerson(getAlice());
 
         // same values -> returns true
         AddressBook addressBookCopy = new AddressBook(addressBook);

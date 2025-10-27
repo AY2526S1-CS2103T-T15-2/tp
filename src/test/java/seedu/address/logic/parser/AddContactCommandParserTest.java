@@ -35,8 +35,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalData.AMY;
-import static seedu.address.testutil.TypicalData.BOB;
+import static seedu.address.testutil.TypicalData.getAmy;
+import static seedu.address.testutil.TypicalData.getBob;
 
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +55,7 @@ public class AddContactCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(getBob()).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB
@@ -64,7 +64,7 @@ public class AddContactCommandParserTest {
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Person expectedPersonMultipleTags = new PersonBuilder(getBob()).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -153,7 +153,7 @@ public class AddContactCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(getAmy()).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + NRIC_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddContactCommand(expectedPerson));

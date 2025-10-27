@@ -7,17 +7,18 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.ALICE;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
-import static seedu.address.testutil.TypicalData.BENSON;
-import static seedu.address.testutil.TypicalData.CARL;
-import static seedu.address.testutil.TypicalData.CONTRACT_A;
-import static seedu.address.testutil.TypicalData.CONTRACT_B;
-import static seedu.address.testutil.TypicalData.CONTRACT_D;
 import static seedu.address.testutil.TypicalData.HEALTH_B;
 import static seedu.address.testutil.TypicalData.HOME;
 import static seedu.address.testutil.TypicalData.LIFE;
+import static seedu.address.testutil.TypicalData.getAlice;
+import static seedu.address.testutil.TypicalData.getBenson;
+import static seedu.address.testutil.TypicalData.getCarl;
+import static seedu.address.testutil.TypicalData.getContractA;
+import static seedu.address.testutil.TypicalData.getContractB;
+import static seedu.address.testutil.TypicalData.getContractD;
+import static seedu.address.testutil.TypicalData.getTypicalAlice;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -97,13 +98,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasPerson(getAlice()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addPerson(getAlice());
+        assertTrue(modelManager.hasPerson(getAlice()));
     }
 
     @Test
@@ -145,33 +146,33 @@ public class ModelManagerTest {
     @Test
     public void addContract_policyInAddressBook_returnsTrue() {
         modelManager.addPolicy(LIFE);
-        modelManager.addContract(CONTRACT_A);
-        assertTrue(modelManager.hasContract(CONTRACT_A));
+        modelManager.addContract(getContractA());
+        assertTrue(modelManager.hasContract(getContractA()));
     }
 
     @Test
     public void addContractToPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
+        modelManager.addPerson(getAlice());
         modelManager.addPolicy(LIFE);
-        modelManager.addContract(CONTRACT_A);
-        modelManager.addContractToPerson(CONTRACT_A);
-        assertTrue(modelManager.personHasContract(CONTRACT_A, ALICE));
+        modelManager.addContract(getContractA());
+        modelManager.addContractToPerson(getContractA());
+        assertTrue(modelManager.personHasContract(getContractA(), getTypicalAlice()));
     }
 
     @Test
     public void addContractToPolicy_policyInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
+        modelManager.addPerson(getAlice());
         modelManager.addPolicy(LIFE);
-        modelManager.addContract(CONTRACT_A);
-        modelManager.addContractToPolicy(CONTRACT_A);
-        assertTrue(modelManager.policyHasContract(CONTRACT_A, LIFE));
+        modelManager.addContract(getContractA());
+        modelManager.addContractToPolicy(getContractA());
+        assertTrue(modelManager.policyHasContract(getContractA(), LIFE));
     }
 
     @Test
     public void removeContract_policyInAddressBook_returnsFalse() {
-        modelManager.addContract(CONTRACT_A);
-        modelManager.removeContract(CONTRACT_A);
-        assertFalse(modelManager.hasContract(CONTRACT_A));
+        modelManager.addContract(getContractA());
+        modelManager.removeContract(getContractA());
+        assertFalse(modelManager.hasContract(getContractA()));
     }
 
     @Test
@@ -201,7 +202,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasContract_policyNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasContract(CONTRACT_D));
+        assertFalse(modelManager.hasContract(getContractD()));
     }
 
     @Test
@@ -232,9 +233,9 @@ public class ModelManagerTest {
 
     @Test
     public void updateFilteredContractList_modifyList_throwsUnsupportedOperationException() {
-        modelManager.addContract(CONTRACT_A);
-        modelManager.addContract(CONTRACT_B);
-        modelManager.updateFilteredContractList(x -> x.equals(CONTRACT_A));
+        modelManager.addContract(getContractA());
+        modelManager.addContract(getContractB());
+        modelManager.updateFilteredContractList(x -> x.equals(getContractA()));
         assertEquals(1, modelManager.getFilteredContractList().size());
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContractList().remove(0));
     }
@@ -246,14 +247,14 @@ public class ModelManagerTest {
 
     @Test
     public void sortPersons() {
-        ObservableList<Person> persons = FXCollections.observableArrayList(BENSON, ALICE, CARL);
+        ObservableList<Person> persons = FXCollections.observableArrayList(getBenson(), getAlice(), getCarl());
         persons.forEach(modelManager::addPerson);
 
         // Make sure the internal filtered person list has the correct persons
         assertEquals(persons, modelManager.getFilteredPersonList());
 
         // Sort alphabetically
-        ObservableList<Person> expectedPersons = FXCollections.observableArrayList(ALICE, BENSON, CARL);
+        ObservableList<Person> expectedPersons = FXCollections.observableArrayList(getAlice(), getBenson(), getCarl());
         modelManager.sortPersons(PersonComparatorType.ALPHABETICAL.comparator);
         assertEquals(expectedPersons, modelManager.getSortedPersonList());
 
@@ -264,7 +265,8 @@ public class ModelManagerTest {
 
     @Test
     public void sortContracts() {
-        ObservableList<Contract> contracts = FXCollections.observableArrayList(CONTRACT_B, CONTRACT_D, CONTRACT_A);
+        ObservableList<Contract> contracts = FXCollections.observableArrayList(getContractB(), getContractD(),
+                getContractA());
         contracts.forEach(modelManager::addContract);
 
         // Make sure the internal filtered contract list has the correct contracts
@@ -272,7 +274,7 @@ public class ModelManagerTest {
 
         // Sort by expiry date
         ObservableList<Contract> expectedContracts =
-                FXCollections.observableArrayList(CONTRACT_A, CONTRACT_B, CONTRACT_D);
+                FXCollections.observableArrayList(getContractA(), getContractB(), getContractD());
         modelManager.sortContracts(ContractComparatorType.EXPIRY_DATE.comparator);
         assertEquals(expectedContracts, modelManager.getSortedContractList());
 
@@ -299,7 +301,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(getAlice()).withPerson(getBenson()).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -321,7 +323,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredPersonList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = getAlice().getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NricContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
@@ -330,7 +332,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredContractList -> returns false
-        modelManager.updateFilteredContractList(x -> x.equals(CONTRACT_A));
+        modelManager.updateFilteredContractList(x -> x.equals(getContractA()));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredAppointmentList -> returns false

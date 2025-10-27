@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalData.ALICE;
-import static seedu.address.testutil.TypicalData.BENSON;
-import static seedu.address.testutil.TypicalData.CONTRACT_A;
-import static seedu.address.testutil.TypicalData.CONTRACT_B;
+import static seedu.address.testutil.TypicalData.getAlice;
+import static seedu.address.testutil.TypicalData.getBenson;
+import static seedu.address.testutil.TypicalData.getContractA;
+import static seedu.address.testutil.TypicalData.getContractB;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalId.CONTRACT_A_ID;
 import static seedu.address.testutil.TypicalId.CONTRACT_B_ID;
@@ -53,11 +53,12 @@ public class EditContractCommandTest {
         Contract contract = model.getFilteredContractList().get(0);
 
         ContractBuilder contractInList = new ContractBuilder(contract);
-        Contract editedContract = contractInList.withName(BENSON.getName().toString())
-                .withNric(BENSON.getNric().toString()).withDate(LocalDate.parse("2023-05-01"))
+        Contract editedContract = contractInList.withName(getBenson().getName().toString())
+                .withNric(getBenson().getNric().toString()).withDate(LocalDate.parse("2023-05-01"))
                 .build();
 
-        EditContractDescriptor descriptor = new EditContractDescriptorBuilder().withNric(BENSON.getNric().toString())
+        EditContractDescriptor descriptor = new EditContractDescriptorBuilder().withNric(getBenson().getNric()
+                        .toString())
                 .withDate("2023-05-01").build();
         EditContractCommand editContractCommand = new EditContractCommand(contract.getCId(), descriptor);
 
@@ -89,11 +90,12 @@ public class EditContractCommandTest {
         Contract contract = model.getFilteredContractList().get(0);
 
         ContractBuilder contractInList = new ContractBuilder(contract);
-        Contract editedContract = contractInList.withName(ALICE.getName().toString())
-                .withNric(ALICE.getNric().toString()).withDate(LocalDate.parse("2023-06-01"))
+        Contract editedContract = contractInList.withName(getAlice().getName().toString())
+                .withNric(getAlice().getNric().toString()).withDate(LocalDate.parse("2023-06-01"))
                 .build();
 
-        EditContractDescriptor descriptor = new EditContractDescriptorBuilder().withNric(ALICE.getNric().toString())
+        EditContractDescriptor descriptor = new EditContractDescriptorBuilder().withNric(getAlice().getNric()
+                        .toString())
                 .withDate("2023-06-01").build();
         EditContractCommand editContractCommand = new EditContractCommand(contract.getCId(), descriptor);
 
@@ -156,11 +158,12 @@ public class EditContractCommandTest {
     @Test
     public void equals() {
         final EditContractCommand standardCommand = new EditContractCommand(CONTRACT_A_ID,
-                new EditContractDescriptorBuilder(CONTRACT_A).withName(CONTRACT_B.getName().toString()).build());
+                new EditContractDescriptorBuilder(getContractA()).withName(getContractB().getName().toString())
+                        .build());
 
         // same values -> returns true
-        EditContractDescriptor copyDescriptor = new EditContractDescriptorBuilder(CONTRACT_A)
-                .withName(CONTRACT_B.getName().toString()).build();
+        EditContractDescriptor copyDescriptor = new EditContractDescriptorBuilder(getContractA())
+                .withName(getContractB().getName().toString()).build();
         EditContractCommand commandWithSameValues = new EditContractCommand(CONTRACT_A_ID, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 

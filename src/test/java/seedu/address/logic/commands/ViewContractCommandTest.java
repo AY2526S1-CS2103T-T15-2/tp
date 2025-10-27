@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalData.CONTRACT_A;
-import static seedu.address.testutil.TypicalData.CONTRACT_B;
-import static seedu.address.testutil.TypicalData.CONTRACT_C;
+import static seedu.address.testutil.TypicalData.getContractA;
+import static seedu.address.testutil.TypicalData.getContractB;
+import static seedu.address.testutil.TypicalData.getContractC;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -96,7 +96,7 @@ public class ViewContractCommandTest {
         ViewContractCommand command = new ViewContractCommand(predicate);
         expectedModel.updateFilteredContractList(predicate);
         assertCommandSuccess(command, model, expectedMessage, ListPanelType.CONTRACT, expectedModel);
-        assertEquals(Arrays.asList(CONTRACT_A, CONTRACT_B, CONTRACT_C), model.getFilteredContractList());
+        assertEquals(Arrays.asList(getContractA(), getContractB(), getContractC()), model.getFilteredContractList());
     }
 
     private ContractIdContainsKeywordsPredicate preparePredicate(String userInput) {

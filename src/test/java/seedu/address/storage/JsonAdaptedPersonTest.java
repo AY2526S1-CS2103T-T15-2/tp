@@ -3,9 +3,9 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.BENSON;
-import static seedu.address.testutil.TypicalData.CARL;
-import static seedu.address.testutil.TypicalData.DANIEL;
+import static seedu.address.testutil.TypicalData.getBenson;
+import static seedu.address.testutil.TypicalData.getCarl;
+import static seedu.address.testutil.TypicalData.getDaniel;
 import static seedu.address.testutil.TypicalData.getTypicalPersons;
 
 import java.util.ArrayList;
@@ -30,30 +30,30 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_NRIC = BENSON.getNric().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = getBenson().getName().toString();
+    private static final String VALID_PHONE = getBenson().getPhone().toString();
+    private static final String VALID_NRIC = getBenson().getNric().toString();
+    private static final String VALID_EMAIL = getBenson().getEmail().toString();
+    private static final String VALID_ADDRESS = getBenson().getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = getBenson().getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
-    private static final String VALID_NAME_2 = CARL.getName().toString();
-    private static final String VALID_PHONE_2 = CARL.getPhone().toString();
-    private static final String VALID_NRIC_2 = CARL.getNric().toString();
-    private static final String VALID_EMAIL_2 = CARL.getEmail().toString();
-    private static final String VALID_ADDRESS_2 = CARL.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS_2 = CARL.getTags().stream()
+    private static final String VALID_NAME_2 = getCarl().getName().toString();
+    private static final String VALID_PHONE_2 = getCarl().getPhone().toString();
+    private static final String VALID_NRIC_2 = getCarl().getNric().toString();
+    private static final String VALID_EMAIL_2 = getCarl().getEmail().toString();
+    private static final String VALID_ADDRESS_2 = getCarl().getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS_2 = getCarl().getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
-    private static final String VALID_NAME_3 = DANIEL.getName().toString();
-    private static final String VALID_PHONE_3 = DANIEL.getPhone().toString();
-    private static final String VALID_NRIC_3 = DANIEL.getNric().toString();
-    private static final String VALID_EMAIL_3 = DANIEL.getEmail().toString();
-    private static final String VALID_ADDRESS_3 = DANIEL.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS_3 = DANIEL.getTags().stream()
+    private static final String VALID_NAME_3 = getDaniel().getName().toString();
+    private static final String VALID_PHONE_3 = getDaniel().getPhone().toString();
+    private static final String VALID_NRIC_3 = getDaniel().getNric().toString();
+    private static final String VALID_EMAIL_3 = getDaniel().getEmail().toString();
+    private static final String VALID_ADDRESS_3 = getDaniel().getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS_3 = getDaniel().getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
@@ -84,8 +84,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
-        assertEquals(BENSON, person.toModelType());
+        JsonAdaptedPerson person = new JsonAdaptedPerson(getBenson());
+        assertEquals(getBenson(), person.toModelType());
     }
 
     @Test

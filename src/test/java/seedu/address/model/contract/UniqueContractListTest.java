@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.CONTRACT_A;
-import static seedu.address.testutil.TypicalData.CONTRACT_B;
+import static seedu.address.testutil.TypicalData.getContractA;
+import static seedu.address.testutil.TypicalData.getContractB;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,26 +23,26 @@ public class UniqueContractListTest {
 
     @Test
     public void contains_contractNotInList_returnsFalse() {
-        assertFalse(uniqueContractList.contains(CONTRACT_A));
+        assertFalse(uniqueContractList.contains(getContractA()));
     }
 
     @Test
     public void contains_contractInList_returnsTrue() {
-        uniqueContractList.add(CONTRACT_A);
-        assertTrue(uniqueContractList.contains(CONTRACT_A));
+        uniqueContractList.add(getContractA());
+        assertTrue(uniqueContractList.contains(getContractA()));
     }
 
     @Test
     public void contains_contractWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueContractList.add(CONTRACT_A);
+        uniqueContractList.add(getContractA());
         Contract editedContractA = new Contract(
-                CONTRACT_A.getCId(),
-                CONTRACT_B.getName(),
-                CONTRACT_A.getNric(),
-                CONTRACT_A.getPId(),
-                CONTRACT_A.getDate(),
-                CONTRACT_A.getExpiryDate(),
-                CONTRACT_A.getPremium()
+                getContractA().getCId(),
+                getContractB().getName(),
+                getContractA().getNric(),
+                getContractA().getPId(),
+                getContractA().getDate(),
+                getContractA().getExpiryDate(),
+                getContractA().getPremium()
         );
         assertTrue(uniqueContractList.contains(editedContractA));
     }
@@ -54,47 +54,48 @@ public class UniqueContractListTest {
 
     @Test
     public void add_duplicateContract_throwsDuplicateContractException() {
-        uniqueContractList.add(CONTRACT_A);
-        assertThrows(DuplicateContractException.class, () -> uniqueContractList.add(CONTRACT_A));
+        uniqueContractList.add(getContractA());
+        assertThrows(DuplicateContractException.class, () -> uniqueContractList.add(getContractA()));
     }
 
     @Test
     public void setContract_nullTargetContract_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContractList.setContract(null, CONTRACT_A));
+        assertThrows(NullPointerException.class, () -> uniqueContractList.setContract(null, getContractA()));
     }
 
     @Test
     public void setContract_nullEditedContract_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueContractList.setContract(CONTRACT_A, null));
+        assertThrows(NullPointerException.class, () -> uniqueContractList.setContract(getContractA(), null));
     }
 
     @Test
     public void setContract_targetContractNotInList_throwsContractNotFoundException() {
-        assertThrows(ContractNotFoundException.class, () -> uniqueContractList.setContract(CONTRACT_A, CONTRACT_A));
+        assertThrows(ContractNotFoundException.class, () -> uniqueContractList.setContract(getContractA(),
+                getContractA()));
     }
 
     @Test
     public void setContract_editedContractIsSameContract_success() {
-        uniqueContractList.add(CONTRACT_A);
-        uniqueContractList.setContract(CONTRACT_A, CONTRACT_A);
+        uniqueContractList.add(getContractA());
+        uniqueContractList.setContract(getContractA(), getContractA());
         UniqueContractList expectedUniqueContractList = new UniqueContractList();
-        expectedUniqueContractList.add(CONTRACT_A);
+        expectedUniqueContractList.add(getContractA());
         assertEquals(expectedUniqueContractList, uniqueContractList);
     }
 
     @Test
     public void setContract_editedContractHasSameIdentity_success() {
-        uniqueContractList.add(CONTRACT_A);
+        uniqueContractList.add(getContractA());
         Contract editedContractA = new Contract(
-                CONTRACT_A.getCId(),
-                CONTRACT_B.getName(),
-                CONTRACT_A.getNric(),
-                CONTRACT_A.getPId(),
-                CONTRACT_B.getDate(),
-                CONTRACT_B.getExpiryDate(),
-                CONTRACT_B.getPremium()
+                getContractA().getCId(),
+                getContractB().getName(),
+                getContractA().getNric(),
+                getContractA().getPId(),
+                getContractB().getDate(),
+                getContractB().getExpiryDate(),
+                getContractB().getPremium()
         );
-        uniqueContractList.setContract(CONTRACT_A, editedContractA);
+        uniqueContractList.setContract(getContractA(), editedContractA);
         UniqueContractList expectedUniqueContractList = new UniqueContractList();
         expectedUniqueContractList.add(editedContractA);
         assertEquals(expectedUniqueContractList, uniqueContractList);
@@ -102,18 +103,19 @@ public class UniqueContractListTest {
 
     @Test
     public void setContract_editedContractHasDifferentIdentity_success() {
-        uniqueContractList.add(CONTRACT_A);
-        uniqueContractList.setContract(CONTRACT_A, CONTRACT_B);
+        uniqueContractList.add(getContractA());
+        uniqueContractList.setContract(getContractA(), getContractB());
         UniqueContractList expectedUniqueContractList = new UniqueContractList();
-        expectedUniqueContractList.add(CONTRACT_B);
+        expectedUniqueContractList.add(getContractB());
         assertEquals(expectedUniqueContractList, uniqueContractList);
     }
 
     @Test
     public void setContract_editedContractHasNonUniqueIdentity_throwsDuplicateContractException() {
-        uniqueContractList.add(CONTRACT_A);
-        uniqueContractList.add(CONTRACT_B);
-        assertThrows(DuplicateContractException.class, () -> uniqueContractList.setContract(CONTRACT_A, CONTRACT_B));
+        uniqueContractList.add(getContractA());
+        uniqueContractList.add(getContractB());
+        assertThrows(DuplicateContractException.class, () -> uniqueContractList.setContract(getContractA(),
+                getContractB()));
     }
 
     @Test
@@ -123,13 +125,13 @@ public class UniqueContractListTest {
 
     @Test
     public void remove_contractDoesNotExist_throwsContractNotFoundException() {
-        assertThrows(ContractNotFoundException.class, () -> uniqueContractList.remove(CONTRACT_A));
+        assertThrows(ContractNotFoundException.class, () -> uniqueContractList.remove(getContractA()));
     }
 
     @Test
     public void remove_existingContract_removesContract() {
-        uniqueContractList.add(CONTRACT_A);
-        uniqueContractList.remove(CONTRACT_A);
+        uniqueContractList.add(getContractA());
+        uniqueContractList.remove(getContractA());
         UniqueContractList expectedUniqueContractList = new UniqueContractList();
         assertEquals(expectedUniqueContractList, uniqueContractList);
     }
@@ -141,9 +143,9 @@ public class UniqueContractListTest {
 
     @Test
     public void setContracts_uniqueContractList_replacesOwnListWithProvidedUniqueContractList() {
-        uniqueContractList.add(CONTRACT_A);
+        uniqueContractList.add(getContractA());
         UniqueContractList expectedUniqueContractList = new UniqueContractList();
-        expectedUniqueContractList.add(CONTRACT_B);
+        expectedUniqueContractList.add(getContractB());
         uniqueContractList.setContracts(expectedUniqueContractList);
         assertEquals(expectedUniqueContractList, uniqueContractList);
     }
@@ -156,15 +158,15 @@ public class UniqueContractListTest {
 
     @Test
     public void setContracts_list_replacesOwnListWithProvidedList() {
-        uniqueContractList.add(CONTRACT_A);
-        java.util.List<Contract> contractList = java.util.List.of(CONTRACT_B);
+        uniqueContractList.add(getContractA());
+        java.util.List<Contract> contractList = java.util.List.of(getContractB());
         uniqueContractList.setContracts(contractList);
         UniqueContractList expectedUniqueContractList = new UniqueContractList();
     }
 
     @Test
     public void setContracts_listWithDuplicateContracts_throwsDuplicateContractException() {
-        java.util.List<Contract> listWithDuplicateContracts = java.util.List.of(CONTRACT_A, CONTRACT_A);
+        java.util.List<Contract> listWithDuplicateContracts = java.util.List.of(getContractA(), getContractA());
         assertThrows(DuplicateContractException.class, ()
             -> uniqueContractList.setContracts(listWithDuplicateContracts));
     }
@@ -177,26 +179,26 @@ public class UniqueContractListTest {
 
     @Test
     public void iterator_success() {
-        uniqueContractList.add(CONTRACT_A);
-        uniqueContractList.add(CONTRACT_B);
+        uniqueContractList.add(getContractA());
+        uniqueContractList.add(getContractB());
         java.util.Iterator<Contract> iterator = uniqueContractList.iterator();
         assertTrue(iterator.hasNext());
-        assertEquals(CONTRACT_A, iterator.next());
+        assertEquals(getContractA(), iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals(CONTRACT_B, iterator.next());
+        assertEquals(getContractB(), iterator.next());
         assertFalse(iterator.hasNext());
     }
 
     @Test
     public void equals() {
         UniqueContractList anotherList = new UniqueContractList();
-        anotherList.add(CONTRACT_A);
+        anotherList.add(getContractA());
         UniqueContractList differentList = new UniqueContractList();
-        differentList.add(CONTRACT_B);
+        differentList.add(getContractB());
 
         // same values -> returns true
         UniqueContractList listCopy = new UniqueContractList();
-        listCopy.add(CONTRACT_A);
+        listCopy.add(getContractA());
         assertTrue(anotherList.equals(listCopy));
 
         // same object -> returns true
@@ -215,17 +217,17 @@ public class UniqueContractListTest {
     @Test
     public void hashCode_success() {
         UniqueContractList anotherList = new UniqueContractList();
-        anotherList.add(CONTRACT_A);
+        anotherList.add(getContractA());
         UniqueContractList listCopy = new UniqueContractList();
-        listCopy.add(CONTRACT_A);
+        listCopy.add(getContractA());
         assertEquals(anotherList.hashCode(), listCopy.hashCode());
     }
 
     @Test
     public void toString_success() {
         UniqueContractList anotherList = new UniqueContractList();
-        anotherList.add(CONTRACT_A);
-        String expected = "[" + CONTRACT_A.toString() + "]";
+        anotherList.add(getContractA());
+        String expected = "[" + getContractA().toString() + "]";
         assertEquals(expected, anotherList.toString());
     }
 

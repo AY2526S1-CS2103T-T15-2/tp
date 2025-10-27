@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.CONTRACT_A;
+import static seedu.address.testutil.TypicalData.getContractA;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalId.CONTRACT_A_ID;
 
@@ -34,9 +34,9 @@ public class RemoveContractCommandTest {
         String expectedMessage = String.format(RemoveContractCommand.MESSAGE_REMOVE_CONTRACT_SUCCESS, CONTRACT_A_ID);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.removeContract(CONTRACT_A);
-        expectedModel.removeContractFromPerson(CONTRACT_A);
-        expectedModel.removeContractFromPolicy(CONTRACT_A);
+        expectedModel.removeContract(getContractA());
+        expectedModel.removeContractFromPerson(getContractA());
+        expectedModel.removeContractFromPolicy(getContractA());
 
         assertCommandSuccess(removeContractCommand, model, expectedMessage, ListPanelType.CONTRACT, expectedModel);
     }
