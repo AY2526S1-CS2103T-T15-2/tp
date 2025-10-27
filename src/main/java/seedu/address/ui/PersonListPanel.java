@@ -46,4 +46,11 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Refreshes the list of person cards to get updated states of each card
+     */
+    public void refresh() {
+        personListView.refresh();
+    }
+
 }

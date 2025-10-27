@@ -208,7 +208,10 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             switch (commandResult.listPanelType) {
-            case CONTACT -> showPersonListPanel();
+            case CONTACT -> {
+                showPersonListPanel();
+                personListPanel.refresh();
+            }
             case POLICY -> {
                 showPolicyListPanel();
                 policyListPanel.refresh();
