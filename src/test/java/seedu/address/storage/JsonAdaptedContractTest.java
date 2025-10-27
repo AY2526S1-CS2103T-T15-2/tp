@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedContract.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.CONTRACT_B;
+import static seedu.address.testutil.TypicalData.getContractB;
 
 import java.time.LocalDate;
 
@@ -29,18 +29,18 @@ public class JsonAdaptedContractTest {
     private static final String INVALID_PERIOD_EXPIRY = "2000-01-01";
     private static final String INVALID_PREMIUM = "-100.00";
 
-    private static final String VALID_CID = CONTRACT_B.getCId().toString();
-    private static final String VALID_NAME = CONTRACT_B.getName().toString();
-    private static final String VALID_NRIC = CONTRACT_B.getNric().toString();
-    private static final String VALID_PID = CONTRACT_B.getPId().toString();
-    private static final String VALID_DATE = CONTRACT_B.getDate().toString();
-    private static final String VALID_EXPIRY = CONTRACT_B.getExpiryDate().toString();
-    private static final String VALID_PREMIUM = CONTRACT_B.getPremium().toString();
+    private static final String VALID_CID = getContractB().getCId().toString();
+    private static final String VALID_NAME = getContractB().getName().toString();
+    private static final String VALID_NRIC = getContractB().getNric().toString();
+    private static final String VALID_PID = getContractB().getPId().toString();
+    private static final String VALID_DATE = getContractB().getDate().toString();
+    private static final String VALID_EXPIRY = getContractB().getExpiryDate().toString();
+    private static final String VALID_PREMIUM = getContractB().getPremium().toString();
 
     @Test
     public void toModelType_validContractDetails_returnsContract() throws Exception {
-        JsonAdaptedContract contract = new JsonAdaptedContract(CONTRACT_B);
-        assertEquals(CONTRACT_B, contract.toModelType());
+        JsonAdaptedContract contract = new JsonAdaptedContract(getContractB());
+        assertEquals(getContractB(), contract.toModelType());
     }
 
     @Test

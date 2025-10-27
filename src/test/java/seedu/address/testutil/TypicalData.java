@@ -54,45 +54,6 @@ import seedu.address.model.policy.PolicyName;
  */
 public class TypicalData {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withNric("S1234567A").withPhone("94351253")
-            .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withNric("S1234567B").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withNric("S1234567C")
-            .withEmail("").withAddress("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withNric("S1234567D")
-            .withEmail("cornelia@example.com").withAddress("").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withNric("T1234567A")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withNric("T1234567B")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withNric("T1234597A")
-            .withEmail("anna@example.com").withAddress("4th street").build();
-
-    // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withNric("S9876543L").withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
-
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withNric(VALID_NRIC_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withNric(VALID_NRIC_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
-
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     public static final Policy LIFE = new Policy(
@@ -119,63 +80,6 @@ public class TypicalData {
             new PolicyId("xyz123")
     );
 
-    // Manually added - Policy's details found in {@code PolicyCommandTestUtil}
-    public static final Policy HOME = new PolicyBuilder().withName(VALID_POLICY_NAME_HOME)
-            .withDetails(VALID_DETAILS_HOME).withId(VALID_POLICY_ID_HOME).build();
-    public static final Policy HEALTH_B = new PolicyBuilder().withName(VALID_POLICY_NAME_HEALTH_B)
-            .withDetails(VALID_DETAILS_HEALTH_B).withId(VALID_POLICY_ID_HEALTH_B).build();
-
-    public static final Contract CONTRACT_A = new Contract(
-            new ContractId("C1234A"),
-            ALICE.getName(),
-            ALICE.getNric(),
-            LIFE.getId(),
-            LocalDate.parse("2023-01-01"),
-            LocalDate.parse("2025-01-01"),
-            new ContractPremium("1000.00")
-    );
-
-    public static final Contract CONTRACT_B = new Contract(
-            new ContractId("C1234B"),
-            BENSON.getName(),
-            BENSON.getNric(),
-            HEALTH.getId(),
-            LocalDate.parse("2023-02-01"),
-            LocalDate.parse("2025-02-01"),
-            new ContractPremium("1500.00")
-    );
-
-    public static final Contract CONTRACT_C = new Contract(
-            new ContractId("C1234C"),
-            CARL.getName(),
-            CARL.getNric(),
-            PROPERTY.getId(),
-            LocalDate.parse("2023-03-01"),
-            LocalDate.parse("2025-03-01"),
-            new ContractPremium("2000.00")
-    );
-
-    // Spare contracts not added into TypicalAddressBook
-    public static final Contract CONTRACT_D = new Contract(
-            new ContractId("C1234D"),
-            DANIEL.getName(),
-            DANIEL.getNric(),
-            LIFE.getId(),
-            LocalDate.parse("2023-04-01"),
-            LocalDate.parse("2025-04-01"),
-            new ContractPremium("3000.00")
-    );
-
-    public static final Contract CONTRACT_E = new Contract(
-            new ContractId("C1234E"),
-            ELLE.getName(),
-            ELLE.getNric(),
-            HEALTH.getId(),
-            LocalDate.parse("2023-05-01"),
-            LocalDate.parse("2025-05-01"),
-            new ContractPremium("1500.00")
-    );
-
     public static final Appointment APPOINTMENT_A = new Appointment(
             new AppointmentId(VALID_APPOINTMENT_ID_A),
             new Nric(VALID_APPOINTMENT_NRIC_1),
@@ -192,12 +96,17 @@ public class TypicalData {
 
     public static final Appointment APPOINTMENT_C = new Appointment(
             new AppointmentId(VALID_APPOINTMENT_ID_C),
-            CARL.getNric(),
+            new Nric("S1234567C"),
             LocalDate.parse(VALID_APPOINTMENT_DATE_A),
             new AppointmentDetails(VALID_APPOINTMENT_DETAILS_A)
     );
 
-    // Manually added - Appointment's details found in {@code AppointmentCommandTestUtil} (not in Typical AddressBook)
+    // Manually added - Policy's details found in {@code PolicyCommandTestUtil}
+    public static final Policy HOME = new PolicyBuilder().withName(VALID_POLICY_NAME_HOME)
+            .withDetails(VALID_DETAILS_HOME).withId(VALID_POLICY_ID_HOME).build();
+    public static final Policy HEALTH_B = new PolicyBuilder().withName(VALID_POLICY_NAME_HEALTH_B)
+            .withDetails(VALID_DETAILS_HEALTH_B).withId(VALID_POLICY_ID_HEALTH_B).build();
+
     public static final Appointment APPOINTMENT_D = new AppointmentBuilder().withId(VALID_APPOINTMENT_ID_D)
             .withNric(VALID_NRIC_BOB)
             .withDate(LocalDate.parse(VALID_APPOINTMENT_DATE_A))
@@ -206,6 +115,95 @@ public class TypicalData {
             .withNric(VALID_NRIC_AMY)
             .withDate(LocalDate.parse(VALID_APPOINTMENT_DATE_B))
             .withDetails(VALID_APPOINTMENT_DETAILS_B).build();
+
+    private static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withNric("S1234567A").withPhone("94351253")
+            .withTags("friends").build();
+    private static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com").withNric("S1234567B").withPhone("98765432")
+            .withTags("owesMoney", "friends").build();
+    private static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+            .withNric("S1234567C")
+            .withEmail("").withAddress("wall street").build();
+    private static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+            .withNric("S1234567D")
+            .withEmail("cornelia@example.com").withAddress("").withTags("friends").build();
+    private static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+            .withNric("T1234567A")
+            .withEmail("werner@example.com").withAddress("michegan ave").build();
+    private static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+            .withNric("T1234567B")
+            .withEmail("lydia@example.com").withAddress("little tokyo").build();
+    private static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+            .withNric("T1234597A")
+            .withEmail("anna@example.com").withAddress("4th street").build();
+
+    private static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+            .withNric("S9876543L").withEmail("stefan@example.com").withAddress("little india").build();
+    private static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+            .withEmail("hans@example.com").withAddress("chicago ave").build();
+
+    private static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withNric(VALID_NRIC_AMY)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+    private static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+            .withNric(VALID_NRIC_BOB)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .build();
+
+    private static final Contract CONTRACT_A = new Contract(
+            new ContractId("C1234A"),
+            ALICE.getName(),
+            ALICE.getNric(),
+            LIFE.getId(),
+            LocalDate.parse("2023-01-01"),
+            LocalDate.parse("2025-01-01"),
+            new ContractPremium("1000.00")
+    );
+
+    private static final Contract CONTRACT_B = new Contract(
+            new ContractId("C1234B"),
+            BENSON.getName(),
+            BENSON.getNric(),
+            HEALTH.getId(),
+            LocalDate.parse("2023-02-01"),
+            LocalDate.parse("2025-02-01"),
+            new ContractPremium("1500.00")
+    );
+
+    private static final Contract CONTRACT_C = new Contract(
+            new ContractId("C1234C"),
+            CARL.getName(),
+            CARL.getNric(),
+            PROPERTY.getId(),
+            LocalDate.parse("2023-03-01"),
+            LocalDate.parse("2025-03-01"),
+            new ContractPremium("2000.00")
+    );
+
+    private static final Contract CONTRACT_D = new Contract(
+            new ContractId("C1234D"),
+            DANIEL.getName(),
+            DANIEL.getNric(),
+            LIFE.getId(),
+            LocalDate.parse("2023-04-01"),
+            LocalDate.parse("2025-04-01"),
+            new ContractPremium("3000.00")
+    );
+
+    private static final Contract CONTRACT_E = new Contract(
+            new ContractId("C1234E"),
+            ELLE.getName(),
+            ELLE.getNric(),
+            HEALTH.getId(),
+            LocalDate.parse("2023-05-01"),
+            LocalDate.parse("2025-05-01"),
+            new ContractPremium("1500.00")
+    );
+
+
 
 
     private TypicalData() {} // prevents instantiation
@@ -359,6 +357,26 @@ public class TypicalData {
 
     public static List<Contract> getTypicalContracts() {
         return new ArrayList<>(Arrays.asList(CONTRACT_A, CONTRACT_B, CONTRACT_C));
+    }
+
+    public static Contract getContractA() {
+        return new ContractBuilder(CONTRACT_A).build();
+    }
+
+    public static Contract getContractB() {
+        return new ContractBuilder(CONTRACT_B).build();
+    }
+
+    public static Contract getContractC() {
+        return new ContractBuilder(CONTRACT_C).build();
+    }
+
+    public static Contract getContractD() {
+        return new ContractBuilder(CONTRACT_D).build();
+    }
+
+    public static Contract getContractE() {
+        return new ContractBuilder(CONTRACT_E).build();
     }
 
     public static List<Appointment> getTypicalAppointments() {

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalData.ELLE;
-import static seedu.address.testutil.TypicalData.FIONA;
+import static seedu.address.testutil.TypicalData.getElle;
+import static seedu.address.testutil.TypicalData.getFiona;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalData.getTypicalCarl;
 
@@ -72,7 +72,7 @@ public class ViewContactCommandTest {
         ViewContactCommand command = new ViewContactCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
-        assertEquals(Arrays.asList(getTypicalCarl(), ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(getTypicalCarl(), getElle(), getFiona()), model.getFilteredPersonList());
     }
 
     @Test

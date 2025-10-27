@@ -11,12 +11,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalData.ALICE;
-import static seedu.address.testutil.TypicalData.BENSON;
-import static seedu.address.testutil.TypicalData.CONTRACT_A;
-import static seedu.address.testutil.TypicalData.CONTRACT_B;
 import static seedu.address.testutil.TypicalData.HEALTH;
 import static seedu.address.testutil.TypicalData.LIFE;
+import static seedu.address.testutil.TypicalData.getAlice;
+import static seedu.address.testutil.TypicalData.getBenson;
+import static seedu.address.testutil.TypicalData.getContractA;
+import static seedu.address.testutil.TypicalData.getContractB;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,20 +26,20 @@ import seedu.address.testutil.EditContractDescriptorBuilder;
 
 public class EditContractCommandParserTest {
 
-    private static final String NAME_A = ALICE.getName().toString();
-    private static final String NRIC_A = ALICE.getNric().toString();
-    private static final String NAME_B = BENSON.getName().toString();
-    private static final String NRIC_B = BENSON.getNric().toString();
+    private static final String NAME_A = getAlice().getName().toString();
+    private static final String NRIC_A = getAlice().getNric().toString();
+    private static final String NAME_B = getBenson().getName().toString();
+    private static final String NRIC_B = getBenson().getNric().toString();
     private static final String POLICY_ID_LIFE = LIFE.getId().toString();
     private static final String POLICY_ID_HEALTH = HEALTH.getId().toString();
-    private static final String CONTRACT_ID_A = CONTRACT_A.getCId().toString();
-    private static final String CONTRACT_ID_B = CONTRACT_B.getCId().toString();
-    private static final String CONTRACT_DATE_A = CONTRACT_A.getDate().toString();
-    private static final String CONTRACT_EXPIRY_A = CONTRACT_A.getExpiryDate().toString();
-    private static final String CONTRACT_DATE_B = CONTRACT_B.getDate().toString();
-    private static final String CONTRACT_EXPIRY_B = CONTRACT_B.getExpiryDate().toString();
-    private static final String CONTRACT_PREMIUM_A = CONTRACT_A.getPremium().toString();
-    private static final String CONTRACT_PREMIUM_B = CONTRACT_B.getPremium().toString();
+    private static final String CONTRACT_ID_A = getContractA().getCId().toString();
+    private static final String CONTRACT_ID_B = getContractB().getCId().toString();
+    private static final String CONTRACT_DATE_A = getContractA().getDate().toString();
+    private static final String CONTRACT_EXPIRY_A = getContractA().getExpiryDate().toString();
+    private static final String CONTRACT_DATE_B = getContractB().getDate().toString();
+    private static final String CONTRACT_EXPIRY_B = getContractB().getExpiryDate().toString();
+    private static final String CONTRACT_PREMIUM_A = getContractA().getPremium().toString();
+    private static final String CONTRACT_PREMIUM_B = getContractB().getPremium().toString();
 
     private static final String VALID_NAME_DESC_A = PREFIX_NAME + NAME_A + " ";
     private static final String VALID_NAME_DESC_B = PREFIX_NAME + NAME_B + " ";
@@ -74,7 +74,7 @@ public class EditContractCommandParserTest {
                 .withExpiryDate(CONTRACT_EXPIRY_B)
                 .withPremium(CONTRACT_PREMIUM_B)
                 .build();
-        EditContractCommand expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        EditContractCommand expectedCommand = new EditContractCommand(getContractA().getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -87,7 +87,7 @@ public class EditContractCommandParserTest {
                 .withNric(NRIC_B)
                 .withDate(CONTRACT_DATE_B)
                 .build();
-        EditContractCommand expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        EditContractCommand expectedCommand = new EditContractCommand(getContractA().getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -123,7 +123,7 @@ public class EditContractCommandParserTest {
                 .withCId(CONTRACT_ID_A)
                 .withNric(NRIC_B)
                 .build();
-        expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        expectedCommand = new EditContractCommand(getContractA().getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // policy id
@@ -132,7 +132,7 @@ public class EditContractCommandParserTest {
                 .withCId(CONTRACT_ID_A)
                 .withPId(POLICY_ID_HEALTH)
                 .build();
-        expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        expectedCommand = new EditContractCommand(getContractA().getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // date signed
@@ -141,7 +141,7 @@ public class EditContractCommandParserTest {
                 .withCId(CONTRACT_ID_A)
                 .withDate(CONTRACT_DATE_B)
                 .build();
-        expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        expectedCommand = new EditContractCommand(getContractA().getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // expiry date
@@ -150,7 +150,7 @@ public class EditContractCommandParserTest {
                 .withCId(CONTRACT_ID_A)
                 .withExpiryDate(CONTRACT_EXPIRY_B)
                 .build();
-        expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        expectedCommand = new EditContractCommand(getContractA().getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // premium
@@ -159,7 +159,7 @@ public class EditContractCommandParserTest {
                 .withCId(CONTRACT_ID_A)
                 .withPremium(CONTRACT_PREMIUM_B)
                 .build();
-        expectedCommand = new EditContractCommand(CONTRACT_A.getCId(), descriptor);
+        expectedCommand = new EditContractCommand(getContractA().getCId(), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.ALICE;
+import static seedu.address.testutil.TypicalData.getAlice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,8 +75,8 @@ public class AddContactCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddContactCommand addContactCommand = new AddContactCommand(ALICE);
-        String expected = AddContactCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddContactCommand addContactCommand = new AddContactCommand(getAlice());
+        String expected = AddContactCommand.class.getCanonicalName() + "{toAdd=" + getAlice() + "}";
         assertEquals(expected, addContactCommand.toString());
     }
 

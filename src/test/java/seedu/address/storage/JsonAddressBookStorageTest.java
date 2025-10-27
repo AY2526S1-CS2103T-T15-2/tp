@@ -3,19 +3,19 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.ALICE;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_D;
 import static seedu.address.testutil.TypicalData.APPOINTMENT_E;
-import static seedu.address.testutil.TypicalData.CONTRACT_B;
-import static seedu.address.testutil.TypicalData.CONTRACT_D;
-import static seedu.address.testutil.TypicalData.CONTRACT_E;
 import static seedu.address.testutil.TypicalData.HEALTH_B;
 import static seedu.address.testutil.TypicalData.HOME;
-import static seedu.address.testutil.TypicalData.HOON;
-import static seedu.address.testutil.TypicalData.IDA;
 import static seedu.address.testutil.TypicalData.LIFE;
+import static seedu.address.testutil.TypicalData.getContractB;
+import static seedu.address.testutil.TypicalData.getContractD;
+import static seedu.address.testutil.TypicalData.getContractE;
+import static seedu.address.testutil.TypicalData.getHoon;
+import static seedu.address.testutil.TypicalData.getIda;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalData.getTypicalAlice;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -110,12 +110,12 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addPerson(getHoon());
+        original.removePerson(getTypicalAlice());
         original.addPolicy(HOME);
         original.removePolicy(LIFE);
-        original.addContract(CONTRACT_D);
-        original.removeContract(CONTRACT_B);
+        original.addContract(getContractD());
+        original.removeContract(getContractB());
         original.addAppointment(APPOINTMENT_D);
         original.removeAppointment(APPOINTMENT_B);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
@@ -123,9 +123,9 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addPerson(getIda());
         original.addPolicy(HEALTH_B);
-        original.addContract(CONTRACT_E);
+        original.addContract(getContractE());
         original.addAppointment(APPOINTMENT_E);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
