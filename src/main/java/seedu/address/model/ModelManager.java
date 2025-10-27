@@ -133,6 +133,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPolicy(PolicyId policyId) {
+        requireNonNull(policyId);
+        return addressBook.hasPolicy(policyId);
+    }
+
+    @Override
     public boolean hasSamePolicyFields(Policy policy) {
         requireNonNull(policy);
         return addressBook.hasSamePolicyFields(policy);
