@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contract.Contract;
 
@@ -21,7 +19,7 @@ public class Policy {
     private final PolicyName policyName;
     private final PolicyDetails policyDetails;
     private final PolicyId policyId;
-    private final ObservableSet<Contract> contracts = FXCollections.observableSet(new HashSet<>());
+    private final Set<Contract> contracts = new HashSet<>();
 
     /**
      * Fields must be present and not null.
@@ -57,8 +55,8 @@ public class Policy {
         return policyId;
     }
 
-    public ObservableSet<Contract> getContracts() {
-        return FXCollections.unmodifiableObservableSet(contracts);
+    public Set<Contract> getContracts() {
+        return contracts;
     }
 
     /**
