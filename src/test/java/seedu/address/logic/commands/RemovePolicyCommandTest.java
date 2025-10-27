@@ -6,13 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalData.TRAVEL;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_2;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +18,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyId;
-import seedu.address.testutil.TypicalData;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -64,7 +58,7 @@ public class RemovePolicyCommandTest {
         }
 
         // Second removal should fail as the policy has already been removed
-        assertCommandFailure(removePolicyCommand, model, Messages.MESSAGE_INVALID_POLICY_ID);
+        assertCommandFailure(removePolicyCommand, model, Messages.MESSAGE_POLICY_NOT_FOUND);
     }
 
     @Test
@@ -96,40 +90,5 @@ public class RemovePolicyCommandTest {
         RemovePolicyCommand removePolicyCommand = new RemovePolicyCommand(VALID_POLICY_ID_2);
         String expectedString = "seedu.address.logic.commands.RemovePolicyCommand{targetId=" + VALID_POLICY_ID_2 + "}";
         assertEquals(expectedString, removePolicyCommand.toString());
-    }
-
-    @Test
-    public void hasPolicy_existsInList() {
-        List<Policy> policyList = TypicalData.getTypicalPolicies();
-        boolean hasPolicy = new RemovePolicyCommand(VALID_POLICY_ID_2).hasPolicyInList(policyList, VALID_POLICY_ID_2);
-        assertTrue(hasPolicy);
-    }
-
-    @Test
-    public void hasPolicy_notExistsInList() {
-        List<Policy> policyList = TypicalData.getTypicalPolicies();
-        PolicyId invalidId = new PolicyId("Inval1");
-        boolean hasPolicy = new RemovePolicyCommand(VALID_POLICY_ID_2).hasPolicyInList(policyList, invalidId);
-        assertFalse(hasPolicy);
-    }
-
-    @Test
-    public void getPolicy_existsInList() {
-        List<Policy> policyList = TypicalData.getTypicalPolicies();
-        try {
-            Policy expectedPolicy = new RemovePolicyCommand(VALID_POLICY_ID_2)
-                    .getPolicyInList(policyList, VALID_POLICY_ID_2);
-            assertEquals(expectedPolicy, LIFE);
-        } catch (Exception e) {
-            // Ignore
-        }
-    }
-
-    @Test
-    public void getPolicy_notExistsInList_throwsCommandException() {
-        List<Policy> policyList = TypicalData.getTypicalPolicies();
-        PolicyId invalidId = new PolicyId("Inval2");
-        RemovePolicyCommand removePolicyCommand = new RemovePolicyCommand(VALID_POLICY_ID_2);
-        assertThrows(CommandException.class, () -> removePolicyCommand.getPolicyInList(policyList, invalidId));
     }
 }

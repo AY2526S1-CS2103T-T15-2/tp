@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -140,6 +141,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public Policy getPolicy(PolicyId policyId) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setPolicy(Policy target, Policy editedPolicy) {
         throw new AssertionError("This method should not be called.");
     }
@@ -204,6 +210,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasAppointment(AppointmentId appointmentId) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void removeAppointment(Appointment target) {
         throw new AssertionError("This method should not be called.");
     }
@@ -220,6 +231,11 @@ public class ModelStub implements Model {
 
     @Override
     public void setAppointment(Appointment target, Appointment editedAppointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Appointment getAppointment(AppointmentId appointmentId) {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -38,6 +38,14 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Returns true if any appointment in the list of appointments contains the {@code aId}
+     */
+    public boolean hasAppointment(AppointmentId aId) {
+        requireNonNull(aId);
+        return internalList.stream().anyMatch(x -> x.getAId().equals(aId));
+    }
+
+    /**
      * Adds an appointment to the list.
      * The appointment must not already exist in the list.
      */

@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -155,6 +156,11 @@ public interface Model {
      */
     void setPolicy(Policy target, Policy editedPolicy);
 
+    /**
+     * Returns the policy if it exists in the address book.
+     */
+    Policy getPolicy(PolicyId policyId);
+
     ObservableList<Appointment> getSortedAppointmentList();
 
     /** Returns an unmodifiable view of the filtered policy list */
@@ -249,6 +255,16 @@ public interface Model {
      * Returns true if an Appointment with the same identity as {@code appointment} exists in the address book.
      */
     boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Returns true if an appointment with the same id as {@code appointmentId} exists in the address book
+     */
+    boolean hasAppointment(AppointmentId appointmentId);
+
+    /**
+     * Returns the appointment if it exists in the address book.
+     */
+    Appointment getAppointment(AppointmentId appointmentId);
 
     /**
      * Removes the given appointment.

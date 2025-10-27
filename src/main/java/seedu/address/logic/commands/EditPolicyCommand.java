@@ -59,11 +59,10 @@ public class EditPolicyCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Update filter to all policies first regardless of what is currently shown
-        model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
-        Policy policyToEdit = findMatchingPolicyId(model, policyId)
-                .orElseThrow(() -> new CommandException(String.format(MESSAGE_POLICY_ID_NOT_FOUND, policyId)));
-
+        if (!model.hasPolicy(policyId)) {
+            throw new CommandException(String.format(MESSAGE_POLICY_ID_NOT_FOUND, policyId));
+        }
+        Policy policyToEdit = model.getPolicy(policyId);
         Policy editedPolicy = createEditedPolicy(policyToEdit, editPolicyDescriptor);
 
         if (!policyToEdit.isSamePolicy(editedPolicy) && model.hasSamePolicyFields(editedPolicy)) {
@@ -71,17 +70,9 @@ public class EditPolicyCommand extends Command {
         }
 
         model.setPolicy(policyToEdit, editedPolicy);
+        model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
         return new CommandResult(String.format(MESSAGE_EDIT_POLICY_SUCCESS, Messages.format(editedPolicy)),
                 ListPanelType.POLICY);
-    }
-
-    /**
-     * Attempts to find a policy in the address book with the given policy id.
-     */
-    private static Optional<Policy> findMatchingPolicyId(Model model, PolicyId toFind) {
-        return model.getFilteredPolicyList().stream()
-                .filter(policy -> policy.getId().equals(toFind))
-                .findFirst();
     }
 
     /**
