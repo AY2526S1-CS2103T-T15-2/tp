@@ -1,12 +1,10 @@
 package seedu.address.ui;
 
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.contract.Contract;
 import seedu.address.model.policy.Policy;
 
 /**
@@ -50,17 +48,10 @@ public class PolicyCard extends UiPart<Region> {
         pid.setText(policy.getId().value);
         details.setText(policy.getDetails().value);
 
-        //Initial populate
-        updateContractChips();
-
-        //Add listener for new incoming contracts
-        policy.getContracts().addListener((SetChangeListener<Contract>) change -> {
-            updateContractChips();
-        });
-    }
-
-    private void updateContractChips() {
+        //clear old chips to load new ones
         contracts.getChildren().clear();
-        policy.getContracts().forEach(c -> contracts.getChildren().add(new Label(c.getCId().value)));
+
+        policy.getContracts().forEach(contract -> contracts.getChildren()
+                .add(new Label(contract.getCId().value)));
     }
 }

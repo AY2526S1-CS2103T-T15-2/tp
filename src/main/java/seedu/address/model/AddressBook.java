@@ -319,6 +319,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Policy policy : policies) {
             if (policy.getId().equals(contract.getPId())) {
                 policy.addContract(contract);
+                setPolicy(policy, policy);
                 return;
             }
         }
@@ -356,6 +357,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Policy policy : policies) {
             if (policy.getId().equals(contract.getPId())) {
                 policy.removeContract(contract);
+                //update policyview method
                 return;
             }
         }

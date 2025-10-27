@@ -45,4 +45,11 @@ public class PolicyListPanel extends UiPart<Region> {
             }
         }
     }
+
+    /**
+     * Refreshes the list of policy cards to get updated states of each card
+     */
+    public void refresh() {
+        policyListView.refresh();
+    }
 }

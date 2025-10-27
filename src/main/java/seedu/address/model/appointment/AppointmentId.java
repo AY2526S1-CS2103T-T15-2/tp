@@ -12,7 +12,7 @@ import seedu.address.model.util.RandomUtil;
 public class AppointmentId {
 
     public static final int ID_LENGTH = 6;
-    public static final String MESSAGE_CONSTRAINTS = "Appointment IDs should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment IDs should be alphanumeric of length 6";
     public static final String VALIDATION_REGEX = String.format("[a-zA-Z0-9]{%d}", ID_LENGTH);
 
     public final String value;

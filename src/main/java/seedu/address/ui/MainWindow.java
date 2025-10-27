@@ -209,7 +209,10 @@ public class MainWindow extends UiPart<Stage> {
 
             switch (commandResult.listPanelType) {
             case CONTACT -> showPersonListPanel();
-            case POLICY -> showPolicyListPanel();
+            case POLICY -> {
+                showPolicyListPanel();
+                policyListPanel.refresh();
+            }
             case CONTRACT -> showContractListPanel();
             case APPOINTMENT -> showAppointmentListPanel();
             default -> { }
