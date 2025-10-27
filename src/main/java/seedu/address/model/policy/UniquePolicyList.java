@@ -135,6 +135,14 @@ public class UniquePolicyList implements Iterable<Policy> {
     }
 
     /**
+     * Returns true if any policy in the list of policies contains the {@code pId}
+     */
+    public boolean hasPolicy(PolicyId pId) {
+        requireNonNull(pId);
+        return internalList.stream().anyMatch(x -> x.getId().equals(pId));
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Policy> asUnmodifiableObservableList() {

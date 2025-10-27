@@ -126,6 +126,11 @@ public interface Model {
     boolean hasSamePolicyFields(Policy policy);
 
     /**
+     * Returns true if a policy with the same id as {@code policyId} exists in the address book
+     */
+    boolean hasPolicy(PolicyId policyId);
+
+    /**
      * Deletes the given policy.
      * The policy must exist in the address book.
      */

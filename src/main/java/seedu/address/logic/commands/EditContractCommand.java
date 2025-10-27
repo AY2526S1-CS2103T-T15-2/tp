@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTRACT_PERIOD;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_POLICY_NOT_FOUND;
 import static seedu.address.logic.commands.CommandUtil.isValidDateSignedAndExpiry;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -86,6 +88,8 @@ public class EditContractCommand extends Command {
             model.removeContractFromPolicy(contractToEdit);
             model.addContractToPerson(editedContract);
             model.addContractToPolicy(editedContract);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredPolicyList(Model.PREDICATE_SHOW_ALL_POLICIES);
             model.updateFilteredContractList(Model.PREDICATE_SHOW_ALL_CONTRACTS);
             return new CommandResult(String.format(MESSAGE_EDIT_CONTRACT_SUCCESS, editedContract.getCId().toString()),
                     ListPanelType.CONTRACT);
@@ -111,9 +115,17 @@ public class EditContractCommand extends Command {
         LocalDate updatedDateSigned = editContractDescriptor.getDate().orElse(contractToEdit.getDate());
         LocalDate updatedExpiryDate = editContractDescriptor.getExpiryDate().orElse(contractToEdit.getExpiryDate());
         ContractPremium updatedPremium = editContractDescriptor.getPremium().orElse(contractToEdit.getPremium());
+        if (!model.hasPerson(updatedNric)) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+        if (!model.hasPolicy(updatedPid)) {
+            throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
+        }
         if (!isValidDateSignedAndExpiry(updatedDateSigned, updatedExpiryDate)) {
             throw new CommandException(MESSAGE_INVALID_CONTRACT_PERIOD);
         }
+        System.out.println("Person: " + updatedNric);
+        System.out.println("Policy: " + updatedPid);
 
         return new Contract(updatedCId, updatedName, updatedNric, updatedPid, updatedDateSigned, updatedExpiryDate,
                 updatedPremium);

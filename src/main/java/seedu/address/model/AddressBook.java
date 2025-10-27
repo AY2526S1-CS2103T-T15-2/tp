@@ -168,6 +168,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if the address book contains a policy with {@code policyId}
+     * @param policyId
+     * @return
+     */
+    public boolean hasPolicy(PolicyId policyId) {
+        requireNonNull(policyId);
+        return policies.hasPolicy(policyId);
+    }
+
+    /**
      * Adds a policy to the address book.
      * The policy must not already exist in the address book.
      */
