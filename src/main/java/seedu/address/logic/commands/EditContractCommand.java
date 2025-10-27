@@ -124,8 +124,6 @@ public class EditContractCommand extends Command {
         if (!isValidDateSignedAndExpiry(updatedDateSigned, updatedExpiryDate)) {
             throw new CommandException(MESSAGE_INVALID_CONTRACT_PERIOD);
         }
-        System.out.println("Person: " + updatedNric);
-        System.out.println("Policy: " + updatedPid);
 
         return new Contract(updatedCId, updatedName, updatedNric, updatedPid, updatedDateSigned, updatedExpiryDate,
                 updatedPremium);
