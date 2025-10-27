@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_POLICY_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -12,7 +14,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 import java.time.LocalDate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contract.Contract;
@@ -64,7 +65,10 @@ public class AddContractCommand extends Command {
 
         Nric nric = toAdd.getNric();
         if (!model.hasPerson(nric)) {
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+        if (!model.hasPolicy(toAdd.getPId())) {
+            throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
         }
 
         // fill in necessary fields
