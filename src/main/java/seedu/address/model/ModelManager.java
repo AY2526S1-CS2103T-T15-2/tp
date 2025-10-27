@@ -15,6 +15,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -151,6 +152,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAppointment(AppointmentId appointmentId) {
+        requireNonNull(appointmentId);
+        return addressBook.hasAppointment(appointmentId);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -158,6 +165,11 @@ public class ModelManager implements Model {
     @Override
     public void removePolicy(Policy policy) {
         addressBook.removePolicy(policy);
+    }
+
+    @Override
+    public Policy getPolicy(PolicyId policyId) {
+        return addressBook.getPolicy(policyId);
     }
 
     @Override
@@ -214,6 +226,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedAppointment);
 
         addressBook.setAppointment(target, editedAppointment);
+    }
+
+    @Override
+    public Appointment getAppointment(AppointmentId appointmentId) {
+        return addressBook.getAppointment(appointmentId);
     }
 
     @Override

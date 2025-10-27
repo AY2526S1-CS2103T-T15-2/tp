@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -61,28 +60,21 @@ public class EditAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(aId);
-        List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
-        if (lastShownList.stream().anyMatch(a -> a.getAId().equals(aId))) {
-            Appointment appointmentToEdit = lastShownList.stream()
-                    .filter(a -> a.getAId().equals(aId))
-                    .findFirst()
-                    .get();
-            Appointment editedAppointment =
-                    createEditedAppointment(appointmentToEdit, editAppointmentDescriptor, model);
-
-            if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
-                throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
-            }
-
-            model.setAppointment(appointmentToEdit, editedAppointment);
-            model.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
-            return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS,
-                    editedAppointment.getAId().toString()), ListPanelType.APPOINTMENT);
-
-        } else {
-            throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
+        if (!model.hasAppointment(aId)) {
+            throw new CommandException(String.format(Messages.MESSAGE_APPOINTMENT_NOT_FOUND, aId));
         }
+        Appointment appointmentToEdit = model.getAppointment(aId);
+        Appointment editedAppointment = createEditedAppointment(appointmentToEdit, editAppointmentDescriptor, model);
+
+        if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
+        model.setAppointment(appointmentToEdit, editedAppointment);
+        model.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS,
+            editedAppointment.getAId().toString()), ListPanelType.APPOINTMENT);
     }
 
     /**
