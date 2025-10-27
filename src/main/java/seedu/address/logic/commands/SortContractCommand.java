@@ -14,7 +14,7 @@ import seedu.address.ui.ListPanelType;
  */
 public class SortContractCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort_contracts";
+    public static final String COMMAND_WORD = "sort_contract";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all contracts by their premium amount\n"
             + "in ascending order. \n"
