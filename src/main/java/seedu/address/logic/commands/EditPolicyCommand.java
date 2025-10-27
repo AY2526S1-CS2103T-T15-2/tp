@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 
 import java.util.Objects;
@@ -29,11 +30,11 @@ public class EditPolicyCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the policy identified "
             + "by its policyId. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: POLICY_ID "
+            + "Parameters: "
+            + PREFIX_PID + "POLICY_ID "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DETAILS + "DETAILS]\n"
-            + "Example: " + COMMAND_WORD + " a1b2c3 "
-            + PREFIX_NAME + "Life Insurance";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PID + "a1b2c3 " + PREFIX_NAME + "Life Insurance";
 
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
     public static final String MESSAGE_POLICY_ID_NOT_FOUND = "A policy with id %1$s was not found in the address book.";
