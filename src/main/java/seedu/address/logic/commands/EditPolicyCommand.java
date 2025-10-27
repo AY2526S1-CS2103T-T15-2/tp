@@ -34,8 +34,7 @@ public class EditPolicyCommand extends Command {
             + PREFIX_PID + "POLICY_ID "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DETAILS + "DETAILS]\n"
-            + "Example: " + COMMAND_WORD + " a1b2c3 "
-            + PREFIX_NAME + "Life Insurance";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PID + "a1b2c3 " + PREFIX_NAME + "Life Insurance";
 
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
     public static final String MESSAGE_POLICY_ID_NOT_FOUND = "A policy with id %1$s was not found in the address book.";
