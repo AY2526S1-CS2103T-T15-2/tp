@@ -31,9 +31,9 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 
    * `list` : Lists all contacts.
 
-   * `add n:John Doe p:98765432 e:johnd@example.com a:John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add_contact n:John Doe p:98765432 ic:T0000000A e:johnd@example.com a:John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `remove_contact ic:T0000000A` : Removes the contact with NRIC `T0000000A`.
 
    * `clear` : Deletes all contacts.
 
