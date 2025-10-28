@@ -36,10 +36,10 @@ public class RemoveContractCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contract> lastShownList = model.getFilteredContractList();
+        List<Contract> list = model.getUniqueContractList();
 
-        if (lastShownList.stream().anyMatch(x -> x.getCId().equals(cId))) {
-            Contract contractToRemove = lastShownList.stream()
+        if (list.stream().anyMatch(x -> x.getCId().equals(cId))) {
+            Contract contractToRemove = list.stream()
                     .filter(x -> x.getCId().equals(cId))
                     .findFirst()
                     .get();
