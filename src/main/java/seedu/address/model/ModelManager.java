@@ -394,6 +394,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Contract> getUniqueContractList() {
+        return addressBook.getContractList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
