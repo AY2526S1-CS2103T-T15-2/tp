@@ -309,4 +309,7 @@ public interface Model {
      */
     void sortAppointments(Comparator<Appointment> comparator);
 
+    /** Returns an unmodifiable view of the unique contract list */
+    ObservableList<Contract> getUniqueContractList();
+
 }

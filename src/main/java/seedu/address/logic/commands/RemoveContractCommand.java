@@ -36,21 +36,21 @@ public class RemoveContractCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contract> lastShownList = model.getFilteredContractList();
+        List<Contract> list = model.getUniqueContractList();
 
-        if (lastShownList.stream().anyMatch(x -> x.getCId().equals(cId))) {
-            Contract contractToRemove = lastShownList.stream()
-                    .filter(x -> x.getCId().equals(cId))
-                    .findFirst()
-                    .get();
-            model.removeContract(contractToRemove);
-            model.removeContractFromPerson(contractToRemove);
-            model.removeContractFromPolicy(contractToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove.getCId()),
-                    ListPanelType.CONTRACT);
-        } else {
-            throw new CommandException(Messages.MESSAGE_CONTRACT_NOT_FOUND);
-        }
+        Contract contractToRemove = getContractToRemove(list);
+        model.removeContract(contractToRemove);
+        model.removeContractFromPerson(contractToRemove);
+        model.removeContractFromPolicy(contractToRemove);
+        return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove.getCId()),
+                ListPanelType.CONTRACT);
+    }
+
+    public Contract getContractToRemove(List<Contract> contractList) throws CommandException {
+        return contractList.stream()
+            .filter(x -> x.getCId().equals(cId))
+            .findFirst()
+            .orElseThrow(() -> new CommandException(Messages.MESSAGE_CONTRACT_NOT_FOUND));
     }
 
     @Override

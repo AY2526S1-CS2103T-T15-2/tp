@@ -288,4 +288,9 @@ public class ModelStub implements Model {
     public void removeContractFromPolicy(Contract contract) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public ObservableList<Contract> getUniqueContractList() {
+        throw new AssertionError("This method should not be called.");
+    }
 }
