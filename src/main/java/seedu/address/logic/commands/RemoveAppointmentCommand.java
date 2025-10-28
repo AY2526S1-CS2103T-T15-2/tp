@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -19,8 +20,8 @@ public class RemoveAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes an appointment from iCon.\n"
-            + "Parameters: "
-            + "Appointment ID (must be a positive integer)\n"
+            + "Parameters: " + PREFIX_AID
+            + " Appointment ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " a: gVVGzn";
 
     public static final String MESSAGE_REMOVE_APPOINTMENT_SUCCESS = "Removed Appointment: %1$s";
