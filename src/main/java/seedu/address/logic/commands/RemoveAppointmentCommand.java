@@ -2,15 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.appointment.AppointmentListUtil;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -37,10 +34,11 @@ public class RemoveAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
-        Appointment appointmentToRemove = AppointmentListUtil.findById(lastShownList, aId)
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND));
+        if (!model.hasAppointment(aId)) {
+            throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
+        }
+        Appointment appointmentToRemove = model.getAppointment(aId);
         model.removeAppointment(appointmentToRemove);
         return new CommandResult(String.format(MESSAGE_REMOVE_APPOINTMENT_SUCCESS, appointmentToRemove.getAId()),
                 ListPanelType.APPOINTMENT);

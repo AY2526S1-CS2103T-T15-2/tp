@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -49,44 +47,22 @@ public class RemovePolicyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Policy> lastShownList = model.getFilteredPolicyList();
 
-        if (hasPolicyInList(lastShownList, targetId)) {
-            Policy policyToRemove = getPolicyInList(lastShownList, targetId);
-            Set<Contract> existingContracts = policyToRemove.getContracts();
-            if (!existingContracts.isEmpty()) {
-                String existingContractIds = existingContracts.stream()
-                        .map(Contract::getCId)
-                        .map(ContractId::toString)
-                        .collect(Collectors.joining(", "));
-                throw new CommandException(String.format(MESSAGE_REMOVE_POLICY_PENDING, existingContractIds));
-            }
-            model.removePolicy(policyToRemove);
-            return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove.getId()),
+        if (!model.hasPolicy(targetId)) {
+            throw new CommandException(Messages.MESSAGE_POLICY_NOT_FOUND);
+        }
+        Policy policyToRemove = model.getPolicy(targetId);
+        Set<Contract> existingContracts = policyToRemove.getContracts();
+        if (!existingContracts.isEmpty()) {
+            String existingContractIds = existingContracts.stream()
+                    .map(Contract::getCId)
+                    .map(ContractId::toString)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(String.format(MESSAGE_REMOVE_POLICY_PENDING, existingContractIds));
+        }
+        model.removePolicy(policyToRemove);
+        return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove.getId()),
                     ListPanelType.POLICY);
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_POLICY_ID);
-        }
-    }
-
-    /**
-     * Returns true if policy with policyId exists in the policy list
-     */
-    public boolean hasPolicyInList(List<Policy> policyList, PolicyId policyId) {
-        return policyList.stream().anyMatch(p -> p.getId().equals(policyId));
-    }
-
-    /**
-     * Returns a policy with policy id in the policy list
-     */
-    public Policy getPolicyInList(List<Policy> policyList, PolicyId policyId) throws CommandException {
-        Optional<Policy> maybePolicy = policyList.stream()
-                .filter(p -> p.getId().equals(policyId))
-                .findFirst();
-        if (maybePolicy.isEmpty()) {
-            throw new CommandException("Unable to get policy");
-        }
-        return maybePolicy.get();
     }
 
     @Override

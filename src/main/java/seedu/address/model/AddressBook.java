@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
@@ -169,12 +170,27 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if the address book contains a policy with {@code policyId}
-     * @param policyId
-     * @return
+     * @param policyId identifier for policy in addressbook
+     * @return true if policy with policyId exists in address book
      */
     public boolean hasPolicy(PolicyId policyId) {
         requireNonNull(policyId);
         return policies.hasPolicy(policyId);
+    }
+
+    /**
+     * Returns a Policy from the addressbook with the policyId
+     * @param policyId identifier for policy in addressbook
+     * @return Policy from the addressbook
+     */
+    public Policy getPolicy(PolicyId policyId) {
+        requireNonNull(policyId);
+        for (Policy policy : policies) {
+            if (policy.getId().equals(policyId)) {
+                return policy;
+            }
+        }
+        return null;
     }
 
     /**
@@ -250,12 +266,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if the address book contains an appointment with {@code appointmentId}
+     * @param appointmentId identifier for appointment in addressbook
+     * @return true if appointment with appointmentId exists in address book
+     */
+    public boolean hasAppointment(AppointmentId appointmentId) {
+        requireNonNull(appointmentId);
+        return appointments.hasAppointment(appointmentId);
+    }
+
+    /**
      * Adds an appointment to the address book.
      * The appointment must not already exist in the address book.
      */
     public void addAppointment(Appointment a) {
         appointments.add(a);
     }
+
 
     /**
      * Replaces the given appointment {@code target} in the list with {@code editedAppointment}.
@@ -267,6 +294,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedAppointment);
 
         appointments.setAppointment(target, editedAppointment);
+    }
+
+    /**
+     * Returns an Appointment from the addressbook with the appointmentId
+     * @param appointmentId identifier for appointment in addressbook
+     * @return Appointment from the addressbook
+     */
+    public Appointment getAppointment(AppointmentId appointmentId) {
+        requireNonNull(appointmentId);
+        for (Appointment appointment : appointments) {
+            if (appointment.getAId().equals(appointmentId)) {
+                return appointment;
+            }
+        }
+        return null;
     }
 
     /**
