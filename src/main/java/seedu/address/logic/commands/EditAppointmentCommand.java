@@ -32,15 +32,16 @@ public class EditAppointmentCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters:"
             + PREFIX_NRIC + "NRIC "
-            + PREFIX_DATE + "DATE"
+            + PREFIX_DATE + "DATE "
             + PREFIX_DETAILS + "DETAILS\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_AID
-            + PREFIX_DATE + "2020-10-10"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_AID + "A1234A" + " "
+            + PREFIX_DATE + "2020-10-10" + " "
             + PREFIX_DETAILS + "Run through Health coverage";
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in iCon.";
 
     private final AppointmentId aId;
     private final EditAppointmentDescriptor editAppointmentDescriptor;

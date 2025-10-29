@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.policy.Policy;
@@ -37,9 +36,9 @@ public class EditPolicyCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_PID + "a1b2c3 " + PREFIX_NAME + "Life Insurance";
 
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
-    public static final String MESSAGE_POLICY_ID_NOT_FOUND = "A policy with id %1$s was not found in the address book.";
+    public static final String MESSAGE_POLICY_ID_NOT_FOUND = "A policy with id %1$s was not found in iCon.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in iCon.";
 
     private final PolicyId policyId;
     private final EditPolicyDescriptor editPolicyDescriptor;
@@ -72,7 +71,7 @@ public class EditPolicyCommand extends Command {
 
         model.setPolicy(policyToEdit, editedPolicy);
         model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_POLICY_SUCCESS, Messages.format(editedPolicy)),
+        return new CommandResult(String.format(MESSAGE_EDIT_POLICY_SUCCESS, editedPolicy.getId().toString()),
                 ListPanelType.POLICY);
     }
 
