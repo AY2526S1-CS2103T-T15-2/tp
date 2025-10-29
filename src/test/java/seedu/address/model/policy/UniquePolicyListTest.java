@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.HEALTH_B;
-import static seedu.address.testutil.TypicalData.HOME;
+import static seedu.address.testutil.TypicalData.getHealthB;
+import static seedu.address.testutil.TypicalData.getHome;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,25 +33,25 @@ public class UniquePolicyListTest {
 
     @Test
     public void containsSameId_policyIdNotInList_returnsFalse() {
-        assertFalse(uniquePolicyList.containsSameId(HOME));
+        assertFalse(uniquePolicyList.containsSameId(getHome()));
     }
 
     @Test
     public void containsSameId_policyWithSameIdInList_returnsTrue() {
-        uniquePolicyList.add(HOME);
-        Policy editedPolicy = new PolicyBuilder(HEALTH_B).withId(VALID_POLICY_ID_HOME).build();
+        uniquePolicyList.add(getHome());
+        Policy editedPolicy = new PolicyBuilder(getHealthB()).withId(VALID_POLICY_ID_HOME).build();
         assertTrue(uniquePolicyList.containsSameId(editedPolicy));
     }
 
     @Test
     public void containsSamePolicy_policyNotInList_returnsFalse() {
-        assertFalse(uniquePolicyList.containsSamePolicy(HOME));
+        assertFalse(uniquePolicyList.containsSamePolicy(getHome()));
     }
 
     @Test
     public void containsSamePolicy_policyWithSameFieldsInList_returnsTrue() {
-        uniquePolicyList.add(HOME);
-        Policy editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build();
+        uniquePolicyList.add(getHome());
+        Policy editedPolicy = new PolicyBuilder(getHome()).withId(VALID_POLICY_ID_HEALTH_B).build();
         assertTrue(uniquePolicyList.containsSamePolicy(editedPolicy));
     }
 
@@ -63,7 +63,7 @@ public class UniquePolicyListTest {
 
     @Test
     public void containsId_policyWithIdInList_returnsTrue() {
-        uniquePolicyList.add(HOME);
+        uniquePolicyList.add(getHome());
         PolicyId policyId = new PolicyId(VALID_POLICY_ID_HOME);
         assertTrue(uniquePolicyList.containsId(policyId));
     }
@@ -75,8 +75,8 @@ public class UniquePolicyListTest {
 
     @Test
     public void add_duplicatePolicy_throwsDuplicatePolicyException() {
-        uniquePolicyList.add(HOME);
-        assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.add(HOME));
+        uniquePolicyList.add(getHome());
+        assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.add(getHome()));
     }
 
     @Test
@@ -86,48 +86,48 @@ public class UniquePolicyListTest {
 
     @Test
     public void addAll_duplicatePolicy_throwsDuplicatePolicyException() {
-        uniquePolicyList.add(HOME);
-        List<Policy> policies = List.of(HEALTH_B, HOME);
+        uniquePolicyList.add(getHome());
+        List<Policy> policies = List.of(getHealthB(), getHome());
         assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.addAll(policies));
     }
 
     @Test
     public void addAll_duplicatePolicyInList_throwsDuplicatePolicyException() {
-        uniquePolicyList.add(HOME);
-        List<Policy> policies = List.of(HEALTH_B, HEALTH_B);
+        uniquePolicyList.add(getHome());
+        List<Policy> policies = List.of(getHealthB(), getHealthB());
         assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.addAll(policies));
     }
 
     @Test
     public void setPolicy_nullTargetPolicy_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePolicyList.setPolicy(null, HOME));
+        assertThrows(NullPointerException.class, () -> uniquePolicyList.setPolicy(null, getHome()));
     }
 
     @Test
     public void setPolicy_nullEditedPolicy_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePolicyList.setPolicy(HOME, null));
+        assertThrows(NullPointerException.class, () -> uniquePolicyList.setPolicy(getHome(), null));
     }
 
     @Test
     public void setPolicy_targetPolicyNotInList_throwsPolicyNotFoundException() {
-        assertThrows(PolicyNotFoundException.class, () -> uniquePolicyList.setPolicy(HOME, HOME));
+        assertThrows(PolicyNotFoundException.class, () -> uniquePolicyList.setPolicy(getHome(), getHome()));
     }
 
     @Test
     public void setPolicy_editedPolicyIsSamePolicy_success() {
-        uniquePolicyList.add(HOME);
-        uniquePolicyList.setPolicy(HOME, HOME);
+        uniquePolicyList.add(getHome());
+        uniquePolicyList.setPolicy(getHome(), getHome());
         UniquePolicyList expectedUniquePolicyList = new UniquePolicyList();
-        expectedUniquePolicyList.add(HOME);
+        expectedUniquePolicyList.add(getHome());
         assertEquals(expectedUniquePolicyList, uniquePolicyList);
     }
 
     @Test
     public void setPolicy_editedPolicyHasSameIdentity_success() {
-        uniquePolicyList.add(HOME);
-        Policy editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_NAME_HEALTH_B)
+        uniquePolicyList.add(getHome());
+        Policy editedPolicy = new PolicyBuilder(getHome()).withName(VALID_POLICY_NAME_HEALTH_B)
                 .withDetails(VALID_DETAILS_HEALTH_B).build();
-        uniquePolicyList.setPolicy(HOME, editedPolicy);
+        uniquePolicyList.setPolicy(getHome(), editedPolicy);
         UniquePolicyList expectedUniquePolicyList = new UniquePolicyList();
         expectedUniquePolicyList.add(editedPolicy);
         assertEquals(expectedUniquePolicyList, uniquePolicyList);
@@ -135,18 +135,18 @@ public class UniquePolicyListTest {
 
     @Test
     public void setPolicy_editedPolicyHasDifferentIdentity_success() {
-        uniquePolicyList.add(HOME);
-        uniquePolicyList.setPolicy(HOME, HEALTH_B);
+        uniquePolicyList.add(getHome());
+        uniquePolicyList.setPolicy(getHome(), getHealthB());
         UniquePolicyList expectedUniquePolicyList = new UniquePolicyList();
-        expectedUniquePolicyList.add(HEALTH_B);
+        expectedUniquePolicyList.add(getHealthB());
         assertEquals(expectedUniquePolicyList, uniquePolicyList);
     }
 
     @Test
     public void setPolicy_editedPolicyHasNonUniqueIdentity_throwsDuplicatePolicyException() {
-        uniquePolicyList.add(HOME);
-        uniquePolicyList.add(HEALTH_B);
-        assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.setPolicy(HOME, HEALTH_B));
+        uniquePolicyList.add(getHome());
+        uniquePolicyList.add(getHealthB());
+        assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.setPolicy(getHome(), getHealthB()));
     }
 
     @Test
@@ -156,13 +156,13 @@ public class UniquePolicyListTest {
 
     @Test
     public void remove_policyDoesNotExist_throwsPolicyNotFoundException() {
-        assertThrows(PolicyNotFoundException.class, () -> uniquePolicyList.remove(HOME));
+        assertThrows(PolicyNotFoundException.class, () -> uniquePolicyList.remove(getHome()));
     }
 
     @Test
     public void remove_existingPolicy_removesPolicy() {
-        uniquePolicyList.add(HOME);
-        uniquePolicyList.remove(HOME);
+        uniquePolicyList.add(getHome());
+        uniquePolicyList.remove(getHome());
         UniquePolicyList expectedUniquePolicyList = new UniquePolicyList();
         assertEquals(expectedUniquePolicyList, uniquePolicyList);
     }
@@ -174,9 +174,9 @@ public class UniquePolicyListTest {
 
     @Test
     public void setPolicies_uniquePolicyList_replacesOwnListWithProvidedUniquePolicyList() {
-        uniquePolicyList.add(HOME);
+        uniquePolicyList.add(getHome());
         UniquePolicyList expectedUniquePolicyList = new UniquePolicyList();
-        expectedUniquePolicyList.add(HEALTH_B);
+        expectedUniquePolicyList.add(getHealthB());
         uniquePolicyList.setPolicies(expectedUniquePolicyList);
         assertEquals(expectedUniquePolicyList, uniquePolicyList);
     }
@@ -188,17 +188,17 @@ public class UniquePolicyListTest {
 
     @Test
     public void setPolicies_list_replacesOwnListWithProvidedList() {
-        uniquePolicyList.add(HOME);
-        List<Policy> policyList = Collections.singletonList(HEALTH_B);
+        uniquePolicyList.add(getHome());
+        List<Policy> policyList = Collections.singletonList(getHealthB());
         uniquePolicyList.setPolicies(policyList);
         UniquePolicyList expectedUniquePolicyList = new UniquePolicyList();
-        expectedUniquePolicyList.add(HEALTH_B);
+        expectedUniquePolicyList.add(getHealthB());
         assertEquals(expectedUniquePolicyList, uniquePolicyList);
     }
 
     @Test
     public void setPolicies_listWithDuplicatePolicies_throwsDuplicatePolicyException() {
-        List<Policy> listWithDuplicatePolicies = Arrays.asList(HOME, HOME);
+        List<Policy> listWithDuplicatePolicies = Arrays.asList(getHome(), getHome());
         assertThrows(DuplicatePolicyException.class, () -> uniquePolicyList.setPolicies(listWithDuplicatePolicies));
     }
 

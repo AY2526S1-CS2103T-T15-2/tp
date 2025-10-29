@@ -8,9 +8,9 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HOME;
-import static seedu.address.testutil.TypicalData.HEALTH_B;
-import static seedu.address.testutil.TypicalData.HOME;
-import static seedu.address.testutil.TypicalData.LIFE;
+import static seedu.address.testutil.TypicalData.getHealthB;
+import static seedu.address.testutil.TypicalData.getHome;
+import static seedu.address.testutil.TypicalData.getLife;
 
 import java.util.List;
 
@@ -23,56 +23,56 @@ public class PolicyTest {
     @Test
     public void hasSameId() {
         // same object -> returns true
-        assertTrue(HOME.hasSameId(HOME));
+        assertTrue(getHome().hasSameId(getHome()));
 
         // null -> returns false
-        assertFalse(HOME.hasSameId(null));
+        assertFalse(getHome().hasSameId(null));
 
         // same id, all other attributes different -> returns true
-        Policy editedPolicy = new PolicyBuilder(HEALTH_B).withId(VALID_POLICY_ID_HOME).build();
-        assertTrue(HOME.hasSameId(editedPolicy));
+        Policy editedPolicy = new PolicyBuilder(getHealthB()).withId(VALID_POLICY_ID_HOME).build();
+        assertTrue(getHome().hasSameId(editedPolicy));
 
         // different id, all other attributes same -> returns false
-        editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build();
-        assertFalse(HOME.hasSameId(editedPolicy));
+        editedPolicy = new PolicyBuilder(getHome()).withId(VALID_POLICY_ID_HEALTH_B).build();
+        assertFalse(getHome().hasSameId(editedPolicy));
 
         // id differs in case, all other attributes same -> returns false
-        editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HOME.toLowerCase()).build();
-        assertFalse(HOME.hasSameId(editedPolicy));
+        editedPolicy = new PolicyBuilder(getHome()).withId(VALID_POLICY_ID_HOME.toLowerCase()).build();
+        assertFalse(getHome().hasSameId(editedPolicy));
     }
 
     @Test
     public void isSamePolicy() {
         // same object -> returns true
-        assertTrue(HOME.isSamePolicy(HOME));
+        assertTrue(getHome().isSamePolicy(getHome()));
 
         // null -> returns false
-        assertFalse(HOME.isSamePolicy(null));
+        assertFalse(getHome().isSamePolicy(null));
 
         // same id, all other attributes different -> returns false
-        Policy editedPolicy = new PolicyBuilder(HEALTH_B).withId(VALID_POLICY_ID_HOME).build();
-        assertFalse(HOME.isSamePolicy(editedPolicy));
+        Policy editedPolicy = new PolicyBuilder(getHealthB()).withId(VALID_POLICY_ID_HOME).build();
+        assertFalse(getHome().isSamePolicy(editedPolicy));
 
         // different id, all other attributes same -> returns true
-        editedPolicy = new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build();
-        assertTrue(HOME.isSamePolicy(editedPolicy));
+        editedPolicy = new PolicyBuilder(getHome()).withId(VALID_POLICY_ID_HEALTH_B).build();
+        assertTrue(getHome().isSamePolicy(editedPolicy));
 
         // name differs in case -> returns false
-        editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_NAME_HOME.toLowerCase()).build();
-        assertFalse(HOME.isSamePolicy(editedPolicy));
+        editedPolicy = new PolicyBuilder(getHome()).withName(VALID_POLICY_NAME_HOME.toLowerCase()).build();
+        assertFalse(getHome().isSamePolicy(editedPolicy));
     }
 
     @Test
     public void policiesAreUnique() {
         // unique policies -> returns true
-        assertTrue(Policy.policiesAreUnique(List.of(HOME, HEALTH_B, LIFE)));
+        assertTrue(Policy.policiesAreUnique(List.of(getHome(), getHealthB(), getLife())));
 
         // non-unique policies -> return false
-        assertFalse(Policy.policiesAreUnique(List.of(HOME, HEALTH_B, HOME)));
+        assertFalse(Policy.policiesAreUnique(List.of(getHome(), getHealthB(), getHome())));
 
         // non-unique policies with different ids -> return false
         assertFalse(Policy.policiesAreUnique(
-                List.of(HOME, LIFE, new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build())
+                List.of(getHome(), getLife(), new PolicyBuilder(getHome()).withId(VALID_POLICY_ID_HEALTH_B).build())
         ));
     }
 
@@ -80,39 +80,39 @@ public class PolicyTest {
     public void equals() {
 
         // same values -> returns true
-        Policy policyCopy = new PolicyBuilder(HOME).build();
-        assertTrue(HOME.equals(policyCopy));
+        Policy policyCopy = new PolicyBuilder(getHome()).build();
+        assertTrue(getHome().equals(policyCopy));
 
         // same object -> returns true
-        assertTrue(HOME.equals(HOME));
+        assertTrue(getHome().equals(getHome()));
 
         // null -> returns false
-        assertFalse(HOME.equals(null));
+        assertFalse(getHome().equals(null));
 
         // different type -> returns false
-        assertFalse(HOME.equals(5));
+        assertFalse(getHome().equals(5));
 
         // different policy -> returns false
-        assertFalse(HOME.equals(HEALTH_B));
+        assertFalse(getHome().equals(getHealthB()));
 
         // different name -> returns false
-        Policy editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_NAME_HEALTH_B).build();
-        assertFalse(HOME.equals(editedPolicy));
+        Policy editedPolicy = new PolicyBuilder(getHome()).withName(VALID_POLICY_NAME_HEALTH_B).build();
+        assertFalse(getHome().equals(editedPolicy));
 
         // different details -> returns false
-        editedPolicy = new PolicyBuilder(HOME).withName(VALID_DETAILS_HEALTH_B).build();
-        assertFalse(HOME.equals(editedPolicy));
+        editedPolicy = new PolicyBuilder(getHome()).withName(VALID_DETAILS_HEALTH_B).build();
+        assertFalse(getHome().equals(editedPolicy));
 
         // different id -> returns false
-        editedPolicy = new PolicyBuilder(HOME).withName(VALID_POLICY_ID_HEALTH_B).build();
-        assertFalse(HOME.equals(editedPolicy));
+        editedPolicy = new PolicyBuilder(getHome()).withName(VALID_POLICY_ID_HEALTH_B).build();
+        assertFalse(getHome().equals(editedPolicy));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Policy.class.getCanonicalName() + "{name=" + HOME.getName()
-                + ", details=" + HOME.getDetails() + ", id=" + HOME.getId() + "}";
-        assertEquals(expected, HOME.toString());
+        String expected = Policy.class.getCanonicalName() + "{name=" + getHome().getName()
+                + ", details=" + getHome().getDetails() + ", id=" + getHome().getId() + "}";
+        assertEquals(expected, getHome().toString());
     }
 
 }

@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_C;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
+import static seedu.address.testutil.TypicalData.getAppointmentB;
+import static seedu.address.testutil.TypicalData.getAppointmentC;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -95,7 +95,8 @@ public class ViewAppointmentCommandTest {
         ViewAppointmentCommand command = new ViewAppointmentCommand(predicate);
         expectedModel.updateFilteredAppointmentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, ListPanelType.APPOINTMENT, expectedModel);
-        assertEquals(Arrays.asList(APPOINTMENT_A, APPOINTMENT_B, APPOINTMENT_C), model.getFilteredAppointmentList());
+        assertEquals(Arrays.asList(getAppointmentA(), getAppointmentB(), getAppointmentC()),
+                model.getFilteredAppointmentList());
     }
 
     @Test

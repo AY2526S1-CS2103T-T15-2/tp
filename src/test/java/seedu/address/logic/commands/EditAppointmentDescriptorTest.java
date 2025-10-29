@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
+import static seedu.address.testutil.TypicalData.getAppointmentB;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +15,11 @@ public class EditAppointmentDescriptorTest {
 
     @Test
     public void equals() {
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_A).build();
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(getAppointmentA()).build();
 
         // same values -> returns true
         EditAppointmentDescriptor descriptorWithSameValues =
-                new EditAppointmentDescriptorBuilder(APPOINTMENT_A).build();
+                new EditAppointmentDescriptorBuilder(getAppointmentA()).build();
         assertTrue(descriptor.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -32,22 +32,22 @@ public class EditAppointmentDescriptorTest {
         assertFalse(descriptor.equals(5));
 
         // different values -> returns false
-        EditAppointmentDescriptor otherDescriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_B).build();
+        EditAppointmentDescriptor otherDescriptor = new EditAppointmentDescriptorBuilder(getAppointmentB()).build();
         assertFalse(descriptor.equals(otherDescriptor));
 
         // different nric -> returns false
-        EditAppointmentDescriptor editedDescriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_A)
-                .withNric(APPOINTMENT_B.getNric().nric).build();
+        EditAppointmentDescriptor editedDescriptor = new EditAppointmentDescriptorBuilder(getAppointmentA())
+                .withNric(getAppointmentB().getNric().nric).build();
         assertFalse(descriptor.equals(editedDescriptor));
 
         // different dates -> returns false
-        editedDescriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_A)
-                .withDate(APPOINTMENT_B.getDate().toString()).build();
+        editedDescriptor = new EditAppointmentDescriptorBuilder(getAppointmentA())
+                .withDate(getAppointmentB().getDate().toString()).build();
         assertFalse(descriptor.equals(editedDescriptor));
 
         // different details -> returns false
-        editedDescriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_A)
-                .withDetails(APPOINTMENT_B.getDetails().value).build();
+        editedDescriptor = new EditAppointmentDescriptorBuilder(getAppointmentA())
+                .withDetails(getAppointmentB().getDetails().value).build();
         assertFalse(descriptor.equals(editedDescriptor));
     }
 

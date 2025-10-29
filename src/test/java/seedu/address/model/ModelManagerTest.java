@@ -7,17 +7,17 @@ import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
-import static seedu.address.testutil.TypicalData.HEALTH_B;
-import static seedu.address.testutil.TypicalData.HOME;
-import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalData.getAlice;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
+import static seedu.address.testutil.TypicalData.getAppointmentB;
 import static seedu.address.testutil.TypicalData.getBenson;
 import static seedu.address.testutil.TypicalData.getCarl;
 import static seedu.address.testutil.TypicalData.getContractA;
 import static seedu.address.testutil.TypicalData.getContractB;
 import static seedu.address.testutil.TypicalData.getContractD;
+import static seedu.address.testutil.TypicalData.getHealthB;
+import static seedu.address.testutil.TypicalData.getHome;
+import static seedu.address.testutil.TypicalData.getLife;
 import static seedu.address.testutil.TypicalData.getTypicalAlice;
 
 import java.nio.file.Path;
@@ -109,43 +109,43 @@ public class ModelManagerTest {
 
     @Test
     public void hasSamePolicyId_policyIdNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasSamePolicyId(HOME));
+        assertFalse(modelManager.hasSamePolicyId(getHome()));
     }
 
     @Test
     public void hasSamePolicyId_policyIdInAddressBook_returnsTrue() {
-        modelManager.addPolicy(new PolicyBuilder(HEALTH_B).withId(VALID_POLICY_ID_HOME).build());
-        assertTrue(modelManager.hasSamePolicyId(HOME));
+        modelManager.addPolicy(new PolicyBuilder(getHealthB()).withId(VALID_POLICY_ID_HOME).build());
+        assertTrue(modelManager.hasSamePolicyId(getHome()));
     }
 
     @Test
     public void hasSamePolicyFields_policyNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasSamePolicyFields(HOME));
+        assertFalse(modelManager.hasSamePolicyFields(getHome()));
     }
 
     @Test
     public void hasSamePolicyFields_policyInAddressBook_returnsTrue() {
-        modelManager.addPolicy(new PolicyBuilder(HOME).withId(VALID_POLICY_ID_HEALTH_B).build());
-        assertTrue(modelManager.hasSamePolicyFields(HOME));
+        modelManager.addPolicy(new PolicyBuilder(getHome()).withId(VALID_POLICY_ID_HEALTH_B).build());
+        assertTrue(modelManager.hasSamePolicyFields(getHome()));
     }
 
     @Test
     public void removePolicy_policyInAddressBook_returnsFalse() {
-        modelManager.addPolicy(LIFE);
-        modelManager.removePolicy(LIFE);
-        assertFalse(modelManager.hasSamePolicyId(LIFE));
+        modelManager.addPolicy(getLife());
+        modelManager.removePolicy(getLife());
+        assertFalse(modelManager.hasSamePolicyId(getLife()));
     }
 
     @Test
     public void setPolicy_policyInAddressBook_returnsTrue() {
-        modelManager.addPolicy(LIFE);
-        modelManager.setPolicy(LIFE, LIFE);
-        assertTrue(modelManager.hasSamePolicyId(LIFE));
+        modelManager.addPolicy(getLife());
+        modelManager.setPolicy(getLife(), getLife());
+        assertTrue(modelManager.hasSamePolicyId(getLife()));
     }
 
     @Test
     public void addContract_policyInAddressBook_returnsTrue() {
-        modelManager.addPolicy(LIFE);
+        modelManager.addPolicy(getLife());
         modelManager.addContract(getContractA());
         assertTrue(modelManager.hasContract(getContractA()));
     }
@@ -153,7 +153,7 @@ public class ModelManagerTest {
     @Test
     public void addContractToPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(getAlice());
-        modelManager.addPolicy(LIFE);
+        modelManager.addPolicy(getLife());
         modelManager.addContract(getContractA());
         modelManager.addContractToPerson(getContractA());
         assertTrue(modelManager.personHasContract(getContractA(), getTypicalAlice()));
@@ -162,10 +162,10 @@ public class ModelManagerTest {
     @Test
     public void addContractToPolicy_policyInAddressBook_returnsTrue() {
         modelManager.addPerson(getAlice());
-        modelManager.addPolicy(LIFE);
+        modelManager.addPolicy(getLife());
         modelManager.addContract(getContractA());
         modelManager.addContractToPolicy(getContractA());
-        assertTrue(modelManager.policyHasContract(getContractA(), LIFE));
+        assertTrue(modelManager.policyHasContract(getContractA(), getLife()));
     }
 
     @Test
@@ -177,27 +177,27 @@ public class ModelManagerTest {
 
     @Test
     public void hasAppointment_appointmentNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasAppointment(APPOINTMENT_A));
+        assertFalse(modelManager.hasAppointment(getAppointmentA()));
     }
 
     @Test
     public void hasAppointment_appointmentInAddressBook_returnsTrue() {
-        modelManager.addAppointment(APPOINTMENT_A);
-        assertTrue(modelManager.hasAppointment(APPOINTMENT_A));
+        modelManager.addAppointment(getAppointmentA());
+        assertTrue(modelManager.hasAppointment(getAppointmentA()));
     }
 
     @Test
     public void removeAppointment_appointmentInAddressBook_returnsFalse() {
-        modelManager.addAppointment(APPOINTMENT_A);
-        modelManager.removeAppointment(APPOINTMENT_A);
-        assertFalse(modelManager.hasAppointment(APPOINTMENT_A));
+        modelManager.addAppointment(getAppointmentA());
+        modelManager.removeAppointment(getAppointmentA());
+        assertFalse(modelManager.hasAppointment(getAppointmentA()));
     }
 
     @Test
     public void setAppointment_appointmentInAddressBook_returnsTrue() {
-        modelManager.addAppointment(APPOINTMENT_A);
-        modelManager.setAppointment(APPOINTMENT_A, APPOINTMENT_A);
-        assertTrue(modelManager.hasAppointment(APPOINTMENT_A));
+        modelManager.addAppointment(getAppointmentA());
+        modelManager.setAppointment(getAppointmentA(), getAppointmentA());
+        assertTrue(modelManager.hasAppointment(getAppointmentA()));
     }
 
     @Test
@@ -285,9 +285,9 @@ public class ModelManagerTest {
 
     @Test
     public void updateFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
-        modelManager.addAppointment(APPOINTMENT_A);
-        modelManager.addAppointment(APPOINTMENT_B);
-        modelManager.updateFilteredAppointmentList(x -> x.equals(APPOINTMENT_A));
+        modelManager.addAppointment(getAppointmentA());
+        modelManager.addAppointment(getAppointmentB());
+        modelManager.updateFilteredAppointmentList(x -> x.equals(getAppointmentA()));
         assertEquals(1, modelManager.getFilteredAppointmentList().size());
         assertThrows(UnsupportedOperationException.class, () ->
                 modelManager.getFilteredAppointmentList().remove(0));
@@ -328,7 +328,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredPolicyList -> returns false
-        modelManager.updateFilteredPolicyList(x -> x.equals(LIFE));
+        modelManager.updateFilteredPolicyList(x -> x.equals(getLife()));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredContractList -> returns false
@@ -336,7 +336,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredAppointmentList -> returns false
-        modelManager.updateFilteredAppointmentList(x -> x.equals(APPOINTMENT_A));
+        modelManager.updateFilteredAppointmentList(x -> x.equals(getAppointmentA()));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

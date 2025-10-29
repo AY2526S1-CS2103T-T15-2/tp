@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
-import static seedu.address.testutil.TypicalData.LIFE;
+import static seedu.address.testutil.TypicalData.getLife;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,7 +86,7 @@ public class AddPolicyCommandTest {
 
     @Test
     public void toStringMethod() {
-        UnassignedPolicy unassignedPolicy = unassign(LIFE);
+        UnassignedPolicy unassignedPolicy = unassign(getLife());
         AddPolicyCommand addPolicyCommand = new AddPolicyCommand(unassignedPolicy);
         String expected = AddPolicyCommand.class.getCanonicalName() + "{toAdd=" + unassignedPolicy + "}";
         assertEquals(expected, addPolicyCommand.toString());

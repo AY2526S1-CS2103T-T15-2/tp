@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.AppointmentCommandTestUtil.VALID_APPO
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -36,10 +36,10 @@ public class RemoveAppointmentCommandTest {
                 new RemoveAppointmentCommand(new AppointmentId(VALID_APPOINTMENT_ID_A));
 
         String expectedMessage = String.format(RemoveAppointmentCommand.MESSAGE_REMOVE_APPOINTMENT_SUCCESS,
-                APPOINTMENT_A.getAId());
+                getAppointmentA().getAId());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.removeAppointment(APPOINTMENT_A);
+        expectedModel.removeAppointment(getAppointmentA());
 
         assertCommandSuccess(removeAppointmentCommand, model, expectedMessage,
                 ListPanelType.APPOINTMENT, expectedModel);

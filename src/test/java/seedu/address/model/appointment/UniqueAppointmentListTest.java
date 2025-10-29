@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
+import static seedu.address.testutil.TypicalData.getAppointmentB;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,13 +23,13 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void contains_appointmentNotInList_returnsFalse() {
-        assertFalse(uniqueAppointmentList.contains(APPOINTMENT_A));
+        assertFalse(uniqueAppointmentList.contains(getAppointmentA()));
     }
 
     @Test
     public void contains_appointmentInList_returnsTrue() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        assertTrue(uniqueAppointmentList.contains(APPOINTMENT_A));
+        uniqueAppointmentList.add(getAppointmentA());
+        assertTrue(uniqueAppointmentList.contains(getAppointmentA()));
     }
 
     @Test
@@ -39,47 +39,47 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void add_duplicateAppointment_throwsDuplicateAppointmentException() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.add(APPOINTMENT_A));
+        uniqueAppointmentList.add(getAppointmentA());
+        assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.add(getAppointmentA()));
     }
 
     @Test
     public void setAppointment_nullTargetAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                uniqueAppointmentList.setAppointment(null, APPOINTMENT_A));
+                uniqueAppointmentList.setAppointment(null, getAppointmentA()));
     }
 
     @Test
     public void setAppointment_nullEditedAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                uniqueAppointmentList.setAppointment(APPOINTMENT_A, null));
+                uniqueAppointmentList.setAppointment(getAppointmentA(), null));
     }
 
     @Test
     public void setAppointment_targetAppointmentNotInList_throwsAppointmentNotFoundException() {
         assertThrows(AppointmentNotFoundException.class, () ->
-                uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_A));
+                uniqueAppointmentList.setAppointment(getAppointmentA(), getAppointmentA()));
     }
 
     @Test
     public void setAppointment_editedAppointmentIsSameAppointment_success() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_A);
+        uniqueAppointmentList.add(getAppointmentA());
+        uniqueAppointmentList.setAppointment(getAppointmentA(), getAppointmentA());
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
-        expectedUniqueAppointmentList.add(APPOINTMENT_A);
+        expectedUniqueAppointmentList.add(getAppointmentA());
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
 
     @Test
     public void setAppointment_editedAppointmentHasSameIdentity_success() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
+        uniqueAppointmentList.add(getAppointmentA());
         Appointment editedAppointmentA = new Appointment(
-                APPOINTMENT_A.getAId(),
-                APPOINTMENT_B.getNric(),
-                APPOINTMENT_A.getDate(),
-                APPOINTMENT_B.getDetails()
+                getAppointmentA().getAId(),
+                getAppointmentB().getNric(),
+                getAppointmentA().getDate(),
+                getAppointmentB().getDetails()
         );
-        uniqueAppointmentList.setAppointment(APPOINTMENT_A, editedAppointmentA);
+        uniqueAppointmentList.setAppointment(getAppointmentA(), editedAppointmentA);
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
         expectedUniqueAppointmentList.add(editedAppointmentA);
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
@@ -87,19 +87,19 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void setAppointment_editedAppointmentHasDifferentIdentity_success() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_B);
+        uniqueAppointmentList.add(getAppointmentA());
+        uniqueAppointmentList.setAppointment(getAppointmentA(), getAppointmentB());
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
-        expectedUniqueAppointmentList.add(APPOINTMENT_B);
+        expectedUniqueAppointmentList.add(getAppointmentB());
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
 
     @Test
     public void setAppointment_editedAppointmentHasNonUniqueIdentity_throwsDuplicateAppointmentException() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        uniqueAppointmentList.add(APPOINTMENT_B);
+        uniqueAppointmentList.add(getAppointmentA());
+        uniqueAppointmentList.add(getAppointmentB());
         assertThrows(DuplicateAppointmentException.class, () ->
-                uniqueAppointmentList.setAppointment(APPOINTMENT_A, APPOINTMENT_B));
+                uniqueAppointmentList.setAppointment(getAppointmentA(), getAppointmentB()));
     }
 
     @Test
@@ -109,13 +109,13 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void remove_appointmentDoesNotExist_throwsAppointmentNotFoundException() {
-        assertThrows(AppointmentNotFoundException.class, () -> uniqueAppointmentList.remove(APPOINTMENT_A));
+        assertThrows(AppointmentNotFoundException.class, () -> uniqueAppointmentList.remove(getAppointmentA()));
     }
 
     @Test
     public void remove_existingAppointment_removesAppointment() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        uniqueAppointmentList.remove(APPOINTMENT_A);
+        uniqueAppointmentList.add(getAppointmentA());
+        uniqueAppointmentList.remove(getAppointmentA());
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
@@ -128,9 +128,9 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void setAppointments_uniqueAppointmentList_replacesOwnListWithProvidedUniqueAppointmentList() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
+        uniqueAppointmentList.add(getAppointmentA());
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
-        expectedUniqueAppointmentList.add(APPOINTMENT_A);
+        expectedUniqueAppointmentList.add(getAppointmentA());
         uniqueAppointmentList.setAppointments(expectedUniqueAppointmentList);
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
@@ -143,15 +143,16 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void setAppointments_list_replacesOwnListWithProvidedList() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        java.util.List<Appointment> appointmentList = java.util.List.of(APPOINTMENT_B);
+        uniqueAppointmentList.add(getAppointmentA());
+        java.util.List<Appointment> appointmentList = java.util.List.of(getAppointmentB());
         uniqueAppointmentList.setAppointments(appointmentList);
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
     }
 
     @Test
     public void setAppointments_listWithDuplicateAppointments_throwsDuplicateAppointmentException() {
-        java.util.List<Appointment> listWithDuplicateAppointments = java.util.List.of(APPOINTMENT_A, APPOINTMENT_A);
+        java.util.List<Appointment> listWithDuplicateAppointments = java.util.List.of(getAppointmentA(),
+                getAppointmentA());
         assertThrows(DuplicateAppointmentException.class, () ->
                 uniqueAppointmentList.setAppointments(listWithDuplicateAppointments));
     }
@@ -164,26 +165,26 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void iterator_success() {
-        uniqueAppointmentList.add(APPOINTMENT_A);
-        uniqueAppointmentList.add(APPOINTMENT_B);
+        uniqueAppointmentList.add(getAppointmentA());
+        uniqueAppointmentList.add(getAppointmentB());
         java.util.Iterator<Appointment> iterator = uniqueAppointmentList.iterator();
         assertTrue(iterator.hasNext());
-        assertEquals(APPOINTMENT_A, iterator.next());
+        assertEquals(getAppointmentA(), iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals(APPOINTMENT_B, iterator.next());
+        assertEquals(getAppointmentB(), iterator.next());
         assertFalse(iterator.hasNext());
     }
 
     @Test
     public void equals() {
         UniqueAppointmentList anotherList = new UniqueAppointmentList();
-        anotherList.add(APPOINTMENT_A);
+        anotherList.add(getAppointmentA());
         UniqueAppointmentList differentList = new UniqueAppointmentList();
-        differentList.add(APPOINTMENT_B);
+        differentList.add(getAppointmentB());
 
         // same values -> returns true
         UniqueAppointmentList listCopy = new UniqueAppointmentList();
-        listCopy.add(APPOINTMENT_A);
+        listCopy.add(getAppointmentA());
         assertTrue(anotherList.equals(listCopy));
 
         // same object -> returns true
@@ -202,17 +203,17 @@ public class UniqueAppointmentListTest {
     @Test
     public void hashCode_success() {
         UniqueAppointmentList anotherList = new UniqueAppointmentList();
-        anotherList.add(APPOINTMENT_A);
+        anotherList.add(getAppointmentA());
         UniqueAppointmentList listCopy = new UniqueAppointmentList();
-        listCopy.add(APPOINTMENT_A);
+        listCopy.add(getAppointmentA());
         assertEquals(anotherList.hashCode(), listCopy.hashCode());
     }
 
     @Test
     public void toString_success() {
         UniqueAppointmentList anotherList = new UniqueAppointmentList();
-        anotherList.add(APPOINTMENT_A);
-        String expected = "[" + APPOINTMENT_A.toString() + "]";
+        anotherList.add(getAppointmentA());
+        String expected = "[" + getAppointmentA().toString() + "]";
         assertEquals(expected, anotherList.toString());
     }
 }
