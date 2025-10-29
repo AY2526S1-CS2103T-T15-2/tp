@@ -29,7 +29,7 @@
             </HBox>
             <FlowPane fx:id="contracts" />
             <Label fx:id="pid" styleClass="cell_small_label" text="\$pid" />
-            <Label fx:id="details" styleClass="cell_small_label" text="\$details" />
+            <Label fx:id="details" styleClass="cell_small_label" text="\$details" wrapText="true" />
         </VBox>
     </GridPane>
 </HBox>

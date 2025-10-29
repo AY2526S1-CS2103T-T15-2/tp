@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
 
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class RemoveContractCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes a contract from iCon.\n"
-            + "Parameters: "
-            + "CID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " C1234A";
+            + "Parameters: " + PREFIX_CID
+            + " CID (must contain 6 alphanumeric characters)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_CID + " C1234A";
 
     public static final String MESSAGE_REMOVE_CONTRACT_SUCCESS = "Removed Contract: %1$s";
 

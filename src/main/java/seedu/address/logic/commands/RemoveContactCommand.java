@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -22,8 +23,8 @@ public class RemoveContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the NRIC used in the displayed person list.\n"
-            + "Parameters: IC \n"
-            + "Example: " + COMMAND_WORD + " ic: S1234567A";
+            + "Parameters: " + PREFIX_NRIC + " NRIC \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NRIC + " S1234567A";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
