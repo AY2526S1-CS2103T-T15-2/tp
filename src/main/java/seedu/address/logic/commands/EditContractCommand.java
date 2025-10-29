@@ -53,7 +53,7 @@ public class EditContractCommand extends Command {
 
     public static final String MESSAGE_EDIT_CONTRACT_SUCCESS = "Edited Contract: %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CONTRACT = "This contract already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CONTRACT = "This contract already exists in iCon.";
 
     private final ContractId cId;
     private final EditContractDescriptor editContractDescriptor;
