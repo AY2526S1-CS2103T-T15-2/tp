@@ -131,7 +131,7 @@ Examples:
 
 Sorts the appointment in iCon by relevant flags.
 
-Format: `sort_appointment ` ins -i al -a datea -da dated -dd
+Format: `sort_appointment`
 1. `sort_appointment -i` sort appointment by insertion order
 2. `sort_appointment -a` sort appointment by alphabetical order
 3. `sort_appointment -da` sort appointment by date in ascending order
@@ -306,13 +306,13 @@ Example:
 1. `view_contract -a`
 2. `view_contract c: C1234A`
 
-### Sort contracts: `sort_contracts`
+### Sort contracts: `sort_contract`
 
-Sorts and displays contracts based on insertion order or expiry date ascending
+Sorts contracts in iCon by relevant flags.
 
 Format: 
-1. `sort_contracts -ea` for expiry date ascending
-2. `sort_contracts -i` for insertion order
+1. `sort_contract -ea` for expiry date ascending
+2. `sort_contract -i` for insertion order
 
 * Expiry date ascending sorts contracts from the earliest expiry date to the latest. 
 * Insertion order is the order in which contracts are added by the user
