@@ -64,6 +64,12 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Text entered after certain parameters will be counted as we do not perform regex on some fields, fields that can
+  be checked such as phone number or NRIC will throw exceptions for incorrect input, but fields like addresses and 
+  names cannot be checked, 
+  thus any input after the colon will be counted. For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will 
+  include the extra text in your name.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
