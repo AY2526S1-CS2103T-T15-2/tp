@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,13 +19,14 @@ public class ViewPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "view_policy";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views policies. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views policies.\n"
             + "Parameters: "
-            + "-a (View all policies) or "
-            + "p:POLICY_ID  (View specific policies by ID)\n"
+            + FLAG_LIST_ALL + " (View all policies) or "
+            + PREFIX_PID + "POLICY_ID  (View specific policies by ID)\n"
             + "Examples: "
-            + "view_policy -a or "
-            + "view_policy p:ABCDEF";
+            + COMMAND_WORD + " " + FLAG_LIST_ALL
+            + " or "
+            + COMMAND_WORD + " " + PREFIX_PID + "ABCDEF";
 
     public static final String MESSAGE_SUCCESS_ALL = "Viewing all policies";
     public static final String MESSAGE_SUCCESS_SPECIFIC = "Viewing policy with ID : %1$s";

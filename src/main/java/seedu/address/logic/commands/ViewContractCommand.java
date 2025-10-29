@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTRACTS;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,13 +19,14 @@ public class ViewContractCommand extends Command {
 
     public static final String COMMAND_WORD = "view_contract";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Viewing contracts. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views contracts.\n"
             + "Parameters: "
-            + "-a (View all contracts) or "
-            + "c:CONTRACT_ID (View specific contracts by ID)\n"
+            + FLAG_LIST_ALL + " (View all contracts) or "
+            + PREFIX_CID + "CONTRACT_ID (View specific contracts by ID)\n"
             + "Examples: "
-            + "view_contract -a or "
-            + "view_contract c:ABCDEF";
+            + COMMAND_WORD + " " + FLAG_LIST_ALL
+            + " or "
+            + COMMAND_WORD + " " + PREFIX_CID + "ABCDEF";
 
     public static final String MESSAGE_SUCCESS_ALL = "Viewing all contracts";
     public static final String MESSAGE_SUCCESS_SPECIFIC = "Viewing contract with ID : %1$s";

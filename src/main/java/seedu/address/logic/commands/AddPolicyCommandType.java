@@ -19,7 +19,7 @@ public abstract sealed class AddPolicyCommandType
             + PREFIX_NAME + "NAME "
             + PREFIX_DETAILS + "DETAILS (Adds one policy) or "
             + PREFIX_FILE + "FILE_PATH (Adds policies from a file) \n"
-            + "Note: Policies loaded from a file should be formatted as lines of NAME`DETAILS."
+            + "Note: Policies loaded from a txt file should have text be formatted as lines of NAME`DETAILS."
             + " See help for examples.\n"
             + "Examples: \n"
             + COMMAND_WORD + " "

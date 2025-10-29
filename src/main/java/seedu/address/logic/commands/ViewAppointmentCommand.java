@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,13 +18,14 @@ public class ViewAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "view_appointment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Viewing appointments. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views appointments.\n"
             + "Parameters: "
-            + "-a (View all appointments) or "
-            + "a:APPOINTMENT_ID (View specific appointments by ID)\n"
+            + FLAG_LIST_ALL + " (View all appointments) or "
+            + PREFIX_AID + "APPOINTMENT_ID (View specific appointments by ID)\n"
             + "Examples: "
-            + "view_appointment -a or "
-            + "view_appointment a:ABCDEF";
+            + COMMAND_WORD + " " + FLAG_LIST_ALL
+            + " or "
+            + COMMAND_WORD + " " + PREFIX_AID + "ABCDEF";
 
     public static final String MESSAGE_SUCCESS_ALL = "Viewing all appointments";
     public static final String MESSAGE_SUCCESS_SPECIFIC = "Viewing appointments with ID : %1$s";
