@@ -38,7 +38,7 @@ public class EditPolicyCommand extends Command {
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
     public static final String MESSAGE_POLICY_ID_NOT_FOUND = "A policy with id %1$s was not found in iCon.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in iConk.";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in iCon.";
 
     private final PolicyId policyId;
     private final EditPolicyDescriptor editPolicyDescriptor;
