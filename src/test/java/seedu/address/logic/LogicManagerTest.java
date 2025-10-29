@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.RemoveContactCommand.MESSAGE_DELETE_CONTACT_FAILURE;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getAmy;
@@ -22,8 +23,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveContactCommand;
+import seedu.address.logic.commands.ViewContractCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -71,8 +72,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String viewCommand = ViewContractCommand.COMMAND_WORD + " " + FLAG_LIST_ALL;
+        assertCommandSuccess(viewCommand, ViewContractCommand.MESSAGE_SUCCESS_ALL, model);
     }
 
     @Test

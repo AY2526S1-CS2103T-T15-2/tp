@@ -39,7 +39,6 @@ import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.EditPolicyCommand.EditPolicyDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveAppointmentCommand;
 import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
@@ -115,12 +114,6 @@ public class AddressBookParserTest {
         SortContactCommand command = (SortContactCommand) parser.parseCommand(
                 SortContactCommand.COMMAND_WORD + " " + FLAG_ALPHABETICAL_ORDER);
         assertEquals(new SortContactCommand(ContactComparatorType.ALPHABETICAL), command);
-    }
-
-    @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
