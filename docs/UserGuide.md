@@ -173,7 +173,7 @@ Displays contact(s) in iCon, either all or a set of specific contacts
 
 Format : 
 1. `view_contact -a` 
-2. `view_contact ic:NRIC1 [NRIC2] [NRIC3] ....` at least 1 IC to view
+2. `view_contact ic:NRIC1 [NRIC2] [NRIC3]...` at least 1 IC to view
 
 ### Viewing help : `help`
 
