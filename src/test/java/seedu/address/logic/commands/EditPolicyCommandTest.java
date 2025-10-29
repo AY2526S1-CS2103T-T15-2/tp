@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditPolicyCommand.EditPolicyDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -41,7 +40,7 @@ public class EditPolicyCommandTest {
         EditPolicyCommand editPolicyCommand = new EditPolicyCommand(policyId, descriptor);
 
         String expectedMessage = String.format(EditPolicyCommand.MESSAGE_EDIT_POLICY_SUCCESS,
-                Messages.format(editedPolicy));
+                editedPolicy.getId().toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPolicy(policyToEdit, editedPolicy);
@@ -59,7 +58,7 @@ public class EditPolicyCommandTest {
         EditPolicyCommand editPolicyCommand = new EditPolicyCommand(policyId, descriptor);
 
         String expectedMessage = String.format(EditPolicyCommand.MESSAGE_EDIT_POLICY_SUCCESS,
-                Messages.format(editedPolicy));
+                editedPolicy.getId().toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPolicy(policyToEdit, editedPolicy);
