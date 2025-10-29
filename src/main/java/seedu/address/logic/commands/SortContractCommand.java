@@ -16,8 +16,9 @@ public class SortContractCommand extends Command {
 
     public static final String COMMAND_WORD = "sort_contract";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all contracts by their premium amount\n"
-            + "in ascending order. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sorts all contracts by their premium amount in ascending order "
+            + "or by their insertion order.\n"
             + "Parameters: [SORT_FLAG = " + FLAG_EXPIRY_ORDER_ASCENDING
             + " or " + FLAG_INSERTION_ORDER + "]\n"
             + "Example: " + COMMAND_WORD + " " + FLAG_EXPIRY_ORDER_ASCENDING;
