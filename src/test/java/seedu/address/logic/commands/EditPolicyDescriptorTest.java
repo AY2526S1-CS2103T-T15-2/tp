@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_DETAILS_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_NAME_HEALTH_B;
-import static seedu.address.testutil.TypicalData.HEALTH_B;
-import static seedu.address.testutil.TypicalData.HOME;
+import static seedu.address.testutil.TypicalData.getHealthB;
+import static seedu.address.testutil.TypicalData.getHome;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +17,10 @@ public class EditPolicyDescriptorTest {
 
     @Test
     public void equals() {
-        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(HOME).build();
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(getHome()).build();
 
         // same values -> returns true
-        EditPolicyDescriptor descriptorWithSameValues = new EditPolicyDescriptorBuilder(HOME).build();
+        EditPolicyDescriptor descriptorWithSameValues = new EditPolicyDescriptorBuilder(getHome()).build();
         assertTrue(descriptor.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -33,16 +33,16 @@ public class EditPolicyDescriptorTest {
         assertFalse(descriptor.equals(5));
 
         // different values -> returns false
-        EditPolicyDescriptor otherDescriptor = new EditPolicyDescriptorBuilder(HEALTH_B).build();
+        EditPolicyDescriptor otherDescriptor = new EditPolicyDescriptorBuilder(getHealthB()).build();
         assertFalse(descriptor.equals(otherDescriptor));
 
         // different name -> returns false
-        EditPolicyDescriptor editedDescriptor = new EditPolicyDescriptorBuilder(HOME)
+        EditPolicyDescriptor editedDescriptor = new EditPolicyDescriptorBuilder(getHome())
                 .withName(VALID_POLICY_NAME_HEALTH_B).build();
         assertFalse(descriptor.equals(editedDescriptor));
 
         // different details -> returns false
-        editedDescriptor = new EditPolicyDescriptorBuilder(HOME).withName(VALID_DETAILS_HEALTH_B).build();
+        editedDescriptor = new EditPolicyDescriptorBuilder(getHome()).withName(VALID_DETAILS_HEALTH_B).build();
         assertFalse(descriptor.equals(editedDescriptor));
     }
 

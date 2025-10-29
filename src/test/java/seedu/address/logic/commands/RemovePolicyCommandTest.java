@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.TRAVEL;
+import static seedu.address.testutil.TypicalData.getTravel;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_2;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
@@ -35,7 +35,7 @@ public class RemovePolicyCommandTest {
         String expectedMessage = String.format(RemovePolicyCommand.MESSAGE_REMOVE_POLICY_SUCCESS, VALID_POLICY_ID_3);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.removePolicy(TRAVEL);
+        expectedModel.removePolicy(getTravel());
 
         assertCommandSuccess(removePolicyCommand, model, expectedMessage, ListPanelType.POLICY, expectedModel);
     }

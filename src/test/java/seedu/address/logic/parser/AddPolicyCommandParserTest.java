@@ -19,7 +19,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.PolicyUtil.unassign;
-import static seedu.address.testutil.TypicalData.HOME;
+import static seedu.address.testutil.TypicalData.getHome;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ public class AddPolicyCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Policy expectedPolicy = new PolicyBuilder(HOME).build();
+        Policy expectedPolicy = new PolicyBuilder(getHome()).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + POLICY_NAME_DESC_HOME + DETAILS_DESC_HOME,

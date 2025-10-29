@@ -54,47 +54,47 @@ import seedu.address.model.policy.PolicyName;
  */
 public class TypicalData {
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    private static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    public static final Policy LIFE = new Policy(
+    private static final Policy LIFE = new Policy(
             new PolicyName("Life Insurance"),
             new PolicyDetails("This policy coverage for family..."),
             new PolicyId("abcdef")
     );
 
-    public static final Policy HEALTH = new Policy(
+    private static final Policy HEALTH = new Policy(
             new PolicyName("Healthcare - A"),
             new PolicyDetails("Other policy details 123"),
             new PolicyId("123456")
     );
 
-    public static final Policy PROPERTY = new Policy(
+    private static final Policy PROPERTY = new Policy(
             new PolicyName("Property"),
             new PolicyDetails("Non-alphanumeric characters *^$+-"),
             new PolicyId("Abc123")
     );
 
-    public static final Policy TRAVEL = new Policy(
+    private static final Policy TRAVEL = new Policy(
             new PolicyName("Travel - A"),
             new PolicyDetails("This policy covers flights to European countries"),
             new PolicyId("xyz123")
     );
 
-    public static final Appointment APPOINTMENT_A = new Appointment(
+    private static final Appointment APPOINTMENT_A = new Appointment(
             new AppointmentId(VALID_APPOINTMENT_ID_A),
             new Nric(VALID_APPOINTMENT_NRIC_1),
             LocalDate.parse(VALID_APPOINTMENT_DATE_A),
             new AppointmentDetails(VALID_APPOINTMENT_DETAILS_A)
     );
 
-    public static final Appointment APPOINTMENT_B = new Appointment(
+    private static final Appointment APPOINTMENT_B = new Appointment(
             new AppointmentId(VALID_APPOINTMENT_ID_B),
             new Nric(VALID_APPOINTMENT_NRIC_2),
             LocalDate.parse(VALID_APPOINTMENT_DATE_B),
             new AppointmentDetails(VALID_APPOINTMENT_DETAILS_B)
     );
 
-    public static final Appointment APPOINTMENT_C = new Appointment(
+    private static final Appointment APPOINTMENT_C = new Appointment(
             new AppointmentId(VALID_APPOINTMENT_ID_C),
             new Nric("S1234567C"),
             LocalDate.parse(VALID_APPOINTMENT_DATE_A),
@@ -102,16 +102,16 @@ public class TypicalData {
     );
 
     // Manually added - Policy's details found in {@code PolicyCommandTestUtil}
-    public static final Policy HOME = new PolicyBuilder().withName(VALID_POLICY_NAME_HOME)
+    private static final Policy HOME = new PolicyBuilder().withName(VALID_POLICY_NAME_HOME)
             .withDetails(VALID_DETAILS_HOME).withId(VALID_POLICY_ID_HOME).build();
-    public static final Policy HEALTH_B = new PolicyBuilder().withName(VALID_POLICY_NAME_HEALTH_B)
+    private static final Policy HEALTH_B = new PolicyBuilder().withName(VALID_POLICY_NAME_HEALTH_B)
             .withDetails(VALID_DETAILS_HEALTH_B).withId(VALID_POLICY_ID_HEALTH_B).build();
 
-    public static final Appointment APPOINTMENT_D = new AppointmentBuilder().withId(VALID_APPOINTMENT_ID_D)
+    private static final Appointment APPOINTMENT_D = new AppointmentBuilder().withId(VALID_APPOINTMENT_ID_D)
             .withNric(VALID_NRIC_BOB)
             .withDate(LocalDate.parse(VALID_APPOINTMENT_DATE_A))
             .withDetails(VALID_APPOINTMENT_DETAILS_A).build();
-    public static final Appointment APPOINTMENT_E = new AppointmentBuilder().withId(VALID_APPOINTMENT_ID_E)
+    private static final Appointment APPOINTMENT_E = new AppointmentBuilder().withId(VALID_APPOINTMENT_ID_E)
             .withNric(VALID_NRIC_AMY)
             .withDate(LocalDate.parse(VALID_APPOINTMENT_DATE_B))
             .withDetails(VALID_APPOINTMENT_DETAILS_B).build();
@@ -381,5 +381,25 @@ public class TypicalData {
 
     public static List<Appointment> getTypicalAppointments() {
         return new ArrayList<>(Arrays.asList(APPOINTMENT_A, APPOINTMENT_B, APPOINTMENT_C));
+    }
+
+    public static Appointment getAppointmentA() {
+        return new AppointmentBuilder(APPOINTMENT_A).build();
+    }
+
+    public static Appointment getAppointmentB() {
+        return new AppointmentBuilder(APPOINTMENT_B).build();
+    }
+
+    public static Appointment getAppointmentC() {
+        return new AppointmentBuilder(APPOINTMENT_C).build();
+    }
+
+    public static Appointment getAppointmentD() {
+        return new AppointmentBuilder(APPOINTMENT_D).build();
+    }
+
+    public static Appointment getAppointmentE() {
+        return new AppointmentBuilder(APPOINTMENT_E).build();
     }
 }

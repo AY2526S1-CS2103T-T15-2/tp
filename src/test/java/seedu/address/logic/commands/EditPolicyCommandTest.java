@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_DETAILS_HOME;
-import static seedu.address.testutil.TypicalData.HEALTH;
-import static seedu.address.testutil.TypicalData.HOME;
+import static seedu.address.testutil.TypicalData.getHealth;
+import static seedu.address.testutil.TypicalData.getHome;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ public class EditPolicyCommandTest {
         Policy policyToEdit = model.getFilteredPolicyList().get(0);
         PolicyId policyId = policyToEdit.getId();
 
-        Policy editedPolicy = new PolicyBuilder(HOME).withId(policyId.value).build();
+        Policy editedPolicy = new PolicyBuilder(getHome()).withId(policyId.value).build();
         EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(editedPolicy).build();
         EditPolicyCommand editPolicyCommand = new EditPolicyCommand(policyId, descriptor);
 
@@ -80,8 +80,8 @@ public class EditPolicyCommandTest {
 
     @Test
     public void execute_policyIdNotInAddressBook_failure() {
-        PolicyId policyId = HOME.getId();
-        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(HOME).build();
+        PolicyId policyId = getHome().getId();
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(getHome()).build();
         EditPolicyCommand editPolicyCommand = new EditPolicyCommand(policyId, descriptor);
 
         assertCommandFailure(editPolicyCommand, model,
@@ -90,12 +90,12 @@ public class EditPolicyCommandTest {
 
     @Test
     public void equals() {
-        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(HOME).build();
-        final EditPolicyCommand standardCommand = new EditPolicyCommand(HOME.getId(), descriptor);
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(getHome()).build();
+        final EditPolicyCommand standardCommand = new EditPolicyCommand(getHome().getId(), descriptor);
 
         // same values -> returns true
-        EditPolicyDescriptor copyDescriptor = new EditPolicyDescriptorBuilder(HOME).build();
-        EditPolicyCommand commandWithSameValues = new EditPolicyCommand(HOME.getId(), copyDescriptor);
+        EditPolicyDescriptor copyDescriptor = new EditPolicyDescriptorBuilder(getHome()).build();
+        EditPolicyCommand commandWithSameValues = new EditPolicyCommand(getHome().getId(), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -108,16 +108,16 @@ public class EditPolicyCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different policy id -> returns false
-        assertFalse(standardCommand.equals(new EditPolicyCommand(HEALTH.getId(), descriptor)));
+        assertFalse(standardCommand.equals(new EditPolicyCommand(getHealth().getId(), descriptor)));
 
         // different descriptor -> returns false
-        EditPolicyDescriptor otherDescriptor = new EditPolicyDescriptorBuilder(HEALTH).build();
-        assertFalse(standardCommand.equals(new EditPolicyCommand(HOME.getId(), otherDescriptor)));
+        EditPolicyDescriptor otherDescriptor = new EditPolicyDescriptorBuilder(getHealth()).build();
+        assertFalse(standardCommand.equals(new EditPolicyCommand(getHome().getId(), otherDescriptor)));
     }
 
     @Test
     public void toStringMethod() {
-        PolicyId policyId = HOME.getId();
+        PolicyId policyId = getHome().getId();
         EditPolicyDescriptor editPolicyDescriptor = new EditPolicyDescriptor();
         EditPolicyCommand editPolicyCommand = new EditPolicyCommand(policyId, editPolicyDescriptor);
         String expected = EditPolicyCommand.class.getCanonicalName() + "{policyId=" + policyId

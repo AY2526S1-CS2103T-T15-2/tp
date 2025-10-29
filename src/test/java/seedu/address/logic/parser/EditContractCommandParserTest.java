@@ -11,12 +11,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalData.HEALTH;
-import static seedu.address.testutil.TypicalData.LIFE;
 import static seedu.address.testutil.TypicalData.getAlice;
 import static seedu.address.testutil.TypicalData.getBenson;
 import static seedu.address.testutil.TypicalData.getContractA;
 import static seedu.address.testutil.TypicalData.getContractB;
+import static seedu.address.testutil.TypicalData.getHealth;
+import static seedu.address.testutil.TypicalData.getLife;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +30,8 @@ public class EditContractCommandParserTest {
     private static final String NRIC_A = getAlice().getNric().toString();
     private static final String NAME_B = getBenson().getName().toString();
     private static final String NRIC_B = getBenson().getNric().toString();
-    private static final String POLICY_ID_LIFE = LIFE.getId().toString();
-    private static final String POLICY_ID_HEALTH = HEALTH.getId().toString();
+    private static final String POLICY_ID_LIFE = getLife().getId().toString();
+    private static final String POLICY_ID_HEALTH = getHealth().getId().toString();
     private static final String CONTRACT_ID_A = getContractA().getCId().toString();
     private static final String CONTRACT_ID_B = getContractB().getCId().toString();
     private static final String CONTRACT_DATE_A = getContractA().getDate().toString();

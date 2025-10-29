@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_B;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_C;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_E;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
+import static seedu.address.testutil.TypicalData.getAppointmentB;
+import static seedu.address.testutil.TypicalData.getAppointmentC;
+import static seedu.address.testutil.TypicalData.getAppointmentE;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ public class EditAppointmentCommandTest {
         Appointment appointmentToEdit = model.getFilteredAppointmentList().get(0);
         AppointmentId appointmentId = appointmentToEdit.getAId();
 
-        Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_A).withId(appointmentId.value).build();
+        Appointment editedAppointment = new AppointmentBuilder(getAppointmentA()).withId(appointmentId.value).build();
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(editedAppointment).build();
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(appointmentId, descriptor);
 
@@ -82,8 +82,8 @@ public class EditAppointmentCommandTest {
 
     @Test
     public void execute_appointmentIdNotInAddressBook_failure() {
-        AppointmentId appointmentId = APPOINTMENT_E.getAId();
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_E).build();
+        AppointmentId appointmentId = getAppointmentE().getAId();
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(getAppointmentE()).build();
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(appointmentId, descriptor);
 
         assertCommandFailure(editAppointmentCommand, model,
@@ -92,13 +92,14 @@ public class EditAppointmentCommandTest {
 
     @Test
     public void equals() {
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_A).build();
-        final EditAppointmentCommand standardCommand = new EditAppointmentCommand(APPOINTMENT_A.getAId(), descriptor);
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(getAppointmentA()).build();
+        final EditAppointmentCommand standardCommand = new EditAppointmentCommand(getAppointmentA().getAId(),
+                descriptor);
 
         // same values -> returns true
-        EditAppointmentDescriptor copyDescriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_A).build();
+        EditAppointmentDescriptor copyDescriptor = new EditAppointmentDescriptorBuilder(getAppointmentA()).build();
         EditAppointmentCommand commandWithSameValues =
-                new EditAppointmentCommand(APPOINTMENT_A.getAId(), copyDescriptor);
+                new EditAppointmentCommand(getAppointmentA().getAId(), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -111,16 +112,16 @@ public class EditAppointmentCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different appointment id -> returns false
-        assertFalse(standardCommand.equals(new EditAppointmentCommand(APPOINTMENT_B.getAId(), descriptor)));
+        assertFalse(standardCommand.equals(new EditAppointmentCommand(getAppointmentB().getAId(), descriptor)));
 
         // different descriptor -> returns false
-        EditAppointmentDescriptor otherDescriptor = new EditAppointmentDescriptorBuilder(APPOINTMENT_C).build();
-        assertFalse(standardCommand.equals(new EditAppointmentCommand(APPOINTMENT_A.getAId(), otherDescriptor)));
+        EditAppointmentDescriptor otherDescriptor = new EditAppointmentDescriptorBuilder(getAppointmentC()).build();
+        assertFalse(standardCommand.equals(new EditAppointmentCommand(getAppointmentA().getAId(), otherDescriptor)));
     }
 
     @Test
     public void toStringMethod() {
-        AppointmentId appointmentId = APPOINTMENT_A.getAId();
+        AppointmentId appointmentId = getAppointmentA().getAId();
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
         EditAppointmentCommand editAppointmentCommand =
                 new EditAppointmentCommand(appointmentId, editAppointmentDescriptor);
