@@ -11,14 +11,14 @@ import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.ui.ListPanelType;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all contacts in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class ViewContactCommand extends Command {
 
     public static final String COMMAND_WORD = "view_contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose nrics matches any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose nrics matches any of "
             + "the specified nrics (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC1 [NRIC2] [NRIC3]...\n"
