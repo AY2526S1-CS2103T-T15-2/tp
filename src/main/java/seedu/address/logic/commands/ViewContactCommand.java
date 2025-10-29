@@ -20,8 +20,11 @@ public class ViewContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose nrics contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NRIC + " T1234567A S1234892B T0549223e";
+            + "Parameters: "
+            + PREFIX_NRIC + "KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_NRIC + " T1234567A S1234892B T0549223e";
 
     private final NricContainsKeywordsPredicate predicate;
     private final boolean showAllContacts;
