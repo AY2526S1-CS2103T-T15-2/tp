@@ -21,7 +21,7 @@ public class RemoveContractCommand extends Command {
     public static final String COMMAND_WORD = "remove_contract";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes a contract from iCon.\n"
+            + ": Removes the contract identified by the id from iCon.\n"
             + "Parameters: " + PREFIX_CID
             + " CID (must contain 6 alphanumeric characters)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_CID + " C1234A";

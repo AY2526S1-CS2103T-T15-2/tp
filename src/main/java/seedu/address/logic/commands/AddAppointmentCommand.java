@@ -27,7 +27,7 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to iCon.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
-            + PREFIX_DATE + "DATE"
+            + PREFIX_DATE + "DATE "
             + PREFIX_DETAILS + "DETAILS\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "T0123456A "

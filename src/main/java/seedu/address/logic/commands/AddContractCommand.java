@@ -26,7 +26,7 @@ import seedu.address.ui.ListPanelType;
 
 /**
  * Adds a contract to iCon.
- * Links a contact to aa policy.
+ * Links a contact to a policy.
  */
 public class AddContractCommand extends Command {
 
@@ -40,7 +40,7 @@ public class AddContractCommand extends Command {
             + PREFIX_EXPIRY + "EXPIRY_DATE "
             + PREFIX_PREMIUM + "PREMIUM_AMOUNT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PID + "68g354f7"
+            + PREFIX_PID + "68g354f7 "
             + PREFIX_NRIC + "T0123456A "
             + PREFIX_DATE + "2025-01-13 "
             + PREFIX_EXPIRY + "2027-01-13 "
