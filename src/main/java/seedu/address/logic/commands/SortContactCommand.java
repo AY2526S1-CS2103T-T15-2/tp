@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_INSERTION_ORDER;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonComparatorType;
+import seedu.address.model.contact.ContactComparatorType;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -26,12 +26,12 @@ public class SortContactCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_ALPHABETICAL = "Showing persons by alphabetical order.";
 
-    private final PersonComparatorType comparatorType;
+    private final ContactComparatorType comparatorType;
 
     /**
      * Creates a SortContactCommand with the given {@code comparatorType}
      */
-    public SortContactCommand(PersonComparatorType comparatorType) {
+    public SortContactCommand(ContactComparatorType comparatorType) {
         requireNonNull(comparatorType);
         this.comparatorType = comparatorType;
     }
@@ -39,7 +39,7 @@ public class SortContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.sortPersons(comparatorType.comparator);
+        model.sortContacts(comparatorType.comparator);
 
         return switch (comparatorType) {
         case UNORDERED -> new CommandResult(MESSAGE_SUCCESS_UNORDERED, ListPanelType.CONTACT);

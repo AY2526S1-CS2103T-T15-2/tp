@@ -74,7 +74,7 @@ public class SortAppointmentCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the contact being added.
      */
     private class ModelStubAcceptingComparator extends ModelStub {
         @Override

@@ -17,9 +17,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Nric;
+import seedu.address.testutil.ContactBuilder;
 import seedu.address.ui.ListPanelType;
 
 
@@ -28,7 +28,7 @@ public class AddAppointmentCommandTest {
     private static final String INVALID_NRIC = "S0000000Z";
     private static final String VALID_NRIC = "S1234567A";
     private static final String VALID_DATE = "2099-01-01";
-    private static final Person PERSON_WITH_VALID_ID = new PersonBuilder().build();
+    private static final Contact CONTACT_WITH_VALID_ID = new ContactBuilder().build();
 
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
@@ -70,13 +70,13 @@ public class AddAppointmentCommandTest {
                 LocalDate.parse(VALID_DATE),
                 new AppointmentDetails("Details"));
         assertCommandFailure(new AddAppointmentCommand(appointmentWithInvalidNric),
-                modelStub, Messages.MESSAGE_PERSON_NOT_FOUND);
+                modelStub, Messages.MESSAGE_CONTACT_NOT_FOUND);
     }
 
     @Test
     public void validNric_success() {
         Model modelStub = new ModelManager();
-        modelStub.addPerson(PERSON_WITH_VALID_ID);
+        modelStub.addContact(CONTACT_WITH_VALID_ID);
 
         Appointment appointmentWithValidNric = new Appointment(
                 new Nric(VALID_NRIC),

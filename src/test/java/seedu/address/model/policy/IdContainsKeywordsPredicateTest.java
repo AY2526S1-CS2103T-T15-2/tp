@@ -35,7 +35,7 @@ public class IdContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

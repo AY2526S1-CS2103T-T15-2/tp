@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 
 /**
  * A utility class to help with building Appointment objects.

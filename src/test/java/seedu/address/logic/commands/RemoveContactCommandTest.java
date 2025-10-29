@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.RemoveContactCommand.MESSAGE_DELETE_PERSON_FAILURE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
+import static seedu.address.logic.commands.RemoveContactCommand.MESSAGE_DELETE_CONTACT_FAILURE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_SECOND;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_THIRD;
@@ -24,9 +24,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.model.contract.Contract;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -44,51 +44,51 @@ public class RemoveContactCommandTest {
 
     @Test
     public void execute_validNricUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         RemoveContactCommand removeContactCommand = new RemoveContactCommand(PREDICATE_FIRST);
 
-        // remove the person's contracts
-        Set<Contract> contractToDelete = personToDelete.getContracts();
+        // remove the contact's contracts
+        Set<Contract> contractToDelete = contactToDelete.getContracts();
         for (Contract contract : contractToDelete) {
             model.removeContract(contract);
-            personToDelete.removeContract(contract);
+            contactToDelete.removeContract(contract);
         }
 
-        // Success message is updated to reflect the person deleted (or count if multiple are possible)
-        String expectedMessage = String.format(RemoveContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName() + " " + personToDelete.getNric());
+        // Success message is updated to reflect the contact deleted (or count if multiple are possible)
+        String expectedMessage = String.format(RemoveContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
+                contactToDelete.getName() + " " + contactToDelete.getNric());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteContact(contactToDelete);
 
         assertCommandSuccess(removeContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
     }
 
     @Test
     public void execute_validNricFilteredList_success() {
-        // Filter the list to show only the person we are about to delete
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        // Filter the list to show only the contact we are about to delete
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
-        // Use the NRIC of the person who is currently at index 0 of the filtered list
+        // Use the NRIC of the contact who is currently at index 0 of the filtered list
         RemoveContactCommand removeContactCommand = new RemoveContactCommand(PREDICATE_FIRST);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
 
-        // remove the person's contracts
-        Set<Contract> contractToDelete = personToDelete.getContracts();
+        // remove the contact's contracts
+        Set<Contract> contractToDelete = contactToDelete.getContracts();
         for (Contract contract : contractToDelete) {
             model.removeContract(contract);
-            personToDelete.removeContract(contract);
+            contactToDelete.removeContract(contract);
         }
 
-        String expectedMessage = String.format(String.format(RemoveContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName() + " " + personToDelete.getNric()));
+        String expectedMessage = String.format(String.format(RemoveContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
+                contactToDelete.getName() + " " + contactToDelete.getNric()));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteContact(contactToDelete);
 
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
 
         assertCommandSuccess(removeContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
     }
@@ -100,33 +100,33 @@ public class RemoveContactCommandTest {
                 new NricContainsKeywordsPredicate(List.of("S0000000Z"));
         RemoveContactCommand removeContactCommand = new RemoveContactCommand(notFoundPredicate);
 
-        // Assuming RemoveContactCommand throws a specific error if no person matches the predicate
-        assertCommandFailure(removeContactCommand, model, MESSAGE_DELETE_PERSON_FAILURE);
+        // Assuming RemoveContactCommand throws a specific error if no contact matches the predicate
+        assertCommandFailure(removeContactCommand, model, MESSAGE_DELETE_CONTACT_FAILURE);
     }
 
     @Test
     public void execute_nricNotFoundFilteredList_throwsCommandException() {
-        // Create a predicate for a person NOT currently in the filtered view
+        // Create a predicate for a contact NOT currently in the filtered view
         RemoveContactCommand removeContactCommand = new RemoveContactCommand(PREDICATE_THIRD);
 
-        // remove contract for person in third index
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        Person person = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
-        Contract contractsToRemove = (Contract) person.getContracts().toArray()[0];
-        person.removeContract(contractsToRemove);
+        // remove contract for contact in third index
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        Contact contact = model.getFilteredContactList().get(INDEX_THIRD_CONTACT.getZeroBased());
+        Contract contractsToRemove = (Contract) contact.getContracts().toArray()[0];
+        contact.removeContract(contractsToRemove);
 
-        showPersonAtIndex(model, INDEX_FIRST_PERSON); // Filter list to one person
+        showContactAtIndex(model, INDEX_FIRST_CONTACT); // Filter list to one contact
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        String expectedMessage = String.format(RemoveContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                person.getName() + " " + person.getNric());
-        expectedModel.deletePerson(expectedModel.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased()));
+        String expectedMessage = String.format(RemoveContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
+                contact.getName() + " " + contact.getNric());
+        expectedModel.deleteContact(expectedModel.getFilteredContactList().get(INDEX_THIRD_CONTACT.getZeroBased()));
         assertCommandSuccess(removeContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
 
-        // Create a predicate for a person truly not in the view
+        // Create a predicate for a contact truly not in the view
         NricContainsKeywordsPredicate trulyNotFoundPredicate = new NricContainsKeywordsPredicate(List.of("S0000000Z"));
         RemoveContactCommand deleteTrulyNotFoundCommand = new RemoveContactCommand(trulyNotFoundPredicate);
 
-        assertCommandFailure(deleteTrulyNotFoundCommand, model, MESSAGE_DELETE_PERSON_FAILURE);
+        assertCommandFailure(deleteTrulyNotFoundCommand, model, MESSAGE_DELETE_CONTACT_FAILURE);
     }
 
     @Test
@@ -165,9 +165,9 @@ public class RemoveContactCommandTest {
     /**
      * Helper method used in original tests, no longer needed but kept for completeness.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+    private void showNoContact(Model model) {
+        model.updateFilteredContactList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredContactList().isEmpty());
     }
 }

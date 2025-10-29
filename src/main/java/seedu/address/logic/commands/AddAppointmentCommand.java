@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -51,10 +51,10 @@ public class AddAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // get nric from preloaded appointment and load person to get name
+        // get nric from preloaded appointment and load contact to get name
         Nric nric = toAdd.getNric();
-        if (!model.hasPerson(nric)) {
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+        if (!model.hasContact(nric)) {
+            throw new CommandException(Messages.MESSAGE_CONTACT_NOT_FOUND);
         }
 
         // fill in necessary fields

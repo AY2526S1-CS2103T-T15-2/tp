@@ -11,7 +11,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewContactCommand;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 
 public class ViewContactCommandParserTest {
 

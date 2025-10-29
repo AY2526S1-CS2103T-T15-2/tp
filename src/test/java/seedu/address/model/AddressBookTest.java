@@ -23,14 +23,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.model.contract.Contract;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.TypicalData;
 
 public class AddressBookTest {
@@ -39,7 +39,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getContactList());
         assertEquals(Collections.emptyList(), addressBook.getPolicyList());
         assertEquals(Collections.emptyList(), addressBook.getContractList());
     }
@@ -57,43 +57,43 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(getAlice()).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateContacts_throwsDuplicateContactException() {
+        // Two contacts with the same identity fields
+        Contact editedAlice = new ContactBuilder(getAlice()).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(getAlice(), editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Contact> newContacts = Arrays.asList(getAlice(), editedAlice);
+        AddressBookStub newData = new AddressBookStub(newContacts);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateContactException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson((Person) null));
+    public void hasContact_nullContact_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasContact((Contact) null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(getAlice()));
+    public void hasContact_contactNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasContact(getAlice()));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(getAlice());
-        assertTrue(addressBook.hasPerson(getAlice()));
+    public void hasContact_contactInAddressBook_returnsTrue() {
+        addressBook.addContact(getAlice());
+        assertTrue(addressBook.hasContact(getAlice()));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(getAlice());
-        Person editedAlice = new PersonBuilder(getAlice()).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasContact_contactWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addContact(getAlice());
+        Contact editedAlice = new ContactBuilder(getAlice()).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasContact(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getContactList().remove(0));
     }
 
     @Test
@@ -176,7 +176,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
+        String expected = AddressBook.class.getCanonicalName() + "{contacts=" + addressBook.getContactList()
                 + ", policies=" + addressBook.getPolicyList() + ", contracts=" + addressBook.getContractList()
                 + ", appointments=" + addressBook.getAppointmentList() + "}";
         assertEquals(expected, addressBook.toString());
@@ -186,7 +186,7 @@ public class AddressBookTest {
     public void equals() {
         AddressBook addressBook = new AddressBook();
         AddressBook differentAddressBook = new AddressBook();
-        differentAddressBook.addPerson(getAlice());
+        differentAddressBook.addContact(getAlice());
 
         // same values -> returns true
         AddressBook addressBookCopy = new AddressBook(addressBook);
@@ -201,7 +201,7 @@ public class AddressBookTest {
         // different type -> returns false
         assertFalse(addressBook.equals(5));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(addressBook.equals(differentAddressBook));
     }
 
@@ -212,21 +212,21 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose contacts list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
         private final ObservableList<Policy> policies = FXCollections.observableArrayList();
         private final ObservableList<Contract> contracts = FXCollections.observableArrayList();
         private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Contact> contacts) {
+            this.contacts.setAll(contacts);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Contact> getContactList() {
+            return contacts;
         }
 
         @Override

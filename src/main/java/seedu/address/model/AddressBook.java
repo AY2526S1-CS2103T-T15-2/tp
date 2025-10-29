@@ -10,13 +10,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.appointment.UniqueAppointmentList;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
+import seedu.address.model.contact.UniqueContactList;
+import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.UniqueContractList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.UniquePolicyList;
@@ -24,11 +24,11 @@ import seedu.address.model.policy.exceptions.PolicyNotFoundException;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameContact comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueContactList contacts;
     private final UniqueContractList contracts;
     private final UniquePolicyList policies;
     private final UniqueAppointmentList appointments;
@@ -41,7 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        contacts = new UniqueContactList();
         contracts = new UniqueContractList();
         policies = new UniquePolicyList();
         appointments = new UniqueAppointmentList();
@@ -51,7 +51,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Contacts in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -61,11 +61,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the contact list with {@code contacts}.
+     * {@code contacts} must not contain duplicate contacts.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setContacts(List<Contact> contacts) {
+        this.contacts.setContacts(contacts);
     }
 
     /**
@@ -90,64 +90,65 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setContacts(newData.getContactList());
         setPolicies(newData.getPolicyList());
         setContracts(newData.getContractList());
         setAppointments(newData.getAppointmentList());
     }
 
-    //// person-level operations
+    //// contact-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return contacts.contains(contact);
     }
 
     /**
-     * Returns true if a person with the same NRIC as {@code nric} exists in the address book.
+     * Returns true if a contact with the same NRIC as {@code nric} exists in the address book.
      */
-    public boolean hasPerson(Nric nric) {
-        return persons.contains(nric);
+    public boolean hasContact(Nric nric) {
+        return contacts.contains(nric);
     }
 
     public Name getName(Nric nric) {
         requireNonNull(nric);
-        for (Person person : persons) {
-            if (person.getNric().equals(nric)) {
-                return person.getName();
+        for (Contact contact : contacts) {
+            if (contact.getNric().equals(nric)) {
+                return contact.getName();
             }
         }
         return null;
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a contact to the address book.
+     * The contact must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addContact(Contact p) {
+        contacts.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given contact {@code target} in the list with {@code editedContact}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The contact identity of {@code editedContact} must not be the same as another
+     * existing contact in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setContact(Contact target, Contact editedContact) {
+        requireNonNull(editedContact);
 
-        persons.setPerson(target, editedPerson);
+        contacts.setContact(target, editedContact);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeContact(Contact key) {
+        contacts.remove(key);
     }
 
     //// policy-level operations
@@ -337,19 +338,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds the given contract to the corresponding person in the address book.
-     * The person must exist in the address book.
+     * Adds the given contract to the corresponding contact in the address book.
+     * The contact must exist in the address book.
      */
-    public void addContractToPerson(Contract contract) throws PersonNotFoundException {
+    public void addContractToContact(Contract contract) throws ContactNotFoundException {
         requireNonNull(contract);
-        for (Person person : persons) {
-            if (person.getNric().equals(contract.getNric())) {
-                person.addContract(contract);
-                setPerson(person, person);
+        for (Contact contact : contacts) {
+            if (contact.getNric().equals(contract.getNric())) {
+                contact.addContract(contract);
+                setContact(contact, contact);
                 return;
             }
         }
-        throw new PersonNotFoundException();
+        throw new ContactNotFoundException();
     }
 
     /**
@@ -378,17 +379,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes the given contract from the corresponding person in the address book.
+     * Removes the given contract from the corresponding contact in the address book.
      */
-    public void removeContractFromPerson(Contract contract) throws PersonNotFoundException {
+    public void removeContractFromContact(Contract contract) throws ContactNotFoundException {
         requireNonNull(contract);
-        for (Person person : persons) {
-            if (person.getNric().equals(contract.getNric())) {
-                person.removeContract(contract);
+        for (Contact contact : contacts) {
+            if (contact.getNric().equals(contract.getNric())) {
+                contact.removeContract(contract);
                 return;
             }
         }
-        throw new PersonNotFoundException();
+        throw new ContactNotFoundException();
     }
 
     /**
@@ -426,13 +427,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person has the given contract.
+     * Returns true if a contact has the given contract.
      */
-    public boolean personHasContract(Contract contract, Person person) {
+    public boolean contactHasContract(Contract contract, Contact contact) {
         requireNonNull(contract);
-        requireNonNull(person);
-        for (Person p : persons) {
-            if (p.equals(person)) {
+        requireNonNull(contact);
+        for (Contact p : contacts) {
+            if (p.equals(contact)) {
                 return p.getContracts().contains(contract);
             }
         }
@@ -458,7 +459,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("contacts", contacts)
                 .add("policies", policies)
                 .add("contracts", contracts)
                 .add("appointments", appointments)
@@ -466,8 +467,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Contact> getContactList() {
+        return contacts.asUnmodifiableObservableList();
     }
 
     @Override
@@ -497,11 +498,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return contacts.equals(otherAddressBook.contacts);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return contacts.hashCode();
     }
 }

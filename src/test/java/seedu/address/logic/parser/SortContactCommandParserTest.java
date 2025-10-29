@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortContactCommand;
-import seedu.address.model.person.PersonComparatorType;
+import seedu.address.model.contact.ContactComparatorType;
 
 public class SortContactCommandParserTest {
 
@@ -24,12 +24,12 @@ public class SortContactCommandParserTest {
     @Test
     public void parse_validArgs_returnsSortContactCommand() {
         // one flag
-        assertParseSuccess(parser, FLAG_INSERTION_ORDER, new SortContactCommand(PersonComparatorType.UNORDERED));
-        assertParseSuccess(parser, FLAG_ALPHABETICAL_ORDER, new SortContactCommand(PersonComparatorType.ALPHABETICAL));
+        assertParseSuccess(parser, FLAG_INSERTION_ORDER, new SortContactCommand(ContactComparatorType.UNORDERED));
+        assertParseSuccess(parser, FLAG_ALPHABETICAL_ORDER, new SortContactCommand(ContactComparatorType.ALPHABETICAL));
 
         // multiple whitespaces around flag
         assertParseSuccess(parser, " \n\t" + FLAG_INSERTION_ORDER + " \t\n ",
-                new SortContactCommand(PersonComparatorType.UNORDERED));
+                new SortContactCommand(ContactComparatorType.UNORDERED));
     }
 
     @Test

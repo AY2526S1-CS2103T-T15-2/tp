@@ -11,8 +11,8 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.contact.Contact;
+import seedu.address.testutil.ContactBuilder;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -29,24 +29,24 @@ public class AddContactCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().withNric(VALID_NRIC).build();
+    public void execute_newContact_success() {
+        Contact validContact = new ContactBuilder().withNric(VALID_NRIC).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addContact(validContact);
 
-        assertCommandSuccess(new AddContactCommand(validPerson), model,
+        assertCommandSuccess(new AddContactCommand(validContact), model,
                 String.format(seedu.address.logic.commands.AddContactCommand.MESSAGE_SUCCESS,
-                        Messages.format(validPerson)),
+                        Messages.format(validContact)),
                 ListPanelType.CONTACT,
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddContactCommand(personInList), model,
-                seedu.address.logic.commands.AddContactCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateContact_throwsCommandException() {
+        Contact contactInList = model.getAddressBook().getContactList().get(0);
+        assertCommandFailure(new AddContactCommand(contactInList), model,
+                seedu.address.logic.commands.AddContactCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
 }

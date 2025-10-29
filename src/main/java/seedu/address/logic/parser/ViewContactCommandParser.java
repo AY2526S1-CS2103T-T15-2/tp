@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new ViewContactCommand object

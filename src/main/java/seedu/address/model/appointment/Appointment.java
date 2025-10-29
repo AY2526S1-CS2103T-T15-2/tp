@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 
 /**
  * Represents an Appointment in the iCon.

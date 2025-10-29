@@ -1,6 +1,6 @@
 {
   "_comment": "AddressBook save file which contains the same values as in TypicalData#getTypicalAddressBook()",
-  "persons" : [ {
+  "contacts" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "nric": "S1234567A",

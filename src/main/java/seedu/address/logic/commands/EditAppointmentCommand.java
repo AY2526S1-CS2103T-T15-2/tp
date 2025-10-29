@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -48,7 +48,7 @@ public class EditAppointmentCommand extends Command {
 
     /**
      * @param aId of the appointment in the filtered appointment list to edit
-     * @param editAppointmentDescriptor details to edit the person with
+     * @param editAppointmentDescriptor details to edit the contact with
      */
     public EditAppointmentCommand(AppointmentId aId, EditAppointmentDescriptor editAppointmentDescriptor) {
         requireNonNull(aId);
@@ -172,8 +172,8 @@ public class EditAppointmentCommand extends Command {
             if (nric == null) {
                 return Optional.ofNullable(nric);
             }
-            if (!model.hasPerson(nric)) {
-                throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            if (!model.hasContact(nric)) {
+                throw new CommandException(Messages.MESSAGE_CONTACT_NOT_FOUND);
             }
             return Optional.ofNullable(nric);
         }

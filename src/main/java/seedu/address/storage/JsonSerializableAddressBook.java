@@ -12,8 +12,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contract.Contract;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 
 /**
@@ -22,26 +22,26 @@ import seedu.address.model.policy.Policy;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "Contacts list contains duplicate contact(s).";
     public static final String MESSAGE_DUPLICATE_POLICY = "Policies list contains duplicate policy(s).";
     public static final String MESSAGE_DUPLICATE_CONTRACT = "Contracts list contains duplicate contract(s).";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "Appointments list contains duplicate appointment(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedPolicy> policies = new ArrayList<>();
     private final List<JsonAdaptedContract> contracts = new ArrayList<>();
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given contacts.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+    public JsonSerializableAddressBook(@JsonProperty("contacts") List<JsonAdaptedContact> contacts,
                                        @JsonProperty("policies") List<JsonAdaptedPolicy> policies,
                                        @JsonProperty("contracts") List<JsonAdaptedContract> contracts,
                                        @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
-        if (persons != null) {
-            this.persons.addAll(persons);
+        if (contacts != null) {
+            this.contacts.addAll(contacts);
         }
         if (policies != null) {
             this.policies.addAll(policies);
@@ -61,7 +61,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         policies.addAll(source.getPolicyList().stream().map(JsonAdaptedPolicy::new).collect(Collectors.toList()));
         contracts.addAll(source.getContractList().stream().map(JsonAdaptedContract::new).collect(Collectors.toList()));
         appointments.addAll(source.getAppointmentList().stream()
@@ -76,13 +76,13 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        /* Convert persons */
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        /* Convert contacts */
+        for (JsonAdaptedContact jsonAdaptedContact : contacts) {
+            Contact contact = jsonAdaptedContact.toModelType();
+            if (addressBook.hasContact(contact)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
-            addressBook.addPerson(person);
+            addressBook.addContact(contact);
         }
         /* Convert policies */
         for (JsonAdaptedPolicy jsonAdaptedPolicy : policies) {
