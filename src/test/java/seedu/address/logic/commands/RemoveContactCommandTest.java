@@ -7,8 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.RemoveContactCommand.MESSAGE_DELETE_PERSON_FAILURE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_SECOND;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_THIRD;
@@ -85,8 +87,8 @@ public class RemoveContactCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(removeContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
     }
@@ -104,11 +106,21 @@ public class RemoveContactCommandTest {
 
     @Test
     public void execute_nricNotFoundFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON); // Filter list to one person
-
         // Create a predicate for a person NOT currently in the filtered view
         RemoveContactCommand removeContactCommand = new RemoveContactCommand(PREDICATE_THIRD);
-        assertCommandFailure(removeContactCommand, model, MESSAGE_DELETE_PERSON_FAILURE);
+
+        // remove contract for person in third index
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Person person = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Contract contractsToRemove = (Contract) person.getContracts().toArray()[0];
+        person.removeContract(contractsToRemove);
+
+        showPersonAtIndex(model, INDEX_FIRST_PERSON); // Filter list to one person
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        String expectedMessage = String.format(RemoveContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                person.getName() + " " + person.getNric());
+        expectedModel.deletePerson(expectedModel.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased()));
+        assertCommandSuccess(removeContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
 
         // Create a predicate for a person truly not in the view
         NricContainsKeywordsPredicate trulyNotFoundPredicate = new NricContainsKeywordsPredicate(List.of("S0000000Z"));
