@@ -8,8 +8,18 @@
 
 iCon is a **desktop app for managing contacts, contracts, policies, and appointments optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, iCon can get your management tasks done faster than traditional GUI apps.
 
-<!-- * Table of Contents -->
-<page-nav-print />
+## Table of Contents
+
+- [Quick start](#quick-start) 
+- [Features](#features)
+- [Appointment](#appointment)
+- [Contacts](#contacts)
+- [Policy](#policy)
+- [Contracts](#contracts)
+- [General](#general)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +34,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar iCon.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![![img.png](images/Ui.png)Ui](images/Ui.png)
+   ![Ui.png](images/Ui.png))
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -83,6 +93,7 @@ Examples:
 * `add_appointment ic:T1234567A dt:2025-10-10 d:Discuss Healthcare coverage...`
 * `add_appointment ic:S9876543B dt:2026-08-09 d:Re-evaluate premium for...`
 
+![img.png](images/add_appointment.png)
 
 ### Viewing appointment(s) : `view_appointment`
 
@@ -109,7 +120,7 @@ Format: `edit_appointment a:APPOINTMENTID ic:[NRIC] dt:[APPOINTMENTDATE] d:[APPO
 
 
 Examples:
-*  `edit_appointment a:abc123 nric:T1234567A` Edits the Nric of the appointment with id 'abc123' to be T1234567A
+*  `edit_appointment a:abc123 ic:T1234567A` Edits the Nric of the appointment with id 'abc123' to be T1234567A
 *  `edit_appointment a:456XYZ dt:2020-01-01 d:This...` Edits the appointment date and appointment details of the appointment with id '456XYZ' to 2020-01-01 and "This..." respectively.
 
 ### Removing an appointment : `remove_appointment`
@@ -193,6 +204,8 @@ Examples:
 * `add_policy n:Life Insurance d:This policy coverage for family...`
 * `add_policy f:policy_file.txt`
 
+![img.png](images/add_policy.png)
+
 ### Editing a policy: `edit_policy`
 
 Edits an existing policy in iCon.
@@ -243,12 +256,12 @@ Furthermore, certain edits can cause the iCon to behave in unexpected ways (e.g.
 
 Adds a contract to iCon.
 
-Format: `add_contract p: POLICY_ID n: NRIC dt: DATE_SIGNED e: EXPIRY_DATE pr: PREMIUM_AMOUNT`
+Format: `add_contract p: POLICY_ID ic: NRIC dt: DATE_SIGNED e: EXPIRY_DATE pr: PREMIUM_AMOUNT`
 
 * EXPIRY_DATE cannot be before DATE_SIGNED.
 * PREMIUM_AMOUNT must be a positive number.
 
-Example: `add_contract p: P1234A n: S1234567A dt: 2023-01-01 e: 2024-01-01 pr: 1200.50`
+Example: `add_contract p: P1234A ic: S1234567A dt: 2023-01-01 e: 2024-01-01 pr: 1200.50`
 
 ### Remove a contract : `remove_contract`
 
@@ -285,14 +298,14 @@ Format:
 
 Edits an existing contract in iCon.
 
-Format: `edit_contract c:CONTRACT_ID [p: POLICY_ID] [n: NRIC] [dt: DATE_SIGNED] [e: EXPIRY_DATE] [pr: PREMIUM_AMOUNT]`
+Format: `edit_contract c:CONTRACT_ID [p: POLICY_ID] [ic: NRIC] [dt: DATE_SIGNED] [e: EXPIRY_DATE] [pr: PREMIUM_AMOUNT]`
 
 * Edits the contract with the specified `CONTRACT_ID`.
 * CONTRACT_ID is a compulsory field
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Example: `edit_contract c:C1234A p: P5678B n: S7654321B dt: 2023-02-01 e: 2024-02-01 pr: 1500.75`
+Example: `edit_contract c:C1234A p: P5678B ic: S7654321B dt: 2023-02-01 e: 2024-02-01 pr: 1500.75`
 
 # General
 
@@ -333,7 +346,7 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known issues 
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
