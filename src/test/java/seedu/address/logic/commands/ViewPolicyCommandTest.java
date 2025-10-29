@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalData.HEALTH;
-import static seedu.address.testutil.TypicalData.LIFE;
-import static seedu.address.testutil.TypicalData.PROPERTY;
+import static seedu.address.testutil.TypicalData.getHealth;
+import static seedu.address.testutil.TypicalData.getLife;
+import static seedu.address.testutil.TypicalData.getProperty;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -95,7 +95,7 @@ public class ViewPolicyCommandTest {
         ViewPolicyCommand command = new ViewPolicyCommand(predicate);
         expectedModel.updateFilteredPolicyList(predicate);
         assertCommandSuccess(command, model, expectedMessage, ListPanelType.POLICY, expectedModel);
-        assertEquals(Arrays.asList(LIFE, HEALTH, PROPERTY), model.getFilteredPolicyList());
+        assertEquals(Arrays.asList(getLife(), getHealth(), getProperty()), model.getFilteredPolicyList());
     }
 
     @Test

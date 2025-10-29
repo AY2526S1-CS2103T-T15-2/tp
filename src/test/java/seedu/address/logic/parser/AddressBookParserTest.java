@@ -16,7 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
-import static seedu.address.testutil.TypicalData.LIFE;
+import static seedu.address.testutil.TypicalData.getLife;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
@@ -163,8 +163,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPolicy() throws Exception {
-        AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(PolicyUtil.getAddPolicyCommand(LIFE));
-        assertEquals(new AddPolicyCommand(unassign(LIFE)), command);
+        AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(PolicyUtil.getAddPolicyCommand(getLife()));
+        assertEquals(new AddPolicyCommand(unassign(getLife())), command);
     }
 
     @Test

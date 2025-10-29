@@ -18,7 +18,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +36,7 @@ public class AddAppointmentCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Appointment appointment = new AppointmentBuilder(APPOINTMENT_A).build();
+        Appointment appointment = new AppointmentBuilder(getAppointmentA()).build();
 
         // whitespace only preamble
         String userInputToTest = PREAMBLE_WHITESPACE + APPOINTMENT_NRIC_DESC_A + APPOINTMENT_DATE_DESC_A

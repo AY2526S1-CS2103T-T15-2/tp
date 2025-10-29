@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -15,15 +16,20 @@ import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.contract.Contract;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -67,7 +73,7 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, ListPanelType.CONTACT, expectedModel);
@@ -105,12 +111,24 @@ public class EditContactCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicatePersonUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editContactCommand, model, EditContactCommand.MESSAGE_DUPLICATE_PERSON);
+        Nric secondPersonNric = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()).getNric();
+        List<Contract> contractList = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased())
+                .getContracts().stream().toList();
+        Person secondPerson = new PersonBuilder(firstPerson).withNric(secondPersonNric.toString())
+                .withContracts(contractList).build();
+
+        try {
+            editContactCommand.execute(model);
+        } catch (CommandException ce) {
+            fail();
+        }
+
+        assertEquals(secondPerson, model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()));
     }
 
     @Test
@@ -122,7 +140,18 @@ public class EditContactCommandTest {
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editContactCommand, model, EditContactCommand.MESSAGE_DUPLICATE_PERSON);
+        try {
+            editContactCommand.execute(model);
+        } catch (CommandException ce) {
+            fail();
+        }
+        Nric secondPersonNric = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()).getNric();
+        List<Contract> contractList = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased())
+                .getContracts().stream().toList();
+        Person secondPerson = new PersonBuilder(personInList).withNric(secondPersonNric.toString())
+                .withContracts(contractList).build();
+
+        assertEquals(secondPerson, model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()));
     }
 
     @Test

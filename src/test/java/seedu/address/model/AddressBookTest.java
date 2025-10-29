@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_E;
 import static seedu.address.testutil.TypicalData.getAlice;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
+import static seedu.address.testutil.TypicalData.getAppointmentE;
 import static seedu.address.testutil.TypicalData.getLife;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
@@ -104,7 +104,7 @@ public class AddressBookTest {
     @Test
     public void setPolicy_hasPolicyInAddressBook_returnsTrue() {
         assertThrows(NullPointerException.class, () -> addressBook.setPolicy(null, null));
-        Policy policy = TypicalData.LIFE;
+        Policy policy = TypicalData.getLife();
         addressBook.addPolicy(policy);
         Policy editedPolicy = new Policy(new PolicyName("Life Plus"), new PolicyDetails("Covers life and more"),
                 new PolicyId("123456"));
@@ -143,19 +143,19 @@ public class AddressBookTest {
 
     @Test
     public void hasAppointment_appointmentInAddressBook_returnsTrue() {
-        addressBook.addAppointment(APPOINTMENT_A);
-        assertTrue(addressBook.hasAppointment(APPOINTMENT_A.getAId()));
+        addressBook.addAppointment(getAppointmentA());
+        assertTrue(addressBook.hasAppointment(getAppointmentA().getAId()));
     }
 
     @Test
     public void getAppointment_appointmentInAddressBook_returnsTrue() {
-        addressBook.addAppointment(APPOINTMENT_A);
-        assertEquals(addressBook.getAppointment(APPOINTMENT_A.getAId()), APPOINTMENT_A);
+        addressBook.addAppointment(getAppointmentA());
+        assertEquals(addressBook.getAppointment(getAppointmentA().getAId()), getAppointmentA());
     }
 
     @Test
     public void getAppointment_appointmentNotInAddressBook_returnsNull() {
-        assertEquals(addressBook.getAppointment(APPOINTMENT_E.getAId()), null);
+        assertEquals(addressBook.getAppointment(getAppointmentE().getAId()), null);
     }
 
     @Test

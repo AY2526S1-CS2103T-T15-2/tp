@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedAppointment.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalData.APPOINTMENT_A;
+import static seedu.address.testutil.TypicalData.getAppointmentA;
 
 import java.time.LocalDate;
 
@@ -21,15 +21,15 @@ public class JsonAdaptedAppointmentTest {
     private static final String INVALID_DATE = "NOT A DATE";
     private static final String INVALID_DETAIL = "";
 
-    private static final String VALID_AID = APPOINTMENT_A.getAId().toString();
-    private static final String VALID_NRIC = APPOINTMENT_A.getNric().toString();
-    private static final String VALID_DATE = APPOINTMENT_A.getDate().toString();
-    private static final String VALID_DETAIL = APPOINTMENT_A.getDetails().toString();
+    private static final String VALID_AID = getAppointmentA().getAId().toString();
+    private static final String VALID_NRIC = getAppointmentA().getNric().toString();
+    private static final String VALID_DATE = getAppointmentA().getDate().toString();
+    private static final String VALID_DETAIL = getAppointmentA().getDetails().toString();
 
     @Test
     public void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(APPOINTMENT_A);
-        assertEquals(APPOINTMENT_A, appointment.toModelType());
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(getAppointmentA());
+        assertEquals(getAppointmentA(), appointment.toModelType());
     }
 
     @Test
