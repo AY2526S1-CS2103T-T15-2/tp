@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.RemoveContactCommand.MESSAGE_DELETE_PERSON_FAILURE;
+import static seedu.address.logic.commands.RemoveContactCommand.MESSAGE_DELETE_CONTACT_FAILURE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getAmy;
@@ -30,11 +30,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -66,7 +66,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String removeContactCommand = RemoveContactCommand.COMMAND_WORD + " " + PREFIX_NRIC + INVALID_NRIC;
-        assertCommandException(removeContactCommand, MESSAGE_DELETE_PERSON_FAILURE);
+        assertCommandException(removeContactCommand, MESSAGE_DELETE_CONTACT_FAILURE);
     }
 
     @Test
@@ -88,13 +88,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredContactList().remove(0));
     }
 
     @Test
-    public void getSortedPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getSortedPersonList().remove(0));
+    public void getSortedContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getSortedContactList().remove(0));
     }
 
     @Test
@@ -192,9 +192,9 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addContactCommand = AddContactCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + NRIC_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(getAmy()).withTags().build();
+        Contact expectedContact = new ContactBuilder(getAmy()).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addContact(expectedContact);
         assertCommandFailure(addContactCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

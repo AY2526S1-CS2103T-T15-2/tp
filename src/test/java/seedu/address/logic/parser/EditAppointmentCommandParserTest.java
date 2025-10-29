@@ -28,7 +28,7 @@ import seedu.address.logic.commands.EditAppointmentCommand;
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.testutil.EditAppointmentDescriptorBuilder;
 

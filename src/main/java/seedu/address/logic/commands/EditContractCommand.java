@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_CONTACT_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTRACT_PERIOD;
-import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_POLICY_NOT_FOUND;
 import static seedu.address.logic.commands.CommandUtil.isValidDateSignedAndExpiry;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CID;
@@ -21,11 +21,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.ui.ListPanelType;
 
@@ -84,11 +84,11 @@ public class EditContractCommand extends Command {
             }
 
             model.setContract(contractToEdit, editedContract);
-            model.removeContractFromPerson(contractToEdit);
+            model.removeContractFromContact(contractToEdit);
             model.removeContractFromPolicy(contractToEdit);
-            model.addContractToPerson(editedContract);
+            model.addContractToContact(editedContract);
             model.addContractToPolicy(editedContract);
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
             model.updateFilteredPolicyList(Model.PREDICATE_SHOW_ALL_POLICIES);
             model.updateFilteredContractList(Model.PREDICATE_SHOW_ALL_CONTRACTS);
             return new CommandResult(String.format(MESSAGE_EDIT_CONTRACT_SUCCESS, editedContract.getCId().toString()),
@@ -115,8 +115,8 @@ public class EditContractCommand extends Command {
         LocalDate updatedDateSigned = editContractDescriptor.getDate().orElse(contractToEdit.getDate());
         LocalDate updatedExpiryDate = editContractDescriptor.getExpiryDate().orElse(contractToEdit.getExpiryDate());
         ContractPremium updatedPremium = editContractDescriptor.getPremium().orElse(contractToEdit.getPremium());
-        if (!model.hasPerson(updatedNric)) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        if (!model.hasContact(updatedNric)) {
+            throw new CommandException(MESSAGE_CONTACT_NOT_FOUND);
         }
         if (!model.hasPolicy(updatedPid)) {
             throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
@@ -154,7 +154,7 @@ public class EditContractCommand extends Command {
 
     /**
      * Stores the details to edit the contract with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * corresponding field value of the contact.
      */
     public static class EditContractDescriptor {
         private ContractId cId;

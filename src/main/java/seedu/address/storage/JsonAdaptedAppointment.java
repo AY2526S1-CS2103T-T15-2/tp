@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 
 /**
  * Jackson-friendly version of {@link Appointment}.

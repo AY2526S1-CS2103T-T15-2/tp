@@ -42,34 +42,34 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddContactCommand;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
+import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 
 public class AddContactCommandParserTest {
     private AddContactCommandParser parser = new AddContactCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(getBob()).withTags(VALID_TAG_FRIEND).build();
+        Contact expectedContact = new ContactBuilder(getBob()).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB
                 + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedContact));
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(getBob()).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Contact expectedContactMultipleTags = new ContactBuilder(getBob()).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddContactCommand(expectedPersonMultipleTags));
+                new AddContactCommand(expectedContactMultipleTags));
     }
 
     @Test
@@ -153,10 +153,10 @@ public class AddContactCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(getAmy()).withTags().build();
+        Contact expectedContact = new ContactBuilder(getAmy()).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + NRIC_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddContactCommand(expectedPerson));
+                new AddContactCommand(expectedContact));
     }
 
     @Test

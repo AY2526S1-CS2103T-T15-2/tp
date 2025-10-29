@@ -60,13 +60,13 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readAddressBook_invalidContactAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidContactAddressBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readAddressBook_invalidAndValidContactAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidContactAddressBook.json"));
     }
 
     @Test
@@ -110,8 +110,8 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(getHoon());
-        original.removePerson(getTypicalAlice());
+        original.addContact(getHoon());
+        original.removeContact(getTypicalAlice());
         original.addPolicy(getHome());
         original.removePolicy(getLife());
         original.addContract(getContractD());
@@ -123,7 +123,7 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(getIda());
+        original.addContact(getIda());
         original.addPolicy(getHealthB());
         original.addContract(getContractE());
         original.addAppointment(getAppointmentE());

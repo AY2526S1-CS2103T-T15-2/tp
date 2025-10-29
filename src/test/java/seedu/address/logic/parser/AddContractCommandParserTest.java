@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddContractCommand;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.ContractPremium;
-import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 
 public class AddContractCommandParserTest {

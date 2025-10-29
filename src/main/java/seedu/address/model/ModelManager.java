@@ -16,10 +16,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
 
@@ -31,12 +31,12 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final SortedList<Person> sortedPersons;
+    private final SortedList<Contact> sortedContacts;
     private final SortedList<Contract> sortedContracts;
     private final SortedList<Appointment> sortedAppointments;
     private final FilteredList<Policy> filteredPolicies;
     private final FilteredList<Contract> filteredContracts;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Contact> filteredContacts;
     private final FilteredList<Appointment> filteredAppointments;
 
     /**
@@ -49,10 +49,10 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredContacts = new FilteredList<>(this.addressBook.getContactList());
         filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
         filteredContracts = new FilteredList<>(this.addressBook.getContractList());
-        sortedPersons = new SortedList<>(filteredPersons);
+        sortedContacts = new SortedList<>(filteredContacts);
         sortedContracts = new SortedList<>(filteredContracts);
         sortedAppointments = new SortedList<>(filteredAppointments);
         filteredPolicies = new FilteredList<>(this.addressBook.getPolicyList());
@@ -110,15 +110,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return addressBook.hasContact(contact);
     }
 
     @Override
-    public boolean hasPerson(Nric nric) {
+    public boolean hasContact(Nric nric) {
         requireNonNull(nric);
-        return addressBook.hasPerson(nric);
+        return addressBook.hasContact(nric);
     }
 
     @Override
@@ -158,8 +158,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteContact(Contact target) {
+        addressBook.removeContact(target);
     }
 
     @Override
@@ -178,9 +178,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addContact(Contact contact) {
+        addressBook.addContact(contact);
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 
     @Override
@@ -201,10 +201,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setContact(target, editedContact);
     }
 
     @Override
@@ -245,8 +245,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addContractToPerson(Contract contract) {
-        addressBook.addContractToPerson(contract);
+    public void addContractToContact(Contract contract) {
+        addressBook.addContractToContact(contract);
     }
 
     @Override
@@ -255,9 +255,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean personHasContract(Contract contract, Person person) {
-        requireAllNonNull(contract, person);
-        return addressBook.personHasContract(contract, person);
+    public boolean contactHasContract(Contract contract, Contact contact) {
+        requireAllNonNull(contract, contact);
+        return addressBook.contactHasContract(contract, contact);
     }
 
     @Override
@@ -272,9 +272,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeContractFromPerson(Contract contract) {
+    public void removeContractFromContact(Contract contract) {
         requireAllNonNull(contract);
-        addressBook.removeContractFromPerson(contract);
+        addressBook.removeContractFromContact(contract);
     }
 
     @Override
@@ -296,21 +296,21 @@ public class ModelManager implements Model {
     //=========== Filtered List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Contact> getFilteredContactList() {
+        return filteredContacts;
     }
 
     /**
-     * Returns an unmodifiable view of the sorted list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the sorted list of {@code Contact} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getSortedPersonList() {
-        return sortedPersons;
+    public ObservableList<Contact> getSortedContactList() {
+        return sortedContacts;
     }
 
     @Override
@@ -355,9 +355,9 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredContacts.setPredicate(predicate);
     }
 
     @Override
@@ -379,8 +379,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortPersons(Comparator<Person> comparator) {
-        sortedPersons.setComparator(comparator);
+    public void sortContacts(Comparator<Contact> comparator) {
+        sortedContacts.setComparator(comparator);
     }
 
     @Override
@@ -412,7 +412,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredContacts.equals(otherModelManager.filteredContacts)
                 && filteredPolicies.equals(otherModelManager.filteredPolicies)
                 && filteredContracts.equals(otherModelManager.filteredContracts)
                 && filteredAppointments.equals(otherModelManager.filteredAppointments);

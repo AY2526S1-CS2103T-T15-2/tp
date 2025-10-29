@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_CONTACT_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_POLICY_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREMIUM;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 
 import java.time.LocalDate;
@@ -16,11 +16,11 @@ import java.time.LocalDate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.ui.ListPanelType;
 
@@ -64,8 +64,8 @@ public class AddContractCommand extends Command {
         requireNonNull(model);
 
         Nric nric = toAdd.getNric();
-        if (!model.hasPerson(nric)) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        if (!model.hasContact(nric)) {
+            throw new CommandException(MESSAGE_CONTACT_NOT_FOUND);
         }
         if (!model.hasPolicy(toAdd.getPId())) {
             throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
@@ -87,9 +87,9 @@ public class AddContractCommand extends Command {
         }
 
         model.addContract(toAdd);
-        model.addContractToPerson(toAdd);
+        model.addContractToContact(toAdd);
         model.addContractToPolicy(toAdd);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCId().toString()), ListPanelType.CONTRACT);
     }

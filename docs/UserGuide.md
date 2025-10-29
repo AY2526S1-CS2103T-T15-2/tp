@@ -183,9 +183,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all persons : `list`
+### Listing all contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
