@@ -156,6 +156,14 @@ Adds a contact to iCon
 
 Format: `add_contact n:NAME p:PHONE_NUMBER ic:NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]`
 
+xamples:
+
+* `add_contact n:Timothy p:91227843 ic:t1234567a`
+* `add_contact n:Andre p:82567645 ic:t0487439z e:andre04@gmail.com a:12 House, House St`
+
+![img.jpeg](images/add_contact_1.jpeg)
+![img.jpeg](images/add_contact_2.jpeg)
+
 ### Editing contacts : `edit_contact`
 
 Edits a contact in iCon
