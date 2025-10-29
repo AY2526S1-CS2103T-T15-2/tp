@@ -72,7 +72,7 @@ public class EditPolicyCommand extends Command {
 
         model.setPolicy(policyToEdit, editedPolicy);
         model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_POLICY_SUCCESS, Messages.format(editedPolicy)),
+        return new CommandResult(String.format(MESSAGE_EDIT_POLICY_SUCCESS, editedPolicy.getId().toString()),
                 ListPanelType.POLICY);
     }
 

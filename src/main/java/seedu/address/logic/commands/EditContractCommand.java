@@ -47,7 +47,7 @@ public class EditContractCommand extends Command {
             + "[" + PREFIX_EXPIRY + "EXPIRY DATE] "
             + "[" + PREFIX_PREMIUM + "PREMIUM] "
             + "Example: "
-            + COMMAND_WORD + PREFIX_CID + " C1234a "
+            + COMMAND_WORD + " " + PREFIX_CID + " C1234a "
             + PREFIX_NRIC + "T1234567B "
             + PREFIX_EXPIRY + "2026-01-02";
 
