@@ -23,7 +23,7 @@ public class RemoveContactCommand extends Command {
     public static final String COMMAND_WORD = "remove_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the contact identified by the NRIC used in the displayed contact list.\n"
+            + ": Removes the contact identified by the NRIC used in iCon.\n"
             + "Parameters: " + PREFIX_NRIC + " NRIC \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NRIC + " S1234567A";
 

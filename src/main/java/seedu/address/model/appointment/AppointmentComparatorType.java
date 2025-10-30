@@ -3,7 +3,7 @@ package seedu.address.model.appointment;
 import java.util.Comparator;
 
 /**
- * Enumeration for available comparators to be used by SortContactCommand.
+ * Enumeration for available comparators to be used by SortAppointmentCommand.
  */
 public enum AppointmentComparatorType {
     UNORDERED(null),
