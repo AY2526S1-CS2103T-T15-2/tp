@@ -10,21 +10,21 @@ import seedu.address.model.contact.ContactComparatorType;
 import seedu.address.ui.ListPanelType;
 
 /**
- * Sorts and lists all persons in address book.
+ * Sorts and lists all contacts in address book.
  */
 public class SortContactCommand extends Command {
 
     public static final String COMMAND_WORD = "sort_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts persons by insertion or alphabetical name order\n"
+            + ": Sorts contacts by insertion or alphabetical name order\n"
             + "Alphabetical sorting is case-insensitive.\n"
             + "Parameters: [SORT_FLAG = " + FLAG_INSERTION_ORDER + " or " + FLAG_ALPHABETICAL_ORDER + "]\n"
             + "Example: " + COMMAND_WORD + " " + FLAG_INSERTION_ORDER;
 
-    public static final String MESSAGE_SUCCESS_UNORDERED = "Showing persons by insertion order.";
+    public static final String MESSAGE_SUCCESS_UNORDERED = "Showing contacts by insertion order.";
 
-    public static final String MESSAGE_SUCCESS_ALPHABETICAL = "Showing persons by alphabetical order.";
+    public static final String MESSAGE_SUCCESS_ALPHABETICAL = "Showing contacts by alphabetical order.";
 
     private final ContactComparatorType comparatorType;
 

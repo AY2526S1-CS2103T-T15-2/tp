@@ -50,8 +50,8 @@ public class RemoveContactCommand extends Command {
         if (index == -1) {
             throw new CommandException(MESSAGE_DELETE_CONTACT_FAILURE);
         }
-        Index personIndex = Index.fromZeroBased(index);
-        Contact contact = lastShownList.get(personIndex.getZeroBased());
+        Index contactIndex = Index.fromZeroBased(index);
+        Contact contact = lastShownList.get(contactIndex.getZeroBased());
 
         //check for existing contracts
         if (!contact.getContracts().isEmpty()) {

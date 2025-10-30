@@ -168,7 +168,7 @@ public class EditAppointmentCommand extends Command {
         }
 
         public Optional<Nric> getNric(Model model) throws CommandException {
-            // Requires precondition null checker as hasPerson requires non null
+            // Requires precondition null checker as hasContact requires non null
             if (nric == null) {
                 return Optional.ofNullable(nric);
             }
