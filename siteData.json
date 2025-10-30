@@ -11,7 +11,6 @@
         "damien": "Damien",
         "glendon-goh": "Glendon Goh",
         "joshua-seah": "Joshua Seah",
-        "james-doe": "James Doe",
         "tan-keng-hong": "Tan Keng Hong"
       },
       "headingKeywords": {}
@@ -156,14 +155,6 @@
       "title": "",
       "headings": {
         "addressbook-level-3": "AddressBook Level-3"
-      },
-      "headingKeywords": {}
-    },
-    {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
-      "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
       "headingKeywords": {}
     }
