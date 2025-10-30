@@ -50,6 +50,20 @@ public class EditContractCommandParser implements Parser<EditContractCommand> {
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_CID, PREFIX_PID, PREFIX_NRIC, PREFIX_DATE, PREFIX_EXPIRY,
                 PREFIX_PREMIUM);
 
+        populateDescriptor(argMultiMap, editContractDescriptor);
+
+        if (!editContractDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditContractCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditContractCommand(cId, editContractDescriptor);
+    }
+
+    /**
+     * Helper method to populate the EditContractDescriptor with values from ArgumentMultimap
+     */
+    private static void populateDescriptor(ArgumentMultimap argMultiMap,
+                                           EditContractDescriptor editContractDescriptor) throws ParseException {
         if (argMultiMap.getValue(PREFIX_PID).isPresent()) {
             editContractDescriptor.setPId(ParserUtil.parsePolicyId(argMultiMap.getValue(PREFIX_PID).get()));
         }
@@ -66,11 +80,5 @@ public class EditContractCommandParser implements Parser<EditContractCommand> {
             editContractDescriptor.setPremium(ParserUtil.parseContractPremium(argMultiMap.getValue(PREFIX_PREMIUM)
                     .get()));
         }
-
-        if (!editContractDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditContractCommand.MESSAGE_NOT_EDITED);
-        }
-
-        return new EditContractCommand(cId, editContractDescriptor);
     }
 }

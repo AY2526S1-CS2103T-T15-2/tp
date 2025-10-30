@@ -67,6 +67,36 @@ public class JsonAdaptedContract {
      * @throws IllegalValueException if there were any data constraints violated in the adapted contract.
      */
     public Contract toModelType() throws IllegalValueException {
+        checkcId(cId);
+        final ContractId modelCId = new ContractId(cId);
+
+        checkName(name);
+        final Name modelName = new Name(name);
+
+        checkNric(nric);
+        final Nric modelNric = new Nric(nric);
+
+        checkPId(pId);
+        final PolicyId modelPId = new PolicyId(pId);
+
+        final LocalDate modelDateSigned = checkDateSigned(dateSigned);
+
+        final LocalDate modelExpiryDate = checkExpiryDate(expiryDate);
+
+        if (modelExpiryDate.isBefore(modelDateSigned)) {
+            throw new InvalidContractDatesException();
+        }
+
+        checkPremium(premium);
+        final ContractPremium modelPremium = new ContractPremium(premium);
+
+        return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned, modelExpiryDate, modelPremium);
+    }
+
+    /**
+     * Checks for null and validity of cId.
+     */
+    private void checkcId(String cId) throws IllegalValueException {
         if (cId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ContractId.class.getSimpleName()));
@@ -74,24 +104,36 @@ public class JsonAdaptedContract {
         if (!ContractId.isValidContractId(cId)) {
             throw new IllegalValueException(ContractId.MESSAGE_CONSTRAINTS);
         }
-        final ContractId modelCId = new ContractId(cId);
+    }
 
+    /**
+     * Checks for null and validity of name.
+     */
+    private void checkName(String name) throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+    }
 
+    /**
+     * Checks for null and validity of nric.
+     */
+    private void checkNric(String nric) throws IllegalValueException {
         if (nric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
         if (!Nric.isValidNric(nric)) {
             throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
         }
-        final Nric modelNric = new Nric(nric);
+    }
 
+    /**
+     * Checks for null and validity of pId.
+     */
+    private void checkPId(String pId) throws IllegalValueException {
         if (pId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     PolicyId.class.getSimpleName()));
@@ -99,43 +141,54 @@ public class JsonAdaptedContract {
         if (!PolicyId.isValidPolicyId(pId)) {
             throw new IllegalValueException(PolicyId.MESSAGE_CONSTRAINTS);
         }
-        final PolicyId modelPId = new PolicyId(pId);
+    }
 
+    /**
+     * Checks for null and validity of dateSigned.
+     * Returns LocalDate if valid.
+     */
+    private LocalDate checkDateSigned(String dateSigned) throws IllegalValueException {
+        LocalDate returnDate;
         if (dateSigned == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDate.class.getSimpleName()));
         }
-        final LocalDate modelDateSigned;
         try {
-            modelDateSigned = LocalDate.parse(dateSigned);
+            returnDate = LocalDate.parse(dateSigned);
         } catch (Exception e) {
             throw new IllegalValueException(Messages.MESSAGE_INVALID_DATE_FORMAT);
         }
+        return returnDate;
+    }
 
+    /**
+     * Checks for null and validity of expiryDate.
+     * Returns LocalDate if valid.
+     */
+    private LocalDate checkExpiryDate(String expiryDate) throws IllegalValueException {
+        LocalDate returnDate;
         if (expiryDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDate.class.getSimpleName()));
         }
-        final LocalDate modelExpiryDate;
         try {
-            modelExpiryDate = LocalDate.parse(expiryDate);
+            returnDate = LocalDate.parse(expiryDate);
         } catch (Exception e) {
             throw new IllegalValueException(Messages.MESSAGE_INVALID_DATE_FORMAT);
         }
-        if (modelExpiryDate.isBefore(modelDateSigned)) {
-            throw new InvalidContractDatesException();
-        }
+        return returnDate;
+    }
 
+    /**
+     * Checks for null and validity of premium.
+     */
+    private void checkPremium(String premium) throws IllegalValueException {
         if (premium == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     seedu.address.model.contract.ContractPremium.class.getSimpleName()));
         }
-
         if (!ContractPremium.isValidContractPremium(premium)) {
             throw new IllegalValueException(ContractPremium.MESSAGE_CONSTRAINTS);
         }
-        final ContractPremium modelPremium = new ContractPremium(premium);
-
-        return new Contract(modelCId, modelName, modelNric, modelPId, modelDateSigned, modelExpiryDate, modelPremium);
     }
 }
