@@ -112,7 +112,9 @@ public class Contact {
         }
 
         return otherContact != null
-                && otherContact.getNric().equals(getNric());
+                && otherContact.getNric().equals(getNric())
+                && otherContact.getName().equals(getName())
+                && otherContact.getPhone().equals(getPhone());
     }
 
     /**

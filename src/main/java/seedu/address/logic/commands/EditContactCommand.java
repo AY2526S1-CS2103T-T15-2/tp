@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -84,7 +83,7 @@ public class EditContactCommand extends Command {
                     .get();
             Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
-            if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
+            if (model.hasContact(editedContact)) {
                 throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
             }
 
@@ -178,6 +177,10 @@ public class EditContactCommand extends Command {
 
         public void setNric(Nric nric) {
             this.nric = nric;
+        }
+
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
         }
 
         public void setName(Name name) {

@@ -61,11 +61,11 @@ public class ContactTest {
         // null -> returns false
         assertFalse(getAlice().isSameContact(null));
 
-        // same nric, all other attributes different -> returns true
+        // same nric, all other attributes different -> returns false
         Contact editedAlice = new ContactBuilder(getAlice()).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(getAlice().isSameContact(editedAlice));
+        assertFalse(getAlice().isSameContact(editedAlice));
 
         // different nric, all other attributes same -> returns false
         editedAlice = new ContactBuilder(getAlice()).withNric(VALID_NRIC_BOB).build();
@@ -74,6 +74,11 @@ public class ContactTest {
         // nric differs in case, all other attributes same -> returns true
         Contact editedBob = new ContactBuilder(getBob()).withNric(VALID_NRIC_BOB.toLowerCase()).build();
         assertTrue(getBob().isSameContact(editedBob));
+
+        // nric, phone, name is same, all other attributes different -> returns true
+        editedAlice = new ContactBuilder(getAlice()).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(getAlice().isSameContact(editedAlice));
     }
 
     @Test
