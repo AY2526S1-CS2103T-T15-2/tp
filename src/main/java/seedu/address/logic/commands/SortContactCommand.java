@@ -10,7 +10,7 @@ import seedu.address.model.contact.ContactComparatorType;
 import seedu.address.ui.ListPanelType;
 
 /**
- * Sorts and lists all contacts in address book.
+ * Sorts and lists currently viewed contacts in iCon.
  */
 public class SortContactCommand extends Command {
 

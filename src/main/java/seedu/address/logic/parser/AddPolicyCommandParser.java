@@ -22,8 +22,8 @@ import seedu.address.model.policy.UnassignedPolicy;
 public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddPolicyCommand
-     * and returns an AddPolicyCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddPolicyCommandType
+     * and returns an AddPolicyCommandType object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPolicyCommandType parse(String args) throws ParseException {
