@@ -180,6 +180,11 @@ How it works:
 7. We then replace `contactToEdit` with `editedContact` and update the filtered contact list to show all contacts
 8. We then return a `CommandResult` to signify successful command execution.
 
+How to apply to other commands:
+
+1. Identifying fields are different for different commands. Contact: `Nric`, Contract:`CId` Policy: `PId`
+2. Replace all `contact` with the field you are trying to edit e.g `editContactCommand` -> `editPolicyCommand`
+
 * TODO: include UML here (sequence diagram)
 
 --------------------------------------------------------------------------------------------------------------------
