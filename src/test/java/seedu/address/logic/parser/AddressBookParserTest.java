@@ -16,11 +16,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
+import static seedu.address.testutil.TypicalData.getAlice;
 import static seedu.address.testutil.TypicalData.getLife;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
-import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
+import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_CONTACT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,12 +35,10 @@ import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.AddPolicyFileCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.EditContactCommand;
-import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.EditPolicyCommand.EditPolicyDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveAppointmentCommand;
 import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.commands.RemoveContractCommand;
@@ -52,17 +50,17 @@ import seedu.address.logic.commands.ViewContractCommand;
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.AppointmentIdContainsKeywordsPredicate;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactComparatorType;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonComparatorType;
 import seedu.address.model.policy.IdContainsKeywordsPredicate;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.ContactBuilder;
+import seedu.address.testutil.ContactUtil;
+import seedu.address.testutil.EditContactDescriptorBuilder;
 import seedu.address.testutil.EditPolicyDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.PolicyBuilder;
 import seedu.address.testutil.PolicyUtil;
 
@@ -73,24 +71,25 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addContact() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddContactCommand(person));
-        assertEquals(new AddContactCommand(person), command);
+        Contact contact = new ContactBuilder().build();
+        AddContactCommand command = (AddContactCommand) parser.parseCommand(ContactUtil.getAddContactCommand(contact));
+        assertEquals(new AddContactCommand(contact), command);
     }
 
     @Test
     public void parseCommand_editContact() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Contact contact = new ContactBuilder().build();
+        EditContactCommand.EditContactDescriptor descriptor = new EditContactDescriptorBuilder(contact).build();
         EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + PREFIX_NRIC + getAlice().getNric().toString() + " "
+                + ContactUtil.getEditContactDescriptorDetails(descriptor));
+        assertEquals(new EditContactCommand(getAlice().getNric(), descriptor), command);
     }
 
     @Test
     public void parseCommand_removeContact() throws Exception {
         RemoveContactCommand command = (RemoveContactCommand) parser.parseCommand(
-                RemoveContactCommand.COMMAND_WORD + " " + PREFIX_NRIC + NRIC_FIRST_PERSON);
+                RemoveContactCommand.COMMAND_WORD + " " + PREFIX_NRIC + NRIC_FIRST_CONTACT);
         assertEquals(new RemoveContactCommand(PREDICATE_FIRST), command);
     }
 
@@ -115,13 +114,7 @@ public class AddressBookParserTest {
     public void parseCommand_sortContact() throws Exception {
         SortContactCommand command = (SortContactCommand) parser.parseCommand(
                 SortContactCommand.COMMAND_WORD + " " + FLAG_ALPHABETICAL_ORDER);
-        assertEquals(new SortContactCommand(PersonComparatorType.ALPHABETICAL), command);
-    }
-
-    @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertEquals(new SortContactCommand(ContactComparatorType.ALPHABETICAL), command);
     }
 
     @Test

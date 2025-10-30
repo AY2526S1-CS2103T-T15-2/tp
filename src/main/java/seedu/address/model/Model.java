@@ -9,10 +9,10 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
 
@@ -21,7 +21,7 @@ import seedu.address.model.policy.PolicyId;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
     Predicate<Policy> PREDICATE_SHOW_ALL_POLICIES = unused -> true;
     Predicate<Contract> PREDICATE_SHOW_ALL_CONTRACTS = unused -> true;
     Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
@@ -65,56 +65,57 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasContact(Contact contact);
 
     /**
-     * Returns true if a person with the same NRIC as {@code nric} exists in the address book.
+     * Returns true if a contact with the same NRIC as {@code nric} exists in the address book.
      */
-    boolean hasPerson(Nric nric);
+    boolean hasContact(Nric nric);
 
     /**
-     * Returns a Name object if a person with the given NRIC exists in the address book.
+     * Returns a Name object if a contact with the given NRIC exists in the address book.
      */
     Name getName(Nric nric);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given contact.
+     * The contact must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteContact(Contact target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given contact.
+     * {@code contact} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addContact(Contact contact);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given contact {@code target} with {@code editedContact}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The contact identity of {@code editedContact} must not be the
+     * same as another existing contact in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setContact(Contact target, Contact editedContact);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered contact list */
+    ObservableList<Contact> getFilteredContactList();
 
-    /** Returns an unmodifiable view of the filtered and sorted person list */
-    ObservableList<Person> getSortedPersonList();
+    /** Returns an unmodifiable view of the filtered and sorted contact list */
+    ObservableList<Contact> getSortedContactList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredContactList(Predicate<Contact> predicate);
 
     /**
      * Updates the comparator of the sorted list to sort by the given {@code comparator}.
-     * @param comparator {@code Comparator<Person>} or {@code null} for no sorting.
+     * @param comparator {@code Comparator<Contact>} or {@code null} for no sorting.
      */
-    void sortPersons(Comparator<Person> comparator);
+    void sortContacts(Comparator<Contact> comparator);
 
     /**
      * Returns true if a policy with the same id as {@code policy} exists in the address book.
@@ -184,10 +185,10 @@ public interface Model {
     void addContract(Contract contract);
 
     /**
-     * Links the given contract to the corresponding person in the address book.
-     * The person must exist in the address book.
+     * Links the given contract to the corresponding contact in the address book.
+     * The contact must exist in the address book.
      */
-    void addContractToPerson(Contract contract);
+    void addContractToContact(Contract contract);
 
     /**
      * Links the given contract to the corresponding policy in the address book.
@@ -220,10 +221,10 @@ public interface Model {
     void sortContracts(Comparator<Contract> comparator);
 
     /**
-     * Returns true if a person has the given contract.
-     * The person must exist in the address book.
+     * Returns true if a contact has the given contract.
+     * The contact must exist in the address book.
      */
-    boolean personHasContract(Contract contract, Person person);
+    boolean contactHasContract(Contract contract, Contact contact);
 
     /**
      * Returns true if a policy has the given contract.
@@ -232,9 +233,9 @@ public interface Model {
     boolean policyHasContract(Contract contract, Policy policy);
 
     /**
-     * Removes the given contract from the corresponding person in the address book.
+     * Removes the given contract from the corresponding contact in the address book.
      */
-    void removeContractFromPerson(Contract contract);
+    void removeContractFromContact(Contract contract);
 
     /**
      * Removes the given contract from the corresponding policy in the address book.
@@ -311,5 +312,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the unique contract list */
     ObservableList<Contract> getUniqueContractList();
+
+    /** Returns an unmodifiable view of the unique contact list */
+    ObservableList<Contact> getUniqueContactList();
 
 }

@@ -156,17 +156,35 @@ Adds a contact to iCon
 
 Format: `add_contact n:NAME p:PHONE_NUMBER ic:NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]`
 
+Examples:
+
+* `add_contact n:Timothy p:91227843 ic:t1234567a`
+* `add_contact n:Andre p:82567645 ic:t0487439z e:andre04@gmail.com a:12 House, House St`
+
+![img.jpeg](images/add_contact_1.jpeg)
+![img.jpeg](images/add_contact_2.jpeg)
+
 ### Editing contacts : `edit_contact`
 
 Edits a contact in iCon
 
-Format: `edit_contact INDEX [n:NAME] [p:PHONE_NUMBER] [ic:NRIC] [e:EMAIL] [a:ADDRESS] [t:TAG]`
+Examples:
+
+* `edit_contact ic:T1234567A n:Tom`
+* `edit_contact ic:T0000000B p:98539870`
+
+Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [ic:NRIC] [e:EMAIL] [a:ADDRESS] [t:TAG]`
 
 ### Removing contacts : `remove_contact`
 
 Removes a contact in iCon
 
 Format: `remove_contact ic:NRIC`
+
+Examples:
+
+* `remove_contact ic:t1234567a`
+* `remove_contact ic:T1234567B`
 
 ### Sorting contacts : `sort_contact`
 
@@ -182,7 +200,12 @@ Shows a list of all contacts or a specific contact in iCon.
 
 Format : 
 1. `view_contact -a` 
-2. `view_contact ic:NRIC1 [NRIC2] [NRIC3] ....` at least 1 IC to view
+2. `view_contact ic:NRIC1 [NRIC2] [NRIC3]...` at least 1 IC to view
+
+Examples: 
+
+* `view_contact ic: T1234567a`
+* `view_contact ic: T1234567a t1234567b`
 
 ## Policy
 
@@ -359,7 +382,7 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 |------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add contact**        | `add_contact n:NAME p:PHONE_NUMBER ic: NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]…​` <br> e.g., `add_contact n:James Ho p:22224444 ic: T0000000A e:jamesho@example.com a:123, Clementi Rd, 1234665 t:friend t:colleague` |
 | **Remove contact**     | `remove_contact ic: NRIC`<br> e.g., `remove_contact ic: T0000000A`                                                                                                                                               |
-| **Edit contact**       | `edit_contact INDEX [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact 2 n:James Lee e:jameslee@example.com`                                                                      |
+| **Edit contact**       | `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact ic:T1234567A n:James Lee e:jameslee@example.com`                                                         |
 | **Sort contact**       | `sort_contact -a` OR `sort_contact -i`                                                                                                                                                                           |
 | **View contact**       | `view_contact -a` OR `view_contact ic: NRIC1 [NRIC2] [NRIC3] ...` <br> e.g., `view_contact ic: T0000000A`                                                                                                        | 
 | **Add contract**       | `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT ` <br> `add_contract p:P1234A ic:T1234567A dt:2024-01-01 e: 2025-12-12 pr: 1000`                                                |

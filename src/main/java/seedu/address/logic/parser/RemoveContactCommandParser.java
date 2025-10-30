@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.RemoveContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.contact.Nric;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new RemoveContactCommand object

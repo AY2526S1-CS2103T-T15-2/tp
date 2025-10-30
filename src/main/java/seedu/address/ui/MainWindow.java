@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ContactListPanel contactListPanel;
     private PolicyListPanel policyListPanel;
     private ContractListPanel contractListPanel;
     private AppointmentListPanel appointmentListPanel;
@@ -48,7 +48,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane mainContentPlaceholder;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contactListPanelPlaceholder;
 
     @FXML
     private StackPane policyListPanelPlaceholder;
@@ -125,8 +125,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getSortedPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        contactListPanel = new ContactListPanel(logic.getSortedContactList());
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
 
         policyListPanel = new PolicyListPanel(logic.getFilteredPolicyList());
         policyListPanelPlaceholder.getChildren().add(policyListPanel.getRoot());
@@ -137,7 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         appointmentListPanel = new AppointmentListPanel(logic.getSortedAppointmentList());
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
 
-        personListPanelPlaceholder.setVisible(true);
+        contactListPanelPlaceholder.setVisible(true);
         policyListPanelPlaceholder.setVisible(false);
         contractListPanelPlaceholder.setVisible(false);
         appointmentListPanelPlaceholder.setVisible(false);
@@ -192,8 +192,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ContactListPanel getContactListPanel() {
+        return contactListPanel;
     }
 
     /**
@@ -209,8 +209,8 @@ public class MainWindow extends UiPart<Stage> {
 
             switch (commandResult.listPanelType) {
             case CONTACT -> {
-                showPersonListPanel();
-                personListPanel.refresh();
+                showContactListPanel();
+                contactListPanel.refresh();
             }
             case POLICY -> {
                 showPolicyListPanel();
@@ -237,29 +237,29 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void showPersonListPanel() {
-        personListPanelPlaceholder.setVisible(true);
+    private void showContactListPanel() {
+        contactListPanelPlaceholder.setVisible(true);
         policyListPanelPlaceholder.setVisible(false);
         contractListPanelPlaceholder.setVisible(false);
         appointmentListPanelPlaceholder.setVisible(false);
     }
 
     private void showPolicyListPanel() {
-        personListPanelPlaceholder.setVisible(false);
+        contactListPanelPlaceholder.setVisible(false);
         policyListPanelPlaceholder.setVisible(true);
         contractListPanelPlaceholder.setVisible(false);
         appointmentListPanelPlaceholder.setVisible(false);
     }
 
     private void showContractListPanel() {
-        personListPanelPlaceholder.setVisible(false);
+        contactListPanelPlaceholder.setVisible(false);
         policyListPanelPlaceholder.setVisible(false);
         contractListPanelPlaceholder.setVisible(true);
         appointmentListPanelPlaceholder.setVisible(false);
     }
 
     private void showAppointmentListPanel() {
-        personListPanelPlaceholder.setVisible(false);
+        contactListPanelPlaceholder.setVisible(false);
         policyListPanelPlaceholder.setVisible(false);
         contractListPanelPlaceholder.setVisible(false);
         appointmentListPanelPlaceholder.setVisible(true);

@@ -2,11 +2,11 @@ package seedu.address.testutil;
 
 import java.time.LocalDate;
 
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 
 /**

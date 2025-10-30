@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
 ### Logic component
 
@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -123,14 +123,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
+* stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Contact` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +190,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -246,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -317,12 +317,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `iCon` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case: UC1 - Add a person**
+**Use Case: UC1 - Add a contact**
 
 **MSS**
 
-1.  User requests to add a person with all details specified
-2.  iCon adds the person
+1.  User requests to add a contact with all details specified
+2.  iCon adds the contact
 
     Use case ends.
 
@@ -333,14 +333,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC2 - Delete a person**
+**Use case: UC2 - Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  iCon shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  iCon deletes the person
+1.  User requests to list contacts
+2.  iCon shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  iCon deletes the contact
 
     Use case ends.
 
@@ -356,14 +356,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use Case: UC3 - Edit a person's details**
+**Use Case: UC3 - Edit a contact's details**
 
 **MSS**
 
-1.  User requests to list persons
-2.  iCon shows a list of persons
-3.  User requests to edit a specific person in the list
-4.  iCon updates the person's details
+1.  User requests to list contacts
+2.  iCon shows a list of contacts
+3.  User requests to edit a specific contact in the list
+4.  iCon updates the contact's details
 
     Use case ends.
 
@@ -385,31 +385,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use Case: UC4 - Find persons by name**
+**Use Case: UC4 - Find contacts by name**
 
 **MSS**
 
-1.  User requests to find persons by name
-2.  iCon shows a list of persons whose names contain the given keywords
-3.  User requests to view details of a specific person in the list
-4.  iCon shows the person's details
+1.  User requests to find contacts by name
+2.  iCon shows a list of contacts whose names contain the given keywords
+3.  User requests to view details of a specific contact in the list
+4.  iCon shows the contact's details
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No persons found.
+* 2a. No contacts found.
 
   * 2a1. iCon shows an empty list.
 
     Use case ends.
 
-**Use Case: UC5 - List all persons**
+**Use Case: UC5 - List all contacts**
 
 **MSS**
 
-1.  User requests to list persons
-2.  iCon shows a list of persons
+1.  User requests to list contacts
+2.  iCon shows a list of contacts
 
     Use case ends.
 
@@ -421,12 +421,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use Case: UC6 - Clear all persons**
+**Use Case: UC6 - Clear all contacts**
 
 **MSS**
 
-1.  User requests to clear all persons
-2.  iCon clears all persons
+1.  User requests to clear all contacts
+2.  iCon clears all contacts
 
     Use case ends.
 
@@ -544,7 +544,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. The person ID is invalid.
+* 2a. The contact ID is invalid.
 
     * 2a1. iCon shows an error message.
 
@@ -615,7 +615,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The application should be easily installable, with no additional third-party dependencies.
 3.  The application should function entirely offline.
-4.  The system should be able to hold up to 1000 persons, contracts, and policies without a noticeable sluggishness in performance for typical usage.
+4.  The system should be able to hold up to 1000 contacts, contracts, and policies without a noticeable sluggishness in performance for typical usage.
 5.  The system should respond to user input and commands within 100 milliseconds.
 6.  The system should manage its own copy of policies separate from the source file when adding or removing policies.
 7.  The save data should not take more than 100 MB in typical usage.
@@ -627,7 +627,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Contact**: A customer of the insurance agent that has data fields, name, email, and NRIC
-* **Person(s)**: Another way of saying a contact
 * **Policy**: The document that details the terms and conditions of a contract
 * **Contract**: A contract that binds a customer to a certain policy
 
@@ -672,11 +671,13 @@ testers are expected to do more *exploratory* testing.
 1. Sort contacts by alphabetical sort. `sort_contact -a`.
    2. The list should re-order to show Alice first, then Bob.
 
-1. edit_contact //fill in later
+1. Edit contact by NRIC to change fields such as phone number.
+
+    1. `edit_contact ic: G1234567B p:88888888`
 
 1. View a specific contact: View by NRIC. Only Bob's details should be displayed
 
-   1.`view_contact ic: G1234567B`
+   1. `view_contact ic: G1234567B`
 
 1. Remove a contact: Remove Bob using his NRIC. The list should update, leaving only Alice.
 
@@ -694,26 +695,26 @@ testers are expected to do more *exploratory* testing.
 
     1. Create a file named `policy_file.txt` in the same folder as your .jar file.
 
-    1. Put this text inside that file: Life Insurance'This policy coverage for family...
+    1. Put this text inside that file: Life Insurance`This policy coverage for family...
 
     1. Now, run the command: `add_policy f:policy_file.txt`
 
 1. View all policies. The list should show all 3 policies added.
-Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI
+Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailor the POLICY_ID to the randomly generated POLICY ID as shown in the GUI
 
    1.  `view_policy -a`
 
 1. Edit a policy. Use the POLICY_ID for "Premium Health" (eg. P1234A) to edit it
 
-    1. `edit_policy p:1234A n: Premium Health Gold`
+    1. `edit_policy p:P1234A n: Premium Health Gold`
 
 1. Remove the Basic Car policy using the POLICY_ID (eg. P5678B)
 
-    1. remove_policy p:5678B
+    1. remove_policy p:P5678B
 
 ### Contract management
 
-1. Setup: We should have "Alice" (NRIC S9876543A) and a Policy (eg. P1234A for "Premium Health Gold").
+1. Setup: We should have "Alice" (NRIC S9876543A) and a Policy (eg. P1234A for "Premium Health Gold", refer to the POLICY_ID in the GUI).
 
 1. Add a new contract for Alice with the policy.
 
@@ -727,7 +728,11 @@ Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI
 
     1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:-50`
 
-1. Edit Contract: Use the CONTRACT_ID assigned by the system (eg. C1234A) to edit the premium
+1. View all contracts. The list should show the contract added.
+
+    1. `view_contract -a`
+
+1. Edit Contract: Similar to POLICY_ID, use the CONTRACT_ID assigned by the system (eg. C1234A) to edit the premium
 
     1. `edit_contract c:C1234A pr:1300.00`
 
@@ -753,10 +758,20 @@ Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI
 
     1. `sort_appointment -da`
 
-1. Edit appointments: Note the APPOINTMENTID from the GUI (eg. A1234B) for one of the appointments and change its date
+1. Edit appointments: Similar to POLICY_ID, use APPOINTMENTID from the GUI (eg. A1234B) from one of the appointments and change its date
 
     1. `edit_appointment a:A1234B dt:2025-11-16 d:Sign new contract papers`
 
-1. Remove appointment: Remove the appointment you edited (use the APPOINTMENTID)
+1. Remove appointment: Remove the appointment you edited (using APPOINTMENTID) (eg. A1234B)
 
     1. `remove_appointment a:A1234B`
+
+### Exiting and Relaunching
+
+1. Exit the app
+
+   1. `exit`
+
+1. Relaunch the app
+
+    1. After relaunching the app, you should see the existing contacts, policies, contracts and appointments saved previously.

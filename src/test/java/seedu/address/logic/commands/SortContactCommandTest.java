@@ -10,8 +10,8 @@ import java.util.Comparator;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.ModelStub;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonComparatorType;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactComparatorType;
 import seedu.address.ui.ListPanelType;
 
 public class SortContactCommandTest {
@@ -25,25 +25,25 @@ public class SortContactCommandTest {
     public void execute_sortByComparatorType_successful() {
         ModelStubAcceptingComparator modelStub = new ModelStubAcceptingComparator();
 
-        CommandResult commandResult = new SortContactCommand(PersonComparatorType.UNORDERED).execute(modelStub);
+        CommandResult commandResult = new SortContactCommand(ContactComparatorType.UNORDERED).execute(modelStub);
         assertEquals(commandResult,
                 new CommandResult(SortContactCommand.MESSAGE_SUCCESS_UNORDERED, ListPanelType.CONTACT));
 
-        commandResult = new SortContactCommand(PersonComparatorType.ALPHABETICAL).execute(modelStub);
+        commandResult = new SortContactCommand(ContactComparatorType.ALPHABETICAL).execute(modelStub);
         assertEquals(commandResult,
                 new CommandResult(SortContactCommand.MESSAGE_SUCCESS_ALPHABETICAL, ListPanelType.CONTACT));
     }
 
     @Test
     public void equals() {
-        SortContactCommand sortInsertion = new SortContactCommand(PersonComparatorType.UNORDERED);
-        SortContactCommand sortAlphabetical = new SortContactCommand(PersonComparatorType.ALPHABETICAL);
+        SortContactCommand sortInsertion = new SortContactCommand(ContactComparatorType.UNORDERED);
+        SortContactCommand sortAlphabetical = new SortContactCommand(ContactComparatorType.ALPHABETICAL);
 
         // same object -> returns true
         assertTrue(sortInsertion.equals(sortInsertion));
 
         // same values -> returns true
-        SortContactCommand sortInsertionCopy = new SortContactCommand(PersonComparatorType.UNORDERED);
+        SortContactCommand sortInsertionCopy = new SortContactCommand(ContactComparatorType.UNORDERED);
         assertTrue(sortInsertion.equals(sortInsertionCopy));
 
         // different types -> returns false
@@ -58,18 +58,18 @@ public class SortContactCommandTest {
 
     @Test
     public void toStringMethod() {
-        PersonComparatorType comparatorType = PersonComparatorType.UNORDERED;
+        ContactComparatorType comparatorType = ContactComparatorType.UNORDERED;
         SortContactCommand sortContactCommand = new SortContactCommand(comparatorType);
         String expected = SortContactCommand.class.getCanonicalName() + "{comparatorType=" + comparatorType + "}";
         assertEquals(expected, sortContactCommand.toString());
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the contact being added.
      */
     private class ModelStubAcceptingComparator extends ModelStub {
         @Override
-        public void sortPersons(Comparator<Person> comparator) {
+        public void sortContacts(Comparator<Contact> comparator) {
 
         }
     }

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -11,26 +11,26 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.ui.ListPanelType;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a contact identified using it's displayed index from the address book.
  */
 public class RemoveContactCommand extends Command {
 
     public static final String COMMAND_WORD = "remove_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes the person identified by the NRIC from iCon.\n"
+            + ": Deletes the contact identified by the NRIC used in the displayed contact list.\n"
             + "Parameters: " + PREFIX_NRIC + " NRIC \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NRIC + " S1234567A";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Removed Person: %1$s";
+    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
-    public static final String MESSAGE_DELETE_PERSON_FAILURE = "Could not remove person "
-            + "since no such NRIC exists within iCon.";
+    public static final String MESSAGE_DELETE_CONTACT_FAILURE = "Could not delete contact "
+            + "since no such NRIC exists within current contact list.";
     public static final String MESSAGE_REMOVE_CONTACT_PENDING = "Contracts exists under this policy. "
             + "Please remove before proceeding: %1$s";
 
@@ -43,28 +43,28 @@ public class RemoveContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        List<Contact> lastShownList = model.getFilteredContactList();
 
         int index = findIndex(lastShownList, predicate);
         if (index == -1) {
-            throw new CommandException(MESSAGE_DELETE_PERSON_FAILURE);
+            throw new CommandException(MESSAGE_DELETE_CONTACT_FAILURE);
         }
-        Index personIndex = Index.fromZeroBased(index);
-        Person person = lastShownList.get(personIndex.getZeroBased());
+        Index contactIndex = Index.fromZeroBased(index);
+        Contact contact = lastShownList.get(contactIndex.getZeroBased());
 
         //check for existing contracts
-        if (!person.getContracts().isEmpty()) {
-            String existingContractIds = person.getContractIdsAsString();
+        if (!contact.getContracts().isEmpty()) {
+            String existingContractIds = contact.getContractIdsAsString();
             throw new CommandException(String.format(MESSAGE_REMOVE_CONTACT_PENDING, existingContractIds));
         }
 
-        model.deletePerson(person);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                person.getName() + " " + person.getNric()), ListPanelType.CONTACT);
+        model.deleteContact(contact);
+        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS,
+                contact.getName() + " " + contact.getNric()), ListPanelType.CONTACT);
     }
 
-    private static int findIndex(List<Person> list, NricContainsKeywordsPredicate predicate) {
+    private static int findIndex(List<Contact> list, NricContainsKeywordsPredicate predicate) {
         return IntStream.range(0, list.size())
                 .filter(i -> predicate.test(list.get(i)))
                 .findFirst()

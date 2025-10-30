@@ -39,18 +39,18 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
 
 /**
- * A utility class containing a list of {@code Person} and {@code Policy} objects to be used in tests.
+ * A utility class containing a list of {@code Contact} and {@code Policy} objects to be used in tests.
  */
 public class TypicalData {
 
@@ -116,39 +116,39 @@ public class TypicalData {
             .withDate(LocalDate.parse(VALID_APPOINTMENT_DATE_B))
             .withDetails(VALID_APPOINTMENT_DETAILS_B).build();
 
-    private static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+    private static final Contact ALICE = new ContactBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withNric("S1234567A").withPhone("94351253")
             .withTags("friends").build();
-    private static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+    private static final Contact BENSON = new ContactBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withNric("S1234567B").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    private static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+    private static final Contact CARL = new ContactBuilder().withName("Carl Kurz").withPhone("95352563")
             .withNric("S1234567C")
             .withEmail("").withAddress("wall street").build();
-    private static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+    private static final Contact DANIEL = new ContactBuilder().withName("Daniel Meier").withPhone("87652533")
             .withNric("S1234567D")
             .withEmail("cornelia@example.com").withAddress("").withTags("friends").build();
-    private static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    private static final Contact ELLE = new ContactBuilder().withName("Elle Meyer").withPhone("9482224")
             .withNric("T1234567A")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
-    private static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    private static final Contact FIONA = new ContactBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withNric("T1234567B")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    private static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    private static final Contact GEORGE = new ContactBuilder().withName("George Best").withPhone("9482442")
             .withNric("T1234597A")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
-    private static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    private static final Contact HOON = new ContactBuilder().withName("Hoon Meier").withPhone("8482424")
             .withNric("S9876543L").withEmail("stefan@example.com").withAddress("little india").build();
-    private static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    private static final Contact IDA = new ContactBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    private static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    private static final Contact AMY = new ContactBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withNric(VALID_NRIC_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    private static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+    private static final Contact BOB = new ContactBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withNric(VALID_NRIC_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
@@ -209,48 +209,48 @@ public class TypicalData {
     private TypicalData() {} // prevents instantiation
 
     // Static variable getters - creates copies of internal data
-    public static Person getAlice() {
-        return new PersonBuilder(ALICE).build();
+    public static Contact getAlice() {
+        return new ContactBuilder(ALICE).build();
     }
 
-    public static Person getBenson() {
-        return new PersonBuilder(BENSON).build();
+    public static Contact getBenson() {
+        return new ContactBuilder(BENSON).build();
     }
 
-    public static Person getCarl() {
-        return new PersonBuilder(CARL).build();
+    public static Contact getCarl() {
+        return new ContactBuilder(CARL).build();
     }
 
-    public static Person getDaniel() {
-        return new PersonBuilder(DANIEL).build();
+    public static Contact getDaniel() {
+        return new ContactBuilder(DANIEL).build();
     }
 
-    public static Person getElle() {
-        return new PersonBuilder(ELLE).build();
+    public static Contact getElle() {
+        return new ContactBuilder(ELLE).build();
     }
 
-    public static Person getFiona() {
-        return new PersonBuilder(FIONA).build();
+    public static Contact getFiona() {
+        return new ContactBuilder(FIONA).build();
     }
 
-    public static Person getGeorge() {
-        return new PersonBuilder(GEORGE).build();
+    public static Contact getGeorge() {
+        return new ContactBuilder(GEORGE).build();
     }
 
-    public static Person getHoon() {
-        return new PersonBuilder(HOON).build();
+    public static Contact getHoon() {
+        return new ContactBuilder(HOON).build();
     }
 
-    public static Person getIda() {
-        return new PersonBuilder(IDA).build();
+    public static Contact getIda() {
+        return new ContactBuilder(IDA).build();
     }
 
-    public static Person getAmy() {
-        return new PersonBuilder(AMY).build();
+    public static Contact getAmy() {
+        return new ContactBuilder(AMY).build();
     }
 
-    public static Person getBob() {
-        return new PersonBuilder(BOB).build();
+    public static Contact getBob() {
+        return new ContactBuilder(BOB).build();
     }
 
     public static Policy getLife() {
@@ -277,21 +277,21 @@ public class TypicalData {
         return new PolicyBuilder(HEALTH_B).build();
     }
 
-    // Static getters for typical persons and policies
-    public static Person getTypicalAlice() {
-        Person alice = getAlice();
+    // Static getters for typical contacts and policies
+    public static Contact getTypicalAlice() {
+        Contact alice = getAlice();
         alice.addContract(CONTRACT_A);
         return alice;
     }
 
-    public static Person getTypicalBenson() {
-        Person benson = getBenson();
+    public static Contact getTypicalBenson() {
+        Contact benson = getBenson();
         benson.addContract(CONTRACT_B);
         return benson;
     }
 
-    public static Person getTypicalCarl() {
-        Person carl = getCarl();
+    public static Contact getTypicalCarl() {
+        Contact carl = getCarl();
         carl.addContract(CONTRACT_C);
         return carl;
     }
@@ -319,8 +319,8 @@ public class TypicalData {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+        for (Contact contact : getTypicalContacts()) {
+            ab.addContact(contact);
         }
         for (Policy policy: getTypicalPolicies()) {
             ab.addPolicy(policy);
@@ -334,7 +334,7 @@ public class TypicalData {
         return ab;
     }
 
-    public static List<Person> getTypicalPersons() {
+    public static List<Contact> getTypicalContacts() {
         return List.of(
                 getTypicalAlice(),
                 getTypicalBenson(),

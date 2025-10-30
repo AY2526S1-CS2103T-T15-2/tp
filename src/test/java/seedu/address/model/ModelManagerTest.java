@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HEALTH_B;
 import static seedu.address.logic.commands.PolicyCommandTestUtil.VALID_POLICY_ID_HOME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getAlice;
 import static seedu.address.testutil.TypicalData.getAppointmentA;
@@ -29,11 +29,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactComparatorType;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractComparatorType;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonComparatorType;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PolicyBuilder;
 
@@ -92,19 +92,19 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson((Person) null));
+    public void hasContact_nullContact_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasContact((Contact) null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(getAlice()));
+    public void hasContact_contactNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasContact(getAlice()));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(getAlice());
-        assertTrue(modelManager.hasPerson(getAlice()));
+    public void hasContact_contactInAddressBook_returnsTrue() {
+        modelManager.addContact(getAlice());
+        assertTrue(modelManager.hasContact(getAlice()));
     }
 
     @Test
@@ -151,17 +151,17 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void addContractToPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(getAlice());
+    public void addContractToContact_contactInAddressBook_returnsTrue() {
+        modelManager.addContact(getAlice());
         modelManager.addPolicy(getLife());
         modelManager.addContract(getContractA());
-        modelManager.addContractToPerson(getContractA());
-        assertTrue(modelManager.personHasContract(getContractA(), getTypicalAlice()));
+        modelManager.addContractToContact(getContractA());
+        assertTrue(modelManager.contactHasContract(getContractA(), getTypicalAlice()));
     }
 
     @Test
     public void addContractToPolicy_policyInAddressBook_returnsTrue() {
-        modelManager.addPerson(getAlice());
+        modelManager.addContact(getAlice());
         modelManager.addPolicy(getLife());
         modelManager.addContract(getContractA());
         modelManager.addContractToPolicy(getContractA());
@@ -206,13 +206,13 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
 
     @Test
-    public void getSortedPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getSortedContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
 
     @Test
@@ -246,21 +246,22 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void sortPersons() {
-        ObservableList<Person> persons = FXCollections.observableArrayList(getBenson(), getAlice(), getCarl());
-        persons.forEach(modelManager::addPerson);
+    public void sortContacts() {
+        ObservableList<Contact> contacts = FXCollections.observableArrayList(getBenson(), getAlice(), getCarl());
+        contacts.forEach(modelManager::addContact);
 
-        // Make sure the internal filtered person list has the correct persons
-        assertEquals(persons, modelManager.getFilteredPersonList());
+        // Make sure the internal filtered contact list has the correct contacts
+        assertEquals(contacts, modelManager.getFilteredContactList());
 
         // Sort alphabetically
-        ObservableList<Person> expectedPersons = FXCollections.observableArrayList(getAlice(), getBenson(), getCarl());
-        modelManager.sortPersons(PersonComparatorType.ALPHABETICAL.comparator);
-        assertEquals(expectedPersons, modelManager.getSortedPersonList());
+        ObservableList<Contact> expectedContacts =
+                FXCollections.observableArrayList(getAlice(), getBenson(), getCarl());
+        modelManager.sortContacts(ContactComparatorType.ALPHABETICAL.comparator);
+        assertEquals(expectedContacts, modelManager.getSortedContactList());
 
         // Sort by insertion order
-        modelManager.sortPersons(PersonComparatorType.UNORDERED.comparator);
-        assertEquals(persons, modelManager.getSortedPersonList());
+        modelManager.sortContacts(ContactComparatorType.UNORDERED.comparator);
+        assertEquals(contacts, modelManager.getSortedContactList());
     }
 
     @Test
@@ -301,7 +302,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(getAlice()).withPerson(getBenson()).build();
+        AddressBook addressBook = new AddressBookBuilder().withContact(getAlice()).withContact(getBenson()).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -322,9 +323,9 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredPersonList -> returns false
+        // different filteredContactList -> returns false
         String[] keywords = getAlice().getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NricContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredContactList(new NricContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredPolicyList -> returns false
@@ -340,7 +341,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

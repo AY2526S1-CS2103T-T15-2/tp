@@ -41,7 +41,7 @@ public class RemoveContractCommand extends Command {
 
         Contract contractToRemove = getContractToRemove(list);
         model.removeContract(contractToRemove);
-        model.removeContractFromPerson(contractToRemove);
+        model.removeContractFromContact(contractToRemove);
         model.removeContractFromPolicy(contractToRemove);
         return new CommandResult(String.format(MESSAGE_REMOVE_CONTRACT_SUCCESS, contractToRemove.getCId()),
                 ListPanelType.CONTRACT);

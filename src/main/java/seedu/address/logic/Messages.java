@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.policy.Policy;
 
 /**
@@ -16,13 +16,13 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_POLICY_NOT_FOUND = "This policy does not exist in iCon";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_CONTRACT_NOT_FOUND = "This contract ID does not exist in iCon.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist in iCon";
+    public static final String MESSAGE_CONTACT_NOT_FOUND = "Contact does not exist in iCon";
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "This appointment ID does not exist in the iCOn.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date should be in the format yyyy-MM-dd";
     public static final String MESSAGE_INVALID_EXPIRY_DATE = "Signing date comes after expiry date";
@@ -41,21 +41,21 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code contact} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Contact contact) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(contact.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(contact.getPhone())
                 .append("; NRIC: ")
-                .append(person.getNric())
+                .append(contact.getNric())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(contact.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(contact.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        contact.getTags().forEach(builder::append);
         return builder.toString();
     }
 

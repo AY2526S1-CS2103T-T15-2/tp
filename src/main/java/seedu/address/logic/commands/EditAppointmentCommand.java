@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDetails;
 import seedu.address.model.appointment.AppointmentId;
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -32,22 +32,23 @@ public class EditAppointmentCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters:"
             + PREFIX_NRIC + "NRIC "
-            + PREFIX_DATE + "DATE"
+            + PREFIX_DATE + "DATE "
             + PREFIX_DETAILS + "DETAILS\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_AID
-            + PREFIX_DATE + "2020-10-10"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_AID + "A1234A" + " "
+            + PREFIX_DATE + "2020-10-10" + " "
             + PREFIX_DETAILS + "Run through Health coverage";
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in iCon.";
 
     private final AppointmentId aId;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
 
     /**
      * @param aId of the appointment in the filtered appointment list to edit
-     * @param editAppointmentDescriptor details to edit the person with
+     * @param editAppointmentDescriptor details to edit the contact with
      */
     public EditAppointmentCommand(AppointmentId aId, EditAppointmentDescriptor editAppointmentDescriptor) {
         requireNonNull(aId);
@@ -167,12 +168,12 @@ public class EditAppointmentCommand extends Command {
         }
 
         public Optional<Nric> getNric(Model model) throws CommandException {
-            // Requires precondition null checker as hasPerson requires non null
+            // Requires precondition null checker as hasContact requires non null
             if (nric == null) {
                 return Optional.ofNullable(nric);
             }
-            if (!model.hasPerson(nric)) {
-                throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            if (!model.hasContact(nric)) {
+                throw new CommandException(Messages.MESSAGE_CONTACT_NOT_FOUND);
             }
             return Optional.ofNullable(nric);
         }

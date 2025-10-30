@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Nric;
+import seedu.address.model.contact.Nric;
 
 public class AppointmentTest {
 

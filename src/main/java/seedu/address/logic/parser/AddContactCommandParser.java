@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
+import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,9 +50,9 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, nric, email, address, tagList);
+        Contact contact = new Contact(name, phone, nric, email, address, tagList);
 
-        return new AddContactCommand(person);
+        return new AddContactCommand(contact);
     }
 
     /**

@@ -14,9 +14,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddContractCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractPremium;
-import seedu.address.model.person.Nric;
 import seedu.address.model.policy.PolicyId;
 
 /**

@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.util.List;
 
-import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 
 /**
  * A utility class containing a list of {@code NricContainsKeywordsPredicate} objects to be used in tests.

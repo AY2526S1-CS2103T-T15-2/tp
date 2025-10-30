@@ -9,10 +9,10 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
 
@@ -51,7 +51,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addContact(Contact contact) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -66,12 +66,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasContact(Contact contact) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public boolean hasPerson(Nric nric) {
+    public boolean hasContact(Nric nric) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -81,32 +81,32 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deleteContact(Contact target) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setContact(Contact target, Contact editedContact) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Contact> getFilteredContactList() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ObservableList<Person> getSortedPersonList() {
+    public ObservableList<Contact> getSortedContactList() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredContactList(Predicate<Contact> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void sortPersons(Comparator<Person> comparator) {
+    public void sortContacts(Comparator<Contact> comparator) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -175,7 +175,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addContractToPerson(Contract contract) {
+    public void addContractToContact(Contract contract) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -270,7 +270,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean personHasContract(Contract contract, Person person) {
+    public boolean contactHasContract(Contract contract, Contact contact) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -280,7 +280,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void removeContractFromPerson(Contract contract) {
+    public void removeContractFromContact(Contract contract) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -291,6 +291,11 @@ public class ModelStub implements Model {
 
     @Override
     public ObservableList<Contract> getUniqueContractList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Contact> getUniqueContactList() {
         throw new AssertionError("This method should not be called.");
     }
 }

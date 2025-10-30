@@ -14,17 +14,17 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.model.contract.ContractPremium;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDetails;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.PolicyName;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 import seedu.address.ui.ListPanelType;
 
 
@@ -36,7 +36,7 @@ public class AddContractCommandTest {
     private static final String VALID_DATE = "2000-01-01";
     private static final String VALID_EXPIRY = "2020-01-01";
     private static final String VALID_PREMIUM = "1000.00";
-    private static final Person PERSON_WITH_VALID_ID = new PersonBuilder().build();
+    private static final Contact CONTACT_WITH_VALID_ID = new ContactBuilder().build();
 
     @Test
     public void constructor_nullContract_throwsNullPointerException() {
@@ -82,13 +82,13 @@ public class AddContractCommandTest {
                 LocalDate.parse(VALID_EXPIRY),
                 new ContractPremium(VALID_PREMIUM));
         assertCommandFailure(new AddContractCommand(contractWithInvalidNric),
-                modelStub, Messages.MESSAGE_PERSON_NOT_FOUND);
+                modelStub, Messages.MESSAGE_CONTACT_NOT_FOUND);
     }
 
     @Test
     public void validNric_success() {
         Model modelStub = new ModelManager();
-        modelStub.addPerson(PERSON_WITH_VALID_ID);
+        modelStub.addContact(CONTACT_WITH_VALID_ID);
         Policy policyStub = new Policy(new PolicyName("stub"),
                 new PolicyDetails("none"), new PolicyId(VALID_PID));
         modelStub.addPolicy(policyStub);

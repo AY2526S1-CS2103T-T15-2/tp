@@ -2,26 +2,26 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
+import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.ui.ListPanelType;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all contacts in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class ViewContactCommand extends Command {
 
     public static final String COMMAND_WORD = "view_contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose nrics contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose nrics matches any of "
+            + "the specified nrics (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + PREFIX_NRIC + "KEYWORD [MORE_KEYWORDS]...\n"
+            + PREFIX_NRIC + "NRIC1 [NRIC2] [NRIC3]...\n"
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NRIC + " T1234567A S1234892B T0549223e";
@@ -51,14 +51,14 @@ public class ViewContactCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (showAllContacts) {
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
             return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                    String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()),
                     ListPanelType.CONTACT);
         }
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()),
                 ListPanelType.CONTACT);
     }
 
