@@ -362,70 +362,86 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1b. The contact is duplicate.
+
+    * 1b1. iCon shows an error message.
+
+      Use case ends.
+
 **Use case: UC2 - Delete a contact**
 
 **MSS**
 
-1.  User requests to list contacts
-2.  iCon shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  iCon deletes the contact
+1. User requests to delete a specific contact in the list by NRIC
+2. iCon deletes the contact
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given NRIC is invalid.
 
-  Use case ends.
+    * 1a1. iCon shows an error message.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. iCon shows an error message.
+* 1b. There is no contact stored with the given NRIC.
 
-      Use case resumes at step 2.
+    * 1b1. iCon shows an error message.
+
+      Use case ends.
+
+* 1c. The contact to be deleted is linked to existing contracts.
+
+    * 1c1. iCon shows an error message.
+
+      Use case ends.
 
 **Use Case: UC3 - Edit a contact's details**
 
 **MSS**
 
-1.  User requests to list contacts
-2.  iCon shows a list of contacts
-3.  User requests to edit a specific contact in the list
-4.  iCon updates the contact's details
+1. User requests to edit a specific contact in the list by NRIC
+2. iCon updates the contact's details
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given NRIC is invalid or missing.
 
-  Use case ends.
+    * 1a1. iCon shows an error message.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. iCon shows an error message.
+* 1b. Valid NRIC but no details to be edited.
 
-      Use case resumes at step 2.
+    * 1b1. iCon shows an error message.
 
-* 4a. Some compulsory details are missing.
+      Use case ends.
 
-    * 4a1. iCon shows an error message.
+* 1c. There is no contact stored with the given NRIC.
 
-      Use case resumes at step 2.
+    * 1c1. iCon shows an error message.
 
-**Use Case: UC4 - Find contacts by name**
+      Use case ends.
+
+**Use Case: UC4 - View contacts by NRIC**
 
 **MSS**
 
-1.  User requests to find contacts by name
-2.  iCon shows a list of contacts whose names contain the given keywords
-3.  User requests to view details of a specific contact in the list
-4.  iCon shows the contact's details
+1.  User requests to view contacts by NRIC substring
+2.  iCon shows a list contacts that matches the NRIC substring given
 
     Use case ends.
 
 **Extensions**
+
+* 1a. The given NRIC is missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
 
 * 2a. No contacts found.
 
@@ -433,37 +449,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use Case: UC5 - List all contacts**
+**Use Case: UC5 - view all contacts**
 
 **MSS**
 
-1.  User requests to list contacts
+1.  User requests to view contacts
 2.  iCon shows a list of contacts
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
 
-  * 1a1. iCon shows an empty list.
+  * 2a1. iCon shows an empty list.
 
     Use case ends.
 
-**Use Case: UC6 - Clear all contacts**
+**Use Case: UC6 - Clear all data**
 
 **MSS**
 
-1.  User requests to clear all contacts
-2.  iCon clears all contacts
+1.  User requests to clear all data
+2.  iCon clears all data
 
     Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
 
 **Use Case: UC7 - Exit the App**
 
@@ -487,28 +497,125 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User adds policy using file path to policy file
+1. User adds policy with all compulsory details specified
 2. iCon adds the policy
-3. iCon shows a success message & generates a policy ID
+3. iCon shows a success message & returns a policy ID to the user
 
    Use case ends.
 
 **Extensions**
 
-* 1a. File path is invalid
+* 1a. Not all compulsory details are specified.
 
    * 1a1. iCon shows an error message.
 
      Use case ends.
 
-**Use case: UC9 - Remove Policy**
+**Use Case: UC9 - Add Policy(by file path)**
 
 **MSS**
 
-1. User requests to list policies
+1. User adds policy using file path
+2. iCon adds the policy
+3. iCon shows a success message & returns a policy ID to the user
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. File path is invalid or file not found.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Remove Policy**
+
+**MSS**
+
+1. User requests to remove a specific policy in the list by policy id
+2. iCon removes the policy
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given id is invalid.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. The policy to be deleted is linked to existing contracts.
+
+    * 2a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2b. There is no policy stored with the given id.
+
+    * 2b1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC11 - Edit Policy**
+
+**MSS**
+
+1. User requests to edit a specific policy in the list by policy id with some or all details specified
+2. iCon updates the policy's details
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given id is invalid or missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 1b. Valid id but no details to be edited.
+
+    * 1b1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. There is no policy stored with the given id.
+
+    * 2a1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC12 - View Specific Policies**
+
+**MSS**
+
+1. User requests to view specific policies by policy id substrings
+2. iCon shows a list of policies that match the policy id substrings
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There is no given search substring.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. The list is empty.
+
+    * 2a1. iCon shows an empty list.
+
+      Use case ends.
+
+**Use Case: UC13 - View All Policies**
+
+**MSS**
+
+1. User requests to view all policies
 2. iCon shows a list of policies
-3. User requests to remove a specific policy in the list
-4. iCon removes the policy
 
     Use case ends.
 
@@ -516,52 +623,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    * 2a1. iCon shows an empty list.
 
-* 3a. The given id is invalid.
+      Use case ends.
 
-    * 3a1. iCon shows an error message.
-
-      Use case resumes at step 2.
-
-**Use Case: UC10 - View Policies**
+**Use Case: UC14 - Sort Policies**
 
 **MSS**
 
-1. User requests to list policies
-2. iCon shows a list of policies
-3. User requests to view details of a specific policy in the list
-4. iCon shows the policy's details
+1. User requests to sort policies by a given flag
+2. iCon shows a sorted list of policies
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given flag is invalid or missing.
 
-  * 2a1. iCon shows an empty list.
+    * 1a1. iCon shows an error message.
 
-    Use case ends.
+      Use case ends.
 
-* 3a. The given id is invalid.
-
-    * 3a1. iCon shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The policy file is missing/corrupted.
-
-    * 3b1. iCon shows an error message.
-
-      Use case resumes at step 2.
-
-**Use Case: UC11 - Add contract**
+**Use Case: UC15 - Add contract**
 
 **MSS**
 
 1. User adds contract with specific details
 2. iCon adds the contract
-3. iCon shows a success message & generates a contract ID
+3. iCon shows a success message & returns a contract ID to the user
 
     Use case ends.
 
@@ -591,37 +680,111 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC12 - Remove contract**
+* 2d. The contract period is invalid.
+
+    * 2d1. iCon shows an error message.
+
+      Use case ends.
+
+* 2e. The date format is invalid.
+
+    * 2e1. iCon shows an error message.
+
+      Use case ends.
+
+* 2f. The premium amount is invalid.
+
+    * 2f1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC16 - Remove contract**
 
 **MSS**
 
-1. User requests to list contracts
-2. iCon shows a list of contracts
-3. User requests to remove a specific contract in the list
-4. iCon removes the contract
+1. User requests to remove a specific contract in the list by contract id
+2. iCon removes the contract
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given id is invalid.
 
-  Use case ends.
+    * 1a1. iCon shows an error message.
 
-* 3a. The given id is invalid.
+      Use case ends.
 
-    * 3a1. iCon shows an error message.
+* 2a. There is no contract stored with the given id.
 
-      Use case resumes at step 2.
+    * 2a1. iCon shows an error message. 
 
-**Use Case: UC13 - View contracts**
+      Use case ends.
+
+**Use Case: UC17 - Edit contract**
 
 **MSS**
 
-1. User requests to list contracts
+1. User requests to edit a specific contract in the list by contract id with some or all details specified
+2. iCon updates the contract's details
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given id is invalid or missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 1b. Valid id but no details to be edited.
+
+    * 1b1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. There is no contract stored with the given id.
+
+    * 2a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2b. Edited details are invalid.
+
+    * 2b1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC18 - View specific contracts**
+
+**MSS**
+
+1. User requests to view details of a specific contract in the list by id
+2. iCon shows the contract's details that matches the id given
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There is no given id.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. The list is empty.
+
+  * 2a1. iCon shows an empty list.
+
+    Use case ends.
+
+**Use Case: UC19 - View all contracts**
+
+**MSS**
+
+1.  User requests to view all contracts
 2. iCon shows a list of contracts
-3. User requests to view details of a specific contract in the list by id
-4. iCon shows the contract's details
 
     Use case ends.
 
@@ -633,11 +796,167 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 3a. The given id is invalid.
+**Use Case: UC20 - Sort contracts**
 
-    * 3a1. iCon shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User requests to sort contracts by a given flag
+2. iCon shows a sorted list of contracts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given flag is invalid or missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC21 - Add appointment**
+
+**MSS**
+
+1. User adds appointment with specific details
+2. iCon adds the appointment
+3. iCon shows a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Some compulsory details are missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. The NRIC is invalid.
+
+    * 2a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2b. The date format is invalid.
+
+    * 2b1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC22 - Remove appointment**
+
+**MSS**
+
+1. User requests to remove a specific appointment in the list by Appointment ID
+2. iCon removes the appointment
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given Appointment ID is invalid.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 1b. There is no appointment stored with the given Appointment ID.
+
+    * 1b1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC23 - Edit appointment**
+
+**MSS**
+
+1. User requests to edit a specific appointment in the list by Appointment ID with some or all details specified
+2. iCon updates the appointment's details
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given Appointment ID is invalid or missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 1b. Valid Appointment ID but no details to be edited.
+
+    * 1b1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. There is no appointment stored with the given Appointment ID.
+
+    * 2a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2b. Edited details are invalid.
+
+    * 2b1. iCon shows an error message.
+
+      Use case ends.
+
+**Use Case: UC24 - View specific appointments**
+
+**MSS**
+
+1. User requests to view specific appointments by Appointment ID substrings
+2. iCon shows a list of appointments that match the Appointment ID substrings
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There is no given search substring.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
+
+* 2a. The list is empty.
+
+    * 2a1. iCon shows an empty list.
+
+      Use case ends.
+
+**Use Case: UC25 - View all appointments**
+
+**MSS**
+
+1. User requests to view all appointments
+2. iCon shows a list of appointments
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  * 2a1. iCon shows an empty list.
+
+    Use case ends.
+
+**Use Case: UC26 - Sort appointments**
+
+**MSS**
+
+1. User requests to sort appointments by a given flag
+2. iCon shows a sorted list of appointments
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given flag is invalid or missing.
+
+    * 1a1. iCon shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
