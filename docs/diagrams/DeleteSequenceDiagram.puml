@@ -27,7 +27,7 @@ activate RemoveContactCommandParser
 RemoveContactCommandParser --> AddressBookParser
 deactivate RemoveContactCommandParser
 
-AddressBookParser -> RemoveContactCommandParser : parse("T1234567A")
+AddressBookParser -> RemoveContactCommandParser : parse("ic:T1234567A")
 activate RemoveContactCommandParser
 
 create RemoveContactCommand
@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> RemoveContactCommand : execute(m)
 activate RemoveContactCommand
 
-RemoveContactCommand -> Model : deleteContact(1)
+RemoveContactCommand -> Model : deleteContact(targetContact)
 activate Model
 
 Model --> RemoveContactCommand

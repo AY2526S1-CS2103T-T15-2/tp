@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# iCon
+# iCon Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Much of our code was based off of the original AB3 code, we refactored it to match the context in our product.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -276,15 +276,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Insurance Agent | search for a contact       | find a specific contact by name                                      |
 | `* *`    | Insurance Agent | search for a contract      | find a specific contract by its type or date                         |
 | `* *`    | Insurance Agent | add client appointments    | add an appointment date for a contact for follow-ups                 |
-| `* *`    | Insurance Agent | delete client appointments | delete any misplaced appointment dates for a contact                 |
+| `* *`    | Insurance Agent | remove client appointments | remove any misplaced appointment dates for a contact                 |
+| `* *`    | Insurance Agent | view client appointments   | see appointments with my clients                                     |
 | `* *`    | Insurance Agent | add contract expiry        | start to schedule an appointment closer to contract's expiry         |
 | `* *`    | Insurance Agent | add contract premium       | easily reference the rates offered to my customers                   |
+| `* *`    | Insurance Agent | edit a contract            | edit any wrong or changed details of a contract                      |
 | `* *`    | Insurance Agent | edit a contact             | edit the wrong details of customers                                  |
 | `* *`    | Insurance Agent | edit a policy              | edit the policy of the contract                                      |
 | `*`      | Insurance Agent | sort by contacts           | order by contacts                                                    |
 | `*`      | Insurance Agent | sort by contracts          | order by contracts                                                   |
 | `*`      | Insurance Agent | edit client appointments   | reschedule an appointment date for a contact or mark it as completed |
 | `*`      | Insurance Agent | sort by appointments       | easily take reference to upcoming appointments                       |
+| `*`      | Insurance Agent | search for appointment     | easily search the details of an appointment with a client            |
 
 
 

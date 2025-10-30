@@ -54,9 +54,9 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactComparatorType;
 import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
-import seedu.address.model.policy.IdContainsKeywordsPredicate;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyId;
+import seedu.address.model.policy.PolicyIdContainsKeywordsPredicate;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.ContactUtil;
 import seedu.address.testutil.EditContactDescriptorBuilder;
@@ -190,7 +190,7 @@ public class AddressBookParserTest {
         ViewPolicyCommand command = (ViewPolicyCommand) parser.parseCommand(
                 ViewPolicyCommand.COMMAND_WORD + " "
                         + PREFIX_PID + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new ViewPolicyCommand(new IdContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new ViewPolicyCommand(new PolicyIdContainsKeywordsPredicate(keywords)), command);
         assertTrue(parser.parseCommand(ViewPolicyCommand.COMMAND_WORD + " -a") instanceof ViewPolicyCommand);
     }
 
