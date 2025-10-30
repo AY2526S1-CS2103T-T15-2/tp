@@ -644,7 +644,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch
 
 1. Initial launch
 
@@ -659,29 +659,104 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Start Clean: `clear`
 
-### Deleting a person
+### Contact management
 
-1. Deleting a person while all persons are being shown
+1. Add two contacts. The list should update immediately
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. add_contact n:Bob Lim p:81112222 ic:G1234567B e:bob@example.com a:456 MBS
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. add_contact n:Alice Tan p:91234567 ic:S9876543A e:alice@example.com a:123 Orchard Road
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Sort contacts by alphabetical sort. `sort_contact -a`.
+   2. The list should re-order to show Alice first, then Bob.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. edit_contact //fill in later
 
-1. _{ more test cases …​ }_
+1. View a specific contact: View by NRIC. Only Bob's details should be displayed
 
-### Saving data
+   1.`view_contact ic: G1234567B`
 
-1. Dealing with missing/corrupted data files
+1. Remove a contact: Remove Bob using his NRIC. The list should update, leaving only Alice.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. `remove_contact ic: G1234567B`
 
-1. _{ more test cases …​ }_
+### Policy management
+
+1. Add two new policies.
+
+    1. `add_policy n:Premium Health d:Covers all hospital stays and specialist visits`
+
+    1. `add_policy n:Basic Car d:Covers basic third-party car damage`
+
+1. Add policy from file.
+
+    1. Create a file named `policy_file.txt` in the same folder as your .jar file.
+
+    1. Put this text inside that file: Life Insurance'This policy coverage for family...
+
+    1. Now, run the command: `add_policy f:policy_file.txt`
+
+1. View all policies. The list should show all 3 policies added.
+Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI
+
+   1.  `view_policy -a`
+
+1. Edit a policy. Use the POLICY_ID for "Premium Health" (eg. P1234A) to edit it
+
+    1. `edit_policy p:1234A n: Premium Health Gold`
+
+1. Remove the Basic Car policy using the POLICY_ID (eg. P5678B)
+
+    1. remove_policy p:5678B
+
+### Contract management
+
+1. Setup: We should have "Alice" (NRIC S9876543A) and a Policy (eg. P1234A for "Premium Health Gold").
+
+1. Add a new contract for Alice with the policy.
+
+    1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:1200.50`
+
+1. Add a contract (Bad expiry date): This command should fail because the expiry date is before the signed date
+
+    1. `add_contract p:P1234A ic:S9876543A dt:2025-01-01 e:2024-01-01 pr:100`
+
+1. Add a contract (Bad premium): This command should fail because premium is not a positive number
+
+    1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:-50`
+
+1. Edit Contract: Use the CONTRACT_ID assigned by the system (eg. C1234A) to edit the premium
+
+    1. `edit_contract c:C1234A pr:1300.00`
+
+1. Remove Contract: Remove the contract you edited (use the CONTRACT_ID)
+
+    1. `remove_contract c:C1234A`
+
+### Appointment Management
+
+1. Setup: We still have "Alice" (NRIC S9876543A) in the contact list.
+
+1. Add two appointments for Alice.
+
+    1. `add_appointment ic:S9876543A dt:2025-11-15 d:Discuss contract renewal`
+
+    1. `add_appointment ic:S9876543A dt:2025-10-10 d:Initial healthcare review`
+
+1. Add appointment (Invalid NRIC): This command should fail because the NRIC does not exist.
+
+    1. `add_appointment ic:F9999999Z dt:2025-12-01 d:Non-existent contact`
+
+1. Sort appointments: Sort the appointments by date in ascending order. The "Initial healthcare review" (Oct 10) should appear before the "contract renewal" (Nov 15).
+
+    1. `sort_appointment -da`
+
+1. Edit appointments: Note the APPOINTMENTID from the GUI (eg. A1234B) for one of the appointments and change its date
+
+    1. `edit_appointment a:A1234B dt:2025-11-16 d:Sign new contract papers`
+
+1. Remove appointment: Remove the appointment you edited (use the APPOINTMENTID)
+
+    1. `remove_appointment a:A1234B`
