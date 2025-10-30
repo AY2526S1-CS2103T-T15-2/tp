@@ -63,12 +63,9 @@
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
-        "launch": "Launch",
-        "contact-management": "Contact management",
-        "policy-management": "Policy management",
-        "contract-management": "Contract management",
-        "appointment-management": "Appointment Management",
-        "exiting-and-relaunching": "Exiting and Relaunching"
+        "launch-and-shutdown": "Launch and shutdown",
+        "deleting-a-contact": "Deleting a contact",
+        "saving-data": "Saving data"
       },
       "headingKeywords": {}
     },
