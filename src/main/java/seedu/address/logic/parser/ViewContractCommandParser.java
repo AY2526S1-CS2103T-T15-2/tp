@@ -32,17 +32,21 @@ public class ViewContractCommandParser implements Parser<ViewContractCommand> {
 
         // Check for view specific contract id command
         if (arePrefixesPresent(argMultimap, PREFIX_CID) && preamble.isEmpty()) {
-            String trimmedArgs = argMultimap.getValue(PREFIX_CID).get().trim();
-            if (trimmedArgs.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        ViewContractCommand.MESSAGE_USAGE));
-            }
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CID);
-            String[] idKeyWords = trimmedArgs.split("\\s+");
-            return new ViewContractCommand(new ContractIdContainsKeywordsPredicate(Arrays.asList(idKeyWords)));
+            return parseViewSpecificContract(argMultimap);
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewContractCommand.MESSAGE_USAGE));
+    }
+
+    private ViewContractCommand parseViewSpecificContract(ArgumentMultimap argMultimap) throws ParseException {
+        String trimmedArgs = argMultimap.getValue(PREFIX_CID).get().trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewContractCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CID);
+        String[] idKeyWords = trimmedArgs.split("\\s+");
+        return new ViewContractCommand(new ContractIdContainsKeywordsPredicate(Arrays.asList(idKeyWords)));
     }
 
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
