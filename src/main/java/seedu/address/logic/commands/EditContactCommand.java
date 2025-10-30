@@ -42,13 +42,14 @@ public class EditContactCommand extends Command {
             + "by the index number used in iCon. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + PREFIX_NRIC + " " + "NRIC" + " "
+            + PREFIX_NRIC + "NRIC" + " "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NRIC + "S1234567A "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
