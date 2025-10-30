@@ -399,6 +399,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Contact> getUniqueContactList() {
+        return addressBook.getContactList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

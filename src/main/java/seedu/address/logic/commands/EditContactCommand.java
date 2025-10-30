@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
@@ -39,9 +40,10 @@ public class EditContactCommand extends Command {
     public static final String COMMAND_WORD = "edit_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
-            + "by the index number used in the displayed contact list. "
+            + "by the index number used in iCon. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: "
+            + PREFIX_NRIC + " " + "NRIC" + " "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -55,41 +57,44 @@ public class EditContactCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book.";
 
-    private final Index index;
+    private final Nric nric;
     private final EditContactDescriptor editContactDescriptor;
 
     /**
-     * @param index of the contact in the filtered contact list to edit
+     * @param nric of the contact in the filtered contact list to edit
      * @param editContactDescriptor details to edit the contact with
      */
-    public EditContactCommand(Index index, EditContactDescriptor editContactDescriptor) {
-        requireNonNull(index);
+    public EditContactCommand(Nric nric, EditContactDescriptor editContactDescriptor) {
+        requireNonNull(nric);
         requireNonNull(editContactDescriptor);
 
-        this.index = index;
+        this.nric = nric;
         this.editContactDescriptor = new EditContactDescriptor(editContactDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contact> lastShownList = model.getFilteredContactList();
+        List<Contact> list = model.getUniqueContactList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+        if (list.stream().anyMatch(x -> x.getNric().equals(nric))) {
+            Contact contactToEdit = list.stream()
+                    .filter(x -> x.getNric().equals(nric))
+                    .findFirst()
+                    .get();
+            Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
+
+            if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
+                throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+            }
+
+            model.setContact(contactToEdit, editedContact);
+            model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+            return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)),
+                    ListPanelType.CONTACT);
+        } else {
+            throw new CommandException(String.format(Messages.MESSAGE_CONTACT_NOT_FOUND, nric));
         }
-
-        Contact contactToEdit = lastShownList.get(index.getZeroBased());
-        Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
-
-        if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
-        }
-
-        model.setContact(contactToEdit, editedContact);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)),
-                ListPanelType.CONTACT);
     }
 
     /**
@@ -123,14 +128,14 @@ public class EditContactCommand extends Command {
         }
 
         EditContactCommand otherEditContactCommand = (EditContactCommand) other;
-        return index.equals(otherEditContactCommand.index)
+        return nric.equals(otherEditContactCommand.nric)
                 && editContactDescriptor.equals(otherEditContactCommand.editContactDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("nric", nric)
                 .add("editContactDescriptor", editContactDescriptor)
                 .toString();
     }
@@ -140,6 +145,7 @@ public class EditContactCommand extends Command {
      * corresponding field value of the contact.
      */
     public static class EditContactDescriptor {
+        private Nric nric;
         private Name name;
         private Phone phone;
         private Email email;
@@ -154,6 +160,7 @@ public class EditContactCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditContactDescriptor(EditContactDescriptor toCopy) {
+            setNric(toCopy.nric);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -167,6 +174,10 @@ public class EditContactCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
         }
 
         public void setName(Name name) {
@@ -247,7 +258,8 @@ public class EditContactCommand extends Command {
             }
 
             EditContactDescriptor otherEditContactDescriptor = (EditContactDescriptor) other;
-            return Objects.equals(name, otherEditContactDescriptor.name)
+            return Objects.equals(nric, otherEditContactDescriptor.nric)
+                    && Objects.equals(name, otherEditContactDescriptor.name)
                     && Objects.equals(phone, otherEditContactDescriptor.phone)
                     && Objects.equals(email, otherEditContactDescriptor.email)
                     && Objects.equals(address, otherEditContactDescriptor.address)
@@ -257,6 +269,7 @@ public class EditContactCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("nric", nric)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
