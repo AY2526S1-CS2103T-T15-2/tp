@@ -14,7 +14,7 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("remove_contact ic:T1234567A")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : deleteContact(p)
+logic -[LOGIC_COLOR]> model : removeContact(p)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic
