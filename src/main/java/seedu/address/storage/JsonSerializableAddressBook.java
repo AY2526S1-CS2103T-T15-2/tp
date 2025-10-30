@@ -76,7 +76,19 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        /* Convert contacts */
+        convertContacts(addressBook);
+        convertPolicies(addressBook);
+        convertContracts(addressBook);
+        convertAppointments(addressBook);
+        return addressBook;
+    }
+
+    /**
+     * Converts and adds contacts to the address book.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    private void convertContacts(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
             if (addressBook.hasContact(contact)) {
@@ -84,7 +96,14 @@ class JsonSerializableAddressBook {
             }
             addressBook.addContact(contact);
         }
-        /* Convert policies */
+    }
+
+    /**
+     * Converts and adds policies to the address book.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    private void convertPolicies(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedPolicy jsonAdaptedPolicy : policies) {
             Policy policy = jsonAdaptedPolicy.toModelType();
             if (addressBook.hasSamePolicyId(policy)) {
@@ -92,23 +111,36 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPolicy(policy);
         }
-        /* Convert contracts */
+    }
+
+    /**
+     * Converts and adds contracts to the address book.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    private void convertContracts(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedContract jsonAdaptedContract : contracts) {
             Contract contract = jsonAdaptedContract.toModelType();
             if (addressBook.hasContract(contract)) {
-                throw new IllegalValueException("Contracts list contains duplicate contract(s).");
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTRACT);
             }
             addressBook.addContract(contract);
         }
-        /* Convert appointments */
+    }
+
+    /**
+     * Converts and adds appointments to the address book.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    private void convertAppointments(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
             Appointment appointment = jsonAdaptedAppointment.toModelType();
             if (addressBook.hasAppointment(appointment)) {
-                throw new IllegalValueException("Appointments list contains duplicate appointment(s).");
+                throw new IllegalValueException(MESSAGE_DUPLICATE_APPOINTMENT);
             }
             addressBook.addAppointment(appointment);
         }
-        return addressBook;
     }
 
 }

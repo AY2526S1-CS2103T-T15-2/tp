@@ -72,7 +72,7 @@ public class EditContractCommand extends Command {
         requireNonNull(cId);
         List<Contract> list = model.getUniqueContractList();
 
-        if (list.stream().anyMatch(x -> x.getCId().equals(cId))) {
+        if (hasContractId(list, cId)) {
             Contract contractToEdit = list.stream()
                     .filter(x -> x.getCId().equals(cId))
                     .findFirst()
@@ -83,20 +83,28 @@ public class EditContractCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_CONTRACT);
             }
 
-            model.setContract(contractToEdit, editedContract);
-            model.removeContractFromContact(contractToEdit);
-            model.removeContractFromPolicy(contractToEdit);
-            model.addContractToContact(editedContract);
-            model.addContractToPolicy(editedContract);
-            model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
-            model.updateFilteredPolicyList(Model.PREDICATE_SHOW_ALL_POLICIES);
-            model.updateFilteredContractList(Model.PREDICATE_SHOW_ALL_CONTRACTS);
+            updateModel(model, contractToEdit, editedContract);
             return new CommandResult(String.format(MESSAGE_EDIT_CONTRACT_SUCCESS, editedContract.getCId().toString()),
                     ListPanelType.CONTRACT);
 
         } else {
             throw new CommandException(Messages.MESSAGE_CONTRACT_NOT_FOUND);
         }
+    }
+
+    private static void updateModel(Model model, Contract oldContract, Contract newContract) {
+        model.setContract(oldContract, newContract);
+        model.removeContractFromContact(oldContract);
+        model.removeContractFromPolicy(oldContract);
+        model.addContractToContact(newContract);
+        model.addContractToPolicy(newContract);
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        model.updateFilteredPolicyList(Model.PREDICATE_SHOW_ALL_POLICIES);
+        model.updateFilteredContractList(Model.PREDICATE_SHOW_ALL_CONTRACTS);
+    }
+
+    private static boolean hasContractId(List<Contract> contractList, ContractId cId) {
+        return contractList.stream().anyMatch(x -> x.getCId().equals(cId));
     }
 
     /**
