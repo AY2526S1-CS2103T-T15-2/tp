@@ -185,7 +185,7 @@ How to apply to other commands:
 1. Identifying fields are different for different commands. Contact: `Nric`, Contract:`CId` Policy: `PId`
 2. Replace all `contact` with the field you are trying to edit e.g `editContactCommand` -> `editPolicyCommand`
 
-<puml src="diagrams/EditContactCommandSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit_contact ic:T1234567A p:97456321` Command" />
+<puml src="diagrams/EditContactSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit_contact ic:T1234567A p:97456321` Command" />
 
 --------------------------------------------------------------------------------------------------------------------
 
