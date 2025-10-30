@@ -158,6 +158,46 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add policies from file feature
+
+The `add_policy` command allows users to add multiple policies at once, loaded from a file.
+
+There were a few alternative behaviours and implementations that were considered when a user adds multiple policies
+from a file.
+
+First, when an invalid line is read from the file, it was chosen that previous valid lines are ignored instead of
+adding all policies until an invalid input. This decision was made so the user will not have issues re-adding the
+same file later and encountering an error about duplicate policies from having the same name and details.
+
+An important consideration when implementing this is since policies and other data in iCon are assigned and identified
+by a unique alphanumeric string id, there is a need for `Model` to generate new random ids not yet present in iCon.
+
+Therefore, in implementation, the class `UnassignedPolicy` was created to facilitate the above described behaviour. The
+parser class `PolicyFileParser` parses and returns `UnassignedPolicy` objects before they are assigned ids, which are
+compared with each other and within existing policies for duplicates. Once all lines are parsed and checks are passed
+does the `Model` only create `PolicyId`s and assigns and adds the policies to iCon.
+
+The alternative was to simply treat each line as its own or similar to an `AddPolicyCommand`, but this does not
+as easily implement the previously described behaviour.
+
+### Sorting data in the view
+
+iCon allows users to sort their current view of data using `sort_*` commands atop of filtering results with `view_*`
+commands. Inspired by CLI syntax, options were chosen to be represented as flags, such as `-a` and `-i`.
+
+Upon implementation, an additional layer using JavaFX's `SortedList<T>` was added atop the `FilteredList<T>`. This is
+what allows the user to apply a filter and a sort, which then gets displayed.
+
+One consideration when implementing was to consider what type the `Command` object should permit. JavaFX specifies a
+`Comparator<T>` type to determine how to sort the `ObservableList<T>`. It further allows the `null` value to signify
+insertion order. The allowance of `null` as a comparator may make it may be unclear to future developers if
+`Comparator<T>` was directly used as the type needed by the `Command`.
+
+Therefore, it was chosen to have an enumeration for the different applicable sorting types, which encloses the `null`
+comparator to a more descriptive `UNORDERED` enum, and which allows non-null checking. This has the additional benefit
+of making it clear to developers what types of sorting options there are, instead of being able to directly define any
+`Comparator<T>`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
