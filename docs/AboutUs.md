@@ -7,8 +7,6 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Andres Gonzales III
@@ -16,51 +14,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/andrescuiii-too.png" width="200px">
 
 [[github](https://github.com/andrescuiii-too)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities : Policy
 
 ### Damien
 
 <img src="images/porcupinezzz.png" width="200px">
 
 [[github](http://github.com/porcupinezzz)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Scheduling and Tracking, Deliverables and Deadlines
+* Role: Developer
+* Responsibilities : Contact
 
 ### Glendon Goh
 
 <img src="images/eggie23.png" width="200px">
 
-[[github](http://github.com/eggie23)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/eggie23)] 
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Contract
 
 ### Joshua Seah
 
 <img src="images/joshua-seah.png" width="200px">
 
 [[github](http://github.com/Joshua-Seah)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Contract
 
 ### Tan Keng Hong
 
 <img src="images/kh-boop-bit.png" width="200px">
 
 [[github](http://github.com/KH-boop-bit)]
-[[portfolio](team/johndoe.md)]
+
+* Role: Team Leader
+* Responsibilities : Appointment, Policy
