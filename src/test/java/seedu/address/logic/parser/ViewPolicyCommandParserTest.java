@@ -11,7 +11,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewPolicyCommand;
-import seedu.address.model.policy.IdContainsKeywordsPredicate;
+import seedu.address.model.policy.PolicyIdContainsKeywordsPredicate;
 
 public class ViewPolicyCommandParserTest {
 
@@ -35,7 +35,7 @@ public class ViewPolicyCommandParserTest {
     public void parse_validArgs_returnsViewPolicyCommand() {
         // no leading and trailing whitespaces
         ViewPolicyCommand expectedViewPolicyCommand =
-                new ViewPolicyCommand(new IdContainsKeywordsPredicate(Arrays.asList("abcdef", "xyz123")));
+                new ViewPolicyCommand(new PolicyIdContainsKeywordsPredicate(Arrays.asList("abcdef", "xyz123")));
         assertParseSuccess(parser, " " + PREFIX_PID + "abcdef xyz123", expectedViewPolicyCommand);
 
         // multiple whitespaces between keywords

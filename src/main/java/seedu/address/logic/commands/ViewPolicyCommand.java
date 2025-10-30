@@ -7,7 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
-import seedu.address.model.policy.IdContainsKeywordsPredicate;
+import seedu.address.model.policy.PolicyIdContainsKeywordsPredicate;
 import seedu.address.ui.ListPanelType;
 
 
@@ -33,7 +33,7 @@ public class ViewPolicyCommand extends Command {
     public static final String MESSAGE_NO_ID_MATCH = "Failed to find any policies";
 
     private final boolean viewAll;
-    private final IdContainsKeywordsPredicate predicate;
+    private final PolicyIdContainsKeywordsPredicate predicate;
 
     /**
      * Constructor method to view all policies
@@ -46,7 +46,7 @@ public class ViewPolicyCommand extends Command {
     /**
      * Constructor method to view policies matching predicate
      */
-    public ViewPolicyCommand(IdContainsKeywordsPredicate predicate) {
+    public ViewPolicyCommand(PolicyIdContainsKeywordsPredicate predicate) {
         this.viewAll = false;
         this.predicate = predicate;
     }

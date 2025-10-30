@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.policy.IdContainsKeywordsPredicate;
+import seedu.address.model.policy.PolicyIdContainsKeywordsPredicate;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -43,10 +43,10 @@ public class ViewPolicyCommandTest {
 
     @Test
     public void equals() {
-        IdContainsKeywordsPredicate firstPredicate =
-                new IdContainsKeywordsPredicate(Collections.singletonList("abcdef"));
-        IdContainsKeywordsPredicate secondPredicate =
-                new IdContainsKeywordsPredicate(Collections.singletonList("xyz123"));
+        PolicyIdContainsKeywordsPredicate firstPredicate =
+                new PolicyIdContainsKeywordsPredicate(Collections.singletonList("abcdef"));
+        PolicyIdContainsKeywordsPredicate secondPredicate =
+                new PolicyIdContainsKeywordsPredicate(Collections.singletonList("xyz123"));
 
         ViewPolicyCommand viewFirstPolicyCommand = new ViewPolicyCommand(firstPredicate);
         ViewPolicyCommand viewSecondPolicyCommand = new ViewPolicyCommand(secondPredicate);
@@ -80,7 +80,7 @@ public class ViewPolicyCommandTest {
     @Test
     public void execute_zeroKeywords_noPolicyFound() {
         String expectedMessage = ViewPolicyCommand.MESSAGE_NO_ID_MATCH;
-        IdContainsKeywordsPredicate predicate = preparePredicate(" ");
+        PolicyIdContainsKeywordsPredicate predicate = preparePredicate(" ");
         ViewPolicyCommand command = new ViewPolicyCommand(predicate);
         expectedModel.updateFilteredPolicyList(predicate);
         assertCommandSuccess(command, model, expectedMessage, ListPanelType.POLICY, expectedModel);
@@ -89,7 +89,7 @@ public class ViewPolicyCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePoliciesFound() {
-        IdContainsKeywordsPredicate predicate = preparePredicate("abcdef 123456 Abc123");
+        PolicyIdContainsKeywordsPredicate predicate = preparePredicate("abcdef 123456 Abc123");
         String expectedMessage = String.format(ViewPolicyCommand.MESSAGE_SUCCESS_SPECIFIC,
                 String.join(", ", predicate.getKeywords()));
         ViewPolicyCommand command = new ViewPolicyCommand(predicate);
@@ -100,7 +100,7 @@ public class ViewPolicyCommandTest {
 
     @Test
     public void toStringMethod() {
-        IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(Arrays.asList("abcdef"));
+        PolicyIdContainsKeywordsPredicate predicate = new PolicyIdContainsKeywordsPredicate(Arrays.asList("abcdef"));
         ViewPolicyCommand viewPolicyCommand = new ViewPolicyCommand(predicate);
         String expected = ViewPolicyCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewPolicyCommand.toString());
@@ -109,7 +109,7 @@ public class ViewPolicyCommandTest {
     /**
      * Parses {@code userInput} into a {@code IdContainsKeywordsPredicate}.
      */
-    private IdContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new IdContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private PolicyIdContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new PolicyIdContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

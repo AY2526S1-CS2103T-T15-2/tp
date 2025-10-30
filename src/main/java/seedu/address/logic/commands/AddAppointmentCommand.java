@@ -51,19 +51,15 @@ public class AddAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // get nric from preloaded appointment and load contact to get name
         Nric nric = toAdd.getNric();
         if (!model.hasContact(nric)) {
             throw new CommandException(Messages.MESSAGE_CONTACT_NOT_FOUND);
         }
 
-        // fill in necessary fields
-
         AppointmentId appointmentId = toAdd.getAId();
         LocalDate date = toAdd.getDate();
         AppointmentDetails details = toAdd.getDetails();
 
-        // initialise new appointment
         toAdd = new Appointment(appointmentId, nric, date, details);
 
         if (model.hasAppointment(toAdd)) {
@@ -84,7 +80,6 @@ public class AddAppointmentCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AddAppointmentCommand)) {
             return false;
         }

@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.policy.IdContainsKeywordsPredicate;
+import seedu.address.model.policy.PolicyIdContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new ViewPolicyCommand object
@@ -39,7 +39,7 @@ public class ViewPolicyCommandParser implements Parser<ViewPolicyCommand> {
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PID);
             String[] idKeyWords = trimmedArgs.split("\\s+");
-            return new ViewPolicyCommand(new IdContainsKeywordsPredicate(Arrays.asList(idKeyWords)));
+            return new ViewPolicyCommand(new PolicyIdContainsKeywordsPredicate(Arrays.asList(idKeyWords)));
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewPolicyCommand.MESSAGE_USAGE));
