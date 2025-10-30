@@ -177,8 +177,13 @@ parser class `PolicyFileParser` parses and returns `UnassignedPolicy` objects be
 compared with each other and within existing policies for duplicates. Once all lines are parsed and checks are passed
 does the `Model` only create `PolicyId`s and assigns and adds the policies to iCon.
 
+The following activity diagram describes the expected behaviour when a user executes the `add_policy` command
+with the file option:
+
+<puml src="diagrams/AddPolicyFileActivityDiagram.puml" alt="AddPolicyFileActivityDiagram" />
+
 The alternative was to simply treat each line as its own or similar to an `AddPolicyCommand`, but this does not
-as easily implement the previously described behaviour.
+as easily implement the desired behaviour.
 
 ### Sorting data in the view
 
