@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Much of our code was based off of the original AB3 code, we refactored it to match the context in our product.
 
 --------------------------------------------------------------------------------------------------------------------
 
