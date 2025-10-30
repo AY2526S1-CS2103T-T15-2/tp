@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. The `ListPanel` comprises of `AppointmentListPanel`, `ContactListPanel`, `ContractListPanel` and `PolicyListPanel`
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `RemoveContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -947,7 +947,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file
+      2. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+
+- Note: For mac and linux users, use the terminal and `cd` to the directory where the jar file is located. Then, run `java -jar iCon.jar`
 
 1. Saving window preferences
 
@@ -962,9 +965,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Add two contacts. The list should update immediately
 
-   1. add_contact n:Bob Lim p:81112222 ic:G1234567B e:bob@example.com a:456 MBS
+   1. `add_contact n:Bob Lim p:81112222 ic:G1234567B e:bob@example.com a:456 MBS`
 
-   1. add_contact n:Alice Tan p:91234567 ic:S9876543A e:alice@example.com a:123 Orchard Road
+   1. `add_contact n:Alice Tan p:91234567 ic:S9876543A e:alice@example.com a:123 Orchard Road`
 
 1. Sort contacts by alphabetical sort. `sort_contact -a`.
    2. The list should re-order to show Alice first, then Bob.
@@ -993,14 +996,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Create a file named `policy_file.txt` in the same folder as your .jar file.
 
-    1. Put this text inside that file: Life Insurance`This policy coverage for family...
+    1. Put this text inside that file: ``Life Insurance`This policy coverage for family...``
 
     1. Now, run the command: `add_policy f:policy_file.txt`
 
 1. View all policies. The list should show all 3 policies added.
 Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailor the POLICY_ID to the randomly generated POLICY ID as shown in the GUI
 
-   1.  `view_policy -a`
+    1. `view_policy -a`
 
 1. Edit a policy. Use the POLICY_ID for "Premium Health" (eg. P1234A) to edit it
 
@@ -1008,7 +1011,7 @@ Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailo
 
 1. Remove the Basic Car policy using the POLICY_ID (eg. P5678B)
 
-    1. remove_policy p:P5678B
+    1. `remove_policy p:P5678B`
 
 ### Contract management
 
