@@ -54,7 +54,7 @@
         "implementation": "Implementation",
         "add-policies-from-file-feature": "Add policies from file feature",
         "sorting-data-in-the-view": "Sorting data in the view",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
+        "edit-feature": "Edit Feature",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
