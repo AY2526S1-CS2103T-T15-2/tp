@@ -51,11 +51,7 @@ public non-sealed class AddPolicyFileCommand extends AddPolicyCommandType {
             throw new CommandException(e.getMessage(), e);
         }
 
-        int policyCount = unassignedPolicies.size();
-        List<PolicyId> policyIds = model.generateUniquePolicyIds(policyCount);
-        List<Policy> policies = IntStream.range(0, policyCount)
-                .mapToObj(i -> unassignedPolicies.get(i).assignId(policyIds.get(i)))
-                .collect(Collectors.toList());
+        List<Policy> policies = assignPolicyIds(model, unassignedPolicies);
 
         if (policies.stream().anyMatch(model::hasSamePolicyFields)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
@@ -66,6 +62,18 @@ public non-sealed class AddPolicyFileCommand extends AddPolicyCommandType {
 
         model.addPolicies(policies);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    /**
+     * Assigns policy ids to the list of unassigned policies.
+     */
+    private static List<Policy> assignPolicyIds(Model model, List<UnassignedPolicy> unassignedPolicies) {
+        int policyCount = unassignedPolicies.size();
+        List<PolicyId> policyIds = model.generateUniquePolicyIds(policyCount);
+        List<Policy> policies = IntStream.range(0, policyCount)
+                .mapToObj(i -> unassignedPolicies.get(i).assignId(policyIds.get(i)))
+                .collect(Collectors.toList());
+        return policies;
     }
 
     @Override
