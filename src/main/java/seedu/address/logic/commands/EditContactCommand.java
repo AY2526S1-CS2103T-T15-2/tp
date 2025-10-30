@@ -39,7 +39,7 @@ public class EditContactCommand extends Command {
     public static final String COMMAND_WORD = "edit_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
-            + "by the index number used in iCon. "
+            + "by the Nric specified in iCon. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC" + " "
