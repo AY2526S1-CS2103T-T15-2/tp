@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
@@ -18,13 +19,14 @@ public class ViewContactCommand extends Command {
 
     public static final String COMMAND_WORD = "view_contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose nrics matches any of "
-            + "the specified nrics (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views contacts.\n"
             + "Parameters: "
-            + PREFIX_NRIC + "NRIC1 [NRIC2] [NRIC3]...\n"
-            + "Example: "
-            + COMMAND_WORD + " "
-            + PREFIX_NRIC + " T1234567A S1234892B T0549223e";
+            + FLAG_LIST_ALL + " (View all contacts) or "
+            + PREFIX_NRIC + "NRIC1 [NRIC2]... (View specific contacts by Nric)\n"
+            + "Examples: "
+            + COMMAND_WORD + " " + FLAG_LIST_ALL
+            + " or "
+            + COMMAND_WORD + " " + PREFIX_NRIC + " T1234567A S1234892B T0549223e";
 
     private final NricContainsKeywordsPredicate predicate;
     private final boolean showAllContacts;
