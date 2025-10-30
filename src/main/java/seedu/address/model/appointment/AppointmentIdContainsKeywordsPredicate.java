@@ -31,7 +31,6 @@ public class AppointmentIdContainsKeywordsPredicate implements Predicate<Appoint
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AppointmentIdContainsKeywordsPredicate)) {
             return false;
         }

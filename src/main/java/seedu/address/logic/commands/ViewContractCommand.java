@@ -22,7 +22,7 @@ public class ViewContractCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views contracts.\n"
             + "Parameters: "
             + FLAG_LIST_ALL + " (View all contracts) or "
-            + PREFIX_CID + "CONTRACT_ID (View specific contracts by ID)\n"
+            + PREFIX_CID + "CONTRACT_ID1 [CONTRACT_ID2]... (View specific contracts by ID)\n"
             + "Examples: "
             + COMMAND_WORD + " " + FLAG_LIST_ALL
             + " or "

@@ -55,7 +55,7 @@ public class EditAppointmentCommand extends Command {
         requireNonNull(editAppointmentDescriptor);
 
         this.aId = aId;
-        this.editAppointmentDescriptor = editAppointmentDescriptor;
+        this.editAppointmentDescriptor = new EditAppointmentDescriptor(editAppointmentDescriptor);
     }
 
     @Override
@@ -102,7 +102,6 @@ public class EditAppointmentCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof EditAppointmentCommand)) {
             return false;
         }
@@ -200,7 +199,6 @@ public class EditAppointmentCommand extends Command {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditAppointmentDescriptor)) {
                 return false;
             }

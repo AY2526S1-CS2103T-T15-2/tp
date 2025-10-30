@@ -8,10 +8,10 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Policy}'s {@code Id} matches any of the keywords given.
  */
-public class IdContainsKeywordsPredicate implements Predicate<Policy> {
+public class PolicyIdContainsKeywordsPredicate implements Predicate<Policy> {
     private final List<String> keywords;
 
-    public IdContainsKeywordsPredicate(List<String> keywords) {
+    public PolicyIdContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -32,12 +32,13 @@ public class IdContainsKeywordsPredicate implements Predicate<Policy> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof IdContainsKeywordsPredicate)) {
+        if (!(other instanceof PolicyIdContainsKeywordsPredicate)) {
             return false;
         }
 
-        IdContainsKeywordsPredicate otherIdContainsKeywordsPredicate = (IdContainsKeywordsPredicate) other;
-        return keywords.equals(otherIdContainsKeywordsPredicate.keywords);
+        PolicyIdContainsKeywordsPredicate otherPolicyIdContainsKeywordsPredicate =
+                (PolicyIdContainsKeywordsPredicate) other;
+        return keywords.equals(otherPolicyIdContainsKeywordsPredicate.keywords);
     }
 
     @Override

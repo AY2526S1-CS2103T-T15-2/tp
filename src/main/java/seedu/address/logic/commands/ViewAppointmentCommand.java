@@ -21,7 +21,7 @@ public class ViewAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views appointments.\n"
             + "Parameters: "
             + FLAG_LIST_ALL + " (View all appointments) or "
-            + PREFIX_AID + "APPOINTMENT_ID (View specific appointments by ID)\n"
+            + PREFIX_AID + "APPOINTMENT_ID1 [APPOINTMENT_ID2]... (View specific appointments by ID)\n"
             + "Examples: "
             + COMMAND_WORD + " " + FLAG_LIST_ALL
             + " or "
@@ -57,15 +57,13 @@ public class ViewAppointmentCommand extends Command {
         if (viewAll) {
             model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
             return new CommandResult(MESSAGE_SUCCESS_ALL, ListPanelType.APPOINTMENT);
-        } else {
-            model.updateFilteredAppointmentList((predicate));
-            if (model.getFilteredAppointmentList().isEmpty()) {
-                return new CommandResult(String.format(MESSAGE_NO_ID_MATCH), ListPanelType.APPOINTMENT);
-            }
-            return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC,
-                    String.join(", ", predicate.getKeywords())), ListPanelType.APPOINTMENT);
-
         }
+        model.updateFilteredAppointmentList((predicate));
+        if (model.getFilteredAppointmentList().isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_NO_ID_MATCH), ListPanelType.APPOINTMENT);
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC,
+                String.join(", ", predicate.getKeywords())), ListPanelType.APPOINTMENT);
     }
 
     @Override

@@ -54,15 +54,24 @@ public class RemovePolicyCommand extends Command {
         Policy policyToRemove = model.getPolicy(targetId);
         Set<Contract> existingContracts = policyToRemove.getContracts();
         if (!existingContracts.isEmpty()) {
-            String existingContractIds = existingContracts.stream()
-                    .map(Contract::getCId)
-                    .map(ContractId::toString)
-                    .collect(Collectors.joining(", "));
+            String existingContractIds = stringifyPendingContracts(existingContracts);
             throw new CommandException(String.format(MESSAGE_REMOVE_POLICY_PENDING, existingContractIds));
         }
         model.removePolicy(policyToRemove);
         return new CommandResult(String.format(MESSAGE_REMOVE_POLICY_SUCCESS, policyToRemove.getId()),
                     ListPanelType.POLICY);
+    }
+
+    /**
+     * Returns a string of contracts that still exist under the policy
+     * @param pendingContracts the set of contracts to stringify
+     * @return string of contracts joined by the "," separator
+     */
+    public String stringifyPendingContracts(Set<Contract> pendingContracts) {
+        return pendingContracts.stream()
+                .map(Contract::getCId)
+                .map(ContractId::toString)
+                .collect(Collectors.joining(", "));
     }
 
     @Override
