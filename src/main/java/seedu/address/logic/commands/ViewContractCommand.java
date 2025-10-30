@@ -59,14 +59,25 @@ public class ViewContractCommand extends Command {
             model.updateFilteredContractList(PREDICATE_SHOW_ALL_CONTRACTS);
             return new CommandResult(MESSAGE_SUCCESS_ALL, ListPanelType.CONTRACT);
         } else {
-            model.updateFilteredContractList((predicate));
-            if (model.getFilteredContractList().isEmpty()) {
-                return new CommandResult(String.format(MESSAGE_NO_ID_MATCH), ListPanelType.CONTRACT);
-            }
-            return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC,
-                    String.join(", ", predicate.getKeywords())), ListPanelType.CONTRACT);
-
+            return executeViewSpecific(model);
         }
+    }
+
+    /**
+     * Executes the command to view specific contracts by filtering the list.
+     *
+     * @param model The model which the command should operate on.
+     * @return A CommandResult indicating the outcome of the execution.
+     */
+    private CommandResult executeViewSpecific(Model model) {
+        model.updateFilteredContractList(predicate);
+
+        if (model.getFilteredContractList().isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_NO_ID_MATCH), ListPanelType.CONTRACT);
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC,
+                String.join(", ", predicate.getKeywords())), ListPanelType.CONTRACT);
     }
 
     @Override
