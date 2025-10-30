@@ -7,7 +7,7 @@ import seedu.address.model.util.RandomUtil;
 
 /**
  * Represents a Policy's id that a user can reference.
- * Guarantees: immutable.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPolicyId(String)}
  */
 public class PolicyId {
 

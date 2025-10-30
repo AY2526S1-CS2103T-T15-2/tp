@@ -19,13 +19,13 @@ import seedu.address.model.policy.PolicyId;
 import seedu.address.model.policy.UnassignedPolicy;
 
 /**
- * Adds multiple policies from a file.
+ * Adds multiple policies to iCon from a file.
  */
 public non-sealed class AddPolicyFileCommand extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policies added from file: %1$s";
     public static final String MESSAGE_IOEXCEPTION = "Error encountered when reading file: %1$s";
-    public static final String MESSAGE_DUPLICATE_POLICY = "A policy in the file already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_POLICY = "A policy in the file already exists in iCon";
     public static final String MESSAGE_DUPLICATE_POLICY_IN_FILE = "There exist duplicate policies in the file";
 
     private final Path toAdd;

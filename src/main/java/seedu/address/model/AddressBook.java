@@ -24,7 +24,7 @@ import seedu.address.model.policy.exceptions.PolicyNotFoundException;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameContact comparison)
+ * Duplicates are not allowed (by .isSameContact, .isSameContract, .isSamePolicy, .isSameAppointment comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 

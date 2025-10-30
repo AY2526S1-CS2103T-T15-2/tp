@@ -11,12 +11,12 @@ import seedu.address.model.policy.UnassignedPolicy;
 import seedu.address.ui.ListPanelType;
 
 /**
- * Adds a policy.
+ * Adds a policy to iCon.
  */
 public non-sealed class AddPolicyCommand extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
-    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in iCon";
 
     private final UnassignedPolicy toAdd;
 
