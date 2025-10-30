@@ -251,7 +251,7 @@ Format: `remove_policy p:POLICY_ID`
 * Deletes the policy with the specified `POLICY_ID`.
 
 Examples:
-* `delete_policy p:Abc123`
+* `remove_policy p:Abc123`
 
 ### Viewing policies: `view_policy`
 
