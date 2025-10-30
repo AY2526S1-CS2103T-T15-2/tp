@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditContactCommandParser" as EditContactCommandParser LOGIC_COLOR
+participant "d:EditContactCommand" as EditContactCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit_contact ic:T1234567A p:97456321")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit_contact ic:T1234567A p:97456321")
+activate AddressBookParser
+
+create EditContactCommandParser
+AddressBookParser -> EditContactCommandParser
+activate EditContactCommandParser
+
+EditContactCommandParser --> AddressBookParser
+deactivate EditContactCommandParser
+
+AddressBookParser -> EditContactCommandParser : parse("ic:T1234567A p:97456321")
+activate EditContactCommandParser
+
+create EditContactCommand
+EditContactCommandParser -> EditContactCommand
+activate EditContactCommand
+
+EditContactCommand --> EditContactCommandParser :
+deactivate EditContactCommand
+
+EditContactCommandParser --> AddressBookParser : d
+deactivate EditContactCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditContactCommandParser -[hidden]-> AddressBookParser
+destroy EditContactCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> EditContactCommand : execute(m)
+activate EditContactCommand
+
+EditContactCommand -> EditContactCommand : createEditedContact(contactToEdit, editContactDescriptor)
+
+EditContactCommand -> Model : setContact(contactToEdit, editedContact)
+activate Model
+
+Model -> Model: updateFilteredContactList(unused->true)
+
+Model --> EditContactCommand
+deactivate Model
+
+create CommandResult
+EditContactCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditContactCommand
+deactivate CommandResult
+
+EditContactCommand --> LogicManager : r
+deactivate EditContactCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

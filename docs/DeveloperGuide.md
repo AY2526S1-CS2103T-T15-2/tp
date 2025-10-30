@@ -256,50 +256,34 @@ The following sequence diagram shows how an undo operation goes through the `Log
 **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+### Edit Feature
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+#### Implementation
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+The edit feature is managed by the respective **EditFIELDCommand** classes. 
+Implementation is pretty similar for the three class, hence using `edit_contact` as an example
+to demonstrate the structure of the implementation.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+How it works:
 
-<box type="info" seamless>
+1. When `edit_contact ic:NRIC [fields to edit]` is called, it is fed through `EditContactCommandParser` first,
+   Then, the parser checks for the presence of the `NRIC` identifying field and at least one other editable field.
+   The parser parses the fields as **String** initially, then converts the ic string into an `Nric` object. Then,
+   it converts the editable field strings into an `EditContactDescriptor` object.
+2. `EditContactCommandParser` will now pass the `Nric` and `EditContactDescriptor` into a `EditContactCommand` constructor
+3. The `EditContactCommand` will then be executed, which start with getting a unique contact list
+4. After that, we check if `Nric` is in the unique contact list, if not, we throw a `CommandException` with `MESSAGE_CONTACT_NOT_FOUND`
+5. Following, we find the `contactToEdit` and create a new Contact `editedContact` with since contact is immutable.
+6. We then do a check to make sure we put in accurate data, we check if `editedContact` is in iCon (by checking `Nric`).
+7. We then replace `contactToEdit` with `editedContact` and update the filtered contact list to show all contacts
+8. We then return a `CommandResult` to signify successful command execution.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+How to apply to other commands:
 
-</box>
+1. Identifying fields are different for different commands. Contact: `Nric`, Contract:`CId` Policy: `PId`
+2. Replace all `contact` with the field you are trying to edit e.g `editContactCommand` -> `editPolicyCommand`
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+<puml src="diagrams/EditContactSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit_contact ic:T1234567A p:97456321` Command" />
 
 --------------------------------------------------------------------------------------------------------------------
 
