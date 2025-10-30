@@ -7,8 +7,6 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Andres Gonzales III
@@ -18,7 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/andrescuiii-too)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities : Policy
 
 ### Damien
 
@@ -27,7 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/porcupinezzz)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Scheduling and Tracking, Deliverables and Deadlines
+* Role: Developer
+* Responsibilities : Contact
 
 ### Glendon Goh
 
@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/eggie23)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Contract
 
 ### Joshua Seah
 
@@ -46,17 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Contract
 
 ### Tan Keng Hong
 
@@ -64,3 +54,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/KH-boop-bit)]
 [[portfolio](team/johndoe.md)]
+
+* Role: Team Leader
+* Responsibilities : Appointment, Policy
