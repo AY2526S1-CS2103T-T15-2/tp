@@ -754,7 +754,7 @@ Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailo
 
     1. `add_appointment ic:F9999999Z dt:2025-12-01 d:Non-existent contact`
 
-1. Sort appointments: Sort the appointments by date in ascending order. The "Initial healthcare review" (Oct 10) should appear before the "contract renewal" (Nov 15).
+1. Sort appointments: Sort the appointments by date in ascending order. The "Initial healthcare review" (Oct 10) should now appear before the "contract renewal" (Nov 15).
 
     1. `sort_appointment -da`
 
