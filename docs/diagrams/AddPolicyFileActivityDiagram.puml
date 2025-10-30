@@ -1,0 +1,37 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes add_policy command with file option;
+:PolicyFileParser reads file;
+
+while () is ([else])
+    :Parser reads a line;
+    if () then ([line is valid])
+        :Add UnassignedPolicy to output list;
+    else ([else])
+        :Throw parsing error;
+        stop
+    endif
+endwhile ([EOF is reached])
+
+:Return list of UnassignedPolicy to Model;
+:Check for duplicates between the returned list and the Model data;
+if () then ([has duplicate])
+    :Throw duplicate exception;
+    stop
+else ([else])
+endif
+:Check for duplicates within the returned list;
+if () then ([has duplicate])
+    :Throw duplicate exception;
+    stop
+else ([else])
+endif
+:Assign unique ids to policies;
+:Insert policies to the Model;
+
+stop
+@enduml
