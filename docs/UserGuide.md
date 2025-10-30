@@ -170,10 +170,10 @@ Edits a contact in iCon
 
 Examples:
 
-* `edit_contact 1 n:Tom`
-* `edit_contact 2 p:98539870`
+* `edit_contact ic:T1234567A n:Tom`
+* `edit_contact ic:T0000000B p:98539870`
 
-Format: `edit_contact INDEX [n:NAME] [p:PHONE_NUMBER] [ic:NRIC] [e:EMAIL] [a:ADDRESS] [t:TAG]`
+Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [ic:NRIC] [e:EMAIL] [a:ADDRESS] [t:TAG]`
 
 ### Removing contacts : `remove_contact`
 
@@ -382,7 +382,7 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 |------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add contact**        | `add_contact n:NAME p:PHONE_NUMBER ic: NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]…​` <br> e.g., `add_contact n:James Ho p:22224444 ic: T0000000A e:jamesho@example.com a:123, Clementi Rd, 1234665 t:friend t:colleague` |
 | **Remove contact**     | `remove_contact ic: NRIC`<br> e.g., `remove_contact ic: T0000000A`                                                                                                                                               |
-| **Edit contact**       | `edit_contact INDEX [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact 2 n:James Lee e:jameslee@example.com`                                                                      |
+| **Edit contact**       | `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact ic:T1234567A n:James Lee e:jameslee@example.com`                                                         |
 | **Sort contact**       | `sort_contact -a` OR `sort_contact -i`                                                                                                                                                                           |
 | **View contact**       | `view_contact -a` OR `view_contact ic: NRIC1 [NRIC2] [NRIC3] ...` <br> e.g., `view_contact ic: T0000000A`                                                                                                        | 
 | **Add contract**       | `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT ` <br> `add_contract p:P1234A ic:T1234567A dt:2024-01-01 e: 2025-12-12 pr: 1000`                                                |

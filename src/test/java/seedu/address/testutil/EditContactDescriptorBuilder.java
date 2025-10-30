@@ -9,6 +9,7 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nric;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -32,11 +33,21 @@ public class EditContactDescriptorBuilder {
      */
     public EditContactDescriptorBuilder(Contact contact) {
         descriptor = new EditContactCommand.EditContactDescriptor();
+        descriptor.setNric(contact.getNric());
         descriptor.setName(contact.getName());
         descriptor.setPhone(contact.getPhone());
         descriptor.setEmail(contact.getEmail());
         descriptor.setAddress(contact.getAddress());
         descriptor.setTags(contact.getTags());
+        descriptor.setContracts(contact.getContracts());
+    }
+
+    /**
+     * Sets the {@code Nric} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withNric(String nric) {
+        descriptor.setNric(new Nric(nric));
+        return this;
     }
 
     /**

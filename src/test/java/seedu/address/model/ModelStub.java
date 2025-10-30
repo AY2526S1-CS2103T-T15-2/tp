@@ -293,4 +293,9 @@ public class ModelStub implements Model {
     public ObservableList<Contract> getUniqueContractList() {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public ObservableList<Contact> getUniqueContactList() {
+        throw new AssertionError("This method should not be called.");
+    }
 }

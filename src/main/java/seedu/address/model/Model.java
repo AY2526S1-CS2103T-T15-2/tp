@@ -313,4 +313,7 @@ public interface Model {
     /** Returns an unmodifiable view of the unique contract list */
     ObservableList<Contract> getUniqueContractList();
 
+    /** Returns an unmodifiable view of the unique contact list */
+    ObservableList<Contact> getUniqueContactList();
+
 }

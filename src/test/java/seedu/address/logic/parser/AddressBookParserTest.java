@@ -16,9 +16,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PolicyUtil.unassign;
+import static seedu.address.testutil.TypicalData.getAlice;
 import static seedu.address.testutil.TypicalData.getLife;
 import static seedu.address.testutil.TypicalId.VALID_POLICY_ID_3;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TypicalNricPredicates.PREDICATE_FIRST;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_CONTACT;
 
@@ -81,8 +81,9 @@ public class AddressBookParserTest {
         Contact contact = new ContactBuilder().build();
         EditContactCommand.EditContactDescriptor descriptor = new EditContactDescriptorBuilder(contact).build();
         EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CONTACT.getOneBased() + " " + ContactUtil.getEditContactDescriptorDetails(descriptor));
-        assertEquals(new EditContactCommand(INDEX_FIRST_CONTACT, descriptor), command);
+                + PREFIX_NRIC + getAlice().getNric().toString() + " "
+                + ContactUtil.getEditContactDescriptorDetails(descriptor));
+        assertEquals(new EditContactCommand(getAlice().getNric(), descriptor), command);
     }
 
     @Test

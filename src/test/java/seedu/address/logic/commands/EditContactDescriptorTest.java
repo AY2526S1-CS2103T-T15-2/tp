@@ -62,7 +62,8 @@ public class EditContactDescriptorTest {
     @Test
     public void toStringMethod() {
         EditContactDescriptor editContactDescriptor = new EditContactCommand.EditContactDescriptor();
-        String expected = EditContactDescriptor.class.getCanonicalName() + "{name="
+        String expected = EditContactDescriptor.class.getCanonicalName() + "{nric="
+                + editContactDescriptor.getNric().orElse(null) + ", name="
                 + editContactDescriptor.getName().orElse(null) + ", phone="
                 + editContactDescriptor.getPhone().orElse(null) + ", email="
                 + editContactDescriptor.getEmail().orElse(null) + ", address="
