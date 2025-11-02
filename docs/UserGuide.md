@@ -173,7 +173,7 @@ Examples:
 * `edit_contact ic:T1234567A n:Tom`
 * `edit_contact ic:T0000000B p:98539870`
 
-Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [ic:NRIC] [e:EMAIL] [a:ADDRESS] [t:TAG]`
+Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]`
 
 ### Removing contacts : `remove_contact`
 
