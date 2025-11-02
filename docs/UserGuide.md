@@ -166,7 +166,7 @@ Examples:
 
 ### Editing contacts : `edit_contact`
 
-Edits a contact in iCon
+Edits a contact in iCon 
 
 Examples:
 
