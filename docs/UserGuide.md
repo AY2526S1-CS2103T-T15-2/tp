@@ -21,6 +21,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
 - [Format summary](#format-summary)
+- [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +60,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the compulsory parameters to be supplied by the user.<br>
-  e.g. in `add_contact n:NAME p:PHONE_NUMBER ic: NRIC`, `NAME`, `PHONE_NUMBER` and `NRIC` are compulsory parameters which can be used as `add_contact n:John Doe p:91234567 ic:T0000000A`.
+  e.g. in `add_contact n:NAME p:PHONE_NUMBER ic:NRIC`, `NAME`, `PHONE_NUMBER` and `NRIC` are compulsory parameters which can be used as `add_contact n:John Doe p:91234567 ic:T0000000A`.
 
 * Items in square brackets are optional.<br>
   e.g `n:NAME [t:TAG]` can be used as `n:John Doe t:friend` or as `n:John Doe`.
@@ -75,7 +76,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 
 * Text entered after certain parameters will be counted as we do not perform regex(format validation) on some fields, fields that can
   be checked - (Phone, NRIC, Email, ContractId, AppointmentId, PolicyID, Premium) - will throw exceptions for incorrect input format,
-  but other fields' formats cannot be checked - (Name, Address, Tag), thus any input after the colon will be counted.
+  but other fields' formats cannot be checked - (Name, Address, Tag), thus any input after the colon will be counted (within the confines of [defined accepted input](#format-summary)).
   For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will
   include the extra text in your name. *e.g NRIC would be checked if it matches the format starting with T/S/F/G/M, followed by 7 digits,
   and then a final letter, this is what we mean by format validation*
@@ -187,13 +188,14 @@ Examples:
 
 Edits a contact in iCon
 
+Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]`
+
 Examples:
 
 * `edit_contact ic:T1234567A n:Tom`
 * `edit_contact ic:T0000000B p:98539870`
 
-Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]`
-
+**Note:**
 * This command completely overwrites previous data entered.
 * For all optional fields - tags, email, address - you may remove such fields by not keying any text 
 after the prefix - `t:`, `e:`, `a:` - e.g `edit_contact ic:NRIC t:`
@@ -221,6 +223,7 @@ Format :
 1. `sort_contact -a` sort contact by name in alphabetical order
 2. `sort_contact -i` sort contact by order in which contact was inserted/added into iCon
 
+**Note:**
 * Insertion order is the order in which contacts are added by the user
 
 ### Viewing contacts : `view_contact`
@@ -233,8 +236,8 @@ Format :
 
 Examples: 
 
-* `view_contact ic: T1234567a`
-* `view_contact ic: T1234567a t1234567b`
+* `view_contact ic:T1234567a`
+* `view_contact ic:T1234567a t1234567b`
 
 **Note:**
 * Viewing Contact(s) by NRIC allows multiple case-insensitive NRIC separated by the space character " "
@@ -414,7 +417,7 @@ iCon data are saved in the hard disk automatically after any command that change
 
 ### Editing the data file
 
-iCon data are saved automatically as a JSON file `[JAR file location]/data/iCon.json`. Advanced users are welcome to update data directly by editing that data file.
+iCon data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -437,43 +440,49 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/iCon.
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                                                              |
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add contact**        | `add_contact n:NAME p:PHONE_NUMBER ic: NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]…​` <br> e.g., `add_contact n:James Ho p:22224444 ic: T0000000A e:jamesho@example.com a:123, Clementi Rd, 1234665 t:friend t:colleague` |
-| **Remove contact**     | `remove_contact ic: NRIC`<br> e.g., `remove_contact ic: T0000000A`                                                                                                                                            |
-| **Edit contact**       | `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact ic:T1234567A n:James Lee e:jameslee@example.com`                                                      |
-| **Sort contact**       | `sort_contact -a` OR `sort_contact -i`                                                                                                                                                                        |
-| **View contact**       | `view_contact -a` OR `view_contact ic: NRIC1 [NRIC2] [NRIC3] ...` <br> e.g., `view_contact ic: T0000000A`                                                                                                     | 
-| **Add contract**       | `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT ` <br> `add_contract p:P1234A ic:T1234567A dt:2024-01-01 e: 2025-12-12 pr: 1000`                                             |
-| **Remove contract**    | `remove_contract c:CONTRACT_ID` <br> e.g., `remove_contract c:C1234A`                                                                                                                                         |
-| **View contract**      | `view_contract -a` OR `view_contract c:CONTRACT_ID` <br> e.g., `view_contract c:C1234A`                                                                                                                       |
-| **Edit contract**      | `edit_contract c:CONTRACT_ID [p:POLICY_ID] [ic:NRIC] [dt:DATE_SIGNED] [e:EXPIRY_DATE] [pr:PREMIUM_AMOUNT]` <br> e.g., `edit_contract c:C1234A ic:T1234567B`                                                   |
-| **Sort contract**      | `sort_contract -ea` OR `sort_contract -i`                                                                                                                                                                     |
-| **Add policy**         | `add_policy n:POLICY_NAME d:POLICY_DETAILS` OR `add_policy f:FILE_PATH` <br> e.g., `add_policy n:Life d:Covers life` OR `add_policy f:Life.txt`                                                               |
-| **Remove policy**      | `remove_policy p:POLICY_ID` <br> e.g., `remove_policy p:P1234A`                                                                                                                                               |
-| **View policy**        | `view_policy -a` OR `view_policy p:POLICY_ID` <br> e.g., `view_policy p:P1234A`                                                                                                                               |
-| **Edit policy**        | `edit_policy p:POLICY_ID [n:POLICY_NAME] [d:POLICY_DETAILS]` <br> e.g., `edit_policy p:P1234A n:Health`                                                                                                       |
-| **Add appointment**    | `add_appointment ic:NRIC dt:DATE d:DETAILS` <br> e.g., `add_appointment ic:T1234567A dt:2025-11-01 d:Meetup`                                                                                                  |
-| **Remove appointment** | `remove_appointment a:APPOINTMENT_ID` <br> e.g., `remove_appointment a:A1234A`                                                                                                                                |
-| **View appointments**  | `view_appointment -a` OR `view_appointment a:` <br> e.g., `view_appointment a:A1234A`                                                                                                                         |
-| **Edit appointment**   | `edit_appointment a:APPOINTMENT_ID [ic:NRIC] [dt:DATE] [d:DETAILS]` <br> e.g., `edit_appointment a:A1234A dt:2025-10-31`                                                                                      |
-| **Sort appointments**  | `sort_appointment -a` OR `sort_appointment -i` OR `sort_appointment -da` OR `sort_appointment -dd`                                                                                                            |
-| **Clear**              | `clear`                                                                                                                                                                                                       |
-| **Exit**               | `exit`                                                                                                                                                                                                        |
-| **Help**               | `help`                                                                                                                                                                                                        |
+| Action                 | Format, Examples                                                                                                                                                                                             |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add contact**        | `add_contact n:NAME p:PHONE_NUMBER ic:NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]…​` <br> e.g., `add_contact n:James Ho p:22224444 ic:T0000000A e:jamesho@example.com a:123, Clementi Rd, 1234665 t:friend t:colleague` |
+| **Remove contact**     | `remove_contact ic:NRIC`<br> e.g., `remove_contact ic:T0000000A`                                                                                                                                             |
+| **Edit contact**       | `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact ic:T1234567A n:James Lee e:jameslee@example.com`                                                     |
+| **Sort contact**       | `sort_contact -a` OR `sort_contact -i`                                                                                                                                                                       |
+| **View contact**       | `view_contact -a` OR `view_contact ic:NRIC1 [NRIC2] [NRIC3] ...` <br> e.g., `view_contact ic:T0000000A`                                                                                                      | 
+| **Add contract**       | `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT ` <br> `add_contract p:P1234A ic:T1234567A dt:2024-01-01 e:2025-12-12 pr:1000`                                              |
+| **Remove contract**    | `remove_contract c:CONTRACT_ID` <br> e.g., `remove_contract c:C1234A`                                                                                                                                        |
+| **View contract**      | `view_contract -a` OR `view_contract c:CONTRACT_ID` <br> e.g., `view_contract c:C1234A`                                                                                                                      |
+| **Edit contract**      | `edit_contract c:CONTRACT_ID [p:POLICY_ID] [ic:NRIC] [dt:DATE_SIGNED] [e:EXPIRY_DATE] [pr:PREMIUM_AMOUNT]` <br> e.g., `edit_contract c:C1234A ic:T1234567B`                                                  |
+| **Sort contract**      | `sort_contract -ea` OR `sort_contract -i`                                                                                                                                                                    |
+| **Add policy**         | `add_policy n:POLICY_NAME d:POLICY_DETAILS` OR `add_policy f:FILE_PATH` <br> e.g., `add_policy n:Life d:Covers life` OR `add_policy f:Life.txt`                                                              |
+| **Remove policy**      | `remove_policy p:POLICY_ID` <br> e.g., `remove_policy p:P1234A`                                                                                                                                              |
+| **View policy**        | `view_policy -a` OR `view_policy p:POLICY_ID` <br> e.g., `view_policy p:P1234A`                                                                                                                              |
+| **Edit policy**        | `edit_policy p:POLICY_ID [n:POLICY_NAME] [d:POLICY_DETAILS]` <br> e.g., `edit_policy p:P1234A n:Health`                                                                                                      |
+| **Add appointment**    | `add_appointment ic:NRIC dt:DATE d:DETAILS` <br> e.g., `add_appointment ic:T1234567A dt:2025-11-01 d:Meetup`                                                                                                 |
+| **Remove appointment** | `remove_appointment a:APPOINTMENT_ID` <br> e.g., `remove_appointment a:A1234A`                                                                                                                               |
+| **View appointments**  | `view_appointment -a` OR `view_appointment a:` <br> e.g., `view_appointment a:A1234A`                                                                                                                        |
+| **Edit appointment**   | `edit_appointment a:APPOINTMENT_ID [ic:NRIC] [dt:DATE] [d:DETAILS]` <br> e.g., `edit_appointment a:A1234A dt:2025-10-31`                                                                                     |
+| **Sort appointments**  | `sort_appointment -a` OR `sort_appointment -i` OR `sort_appointment -da` OR `sort_appointment -dd`                                                                                                           |
+| **Clear**              | `clear`                                                                                                                                                                                                      |
+| **Exit**               | `exit`                                                                                                                                                                                                       |
+| **Help**               | `help`                                                                                                                                                                                                       |
 
 
 ## Format Summary
 
-| Model                  | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Phone**              | A string of numbers length 3 to 10 inclusive. e.g `999` `98765321`                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| **NRIC**               | A string that starts with T/S/F/G/M, followed by 7 digits, and then a final letter. e.g `T1234567E`                                                                                                                                                                                                                                                                                                                                                                                                |
-| **Email**              | A string that follows the format **local-part@domain**. The local-part should only contain alphanumeric characters and any of these special characters `+_.-`. The domain name is made up of domain labels separated by periods. The domain name must: end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any. e.g `person@gmail.com` |
-| **ContractId**         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **AppointmentId**      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 
-| **PolicyId**           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **Premium**            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **Name**               | A string that contains printable ASCII characters. Anything accessible on your keyboard (without pressing ALT) is an ASCII character. For more details on ASCII characters, refer to https://www.ascii-code.com/ e.g `Tom` `Krishna s/o Adhitya`                                                                                                                                                                                                                                                   |
-| **Address**            | A string that takes any values, including letters, numbers and special characters. e.g `110 Raffles Street, #06-12`                                                                                                                                                                                                                                                                                                                                                                                |
-| **Tag**                | A string that take any alphanumeric characters (plain letters and numbers), **no spaces allowed** e.g `Priority1`                                                                                                                                                                                                                                                                                                                                                                                  |
+| Model                  | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Phone**              | A string of numbers length 3 to 10 inclusive. e.g `999` `98765321`                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **NRIC**               | A string that starts with T/S/F/G/M, followed by 7 numbers, and then a final letter. e.g `T1234567E`                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Email**              | A string that follows the format **local-part@domain**. The local-part should only contain [alphanumeric characters](#glossary) and any of these special characters `+_.-`. The domain name is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any. e.g `person@gmail.com` |
+| **ContractId**         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **AppointmentId**      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 
+| **PolicyId**           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Premium**            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Name**               | A string that contains [printable ASCII characters](#glossary) e.g `Tom` `Krishna s/o Adhitya`                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Address**            | A string that takes any values, including letters, numbers and special characters. e.g `110 Raffles Street, #06-12`                                                                                                                                                                                                                                                                                                                                                                                            |
+| **Tag**                | A string that take any [alphanumeric characters](#glossary), **no spaces allowed** e.g `Priority1`                                                                                                                                                                                                                                                                                                                                                                                                             |
+
+## Glossary
+
+* **ASCII Character** - Anything accessible on your keyboard (without pressing ALT) is an ASCII character. For more details on ASCII characters, refer to https://www.ascii-code.com/
+* **Printable ASCII Character** - The whole set of ASCII characters excluding characters that cannot be represented on screen. For more details on ASCII characters, refer to https://www.ascii-code.com/characters/printable-characters
+* **Alphanumeric Character** - Characters `a` to `z`, lower-case and upper-case, and `0` to `9`.
