@@ -347,6 +347,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1d. The contact to be deleted is linked to existing appointments.
+
+    * 1d1. iCon shows an error message.
+
+      Use case ends.
+
 **Use Case: UC3 - Edit a contact's details**
 
 **MSS**
