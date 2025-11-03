@@ -17,12 +17,12 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
-    public static final String MESSAGE_POLICY_NOT_FOUND = "This policy does not exist in iCon";
+    public static final String MESSAGE_POLICY_NOT_FOUND = "This policy ID does not exist in iCon";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_CONTRACT_NOT_FOUND = "This contract ID does not exist in iCon.";
-    public static final String MESSAGE_CONTACT_NOT_FOUND = "Contact does not exist in iCon";
+    public static final String MESSAGE_CONTACT_NOT_FOUND = "This contact NRIC does not exist in iCon";
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "This appointment ID does not exist in the iCOn.";
     public static final String MESSAGE_INVALID_DATE = "The date provided is invalid.\n"
             + "Please ensure that the date exists in the calendar.\n"
