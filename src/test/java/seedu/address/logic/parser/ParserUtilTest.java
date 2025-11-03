@@ -235,4 +235,17 @@ public class ParserUtilTest {
         LocalDate expectedDate = LocalDate.parse("2023-01-01");
         assertEquals(expectedDate, parseDate(dateWithWhitespace));
     }
+
+    @Test
+    public void parseDate_february29LeapYear_returnsDate() throws Exception {
+        String leapYearDate = "2024-02-29";
+        LocalDate expectedDate = LocalDate.parse("2024-02-29");
+        assertEquals(expectedDate, parseDate(leapYearDate));
+    }
+
+    @Test
+    public void parseDate_february29NonLeapYear_throwsParseException() {
+        String nonLeapYearDate = "2023-02-29";
+        assertThrows(ParseException.class, () -> parseDate(nonLeapYearDate));
+    }
 }

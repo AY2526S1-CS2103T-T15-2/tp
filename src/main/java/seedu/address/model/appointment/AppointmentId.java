@@ -12,7 +12,8 @@ import seedu.address.model.util.RandomUtil;
 public class AppointmentId {
 
     public static final int ID_LENGTH = 6;
-    public static final String MESSAGE_CONSTRAINTS = "Appointment IDs should be alphanumeric of length 6";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment IDs should be alphanumeric of length 6\n"
+            + "Note that capital 'i'(I), 'o'(O) and lowercase 'l'(l) are not used to avoid confusion.";
     public static final String VALIDATION_REGEX = String.format("[a-zA-Z0-9]{%d}", ID_LENGTH);
 
     public final String value;

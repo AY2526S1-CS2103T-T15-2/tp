@@ -34,7 +34,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar iCon.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui.png](images/Ui.png))
+   ![Ui.png](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -95,26 +95,28 @@ Examples:
 
 ![img.png](images/add_appointment.png)
 
-### Viewing appointment(s) : `view_appointment`
+### Viewing appointment(s): `view_appointment`
 
 Display appointment(s) in iCon, either all or a set of specific appointments
 
 Format: 
-1. `view_appointment -a`
-2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 Id to view
+1. `view_appointment -a` view all appointments
+2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 id to view
 
 Examples:
 * `view_appointment -a`
 * `view_appointment a:ABCDEF`
 
+**Note:**
+* Viewing appointment(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
 
 ### Editing an appointment : `edit_appointment`
 
 Edits an existing appointment in iCon.
 
-Format: `edit_appointment a:APPOINTMENTID ic:[NRIC] dt:[APPOINTMENTDATE] d:[APPOINTMENTDETAILS]` 
+Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
 
-* Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment **must be a positive an alphanumeric, 6 characters long** …​
+* Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment id **must be positive, alphanumeric and 6 characters** …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -131,7 +133,7 @@ Format: `remove_appointment a:APPOINTMENTID`
 
 * Removes the appointment with the specified `APPOINTMENTID`.
 * The appointment id refers to the appointment id shown in the displayed appointment list.
-* The appointment **must be a positive an alphanumeric, 6 characters long** …​
+* The appointment id **must be positive, alphanumeric and 6 characters long** …​
 
 Examples:
 * `remove_appointment a:xyz123` removes the appointment with appointment id "xyz123" in iCon.
@@ -141,12 +143,13 @@ Examples:
 Sorts the appointment in iCon by relevant flags.
 
 Format: `sort_appointment`
-1. `sort_appointment -i` sort appointment by insertion order
-2. `sort_appointment -a` sort appointment by alphabetical order
+1. `sort_appointment -i` sort appointment by order in which appointment was inserted/added into iCon
+2. `sort_appointment -a` sort appointment by the id's alphabetical order
 3. `sort_appointment -da` sort appointment by date in ascending order
 4. `sort_appointment -dd` sort appointment by date in descending order
 
 * Insertion order is the order in which appointments are added by the user
+
 
 ## Contacts
 
@@ -166,7 +169,7 @@ Examples:
 
 ### Editing contacts : `edit_contact`
 
-Edits a contact in iCon 
+Edits a contact in iCon
 
 Examples:
 
@@ -190,16 +193,17 @@ Examples:
 * `remove_contact ic:t1234567a`
 * `remove_contact ic:T1234567B`
 
-Removal requirement:
-* **ALL** `Contract`(s) that are registered under the current `Contact` must be removed before the `Contact` can be removed
+**Note:**
+* Contact cannot be removed if there is a contract or appointment linked to the contact
+* MessageBox will always display existence of contracts (if any) first, before displaying existence of appointments (if any)
 
 ### Sorting contacts : `sort_contact`
 
 Sorts contacts in iCon by relevant flags.
 
 Format : 
-1. `sort_contact -a` in alphabetical order
-2. `sort_contact -i` in insertion order
+1. `sort_contact -a` sort contact by name in alphabetical order
+2. `sort_contact -i` sort contact by order in which contact was inserted/added into iCon
 
 * Insertion order is the order in which contacts are added by the user
 
@@ -208,13 +212,16 @@ Format :
 Shows a list of all contacts or a specific contact in iCon.
 
 Format : 
-1. `view_contact -a` 
-2. `view_contact ic:NRIC1 [NRIC2] [NRIC3]...` at least 1 IC to view
+1. `view_contact -a` view all contacts
+2. `view_contact ic:NRIC1 [NRIC2] [NRIC3]...` at least 1 NRIC to view
 
 Examples: 
 
 * `view_contact ic: T1234567a`
 * `view_contact ic: T1234567a t1234567b`
+
+**Note:**
+* Viewing Contact(s) by NRIC allows multiple case-insensitive NRIC separated by the space character " "
 
 ## Policy
 
@@ -231,6 +238,10 @@ Format:
 Life Insurance`This policy coverage for family...
 Travel - A`This policy covers flights to European countries
 ```
+
+**Files will be read as plain text in the UTF-8 encoding.** It is recommended to use a plain text file with extension
+`.txt` when using the file option. Using files with other extensions or file formats may lead to unexpected errors
+during parsing.
 
 Examples:
 * `add_policy n:Life Insurance d:This policy coverage for family...`
@@ -257,21 +268,27 @@ Removes an existing policy in iCon.
 
 Format: `remove_policy p:POLICY_ID`
 
-* Deletes the policy with the specified `POLICY_ID`.
+* Removes the policy with the specified `POLICY_ID`.
 
 Examples:
 * `remove_policy p:Abc123`
+
+**Note:**
+* Policy cannot be removed if there is a contract linked to the policy
 
 ### Viewing policies: `view_policy`
 
 Shows a list of all policies or a specific policy in iCon.
 
 Format:
-1. `view_policy -a` to view all policies; or
-2. `view_policy p:POLICY_ID` to view a specific policy
+1. `view_policy -a` view all policies
+2. `view_policy p:POLICY_ID1 [p:POLICY_ID2] [p:POLICYID3]` at least 1 id to view
 
 Examples:
-* `view_policy p:Abc123`
+* `view_policy p:Abc123` views the policy with id "Abc123"
+
+**Note:**
+* Viewing policies by id allows multiple case-sensitive, id substrings separated by the space character " "
 
 
 <box type="warning" seamless>
@@ -315,13 +332,17 @@ Example:
 1. `view_contract -a`
 2. `view_contract c: C1234A`
 
+**Note:**
+* Viewing Contract(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
+
+
 ### Sort contracts: `sort_contract`
 
 Sorts contracts in iCon by relevant flags.
 
 Format: 
-1. `sort_contract -ea` for expiry date ascending
-2. `sort_contract -i` for insertion order
+1. `sort_contract -ea` sorts contract by expiry date ascending
+2. `sort_contract -i` sorts contract by order in which contract was inserted/added into iCon
 
 * Expiry date ascending sorts contracts from the earliest expiry date to the latest. 
 * Insertion order is the order in which contracts are added by the user
@@ -376,6 +397,9 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous iCon home folder.
 
+**Q**: How can I distinguish between similar characters like 'I' (uppercase i) and 'l' (lowercase L) or '0' (zero) and 'O' (uppercase o) in the IDs generated?<br>
+**A**: We have removed the characters 'I', 'l', and 'O' from the pool of characters used to generate IDs. Hence, you will not find these characters in any IDs generated by iCon.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues 
@@ -387,27 +411,27 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                                                                 |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                 | Format, Examples                                                                                                                                                                                              |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add contact**        | `add_contact n:NAME p:PHONE_NUMBER ic: NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]…​` <br> e.g., `add_contact n:James Ho p:22224444 ic: T0000000A e:jamesho@example.com a:123, Clementi Rd, 1234665 t:friend t:colleague` |
-| **Remove contact**     | `remove_contact ic: NRIC`<br> e.g., `remove_contact ic: T0000000A`                                                                                                                                               |
-| **Edit contact**       | `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact ic:T1234567A n:James Lee e:jameslee@example.com`                                                         |
-| **Sort contact**       | `sort_contact -a` OR `sort_contact -i`                                                                                                                                                                           |
-| **View contact**       | `view_contact -a` OR `view_contact ic: NRIC1 [NRIC2] [NRIC3] ...` <br> e.g., `view_contact ic: T0000000A`                                                                                                        | 
-| **Add contract**       | `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT ` <br> `add_contract p:P1234A ic:T1234567A dt:2024-01-01 e: 2025-12-12 pr: 1000`                                                |
-| **Remove contract**    | `remove_contract c:CONTRACT_ID` <br> e.g., `remove_contract c:C1234A`                                                                                                                                            |
-| **View contract**      | `view_contract -a` OR `view_contract c:CONTRACT_ID` <br> e.g., `view_contract c:C1234A`                                                                                                                          |
-| **Edit contract**      | `edit_contract c:CONTRACT_ID [p:POLICY_ID] [ic:NRIC] [dt:DATE_SIGNED] [e:EXPIRY_DATE] [pr:PREMIUM_AMOUNT]` <br> e.g., `edit_contract c:C1234A ic:T1234567B`                                                      |
-| **Sort contract**      | `sort_contract -ea` OR `sort_contract -i`                                                                                                                                                                        |
-| **Add policy**         | `add_policy n:POLICY_NAME d:POLICY_DETAILS` OR `add_policy f:FILE_PATH` <br> e.g., `add_policy n:Life d:Covers life` OR `add_policy f:Life.txt`                                                                  |
-| **Remove policy**      | `remove_policy p:POLICY_ID` <br> e.g., `remove_policy p:P1234A`                                                                                                                                                  |
-| **View policy**        | `view_policy -a` OR `view_policy p:POLICY_ID` <br> e.g., `view_policy p:P1234A`                                                                                                                                  |
-| **Edit policy**        | `edit_policy p:POLICY_ID [n:POLICY_NAME] [d:POLICY_DETAILS]` <br> e.g., `edit_policy p:P1234A n:Health`                                                                                                          |
-| **Add appointment**    | `add_appointment ic:NRIC dt:DATE d:DETAILS` <br> e.g., `add_appointment ic:T1234567A dt:2025-11-01 d:Meetup`                                                                                                     |
-| **Remove appointment** | `remove_appointment a:APPOINTMENT_ID` <br> e.g., `remove_appointment a:A1234A`                                                                                                                                   |
-| **View appointments**  | `view_appointment -a` OR `view_appointment a:` <br> e.g., `view_appointment a:A1234A`                                                                                                                            |
-| **Edit appointment**   | `edit_appointment a:APPOINTMENT_ID [ic:NRIC] [dt:DATE] [d:DETAILS]` OR <br> e.g., `edit_appointment a:A1234A dt:2025-10-31`                                                                                      |
-| **Sort appointments**  | `sort_appointment -a` OR `sort_appointment -i` OR `sort_appointment -da` OR `sort_appointment -dd`                                                                                                               |
-| **Clear**              | `clear`                                                                                                                                                                                                          |
-| **Exit**               | `exit`                                                                                                                                                                                                           |
-| **Help**               | `help`                                                                                                                                                                                                           |
+| **Remove contact**     | `remove_contact ic: NRIC`<br> e.g., `remove_contact ic: T0000000A`                                                                                                                                            |
+| **Edit contact**       | `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]…​`<br> e.g.,`edit_contact ic:T1234567A n:James Lee e:jameslee@example.com`                                                      |
+| **Sort contact**       | `sort_contact -a` OR `sort_contact -i`                                                                                                                                                                        |
+| **View contact**       | `view_contact -a` OR `view_contact ic: NRIC1 [NRIC2] [NRIC3] ...` <br> e.g., `view_contact ic: T0000000A`                                                                                                     | 
+| **Add contract**       | `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT ` <br> `add_contract p:P1234A ic:T1234567A dt:2024-01-01 e: 2025-12-12 pr: 1000`                                             |
+| **Remove contract**    | `remove_contract c:CONTRACT_ID` <br> e.g., `remove_contract c:C1234A`                                                                                                                                         |
+| **View contract**      | `view_contract -a` OR `view_contract c:CONTRACT_ID` <br> e.g., `view_contract c:C1234A`                                                                                                                       |
+| **Edit contract**      | `edit_contract c:CONTRACT_ID [p:POLICY_ID] [ic:NRIC] [dt:DATE_SIGNED] [e:EXPIRY_DATE] [pr:PREMIUM_AMOUNT]` <br> e.g., `edit_contract c:C1234A ic:T1234567B`                                                   |
+| **Sort contract**      | `sort_contract -ea` OR `sort_contract -i`                                                                                                                                                                     |
+| **Add policy**         | `add_policy n:POLICY_NAME d:POLICY_DETAILS` OR `add_policy f:FILE_PATH` <br> e.g., `add_policy n:Life d:Covers life` OR `add_policy f:Life.txt`                                                               |
+| **Remove policy**      | `remove_policy p:POLICY_ID` <br> e.g., `remove_policy p:P1234A`                                                                                                                                               |
+| **View policy**        | `view_policy -a` OR `view_policy p:POLICY_ID` <br> e.g., `view_policy p:P1234A`                                                                                                                               |
+| **Edit policy**        | `edit_policy p:POLICY_ID [n:POLICY_NAME] [d:POLICY_DETAILS]` <br> e.g., `edit_policy p:P1234A n:Health`                                                                                                       |
+| **Add appointment**    | `add_appointment ic:NRIC dt:DATE d:DETAILS` <br> e.g., `add_appointment ic:T1234567A dt:2025-11-01 d:Meetup`                                                                                                  |
+| **Remove appointment** | `remove_appointment a:APPOINTMENT_ID` <br> e.g., `remove_appointment a:A1234A`                                                                                                                                |
+| **View appointments**  | `view_appointment -a` OR `view_appointment a:` <br> e.g., `view_appointment a:A1234A`                                                                                                                         |
+| **Edit appointment**   | `edit_appointment a:APPOINTMENT_ID [ic:NRIC] [dt:DATE] [d:DETAILS]` <br> e.g., `edit_appointment a:A1234A dt:2025-10-31`                                                                                      |
+| **Sort appointments**  | `sort_appointment -a` OR `sort_appointment -i` OR `sort_appointment -da` OR `sort_appointment -dd`                                                                                                            |
+| **Clear**              | `clear`                                                                                                                                                                                                       |
+| **Exit**               | `exit`                                                                                                                                                                                                        |
+| **Help**               | `help`                                                                                                                                                                                                        |

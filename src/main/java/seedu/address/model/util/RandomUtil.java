@@ -7,8 +7,8 @@ import java.util.Random;
  */
 public class RandomUtil {
 
-    private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
-            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijkmnopqrstuvwxyz"
+            + "ABCDEFGHJKLMNPQRSTUVWXYZ"
             + "0123456789";
 
     /**

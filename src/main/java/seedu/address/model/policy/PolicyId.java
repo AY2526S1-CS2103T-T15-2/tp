@@ -14,7 +14,8 @@ public class PolicyId {
     public static final int ID_LENGTH = 6;
 
     public static final String MESSAGE_CONSTRAINTS =
-            String.format("Id should be an alphanumeric string of length %d", ID_LENGTH);
+            String.format("Id should be an alphanumeric string of length %d\n", ID_LENGTH)
+                    + "Note that capital 'i'(I), 'o'(O) and lowercase 'l'(l) are not used to avoid confusion.";
 
     public static final String VALIDATION_REGEX = String.format("[a-zA-Z0-9]{%d}", ID_LENGTH);
 

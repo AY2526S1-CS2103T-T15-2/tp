@@ -10,6 +10,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 
 import java.io.IOException;
+import java.nio.charset.CharacterCodingException;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -59,7 +61,7 @@ public class AddPolicyFileCommandTest {
     }
 
     @Test
-    public void execute_missingFile_throwsCommandException() {
+    public void execute_noSuchFile_throwsCommandException() {
         Path path = TEST_DATA_FOLDER.resolve("nonexistentPolicyFile.txt");
         AddPolicyFileCommand addPolicyCommand = new AddPolicyFileCommand(path);
 
@@ -67,13 +69,34 @@ public class AddPolicyFileCommandTest {
         try {
             PolicyFileParser.readFile(path);
             fail();
-        } catch (IOException e) {
+        } catch (NoSuchFileException e) {
             exception = e;
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             fail();
         }
 
-        String expectedMessage = String.format(AddPolicyFileCommand.MESSAGE_IOEXCEPTION, exception.getMessage());
+        String expectedMessage = String.format(AddPolicyFileCommand.MESSAGE_NO_SUCH_FILE_EXCEPTION,
+                exception.getMessage());
+
+        assertCommandFailure(addPolicyCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_codingException_throwsCommandException() {
+        Path path = TEST_DATA_FOLDER.resolve("invalidPolicyFile.pdf");
+        AddPolicyFileCommand addPolicyCommand = new AddPolicyFileCommand(path);
+
+        IOException exception = null;
+        try {
+            PolicyFileParser.readFile(path);
+            fail();
+        } catch (CharacterCodingException e) {
+            exception = e;
+        } catch (IOException | ParseException e) {
+            fail();
+        }
+
+        String expectedMessage = String.format(AddPolicyFileCommand.MESSAGE_CHARACTER_CODING_EXCEPTION, exception);
 
         assertCommandFailure(addPolicyCommand, model, expectedMessage);
     }
