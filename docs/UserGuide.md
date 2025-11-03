@@ -20,6 +20,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
+- [Format summary](#format-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
