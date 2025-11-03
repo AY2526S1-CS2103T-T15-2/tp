@@ -10,14 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain ASCII characters and spaces, and it should not be blank \n"
+            "Names should only contain printable ASCII characters and spaces, and it should not be blank \n"
                    + "(ASCII refers to the characters in the following link: https://www.ascii-code.com/)";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{ASCII}][\\p{ASCII} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Print}][\\p{Print} ]*";
 
     public final String fullName;
 
