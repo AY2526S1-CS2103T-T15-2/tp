@@ -927,6 +927,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact**: A customer of the insurance agent that has data fields, name, email, and NRIC
 * **Policy**: The document that details the terms and conditions of a contract
 * **Contract**: A contract that binds a customer to a certain policy
+* **Appointment**: A scheduled event between the user (insurance agent) and a Contact, identified by a date, time, and associated NRIC.
+* **NRIC**: National Registration Identity Card. A unique identifier used to link a Contact to their associated Contracts and Appointments.
 
 --------------------------------------------------------------------------------------------------------------------
 
