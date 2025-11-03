@@ -6,7 +6,7 @@
 
 # iCon User Guide
 
-iCon is a **desktop app for managing contacts, contracts, policies, and appointments optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, iCon can get your management tasks done faster than traditional GUI apps.
+iCon is a **desktop app for managing contacts, contracts, policies, and appointments optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, iCon can get your management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 
