@@ -10,7 +10,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 
 ## Table of Contents
 
-- [Quick start](#quick-start) 
+- [Quick start](#quick-start)
 - [Features](#features)
 - [Appointment](#appointment)
 - [Contacts](#contacts)
@@ -20,12 +20,13 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
+- [Format summary](#format-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T15-2/tp/releases).
@@ -73,10 +74,10 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Text entered after certain parameters will be counted as we do not perform regex(format validation) on some fields, fields that can
-  be checked - (Phone, NRIC, Email, ContractId, AppointmentId, PolicyID, Premium) - will throw exceptions for incorrect input format, 
-  but other fields' formats cannot be checked - (Name, Address, Tag), thus any input after the colon will be counted. 
-  For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will 
-  include the extra text in your name. *e.g NRIC would be checked if it matches the format starting with T/S/F/G/M, followed by 7 digits, 
+  be checked - (Phone, NRIC, Email, ContractId, AppointmentId, PolicyID, Premium) - will throw exceptions for incorrect input format,
+  but other fields' formats cannot be checked - (Name, Address, Tag), thus any input after the colon will be counted.
+  For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will
+  include the extra text in your name. *e.g NRIC would be checked if it matches the format starting with T/S/F/G/M, followed by 7 digits,
   and then a final letter, this is what we mean by format validation*
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -111,7 +112,7 @@ Display appointment(s) in iCon, either all or a set of specific appointments
 
 Format: 
 1. `view_appointment -a` view all appointments
-2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 id to view
+2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 ID to view
 
 Examples:
 * `view_appointment -a`
@@ -134,7 +135,7 @@ Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPO
 
 
 Examples:
-*  `edit_appointment a:abc123 ic:T1234567A` Edits the Nric of the appointment with id 'abc123' to be T1234567A
+*  `edit_appointment a:abc123 ic:T1234567A` Edits the Nric of the appointment with id 'abc123' to be T1234567A.
 *  `edit_appointment a:456XYZ dt:2020-01-01 d:This...` Edits the appointment date and appointment details of the appointment with id '456XYZ' to 2020-01-01 and "This..." respectively.
 
 **Note:**
@@ -460,3 +461,19 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/iCon.
 | **Clear**              | `clear`                                                                                                                                                                                                       |
 | **Exit**               | `exit`                                                                                                                                                                                                        |
 | **Help**               | `help`                                                                                                                                                                                                        |
+
+
+## Format Summary
+
+| Model                  | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Phone**              | A string of numbers length 3 to 10 inclusive. e.g `999` `98765321`                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **NRIC**               | A string that starts with T/S/F/G/M, followed by 7 digits, and then a final letter. e.g `T1234567E`                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Email**              | A string that follows the format **local-part@domain**. The local-part should only contain alphanumeric characters and any of these special characters `+_.-`. The domain name is made up of domain labels separated by periods. The domain name must: end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any. e.g `person@gmail.com` |
+| **ContractId**         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **AppointmentId**      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 
+| **PolicyId**           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Premium**            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Name**               | A string that contains printable ASCII characters. Anything accessible on your keyboard (without pressing ALT) is an ASCII character. For more details on ASCII characters, refer to https://www.ascii-code.com/ e.g `Tom` `Krishna s/o Adhitya`                                                                                                                                                                                                                                                   |
+| **Address**            | A string that takes any values, including letters, numbers and special characters. e.g `110 Raffles Street, #06-12`                                                                                                                                                                                                                                                                                                                                                                                |
+| **Tag**                | A string that take any alphanumeric characters (plain letters and numbers), **no spaces allowed** e.g `Priority1`                                                                                                                                                                                                                                                                                                                                                                                  |
