@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.policy.Policy.policiesAreUnique;
 
 import java.io.IOException;
+import java.nio.charset.CharacterCodingException;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +26,10 @@ import seedu.address.model.policy.UnassignedPolicy;
 public non-sealed class AddPolicyFileCommand extends AddPolicyCommandType {
 
     public static final String MESSAGE_SUCCESS = "New policies added from file: %1$s";
+    public static final String MESSAGE_NO_SUCH_FILE_EXCEPTION = "File not found: %1$s";
     public static final String MESSAGE_IOEXCEPTION = "Error encountered when reading file: %1$s";
+    public static final String MESSAGE_CHARACTER_CODING_EXCEPTION = MESSAGE_IOEXCEPTION
+            + "\nNote: Use a plain text file in the UTF-8 format for the best performance.";
     public static final String MESSAGE_DUPLICATE_POLICY = "A policy in the file already exists in iCon";
     public static final String MESSAGE_DUPLICATE_POLICY_IN_FILE = "There exist duplicate policies in the file";
 
@@ -45,10 +50,14 @@ public non-sealed class AddPolicyFileCommand extends AddPolicyCommandType {
 
         try {
             unassignedPolicies = PolicyFileParser.readFile(toAdd);
-        } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_IOEXCEPTION, e.getMessage()), e);
-        } catch (ParseException e) {
-            throw new CommandException(e.getMessage(), e);
+        } catch (NoSuchFileException nsfe) {
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_FILE_EXCEPTION, nsfe.getMessage()), nsfe);
+        } catch (CharacterCodingException cce) {
+            throw new CommandException(String.format(MESSAGE_CHARACTER_CODING_EXCEPTION, cce), cce);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(MESSAGE_IOEXCEPTION, ioe), ioe);
+        } catch (ParseException pe) {
+            throw new CommandException(pe.getMessage(), pe);
         }
 
         List<Policy> policies = assignPolicyIds(model, unassignedPolicies);
