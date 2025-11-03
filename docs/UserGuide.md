@@ -90,12 +90,18 @@ Adds an appointment to iCon.
 
 Format: `add_appointment ic:NRIC dt:APPOINTMENTDATE d:APPOINTMENTDETAILS`
 
+* Appointment date allows past and present dates for historical tracking purposes
+* NRIC of contact must exist in iCon at the current point in time
+
 Examples:
 * `add_appointment ic:T1234567A dt:2025-10-10 d:Discuss Healthcare coverage...`
 * `add_appointment ic:S9876543B dt:2026-08-09 d:Re-evaluate premium for...`
 
-* Appointment date allows past and present dates for historical tracking purposes
-* NRIC of contact must exist in iCon at the current point in time
+**Note:**
+* Appointments are considered duplicates and are not added to iCon if they have the **EXACT** same NRIC, date, and details.\
+Therefore it is possible to have, for example, two similar appointments with details differing in case such as:
+  * `ic:T1234567a dt:2025-10-10 dt:Discuss...`; and
+  * `ic:T1234567a dt:2025-10-10 dt:discuss...`
 
 ![img.png](images/add_appointment.png)
 
@@ -130,6 +136,9 @@ Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPO
 Examples:
 *  `edit_appointment a:abc123 ic:T1234567A` Edits the Nric of the appointment with id 'abc123' to be T1234567A
 *  `edit_appointment a:456XYZ dt:2020-01-01 d:This...` Edits the appointment date and appointment details of the appointment with id '456XYZ' to 2020-01-01 and "This..." respectively.
+
+**Note:**
+* Duplicate appointments are similarly checked as in [`add_appointment`](#adding-an-appointment--addappointment) and are rejected.
 
 ### Removing an appointment : `remove_appointment`
 
@@ -239,19 +248,23 @@ Format:
 1. `add_policy n:NAME d:DETAILS` to add one policy; or
 2. `add_policy f:FILE_PATH` to add policies from a file
 
-**Note:** Policies loaded from a file should be formatted as lines of ``NAME`DETAILS``. For example:
-```
-Life Insurance`This policy coverage for family...
-Travel - A`This policy covers flights to European countries
-```
-
-**Files will be read as plain text in the UTF-8 encoding.** It is recommended to use a plain text file with extension
-`.txt` when using the file option. Using files with other extensions or file formats may lead to unexpected errors
-during parsing.
-
 Examples:
 * `add_policy n:Life Insurance d:This policy coverage for family...`
 * `add_policy f:policy_file.txt`
+
+**Note:**
+* Policies loaded from a file should be formatted as lines of ``NAME`DETAILS``. For example:
+    ```
+    Life Insurance`This policy coverage for family...
+    Travel - A`This policy covers flights to European countries
+    ```
+    **Files will be read as plain text in the UTF-8 encoding.** It is recommended to use a plain text file with
+extension `.txt` when using the file option. Using files with other extensions or file formats may lead to unexpected
+errors during parsing.
+* Policies are considered duplicates and are not added to iCon if they have the **EXACT** same name and details.\
+  Therefore it is possible to have, for example, two similar policies with details differing in case such as:
+    * `n:Life Insurance d:This policy...`; and
+    * `n:Life Insurance d:this policy...`
 
 ![img.png](images/add_policy.png)
 
@@ -267,6 +280,9 @@ Format: `edit_policy p:POLICY_ID [n:NAME] [d:DETAILS]`
 
 Examples:
 *  `edit_policy p:Abc123 n:Healthcare` edits the policy with id `Abc123` to have the name `Healtchare`.
+
+**Note:**
+* Duplicate policies are similarly checked as in [`add_policy`](#adding-a-policy--addpolicy) and are rejected.
 
 ### Removing a policy: `remove_policy`
 
