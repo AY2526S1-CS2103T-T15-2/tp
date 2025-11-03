@@ -146,6 +146,7 @@ Format: `sort_appointment`
 3. `sort_appointment -da` sort appointment by date in ascending order
 4. `sort_appointment -dd` sort appointment by date in descending order
 
+* Insertion order is the order in which appointments are added by the user
 
 
 ## Contacts
@@ -193,6 +194,8 @@ Sorts contacts in iCon by relevant flags.
 Format : 
 1. `sort_contact -a` in alphabetical order
 2. `sort_contact -i` in insertion order
+
+* Insertion order is the order in which contacts are added by the user
 
 ### Viewing contacts : `view_contact`
 
