@@ -2,17 +2,25 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NricContainsKeywordsPredicate;
+import seedu.address.model.contract.Contract;
+import seedu.address.model.contract.ContractId;
 import seedu.address.ui.ListPanelType;
 
 /**
@@ -31,7 +39,9 @@ public class RemoveContactCommand extends Command {
 
     public static final String MESSAGE_DELETE_CONTACT_FAILURE = "Could not delete contact "
             + "since no such NRIC exists within current contact list.";
-    public static final String MESSAGE_REMOVE_CONTACT_PENDING = "Contracts exists under this policy. "
+    public static final String MESSAGE_REMOVE_CONTACT_PENDING = "Contracts exists under this contact. "
+            + "Please remove before proceeding: %1$s";
+    public static final String MESSAGE_REMOVE_CONTACT_HAS_APPOINTMENT = "Appointments exists under this contact. "
             + "Please remove before proceeding: %1$s";
 
     private final NricContainsKeywordsPredicate predicate;
@@ -57,6 +67,12 @@ public class RemoveContactCommand extends Command {
         if (!contact.getContracts().isEmpty()) {
             String existingContractIds = contact.getContractIdsAsString();
             throw new CommandException(String.format(MESSAGE_REMOVE_CONTACT_PENDING, existingContractIds));
+        }
+        //check existing appointments
+        List<Appointment> appointmentList = getAppointmentListUnderContact(model, contact);
+        if (!appointmentList.isEmpty()) {
+            String existingAppointmentIds = stringifyAppointmentIds(appointmentList);
+            throw new CommandException(String.format(MESSAGE_REMOVE_CONTACT_HAS_APPOINTMENT, existingAppointmentIds));
         }
 
         model.deleteContact(contact);
@@ -84,6 +100,21 @@ public class RemoveContactCommand extends Command {
 
         RemoveContactCommand otherRemoveContactCommand = (RemoveContactCommand) other;
         return predicate.equals(otherRemoveContactCommand.predicate);
+    }
+
+    private String stringifyAppointmentIds(List<Appointment> appointmentList) {
+        return appointmentList.stream()
+                .map(Appointment::getAId)
+                .map(AppointmentId::toString)
+                .collect(Collectors.joining(", "));
+    }
+
+    private List<Appointment> getAppointmentListUnderContact(Model model, Contact contact) {
+        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        ObservableList<Appointment> appointmentList = model.getFilteredAppointmentList();
+        return appointmentList.stream()
+                .filter(a -> a.getNric().equals(contact.getNric()))
+                .collect(Collectors.toList());
     }
 
     @Override
