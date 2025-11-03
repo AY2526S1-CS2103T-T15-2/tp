@@ -82,7 +82,7 @@ public class JsonAdaptedAppointmentTest {
     public void toModelType_invalidDetail_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(VALID_AID, VALID_NRIC, VALID_DATE, INVALID_DETAIL);
-        String expectedMessage = "Details should not be blank";
+        String expectedMessage = AppointmentDetails.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
