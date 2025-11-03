@@ -21,7 +21,7 @@ import seedu.address.model.policy.PolicyId;
 public class JsonAdaptedContractTest {
 
     private static final String INVALID_CID = "!1234A";
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Ra¢hel";
     private static final String INVALID_NRIC = "!123D";
     private static final String INVALID_PID = "P1234!";
     private static final String INVALID_DATE = "NOT A DATE";

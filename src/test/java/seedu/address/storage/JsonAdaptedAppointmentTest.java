@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.storage.JsonAdaptedAppointment.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalData.getAppointmentA;
@@ -66,8 +67,7 @@ public class JsonAdaptedAppointmentTest {
     public void toModelType_invalidDate_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(VALID_AID, VALID_NRIC, INVALID_DATE, VALID_DETAIL);
-        String expectedMessage = "Date should be in the format dd-MM-yyyy";
-        assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
+        assertThrows(IllegalValueException.class, MESSAGE_INVALID_DATE_FORMAT, appointment::toModelType);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class JsonAdaptedAppointmentTest {
     public void toModelType_invalidDetail_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(VALID_AID, VALID_NRIC, VALID_DATE, INVALID_DETAIL);
-        String expectedMessage = "Details should not be blank";
+        String expectedMessage = AppointmentDetails.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 

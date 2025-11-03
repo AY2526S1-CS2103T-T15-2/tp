@@ -9,9 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class PolicyDetails {
 
-    public static final String MESSAGE_CONSTRAINTS = "Details should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Details should only contain printable ASCII characters, and it should not be blank\n"
+                    + "For details, refer to: https://www.ascii-code.com/characters/printable-characters";
 
-    public static final String VALIDATION_REGEX = "\\S.*";
+    public static final String VALIDATION_REGEX = "[\\p{Print}&&[\\S]]\\p{Print}*";
 
     public final String value;
 
