@@ -223,6 +223,9 @@ Life Insurance`This policy coverage for family...
 Travel - A`This policy covers flights to European countries
 ```
 
+**Files will be read in plain text.** It is recommended to use a plain text file with extension `.txt` when using the
+file option. Using files with other extensions or file formats may lead to unexpected errors during parsing.
+
 Examples:
 * `add_policy n:Life Insurance d:This policy coverage for family...`
 * `add_policy f:policy_file.txt`
