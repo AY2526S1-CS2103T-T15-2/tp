@@ -76,9 +76,9 @@ Contact *--> Email
 Contact *--> Tag
 
 Contract *--> ContractId
-Contract ..|> Name
-Contract ..|> Nric
-Contract ..|> PolicyId
+Contract ..> Name
+Contract ..> Nric
+Contract ..> PolicyId
 Contract *--> LocalDate:dateSigned
 Contract *--> LocalDate:expiryDate
 Contract *--> ContractPremium
@@ -87,7 +87,7 @@ Policy *--> PolicyName
 Policy *--> PolicyDetails
 Policy *--> PolicyId
 
-Appointment ..|> Nric
+Appointment ..> Nric
 Appointment *--> LocalDate
 Appointment *--> AppointmentDetails
 Appointment *--> AppointmentId
