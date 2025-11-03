@@ -919,12 +919,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The application should be easily installable, with no additional third-party dependencies.
 3.  The application should function entirely offline.
-4.  The system should be able to hold up to 1000 contacts, contracts, and policies without a noticeable sluggishness in performance for typical usage.
+4.  The system should be able to hold up to 1000 contacts, contracts, and policies without a noticeable sluggishness in performance for typical usage - load time under 1 second.
 5.  The system should respond to user input and commands within 100 milliseconds.
 6.  The system should manage its own copy of policies separate from the source file when adding or removing policies.
 7.  The save data should not take more than 100 MB in typical usage.
 8.  The system must save changes to the hard disk after 1 or a few user modifications and after exiting the program, to minimize data loss in the event of a crash.
-9.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+9.  A user with above average typing speed (50 WPM) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
@@ -933,6 +933,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact**: A customer of the insurance agent that has data fields, name, email, and NRIC
 * **Policy**: The document that details the terms and conditions of a contract
 * **Contract**: A contract that binds a customer to a certain policy
+* **Appointment**: A scheduled event between the user (insurance agent) and a Contact, identified by a date, time, and associated NRIC.
+* **NRIC**: National Registration Identity Card. A unique identifier used to link a Contact to their associated Contracts and Appointments.
 
 --------------------------------------------------------------------------------------------------------------------
 
