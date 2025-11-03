@@ -305,6 +305,7 @@ Format: `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIU
 
 * EXPIRY_DATE cannot be before DATE_SIGNED.
 * PREMIUM_AMOUNT must be a positive number.
+* PREMIUM_AMOUNT cannot have any commas. For eg: 999,999 is not accepted. User should input 999999 instead.
 
 Example: `add_contract p:P1234A ic:S1234567A dt:2023-01-01 e:2024-01-01 pr:1200.50`
 
