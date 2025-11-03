@@ -19,7 +19,7 @@ public class SortAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "sort_appointment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts appointments by insertion or alphabetical name order\n"
+            + ": Sorts appointments by insertion, alphabetical id or date order\n"
             + "Alphabetical sorting is case-insensitive.\n"
             + "Parameters: [SORT_FLAG = " + FLAG_INSERTION_ORDER + " or " + FLAG_ALPHABETICAL_ORDER
             + " or " + FLAG_DATE_ORDER_ASCENDING + " or " + FLAG_DATE_ORDER_DESCENDING + "]\n"
@@ -27,7 +27,7 @@ public class SortAppointmentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_UNORDERED = "Showing appointments by insertion order.";
 
-    public static final String MESSAGE_SUCCESS_ALPHABETICAL = "Showing appointments by alphabetical order.";
+    public static final String MESSAGE_SUCCESS_ALPHABETICAL = "Showing appointments by id's alphabetical order.";
 
     public static final String MESSAGE_SUCCESS_DATE_ASCENDING = "Showing appointments by date ascending order.";
 

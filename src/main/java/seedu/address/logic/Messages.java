@@ -24,6 +24,9 @@ public class Messages {
     public static final String MESSAGE_CONTRACT_NOT_FOUND = "This contract ID does not exist in iCon.";
     public static final String MESSAGE_CONTACT_NOT_FOUND = "Contact does not exist in iCon";
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "This appointment ID does not exist in the iCOn.";
+    public static final String MESSAGE_INVALID_DATE = "The date provided is invalid.\n"
+            + "Please ensure that the date exists in the calendar.\n"
+            + "Kind reminder that the format is yyyy-MM-dd. Check that the order is correct!";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date should be in the format yyyy-MM-dd";
     public static final String MESSAGE_INVALID_EXPIRY_DATE = "Signing date comes after expiry date";
     public static final String MESSAGE_INVALID_CONTRACT_PERIOD = "Date signed must be before Expiry date";

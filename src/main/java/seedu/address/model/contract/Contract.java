@@ -103,10 +103,7 @@ public class Contract {
 
         return otherContract != null
                 && otherContract.getNric().equals(getNric())
-                && otherContract.getPId().equals(getPId())
-                && otherContract.getDate().equals(getDate())
-                && otherContract.getExpiryDate().equals(getExpiryDate())
-                && otherContract.getPremium().equals(getPremium());
+                && otherContract.getPId().equals(getPId());
     }
 
     public static int compareByExpiryDate(Contract c1, Contract c2) {
