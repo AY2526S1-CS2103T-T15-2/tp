@@ -22,7 +22,7 @@ public class Prefix {
 
     @Override
     public int hashCode() {
-        return prefix == null ? 0 : prefix.hashCode();
+        return prefix == null ? 0 : prefix.toLowerCase().hashCode();
     }
 
     @Override
@@ -37,6 +37,6 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) other;
-        return prefix.equals(otherPrefix.prefix);
+        return prefix.equalsIgnoreCase(otherPrefix.prefix);
     }
 }
