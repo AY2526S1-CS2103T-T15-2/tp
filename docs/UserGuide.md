@@ -187,13 +187,14 @@ Examples:
 
 Edits a contact in iCon
 
+Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]`
+
 Examples:
 
 * `edit_contact ic:T1234567A n:Tom`
 * `edit_contact ic:T0000000B p:98539870`
 
-Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]`
-
+**Note:**
 * This command completely overwrites previous data entered.
 * For all optional fields - tags, email, address - you may remove such fields by not keying any text 
 after the prefix - `t:`, `e:`, `a:` - e.g `edit_contact ic:NRIC t:`
@@ -221,6 +222,7 @@ Format :
 1. `sort_contact -a` sort contact by name in alphabetical order
 2. `sort_contact -i` sort contact by order in which contact was inserted/added into iCon
 
+**Note:**
 * Insertion order is the order in which contacts are added by the user
 
 ### Viewing contacts : `view_contact`
