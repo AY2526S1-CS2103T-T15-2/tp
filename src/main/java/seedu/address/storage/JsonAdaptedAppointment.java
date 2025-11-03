@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -77,7 +79,7 @@ public class JsonAdaptedAppointment {
         try {
             modelDate = LocalDate.parse(appDate);
         } catch (Exception e) {
-            throw new IllegalValueException("Date should be in the format dd-MM-yyyy");
+            throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
         }
 
         if (details == null) {
