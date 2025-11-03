@@ -116,7 +116,7 @@ Edits an existing appointment in iCon.
 
 Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
 
-* Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment **must be positive, alphanumeric and 6 characters** …​
+* Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment id **must be positive, alphanumeric and 6 characters** …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
