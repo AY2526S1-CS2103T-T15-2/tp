@@ -93,6 +93,9 @@ Examples:
 * `add_appointment ic:T1234567A dt:2025-10-10 d:Discuss Healthcare coverage...`
 * `add_appointment ic:S9876543B dt:2026-08-09 d:Re-evaluate premium for...`
 
+* Appointment date allows past and present dates for historical tracking purposes
+* NRIC of contact must exist in iCon at the current point in time
+
 ![img.png](images/add_appointment.png)
 
 ### Viewing appointment(s): `view_appointment`
@@ -112,13 +115,15 @@ Examples:
 
 ### Editing an appointment : `edit_appointment`
 
-Edits an existing appointment in iCon.
+Edits an existing appointment in iCon
 
 Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
 
 * Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment id **must be positive, alphanumeric and 6 characters** …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* At least one of the optional fields must be provided
+* Existing values will be updated to the input values
+* Appointment Date allows past and present dates for historical tracking purposes
+* NRIC of contact must exist in iCon at the current point in time
 
 
 Examples:
