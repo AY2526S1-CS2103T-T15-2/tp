@@ -40,6 +40,10 @@ public class PolicyFileParser {
             int lineNumber = 0;
 
             while ((line = reader.readLine()) != null) {
+                // Handle UTF-8 with BOM encoding
+                if (lineNumber == 0) {
+                    line = line.replace("\ufeff", "");
+                }
                 lineNumber++;
                 policies.add(parseLine(lineNumber, line));
             }
