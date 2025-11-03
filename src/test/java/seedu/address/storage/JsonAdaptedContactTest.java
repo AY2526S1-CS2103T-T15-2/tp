@@ -24,7 +24,7 @@ import seedu.address.model.contact.Phone;
 
 public class JsonAdaptedContactTest {
     private static final String INVALID_NAME = "Ra¢hel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "+65";
     private static final String INVALID_NRIC = "T000000E";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
