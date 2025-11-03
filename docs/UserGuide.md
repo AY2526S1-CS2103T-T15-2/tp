@@ -122,7 +122,7 @@ Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPO
 
 * Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment id **must be positive, alphanumeric and 6 characters** …​
 * At least one of the optional fields must be provided
-* Existing values will be updated to the input values
+* Existing values of selected optional field(s) will be updated (overwritten) to the new input values
 * Appointment Date allows past and present dates for historical tracking purposes
 * NRIC of contact must exist in iCon at the current point in time
 
@@ -263,7 +263,7 @@ Format: `edit_policy p:POLICY_ID [n:NAME] [d:DETAILS]`
 
 * Edits the policy with the specified `POLICY_ID`.
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Existing values of selected optional field(s) will be updated (overwritten) to the new input values
 
 Examples:
 *  `edit_policy p:Abc123 n:Healthcare` edits the policy with id `Abc123` to have the name `Healtchare`.
@@ -360,14 +360,14 @@ Format:
 
 Edits an existing contract in iCon.
 
-Format: `edit_contract c:CONTRACT_ID [p: POLICY_ID] [ic: NRIC] [dt: DATE_SIGNED] [e: EXPIRY_DATE] [pr: PREMIUM_AMOUNT]`
+Format: `edit_contract c:CONTRACT_ID [p:POLICY_ID] [ic:NRIC] [dt:DATE_SIGNED] [e:EXPIRY_DATE] [pr:PREMIUM_AMOUNT]`
 
 * Edits the contract with the specified `CONTRACT_ID`.
 * CONTRACT_ID is a compulsory field
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Existing values of selected optional field(s) will be updated (overwritten) to the new input values
 
-Example: `edit_contract c:C1234A p: P5678B ic: S7654321B dt: 2023-02-01 e: 2024-02-01 pr: 1500.75`
+Example: `edit_contract c:C1234A p:P5678B ic:S7654321B dt:2023-02-01 e:2024-02-01 pr:1500.75`
 
 # General
 
@@ -397,7 +397,7 @@ iCon data are saved in the hard disk automatically after any command that change
 
 ### Editing the data file
 
-iCon data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+iCon data are saved automatically as a JSON file `[JAR file location]/data/iCon.json`. Advanced users are welcome to update data directly by editing that data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
