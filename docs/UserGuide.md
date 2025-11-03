@@ -190,6 +190,9 @@ Examples:
 * `remove_contact ic:t1234567a`
 * `remove_contact ic:T1234567B`
 
+Removal requirement:
+* **ALL** `Contract`(s) that are registered under the current `Contact` must be removed before the `Contact` can be removed
+
 ### Sorting contacts : `sort_contact`
 
 Sorts contacts in iCon by relevant flags.
