@@ -306,12 +306,14 @@ Furthermore, certain edits can cause the iCon to behave in unexpected ways (e.g.
 
 Adds a contract to iCon.
 
-Format: `add_contract p: POLICY_ID ic: NRIC dt: DATE_SIGNED e: EXPIRY_DATE pr: PREMIUM_AMOUNT`
+Format: `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT`
 
 * EXPIRY_DATE cannot be before DATE_SIGNED.
 * PREMIUM_AMOUNT must be a positive number.
 
-Example: `add_contract p: P1234A ic: S1234567A dt: 2023-01-01 e: 2024-01-01 pr: 1200.50`
+Example: `add_contract p:P1234A ic:S1234567A dt:2023-01-01 e:2024-01-01 pr:1200.50`
+
+Note:  Contact's NRIC and Policy ID must be valid and must already exist in iCon
 
 ### Remove a contract : `remove_contract`
 
@@ -327,11 +329,13 @@ Displays all contracts in iCon.
 
 Format: 
 1. `view_contract -a` for viewing all contracts
-2. `view_contract c: CONTRACT_ID` for viewing a specific contract by CONTRACT_ID
+2. `view_contract c:CONTRACT_ID` for viewing a specific contract by CONTRACT_ID
 
 Example: 
 1. `view_contract -a`
-2. `view_contract c: C1234A`
+2. `view_contract c:C1234A`
+
+Note: You can view multiple CONTRACT_IDs at once. Eg: `view_contract c:CONTRACT_ID1 CONTRACT_ID2`
 
 **Note:**
 * Viewing Contract(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
