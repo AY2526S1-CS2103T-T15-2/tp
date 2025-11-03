@@ -9,13 +9,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Addresses should only contain printable ASCII characters and spaces, and it should not be blank \n"
+            + "(Printable ASCII refers to the characters in the following link: "
+            + "https://www.ascii-code.com/characters/printable-characters)";;
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[\\p{Print}][\\p{Print} ]*";
 
     public final String value;
 

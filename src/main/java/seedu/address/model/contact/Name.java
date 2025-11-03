@@ -11,7 +11,8 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain printable ASCII characters and spaces, and it should not be blank \n"
-                   + "(ASCII refers to the characters in the following link: https://www.ascii-code.com/)";
+                   + "(Printable ASCII refers to the characters in the following link: "
+                   + "https://www.ascii-code.com/characters/printable-characters)";
 
     /*
      * The first character of the address must not be a whitespace,
