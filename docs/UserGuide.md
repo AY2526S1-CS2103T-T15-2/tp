@@ -95,7 +95,7 @@ Examples:
 
 ![img.png](images/add_appointment.png)
 
-### Viewing appointment(s) : `view_appointment`
+### Viewing appointment(s): `view_appointment`
 
 Display appointment(s) in iCon, either all or a set of specific appointments
 
@@ -188,6 +188,10 @@ Examples:
 * `remove_contact ic:t1234567a`
 * `remove_contact ic:T1234567B`
 
+**Note:**
+* Contact cannot be removed if there is a contract or appointment linked to the contact
+* MessageBox will always display existence of contracts (if any) first, before displaying existence of appointments (if any)
+
 ### Sorting contacts : `sort_contact`
 
 Sorts contacts in iCon by relevant flags.
@@ -253,10 +257,13 @@ Removes an existing policy in iCon.
 
 Format: `remove_policy p:POLICY_ID`
 
-* Deletes the policy with the specified `POLICY_ID`.
+* Removes the policy with the specified `POLICY_ID`.
 
 Examples:
 * `remove_policy p:Abc123`
+
+**Note:**
+* Policy cannot be removed if there is a contract linked to the policy
 
 ### Viewing policies: `view_policy`
 
