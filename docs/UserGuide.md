@@ -314,8 +314,9 @@ Adds a contract to iCon.
 Format: `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT`
 
 * EXPIRY_DATE cannot be before DATE_SIGNED.
-* PREMIUM_AMOUNT must be a non-negative number, ranging from 0 to 999999999999.99
+* PREMIUM_AMOUNT must be a non-negative number, ranging from 0 to 999999999999.99.
 * PREMIUM_AMOUNT cannot have any commas or dollar signs. For eg: $999,999 is not accepted. User should input 999999 instead.
+* PREMIUM_AMOUNT will be automatically rounded to the nearest 2 decimal places.
 
 Example: `add_contract p:P1234A ic:S1234567A dt:2023-01-01 e:2024-01-01 pr:1200.50`
 
