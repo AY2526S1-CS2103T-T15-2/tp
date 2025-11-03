@@ -314,7 +314,8 @@ Adds a contract to iCon.
 Format: `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT`
 
 * EXPIRY_DATE cannot be before DATE_SIGNED.
-* PREMIUM_AMOUNT must be a positive number.
+* PREMIUM_AMOUNT must be a non-negative number, ranging from 0 to 999999999999.99
+* PREMIUM_AMOUNT cannot have any commas or dollar signs. For eg: $999,999 is not accepted. User should input 999999 instead.
 
 Example: `add_contract p:P1234A ic:S1234567A dt:2023-01-01 e:2024-01-01 pr:1200.50`
 
@@ -340,11 +341,8 @@ Example:
 1. `view_contract -a`
 2. `view_contract c:C1234A`
 
-Note: You can view multiple CONTRACT_IDs at once. Eg: `view_contract c:CONTRACT_ID1 CONTRACT_ID2`
-
 **Note:**
 * Viewing Contract(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
-
 
 ### Sort contracts: `sort_contract`
 
