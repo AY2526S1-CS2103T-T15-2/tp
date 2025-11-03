@@ -117,7 +117,7 @@
         "features": "Features",
         "appointment": "Appointment",
         "adding-an-appointment-add-appointment": "Adding an appointment: add_appointment",
-        "viewing-appointment-s-view-appointment": "Viewing appointment(s) : view_appointment",
+        "viewing-appointment-s-view-appointment": "Viewing appointment(s): view_appointment",
         "editing-an-appointment-edit-appointment": "Editing an appointment : edit_appointment",
         "removing-an-appointment-remove-appointment": "Removing an appointment : remove_appointment",
         "sorting-an-appointment-sort-appointment": "Sorting an appointment : sort_appointment",
