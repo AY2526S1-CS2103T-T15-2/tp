@@ -799,6 +799,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 3a. Appointment fields matches an exact copy of existing appointment
+
+    * 3a1. iCon shows an error message.
+
+      Use case ends.
+
 **Use Case: UC22 - Remove appointment**
 
 **MSS**
@@ -854,6 +860,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. Edited details are invalid.
 
     * 2b1. iCon shows an error message.
+
+      Use case ends.
+
+* 3a. Edited fields cause edited appointment to match an exact copy of existing Appointment
+
+    * 3a1. iCon shows an error message.
 
       Use case ends.
 
