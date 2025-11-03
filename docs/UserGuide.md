@@ -342,11 +342,8 @@ Example:
 1. `view_contract -a`
 2. `view_contract c:C1234A`
 
-Note: You can view multiple CONTRACT_IDs at once. Eg: `view_contract c:CONTRACT_ID1 CONTRACT_ID2`
-
 **Note:**
 * Viewing Contract(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
-
 
 ### Sort contracts: `sort_contract`
 
