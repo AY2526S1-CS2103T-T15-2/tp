@@ -436,3 +436,19 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 | **Clear**              | `clear`                                                                                                                                                                                                       |
 | **Exit**               | `exit`                                                                                                                                                                                                        |
 | **Help**               | `help`                                                                                                                                                                                                        |
+
+
+## Format Summary
+
+| Model                  | Format, Examples                                                                                                                                                               |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Phone**              |  |
+| **NRIC**               |                              |
+| **Email**              |                                                     |
+| **ContractId**         |                                                       |
+| **AppointmentId**      |                                      | 
+| **PolicyId**           |                                             |
+| **Premium**            |                                              |
+| **Name**               |                                          |
+| **Address**            |                                                 |
+| **Tag**                |                                            |
