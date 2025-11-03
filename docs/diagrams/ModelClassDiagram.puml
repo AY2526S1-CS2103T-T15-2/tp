@@ -11,14 +11,33 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class FilteredList
 
 Class UniqueContactList
 Class Contact
-Class Address
-Class Email
+Class Nric
 Class Name
+Class Email
 Class Phone
+Class Address
 Class Tag
+
+Class UniquePolicyList
+Class Policy
+Class PolicyId
+Class PolicyName
+Class PolicyDetails
+
+Class UniqueContractList
+Class Contract
+Class ContractId
+Class ContractPremium
+Class LocalDate
+
+Class UniqueAppointmentList
+Class Appointment
+Class AppointmentDetails
+Class AppointmentId
 
 Class I #FFFFFF
 }
@@ -36,19 +55,42 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueContactList
-UniqueContactList --> "~* all" Contact
-Contact *--> Name
-Contact *--> Phone
-Contact *--> Email
-Contact *--> Address
-Contact *--> "*" Tag
+AddressBook *--> "1" UniqueAppointmentList
+AddressBook *--> "1" UniquePolicyList
+AddressBook *--> "1" UniqueContractList
+UniqueContactList --> Contact
+UniqueContractList --> Contract
+UniqueAppointmentList --> Appointment
+UniquePolicyList --> Policy
 
-Contact -[hidden]up--> I
 UniqueContactList -[hidden]right-> I
+UniqueContractList -[hidden]right-> I
+UniquePolicyList -[hidden]right-> I
+UniqueAppointmentList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Contact *--> Name
+Contact *--> Nric
+Contact *--> Phone
+Contact *--> Address
+Contact *--> Email
+Contact *--> Tag
 
-ModelManager --> "~* filtered" Contact
+Contract *--> ContractId
+Contract ..|> Name
+Contract ..|> Nric
+Contract ..|> PolicyId
+Contract *--> LocalDate:dateSigned
+Contract *--> LocalDate:expiryDate
+Contract *--> ContractPremium
+
+Policy *--> PolicyName
+Policy *--> PolicyDetails
+Policy *--> PolicyId
+
+Appointment ..|> Nric
+Appointment *--> LocalDate
+Appointment *--> AppointmentDetails
+Appointment *--> AppointmentId
+
+ModelManager --> "~* filtered" FilteredList
 @enduml
