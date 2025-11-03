@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.nio.file.Path;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -33,6 +35,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    private static final Pattern DATE_FORMAT_PATTERN = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -236,10 +240,15 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         LocalDate parsedDate;
+
+        if (!DATE_FORMAT_PATTERN.matcher(trimmedDate).matches()) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
+
         try {
             parsedDate = LocalDate.parse(trimmedDate);
         } catch (Exception e) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return parsedDate;
     }
