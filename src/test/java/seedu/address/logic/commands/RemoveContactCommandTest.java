@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.address.logic.commands.RemoveContactCommand.MESSAGE_DELETE_CONTACT_FAILURE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.testutil.TypicalData.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
@@ -24,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NricContainsKeywordsPredicate;
 import seedu.address.model.contract.Contract;
@@ -53,6 +55,13 @@ public class RemoveContactCommandTest {
             model.removeContract(contract);
             contactToDelete.removeContract(contract);
         }
+        //remove the contact's appointments
+        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        List<Appointment> appointmentsToRemove = model.getFilteredAppointmentList().stream()
+                .filter(a -> a.getNric().equals(contactToDelete.getNric())).toList();
+        for (Appointment appointment : appointmentsToRemove) {
+            model.removeAppointment(appointment);
+        }
 
         // Success message is updated to reflect the contact deleted (or count if multiple are possible)
         String expectedMessage = String.format(RemoveContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
@@ -79,6 +88,13 @@ public class RemoveContactCommandTest {
         for (Contract contract : contractToDelete) {
             model.removeContract(contract);
             contactToDelete.removeContract(contract);
+        }
+        // remove the contact's appointments
+        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        List<Appointment> appointmentsToRemove = model.getFilteredAppointmentList().stream()
+                .filter(a -> a.getNric().equals(contactToDelete.getNric())).toList();
+        for (Appointment appointment : appointmentsToRemove) {
+            model.removeAppointment(appointment);
         }
 
         String expectedMessage = String.format(String.format(RemoveContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
@@ -114,6 +130,13 @@ public class RemoveContactCommandTest {
         Contact contact = model.getFilteredContactList().get(INDEX_THIRD_CONTACT.getZeroBased());
         Contract contractsToRemove = (Contract) contact.getContracts().toArray()[0];
         contact.removeContract(contractsToRemove);
+
+        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        List<Appointment> appointmentsToRemove = model.getFilteredAppointmentList().stream()
+                .filter(a -> a.getNric().equals(contact.getNric())).toList();
+        for (Appointment appointment : appointmentsToRemove) {
+            model.removeAppointment(appointment);
+        }
 
         showContactAtIndex(model, INDEX_FIRST_CONTACT); // Filter list to one contact
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

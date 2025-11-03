@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,8 +18,6 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NricContainsKeywordsPredicate;
-import seedu.address.model.contract.Contract;
-import seedu.address.model.contract.ContractId;
 import seedu.address.ui.ListPanelType;
 
 /**
