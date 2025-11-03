@@ -17,13 +17,14 @@ public class ContractPremiumTest {
         assertFalse(ContractPremium.isValidContractPremium(" ")); // spaces only
         assertFalse(ContractPremium.isValidContractPremium("-50")); // negative value
         assertFalse(ContractPremium.isValidContractPremium("abc")); // non-numeric
-
+        assertFalse(ContractPremium.isValidContractPremium("1000000000000")); //Over the limit
         // valid premiums
         assertTrue(ContractPremium.isValidContractPremium("0")); // zero value
         assertTrue(ContractPremium.isValidContractPremium("100")); // integer value
         assertTrue(ContractPremium.isValidContractPremium("99.99")); // valid decimal value
         assertTrue(ContractPremium.isValidContractPremium("0.01")); // minimum positive value
         assertTrue(ContractPremium.isValidContractPremium("100.123")); // more than 2 decimal places
+        assertTrue(ContractPremium.isValidContractPremium("999999999999.99")); // max value possible
     }
 
     @Test
