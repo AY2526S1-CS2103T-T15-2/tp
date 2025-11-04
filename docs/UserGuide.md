@@ -79,7 +79,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
   but other fields' formats cannot be checked - (Name, Address, Tag), thus any input after the colon will be counted (within the confines of [defined accepted input](#format-summary)).
   For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will
   include the extra text in your name. *e.g NRIC would be checked if it matches the format starting with T/S/F/G/M, followed by 7 digits,
-  and then a final letter, this is what we mean by format validation*
+  and then a final letter, this is what we mean by format validation*.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -92,8 +92,8 @@ Adds an appointment to iCon.
 
 Format: `add_appointment ic:NRIC dt:APPOINTMENTDATE d:APPOINTMENTDETAILS`
 
-* Appointment date allows past and present dates for historical tracking purposes
-* NRIC of contact must exist in iCon at the current point in time
+* Appointment date allows past and present dates for historical tracking purposes.
+* NRIC of contact must exist in iCon at the current point in time.
 
 Examples:
 * `add_appointment ic:T1234567A dt:2025-10-10 d:Discuss Healthcare coverage...`
@@ -109,30 +109,30 @@ Therefore it is possible to have, for example, two similar appointments with det
 
 ### Viewing appointment(s): `view_appointment`
 
-Display appointment(s) in iCon, either all or a set of specific appointments
+Display appointment(s) in iCon, either all or a set of specific appointments.
 
 Format: 
-1. `view_appointment -a` view all appointments
-2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 ID to view
+1. `view_appointment -a` view all appointments.
+2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 ID to view.
 
 Examples:
 * `view_appointment -a`
 * `view_appointment a:ABCDEF`
 
 **Note:**
-* Viewing appointment(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
+* Viewing appointment(s) by id allows multiple case-sensitive, id substrings separated by the space character " ".
 
 ### Editing an appointment : `edit_appointment`
 
-Edits an existing appointment in iCon
+Edits an existing appointment in iCon.
 
 Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
 
 * Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment id **must be positive, alphanumeric and 6 characters** …​
-* At least one of the optional fields must be provided
-* Existing values of selected optional field(s) will be updated (overwritten) to the new input values
-* Appointment Date allows past and present dates for historical tracking purposes
-* NRIC of contact must exist in iCon at the current point in time
+* At least one of the optional fields must be provided.
+* Existing values of selected optional field(s) will be updated (overwritten) to the new input values.
+* Appointment Date allows past and present dates for historical tracking purposes.
+* NRIC of contact must exist in iCon at the current point in time.
 
 
 Examples:
@@ -148,7 +148,7 @@ Removes the specified appointment from iCon.
 
 Format: `remove_appointment a:APPOINTMENTID`
 
-* Removes the appointment with the specified `APPOINTMENTID`.
+* Removes the appointment with the specified `APPOINTMENTID`
 * The appointment id refers to the appointment id shown in the displayed appointment list.
 * The appointment id **must be positive, alphanumeric and 6 characters long** …​
 
@@ -160,19 +160,19 @@ Examples:
 Sorts the appointment in iCon by relevant flags.
 
 Format: `sort_appointment`
-1. `sort_appointment -i` sort appointment by order in which appointment was inserted/added into iCon
-2. `sort_appointment -a` sort appointment by the id's alphabetical order
-3. `sort_appointment -da` sort appointment by date in ascending order
-4. `sort_appointment -dd` sort appointment by date in descending order
+1. `sort_appointment -i` sort appointment by order in which appointment was inserted/added into iCon.
+2. `sort_appointment -a` sort appointment by the id's alphabetical order.
+3. `sort_appointment -da` sort appointment by date in ascending order.
+4. `sort_appointment -dd` sort appointment by date in descending order.
 
-* Insertion order is the order in which appointments are added by the user
+* Insertion order is the order in which appointments are added by the user.
 
 
 ## Contacts
 
 ### Adding contacts : `add_contact`
 
-Adds a contact to iCon
+Adds a contact to iCon.
 
 Format: `add_contact n:NAME p:PHONE_NUMBER ic:NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]`
 
@@ -181,12 +181,11 @@ Examples:
 * `add_contact n:Timothy p:91227843 ic:t1234567a`
 * `add_contact n:Andre p:82567645 ic:t0487439z e:andre04@gmail.com a:12 House, House St`
 
-![img.jpeg](images/add_contact_1.jpeg)
-![img.jpeg](images/add_contact_2.jpeg)
+![img.jpeg](images/add_contact.png)
 
 ### Editing contacts : `edit_contact`
 
-Edits a contact in iCon
+Edits a contact in iCon.
 
 Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]`
 
@@ -202,7 +201,7 @@ after the prefix - `t:`, `e:`, `a:` - e.g `edit_contact ic:NRIC t:`
 
 ### Removing contacts : `remove_contact`
 
-Removes a contact in iCon
+Removes a contact in iCon.
 
 Format: `remove_contact ic:NRIC`
 
@@ -212,27 +211,27 @@ Examples:
 * `remove_contact ic:T1234567B`
 
 **Note:**
-* Contact cannot be removed if there is a contract or appointment linked to the contact
-* MessageBox will always display existence of contracts (if any) first, before displaying existence of appointments (if any)
+* Contact cannot be removed if there is a contract or appointment linked to the contact.
+* MessageBox will always display existence of contracts (if any) first, before displaying existence of appointments (if any).
 
 ### Sorting contacts : `sort_contact`
 
 Sorts contacts in iCon by relevant flags.
 
 Format : 
-1. `sort_contact -a` sort contact by name in alphabetical order
-2. `sort_contact -i` sort contact by order in which contact was inserted/added into iCon
+1. `sort_contact -a` sort contact by name in alphabetical order.
+2. `sort_contact -i` sort contact by order in which contact was inserted/added into iCon.
 
 **Note:**
-* Insertion order is the order in which contacts are added by the user
+* Insertion order is the order in which contacts are added by the user.
 
 ### Viewing contacts : `view_contact`
 
 Shows a list of all contacts or a specific contact in iCon.
 
 Format : 
-1. `view_contact -a` view all contacts
-2. `view_contact ic:NRIC1 [NRIC2] [NRIC3]...` at least 1 NRIC to view
+1. `view_contact -a` view all contacts.
+2. `view_contact ic:NRIC1 [NRIC2] [NRIC3]...` at least 1 NRIC to view.
 
 Examples: 
 
@@ -240,7 +239,7 @@ Examples:
 * `view_contact ic:T1234567a t1234567b`
 
 **Note:**
-* Viewing Contact(s) by NRIC allows multiple case-insensitive NRIC separated by the space character " "
+* Viewing Contact(s) by NRIC allows multiple case-insensitive NRIC separated by the space character " ".
 
 ## Policy
 
@@ -250,7 +249,7 @@ Adds a policy or a list of policies to iCon.
 
 Format:
 1. `add_policy n:NAME d:DETAILS` to add one policy; or
-2. `add_policy f:FILE_PATH` to add policies from a file
+2. `add_policy f:FILE_PATH` to add policies from a file.
 
 Examples:
 * `add_policy n:Life Insurance d:This policy coverage for family...`
@@ -280,7 +279,7 @@ Format: `edit_policy p:POLICY_ID [n:NAME] [d:DETAILS]`
 
 * Edits the policy with the specified `POLICY_ID`.
 * At least one of the optional fields must be provided.
-* Existing values of selected optional field(s) will be updated (overwritten) to the new input values
+* Existing values of selected optional field(s) will be updated (overwritten) to the new input values.
 
 Examples:
 *  `edit_policy p:Abc123 n:Healthcare` edits the policy with id `Abc123` to have the name `Healtchare`.
@@ -300,21 +299,21 @@ Examples:
 * `remove_policy p:Abc123`
 
 **Note:**
-* Policy cannot be removed if there is a contract linked to the policy
+* Policy cannot be removed if there is a contract linked to the policy.
 
 ### Viewing policies: `view_policy`
 
 Shows a list of all policies or a specific policy in iCon.
 
 Format:
-1. `view_policy -a` view all policies
-2. `view_policy p:POLICY_ID1 [p:POLICY_ID2] [p:POLICYID3]` at least 1 id to view
+1. `view_policy -a` view all policies.
+2. `view_policy p:POLICY_ID1 [p:POLICY_ID2] [p:POLICYID3]` at least 1 id to view.
 
 Examples:
-* `view_policy p:Abc123` views the policy with id "Abc123"
+* `view_policy p:Abc123` views the policy with id "Abc123".
 
 **Note:**
-* Viewing policies by id allows multiple case-sensitive, id substrings separated by the space character " "
+* Viewing policies by id allows multiple case-sensitive, id substrings separated by the space character " ".
 
 
 <box type="warning" seamless>
@@ -340,7 +339,7 @@ Format: `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIU
 
 Example: `add_contract p:P1234A ic:S1234567A dt:2023-01-01 e:2024-01-01 pr:1200.50`
 
-Note:  Contact's NRIC and Policy ID must be valid and must already exist in iCon
+Note:  Contact's NRIC and Policy ID must be valid and must already exist in iCon.
 
 ### Remove a contract : `remove_contract`
 
@@ -355,26 +354,26 @@ Example: `remove_contract c:C1234A`
 Displays all contracts in iCon.
 
 Format: 
-1. `view_contract -a` for viewing all contracts
-2. `view_contract c:CONTRACT_ID` for viewing a specific contract by CONTRACT_ID
+1. `view_contract -a` for viewing all contracts.
+2. `view_contract c:CONTRACT_ID` for viewing a specific contract by CONTRACT_ID.
 
 Example: 
 1. `view_contract -a`
 2. `view_contract c:C1234A`
 
 **Note:**
-* Viewing Contract(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
+* Viewing Contract(s) by id allows multiple case-sensitive, id substrings separated by the space character " ".
 
 ### Sort contracts: `sort_contract`
 
 Sorts contracts in iCon by relevant flags.
 
 Format: 
-1. `sort_contract -ea` sorts contract by expiry date ascending
-2. `sort_contract -i` sorts contract by order in which contract was inserted/added into iCon
+1. `sort_contract -ea` sorts contract by expiry date ascending.
+2. `sort_contract -i` sorts contract by order in which contract was inserted/added into iCon.
 
 * Expiry date ascending sorts contracts from the earliest expiry date to the latest. 
-* Insertion order is the order in which contracts are added by the user
+* Insertion order is the order in which contracts are added by the user.
 
 ### Edit contract: `edit_contract`
 
@@ -382,10 +381,10 @@ Edits an existing contract in iCon.
 
 Format: `edit_contract c:CONTRACT_ID [p:POLICY_ID] [ic:NRIC] [dt:DATE_SIGNED] [e:EXPIRY_DATE] [pr:PREMIUM_AMOUNT]`
 
-* Edits the contract with the specified `CONTRACT_ID`.
-* CONTRACT_ID is a compulsory field
+* Edits the contract with the specified `CONTRACT_ID`
+* CONTRACT_ID is a compulsory field.
 * At least one of the optional fields must be provided.
-* Existing values of selected optional field(s) will be updated (overwritten) to the new input values
+* Existing values of selected optional field(s) will be updated (overwritten) to the new input values.
 
 Example: `edit_contract c:C1234A p:P5678B ic:S7654321B dt:2023-02-01 e:2024-02-01 pr:1500.75`
 
@@ -401,7 +400,7 @@ Format: `help`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from iCon
+Clears all entries from iCon.
 
 Format: `clear`
 
@@ -417,7 +416,7 @@ iCon data are saved in the hard disk automatically after any command that change
 
 ### Editing the data file
 
-iCon data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+iCon data are saved automatically as a JSON file `[JAR file location]/data/iCon.json`. Advanced users are welcome to update data directly by editing that data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
