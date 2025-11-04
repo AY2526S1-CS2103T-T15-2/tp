@@ -263,6 +263,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Insurance Agent | add a contract                                  | link a specific policy to a client                                         |
 | `* * *`  | Insurance Agent | remove a contract                               | delete outdated or invalid client contracts                                |
 | `* * *`  | Insurance Agent | view a contract                                 | review contract details, including the policy type and the client involved |
+| `* *`    | Insurance Agent | search for a contact                            | quickly pull up contact details for reference                              |
+| `* *`    | Insurance Agent | search for a contract                           | quickly reference contract details                                         |
 | `* *`    | Insurance Agent | tag a contact                                   | label contacts with follow-up notes or categories for better organization  |
 | `* *`    | Insurance Agent | add client appointments                         | schedule meetings or follow-ups with clients                               |
 | `* *`    | Insurance Agent | remove client appointments                      | cancel or correct appointments as needed                                   |
