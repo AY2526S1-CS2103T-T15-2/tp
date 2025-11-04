@@ -59,7 +59,7 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both iCon data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -199,7 +199,7 @@ of making it clear to developers what types of sorting options there are, instea
 #### Implementation
 
 The edit feature is managed by the respective **EditFIELDCommand** classes. 
-Implementation is pretty similar for the three class, hence using `edit_contact` as an example
+Implementation is pretty similar for the three classes, hence using `edit_contact` as an example
 to demonstrate the structure of the implementation.
 
 How it works:
@@ -218,7 +218,7 @@ How it works:
 
 How to apply to other commands:
 
-1. Identifying fields are different for different commands. Contact: `Nric`, Contract:`CId` Policy: `PId`
+1. Identifying fields are different for different commands. Contact: `Nric`, Contract:`CId`, Policy: `PId`, Appointment: `AId`.
 2. Replace all `contact` with the field you are trying to edit e.g `editContactCommand` -> `editPolicyCommand`
 
 <puml src="diagrams/EditContactSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit_contact ic:T1234567A p:97456321` Command" />
@@ -309,12 +309,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC2 - Delete a contact**
+**Use case: UC2 - Remove a contact**
 
 **MSS**
 
-1. User requests to delete a specific contact in the list by NRIC
-2. iCon deletes the contact
+1. User requests to remove a specific contact in the list by NRIC
+2. iCon removes the contact
 
     Use case ends.
 
@@ -332,13 +332,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. The contact to be deleted is linked to existing contracts.
+* 1c. The contact to be removed is linked to existing contracts.
 
     * 1c1. iCon shows an error message.
 
       Use case ends.
 
-* 1d. The contact to be deleted is linked to existing appointments.
+* 1d. The contact to be removed is linked to existing appointments.
 
     * 1d1. iCon shows an error message.
 
@@ -616,7 +616,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. The contact ID is invalid.
+* 2a. The NRIC is invalid.
 
     * 2a1. iCon shows an error message.
 
@@ -945,7 +945,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Contact**: A customer of the insurance agent that has data fields, name, email, and NRIC
 * **Policy**: The document that details the terms and conditions of a contract
 * **Contract**: A contract that binds a customer to a certain policy
