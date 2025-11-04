@@ -262,7 +262,7 @@ Examples:
     Life Insurance`This policy coverage for family...
     Travel - A`This policy covers flights to European countries
     ```
-    **Files will be read as plain text in the UTF-8 encoding.** It is recommended to use a plain text file with
+    **Files will be read as plain text in the [UTF-8 encoding](#glossary).** It is recommended to use a plain text file with
 extension `.txt` when using the file option. Using files with other extensions or file formats may lead to unexpected
 errors during parsing.
 * Policies are considered duplicates and are not added to iCon if they have the **EXACT** same name and details.\
@@ -490,3 +490,4 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 * **ASCII Character** - Anything accessible on your keyboard (without pressing ALT) is an ASCII character. For more details on ASCII characters, refer to https://www.ascii-code.com/
 * **Printable ASCII Character** - The whole set of ASCII characters excluding characters that cannot be represented on screen. For more details on ASCII characters, refer to https://www.ascii-code.com/characters/printable-characters
 * **Alphanumeric Character** - Characters `a` to `z`, lower-case and upper-case, and `0` to `9`.
+* **UTF-8 encoding** ([Wikipedia](https://en.wikipedia.org/wiki/UTF-8)) - A character encoding standard for [Unicode](https://en.wikipedia.org/wiki/Unicode), which contains characters in most writing systems. The option to select this character encoding is available when saving text files.
