@@ -264,8 +264,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Insurance Agent | remove a contract                               | delete outdated or invalid client contracts                                |
 | `* * *`  | Insurance Agent | view a contract                                 | review contract details, including the policy type and the client involved |
 | `* *`    | Insurance Agent | tag a contact                                   | label contacts with follow-up notes or categories for better organization  |
-| `* *`    | Insurance Agent | search for a contact                            | locate a client quickly by name                                            |
-| `* *`    | Insurance Agent | search for a contract                           | find a contract easily based on its type or date                           |
 | `* *`    | Insurance Agent | add client appointments                         | schedule meetings or follow-ups with clients                               |
 | `* *`    | Insurance Agent | remove client appointments                      | cancel or correct appointments as needed                                   |
 | `* *`    | Insurance Agent | view client appointments                        | view upcoming or past meetings with clients                                |
@@ -275,7 +273,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Insurance Agent | edit a contact                                  | correct or update client information                                       |
 | `* *`    | Insurance Agent | edit a policy’s details                         | ensure policy information remains accurate and up-to-date                  |
 | `*`      | Insurance Agent | sort my contacts alphabetically by name         | find a specific client’s record quickly when speaking with them            |
-| `*`      | Insurance Agent | sort my contracts by expiry date or policy type | review which contracts need attention or follow-ups soonest                |
+| `*`      | Insurance Agent | sort my contracts by expiry date                | review which contracts need attention or follow-ups soonest                |
 | `*`      | Insurance Agent | edit client appointments                        | reschedule meetings or mark them as completed                              |
 | `*`      | Insurance Agent | sort my appointments by date                    | easily reference upcoming or recent appointments                           |
 | `*`      | Insurance Agent | search for an appointment                       | quickly look up details of a client meeting or follow-up                   |
