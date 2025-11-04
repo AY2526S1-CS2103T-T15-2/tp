@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PATH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
@@ -42,9 +44,13 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommandType> {
             } else if (arePrefixesPresent(argMultimap, PREFIX_FILE)
                     && arePrefixesAbsent(argMultimap, PREFIX_NAME, PREFIX_DETAILS)) {
                 argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE);
-                Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get());
 
-                return new AddPolicyFileCommand(filePath);
+                try {
+                    Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get());
+                    return new AddPolicyFileCommand(filePath);
+                } catch (InvalidPathException ipe) {
+                    throw new ParseException(MESSAGE_INVALID_PATH, ipe);
+                }
             }
         }
 

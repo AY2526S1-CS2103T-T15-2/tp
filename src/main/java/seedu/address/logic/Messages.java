@@ -30,6 +30,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date should be in the format yyyy-MM-dd";
     public static final String MESSAGE_INVALID_EXPIRY_DATE = "Signing date comes after expiry date";
     public static final String MESSAGE_INVALID_CONTRACT_PERIOD = "Date signed must be before Expiry date";
+    public static final String MESSAGE_INVALID_PATH = "The path provided is invalid.\n"
+            + "Please ensure that the path provided is a valid path in your system and to exclude quotation marks in "
+            + "your input.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

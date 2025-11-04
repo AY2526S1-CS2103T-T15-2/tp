@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -185,7 +186,7 @@ public class ParserUtil {
      * Parses a {@code String policyDetails} into an {@code PolicyDetails}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Path parsePath(String filePath) {
+    public static Path parsePath(String filePath) throws InvalidPathException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
         return Paths.get(trimmedFilePath);
