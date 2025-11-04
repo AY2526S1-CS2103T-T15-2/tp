@@ -490,4 +490,4 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 * **ASCII Character** - Anything accessible on your keyboard (without pressing ALT) is an ASCII character. For more details on ASCII characters, refer to https://www.ascii-code.com/
 * **Printable ASCII Character** - The whole set of ASCII characters excluding characters that cannot be represented on screen. For more details on ASCII characters, refer to https://www.ascii-code.com/characters/printable-characters
 * **Alphanumeric Character** - Characters `a` to `z`, lower-case and upper-case, and `0` to `9`.
-* **UTF-8 encoding** - A character encoding standard for Unicode, which contains characters in most writing systems. The option to select this character encoding is available when saving text files.
+* **UTF-8 encoding** ([Wikipedia](https://en.wikipedia.org/wiki/UTF-8)) - A character encoding standard for [Unicode](https://en.wikipedia.org/wiki/Unicode), which contains characters in most writing systems. The option to select this character encoding is available when saving text files.
