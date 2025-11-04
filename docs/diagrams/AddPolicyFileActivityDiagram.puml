@@ -17,7 +17,8 @@ while () is ([else])
     endif
 endwhile ([EOF is reached])
 
-:Return list of UnassignedPolicy to Model;
+:Return list of UnassignedPolicy;
+:Assign unique ids to policies;
 :Check for duplicates between the returned list and the Model data;
 if () then ([has duplicate])
     :Throw duplicate exception;
@@ -30,7 +31,6 @@ if () then ([has duplicate])
     stop
 else ([else])
 endif
-:Assign unique ids to policies;
 :Insert policies to the Model;
 
 stop
