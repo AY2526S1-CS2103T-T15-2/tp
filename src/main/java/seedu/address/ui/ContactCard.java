@@ -58,10 +58,14 @@ public class ContactCard extends UiPart<Region> {
         contact.getContracts().forEach(contract -> contracts.getChildren()
                 .add(new Label(contract.getCId().value + " ")));
         if (contact.getAddress() != null && !contact.getAddress().value.isBlank()) {
-            address.getChildren().add(new Label(contact.getAddress().value));
+            Label addressLabel = new Label(contact.getAddress().value);
+            addressLabel.setWrapText(true);
+            address.getChildren().add(addressLabel);
         }
         if (contact.getEmail() != null && !contact.getEmail().value.isBlank()) {
-            email.getChildren().add(new Label(contact.getEmail().value));
+            Label emailLabel = new Label(contact.getEmail().value);
+            emailLabel.setWrapText(true);
+            email.getChildren().add(emailLabel);
         }
         contact.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
