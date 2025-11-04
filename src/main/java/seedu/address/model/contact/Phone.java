@@ -13,8 +13,9 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain an optional starting +, numbers, dashes, and spaces"
                     + " and it should contain at least 3 numbers, and have at most 30 characters.\n"
-                    + "It should not contain consecutive dashes or spaces and should end with a number.";
-    public static final String VALIDATION_REGEX = "^(?=(?:.*\\d){3,})(?!.*--)(?!.*  )\\+?[0-9-\\s]{2,29}[0-9]$";
+                    + "It should not contain consecutive dashes and/or spaces and should end with a number.";
+    public static final String VALIDATION_REGEX =
+            "^(?=(?:.*\\d){3,})(?!.*--)(?!.*  )(?!.*- )(?!.* -)\\+?[0-9-\\s]{2,29}[0-9]$";
     public final String value;
 
     /**
