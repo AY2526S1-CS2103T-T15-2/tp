@@ -932,7 +932,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. The system should work on any _mainstream OS_(excluding MacOS, see point 2) as long as it has Java `17` installed.
+1. The system should work on any _mainstream OS_ (excluding MacOS, see point 2) as long as it has Java `17` installed.
 2. The system should work on MacOS as long as it has a specific Java `17` [configuration](https://se-education.org/guides/tutorials/javaInstallationMac.html) `Java 17 JDK+FX Azul distribution`.
 3. The application should be easily installable, with no additional third-party dependencies.
 4. The application should function entirely offline.
