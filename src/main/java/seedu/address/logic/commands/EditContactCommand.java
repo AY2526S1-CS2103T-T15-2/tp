@@ -97,6 +97,7 @@ public class EditContactCommand extends Command {
         }
     }
 
+    //@@author porcupinezzz
     /**
      * Creates and returns a {@code Contact} with the details of {@code contactToEdit}
      * edited with {@code editContactDescriptor}.
@@ -115,6 +116,7 @@ public class EditContactCommand extends Command {
         return new Contact(updatedName, updatedPhone,
                 updatedNric, updatedEmail, updatedAddress, updatedTags, contracts);
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
@@ -250,6 +252,7 @@ public class EditContactCommand extends Command {
             return (contracts != null) ? Optional.of(Collections.unmodifiableSet(contracts)) : Optional.empty();
         }
 
+        //@@author porcupinezzz
         @Override
         public boolean equals(Object other) {
             if (other == this) {

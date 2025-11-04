@@ -244,6 +244,7 @@ public class ModelManager implements Model {
         addressBook.addContract(contract);
     }
 
+    //@@author Joshua-Seah
     @Override
     public void addContractToContact(Contract contract) {
         addressBook.addContractToContact(contract);
@@ -259,6 +260,7 @@ public class ModelManager implements Model {
         requireAllNonNull(contract, contact);
         return addressBook.contactHasContract(contract, contact);
     }
+    //@@author
 
     @Override
     public boolean policyHasContract(Contract contract, Policy policy) {
@@ -271,11 +273,13 @@ public class ModelManager implements Model {
         addressBook.removeContract(contract);
     }
 
+    //@@author Joshua-Seah
     @Override
     public void removeContractFromContact(Contract contract) {
         requireAllNonNull(contract);
         addressBook.removeContractFromContact(contract);
     }
+    //@@author
 
     @Override
     public void removeContractFromPolicy(Contract contract) {
@@ -304,6 +308,7 @@ public class ModelManager implements Model {
         return filteredContacts;
     }
 
+    //@@author KH-boop-bit
     /**
      * Returns an unmodifiable view of the sorted list of {@code Contact} backed by the internal list of
      * {@code versionedAddressBook}
@@ -312,6 +317,7 @@ public class ModelManager implements Model {
     public ObservableList<Contact> getSortedContactList() {
         return sortedContacts;
     }
+    //@@author
 
     @Override
     public ObservableList<Contract> getSortedContractList() {
@@ -335,6 +341,7 @@ public class ModelManager implements Model {
         return filteredPolicies;
     }
 
+    //@@author Eggie23
     /**
      * Returns an unmodifiable view of the list of {@code Contract} backed by the internal list of
      * {@code versionedAddressBook}
@@ -343,6 +350,7 @@ public class ModelManager implements Model {
     public ObservableList<Contract> getFilteredContractList() {
         return filteredContracts;
     }
+    //@@author
 
     /**
      * Returns an unmodifiable view of the list of {@code Appointment} backed by the internal list of
@@ -354,11 +362,13 @@ public class ModelManager implements Model {
     }
 
 
+    //@@author KH-boop-bit
     @Override
     public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
         filteredContacts.setPredicate(predicate);
     }
+    //@@author
 
     @Override
     public void updateFilteredPolicyList(Predicate<Policy> predicate) {
@@ -378,10 +388,12 @@ public class ModelManager implements Model {
         filteredContracts.setPredicate(predicate);
     }
 
+    //@@author AndrescuIII-too
     @Override
     public void sortContacts(Comparator<Contact> comparator) {
         sortedContacts.setComparator(comparator);
     }
+    //@@author
 
     @Override
     public void sortContracts(Comparator<Contract> comparator) {

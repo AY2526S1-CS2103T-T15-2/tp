@@ -20,6 +20,7 @@ import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contact.Nric;
 import seedu.address.ui.ListPanelType;
 
+//@@author KH-boop-bit
 /**
  * Edits the details of an existing appointment in the address book.
  */

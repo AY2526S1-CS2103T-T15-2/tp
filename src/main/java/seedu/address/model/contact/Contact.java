@@ -30,6 +30,7 @@ public class Contact {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Contract> contracts = new HashSet<>();
 
+    //@@author Joshua-Seah
     /**
      * Constructor when constructing Contact with contracts.
      */
@@ -45,6 +46,7 @@ public class Contact {
         this.contracts.addAll(contracts);
     }
 
+    //@@author porcupinezzz
     /**
      * Main constructor when constructing Contact
      * Constructor without contracts.
@@ -58,6 +60,7 @@ public class Contact {
         this.address = address;
         this.tags.addAll(tags);
     }
+    //@@author
 
     public Name getName() {
         return name;

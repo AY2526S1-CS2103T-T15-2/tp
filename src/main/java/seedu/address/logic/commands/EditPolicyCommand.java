@@ -55,6 +55,7 @@ public class EditPolicyCommand extends Command {
         this.editPolicyDescriptor = editPolicyDescriptor;
     }
 
+    //@@author AndrescuIII-too
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -74,6 +75,7 @@ public class EditPolicyCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_POLICY_SUCCESS, editedPolicy.getId().toString()),
                 ListPanelType.POLICY);
     }
+    //@@author
 
     /**
      * Creates and returns a {@code Policy} with the details of {@code policyToEdit}

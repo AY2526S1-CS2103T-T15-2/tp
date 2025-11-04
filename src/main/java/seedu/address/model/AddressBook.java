@@ -113,6 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return contacts.contains(nric);
     }
 
+    //@@author Joshua-Seah
     public Name getName(Nric nric) {
         requireNonNull(nric);
         for (Contact contact : contacts) {
@@ -122,6 +123,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         return null;
     }
+    //@@author
 
     /**
      * Adds a contact to the address book.
@@ -337,6 +339,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         contracts.add(contract);
     }
 
+    //@@author Joshua-Seah
     /**
      * Adds the given contract to the corresponding contact in the address book.
      * The contact must exist in the address book.
@@ -352,6 +355,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         throw new ContactNotFoundException();
     }
+    //@@author
 
     /**
      * Adds the given contract to the corresponding policy in the address book.
@@ -378,6 +382,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         contracts.remove(contract);
     }
 
+    //@@author Joshua-Seah
     /**
      * Removes the given contract from the corresponding contact in the address book.
      */
@@ -391,6 +396,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         throw new ContactNotFoundException();
     }
+    //@@author
 
     /**
      * Removes the given contract from the corresponding policy in the address book.
@@ -426,6 +432,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         contracts.setContract(target, editedContract);
     }
 
+    //@@author Joshua-Seah
     /**
      * Returns true if a contact has the given contract.
      */
@@ -439,6 +446,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         return false;
     }
+    //@@author
 
     /**
      * Returns true if a policy has the given contract.
