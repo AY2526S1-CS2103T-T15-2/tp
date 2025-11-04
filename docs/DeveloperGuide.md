@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 
 The `Model` component,
@@ -932,15 +932,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  The application should be easily installable, with no additional third-party dependencies.
-3.  The application should function entirely offline.
-4.  The system should be able to hold up to 1000 contacts, contracts, and policies without a noticeable sluggishness in performance for typical usage - load time under 1 second.
-5.  The system should respond to user input and commands within 100 milliseconds.
-6.  The system should manage its own copy of policies separate from the source file when adding or removing policies.
-7.  The save data should not take more than 100 MB in typical usage.
-8.  The system must save changes to the hard disk after 1 or a few user modifications and after exiting the program, to minimize data loss in the event of a crash.
-9.  A user with above average typing speed (50 WPM) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work on any _mainstream OS_(excluding MacOS, see point 2) as long as it has Java `17` installed.
+2. The system should work on MacOS as long as it has a specific Java `17` [configuration](https://se-education.org/guides/tutorials/javaInstallationMac.html) `Java 17 JDK+FX Azul distribution`.
+3. The application should be easily installable, with no additional third-party dependencies.
+4. The application should function entirely offline.
+5. The system should be able to hold up to 1000 contacts, contracts, and policies without a noticeable sluggishness in performance for typical usage - load time under 1 second.
+6. The system should respond to user input and commands within 100 milliseconds.
+7. The system should manage its own copy of policies separate from the source file when adding or removing policies.
+8. The save data should not take more than 100 MB in typical usage.
+9. The system must save changes to the hard disk after 1 or a few user modifications and after exiting the program, to minimize data loss in the event of a crash.
+10. A user with above average typing speed (50 WPM) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
