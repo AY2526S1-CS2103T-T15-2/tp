@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. The `ListPanel` comprises of `AppointmentListPanel`, `ContactListPanel`, `ContractListPanel` and `PolicyListPanel`
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. The `ListPanel` comprises of `AppointmentListPanel`, `ContactListPanel`, `ContractListPanel` and `PolicyListPanel`, represented by `XYZListPanel`
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -161,7 +161,7 @@ adding all policies until an invalid input. This decision was made so the user w
 same file later and encountering an error about duplicate policies from having the same name and details.
 
 An important consideration when implementing this is since policies and other data in iCon are assigned and identified
-by a unique alphanumeric string id, there is a need for `Model` to generate new random ids not yet present in iCon.
+by a unique alphanumeric string ID, there is a need for `Model` to generate new random ids not yet present in iCon.
 
 Therefore, in implementation, the class `UnassignedPolicy` was created to facilitate the above described behaviour. The
 parser class `PolicyFileParser` parses and returns `UnassignedPolicy` objects before they are assigned ids, which are
@@ -377,8 +377,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view contacts by NRIC substring
-2.  iCon shows a list contacts that matches the NRIC substring given
+1.  User requests to view contacts by NRIC
+2.  iCon shows a list contacts that matches the NRIC exactly
 
     Use case ends.
 
@@ -396,7 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use Case: UC5 - view all contacts**
+**Use Case: UC5 - View all contacts**
 
 **MSS**
 
@@ -458,13 +458,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use Case: UC9 - Add Policy(by file path)**
+**Use Case: UC9 - Add Policies (from file path)**
 
 **MSS**
 
-1. User adds policy using file path
-2. iCon adds the policy
-3. iCon shows a success message & returns a policy ID to the user
+1. User adds policies using file path
+2. iCon adds the policies
+3. iCon shows a success message
 
    Use case ends.
 
@@ -480,14 +480,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to remove a specific policy in the list by policy id
+1. User requests to remove a specific policy in the list by policy ID
 2. iCon removes the policy
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given id is invalid.
+* 1a. The given ID is invalid.
 
     * 1a1. iCon shows an error message.
 
@@ -499,7 +499,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2b. There is no policy stored with the given id.
+* 2b. There is no policy stored with the given ID.
 
     * 2b1. iCon shows an error message.
 
@@ -509,26 +509,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to edit a specific policy in the list by policy id with some or all details specified
+1. User requests to edit a specific policy in the list by policy ID with some or all details specified
 2. iCon updates the policy's details
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given id is invalid or missing.
+* 1a. The given ID is invalid or missing.
 
     * 1a1. iCon shows an error message.
 
       Use case ends.
 
-* 1b. Valid id but no details to be edited.
+* 1b. Valid ID but no details to be edited.
 
     * 1b1. iCon shows an error message.
 
       Use case ends.
 
-* 2a. There is no policy stored with the given id.
+* 2a. There is no policy stored with the given ID.
 
     * 2a1. iCon shows an error message.
 
@@ -545,8 +545,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view specific policies by policy id substrings
-2. iCon shows a list of policies that match the policy id substrings
+1. User requests to view specific policies by policy ID substrings
+2. iCon shows a list of policies that match the policy ID substrings
 
    Use case ends.
 
@@ -656,20 +656,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to remove a specific contract in the list by contract id
+1. User requests to remove a specific contract in the list by contract ID
 2. iCon removes the contract
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given id is invalid.
+* 1a. The given ID is invalid.
 
     * 1a1. iCon shows an error message.
 
       Use case ends.
 
-* 2a. There is no contract stored with the given id.
+* 2a. There is no contract stored with the given ID.
 
     * 2a1. iCon shows an error message. 
 
@@ -679,26 +679,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to edit a specific contract in the list by contract id with some or all details specified
+1. User requests to edit a specific contract in the list by contract ID with some or all details specified
 2. iCon updates the contract's details
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given id is invalid or missing.
+* 1a. The given ID is invalid or missing.
 
     * 1a1. iCon shows an error message.
 
       Use case ends.
 
-* 1b. Valid id but no details to be edited.
+* 1b. Valid ID but no details to be edited.
 
     * 1b1. iCon shows an error message.
 
       Use case ends.
 
-* 2a. There is no contract stored with the given id.
+* 2a. There is no contract stored with the given ID.
 
     * 2a1. iCon shows an error message.
 
@@ -720,14 +720,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view details of a specific contract in the list by id
-2. iCon shows the contract's details that matches the id given
+1. User requests to view details of a specific contract in the list by ID
+2. iCon shows the contract's details that matches the ID given
 
     Use case ends.
 
 **Extensions**
 
-* 1a. There is no given id.
+* 1a. There is no given ID.
 
     * 1a1. iCon shows an error message.
 
@@ -932,7 +932,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. The system should work on any _mainstream OS_(excluding MacOS, see point 2) as long as it has Java `17` installed.
+1. The system should work on any _mainstream OS_ (excluding MacOS, see point 2) as long as it has Java `17` installed.
 2. The system should work on MacOS as long as it has a specific Java `17` [configuration](https://se-education.org/guides/tutorials/javaInstallationMac.html) `Java 17 JDK+FX Azul distribution`.
 3. The application should be easily installable, with no additional third-party dependencies.
 4. The application should function entirely offline.
@@ -946,10 +946,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Contact**: A customer of the insurance agent that has data fields, name, email, and NRIC
-* **Policy**: The document that details the terms and conditions of a contract
-* **Contract**: A contract that binds a customer to a certain policy
-* **Appointment**: A scheduled event between the user (insurance agent) and a Contact, identified by a date, time, and associated NRIC.
+* **Contact**: A customer of the insurance agent that has data fields and is identified by NRIC
+* **Policy**: The document that details the terms and conditions of a contract and is identified by `POLICY_ID`
+* **Contract**: A contract that binds a customer to a certain policy and is identified by `CONTRACT_ID`
+* **Appointment**: A scheduled event between the user (insurance agent) and a Contact, with a date, time, and associated NRIC, identified by `APPOINTMENT_ID`
 * **NRIC**: National Registration Identity Card. A unique identifier used to link a Contact to their associated Contracts and Appointments.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -969,138 +969,138 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1.1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file
-      2. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1.2. Double-click the jar file
+
+   1.3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 - Note: For mac and linux users, use the terminal and `cd` to the directory where the jar file is located. Then, run `java -jar iCon.jar`
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2.1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2.2. Re-launch the app by double-clicking the jar file.<br>Expected: The most recent window size and location is retained.
 
-1. Start Clean: `clear`
+3. Start Clean: `clear`
 
 ### Contact management
 
 1. Add two contacts. The list should update immediately
 
-   1. `add_contact n:Bob Lim p:81112222 ic:G1234567B e:bob@example.com a:456 MBS`
+   1.1. `add_contact n:Bob Lim p:81112222 ic:G1234567B e:bob@example.com a:456 MBS`
 
-   1. `add_contact n:Alice Tan p:91234567 ic:S9876543A e:alice@example.com a:123 Orchard Road`
+   1.2. `add_contact n:Alice Tan p:91234567 ic:S9876543A e:alice@example.com a:123 Orchard Road`
 
-1. Sort contacts by alphabetical sort. `sort_contact -a`.
-   2. The list should re-order to show Alice first, then Bob.
+2. Sort contacts by alphabetical sort. `sort_contact -a`.
+   2.1. The list should re-order to show Alice first, then Bob.
 
-1. Edit contact by NRIC to change fields such as phone number.
+3. Edit contact by NRIC to change fields such as phone number.
 
-    1. `edit_contact ic:G1234567B p:88888888`
+    3.1. `edit_contact ic:G1234567B p:88888888`
 
-1. View a specific contact: View by NRIC. Only Bob's details should be displayed
+4. View a specific contact: View by NRIC. Only Bob's details should be displayed
 
-   1. `view_contact ic:G1234567B`
+   4.1. `view_contact ic:G1234567B`
 
-1. Remove a contact: Remove Bob using his NRIC. The list should update, leaving only Alice.
+5. Remove a contact: Remove Bob using his NRIC. The list should update, leaving only Alice.
 
-    1. `remove_contact ic:G1234567B`
+    5.1. `remove_contact ic:G1234567B`
 
 ### Policy management
 
 1. Add two new policies.
 
-    1. `add_policy n:Premium Health d:Covers all hospital stays and specialist visits`
+    1.1. `add_policy n:Premium Health d:Covers all hospital stays and specialist visits`
 
-    1. `add_policy n:Basic Car d:Covers basic third-party car damage`
+    1.2. `add_policy n:Basic Car d:Covers basic third-party car damage`
 
-1. Add policy from file.
+2. Add policy from file.
 
-    1. Create a file named `policy_file.txt` in the same folder as your .jar file.
+    2.1. Create a file named `policy_file.txt` in the same folder as your .jar file.
 
-    1. Put this text inside that file: ``Life Insurance`This policy coverage for family...``
+    2.2. Put this text inside that file: ``Life Insurance`This policy coverage for family...``
 
-    1. Now, run the command: `add_policy f:policy_file.txt`
+    2.3. Now, run the command: `add_policy f:policy_file.txt`
 
-1. View all policies. The list should show all 3 policies added.
-Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailor the POLICY_ID to the randomly generated POLICY ID as shown in the GUI
+3. View all policies. The list should show all 3 policies added.
+Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailor the `POLICY_ID` to the randomly generated policy ID as shown in the GUI
 
-    1. `view_policy -a`
+    3.1. `view_policy -a`
 
-1. Edit a policy. Use the POLICY_ID for "Premium Health" (eg. P1234A) to edit it
+4. Edit a policy. Use the `POLICY_ID` for "Premium Health" (eg. P1234A) to edit it
 
-    1. `edit_policy p:P1234A n:Premium Health Gold`
+    4.1. `edit_policy p:P1234A n:Premium Health Gold`
 
-1. Remove the Basic Car policy using the POLICY_ID (eg. P5678B)
+5. Remove the Basic Car policy using the `POLICY_ID` (eg. P5678B)
 
-    1. `remove_policy p:P5678B`
+    5.1. `remove_policy p:P5678B`
 
 ### Contract management
 
-1. Setup: We should have "Alice" (NRIC S9876543A) and a Policy (eg. P1234A for "Premium Health Gold", refer to the POLICY_ID in the GUI).
+1. Setup: We should have "Alice" (NRIC S9876543A) and a Policy (eg. P1234A for "Premium Health Gold", refer to the `POLICY_ID` in the GUI).
 
-1. Add a new contract for Alice with the policy.
+2. Add a new contract for Alice with the policy.
 
-    1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:1200.50`
+    2.1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:1200.50`
 
-1. Add a contract (Bad expiry date): This command should fail because the expiry date is before the signed date
+3. Add a contract (Bad expiry date): This command should fail because the expiry date is before the signed date
 
-    1. `add_contract p:P1234A ic:S9876543A dt:2025-01-01 e:2024-01-01 pr:100`
+    3.1. `add_contract p:P1234A ic:S9876543A dt:2025-01-01 e:2024-01-01 pr:100`
 
-    2. The error message: "Signing date comes after expiry date" should appear.
+    3.2. The error message: "Signing date comes after expiry date" should appear.
 
-1. Add a contract (Bad premium): This command should fail because premium is not a positive number
+4. Add a contract (Bad premium): This command should fail because premium is not a positive number
 
-    1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:-50`
+    4.1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:-50`
 
-    2. The error message: "Contract premium should be between 0 and 999999999999.99" should appear.
+    4.2. The error message: "Contract premium should be between 0 and 999999999999.99" should appear.
 
-1. View all contracts. The list should show the contract added.
+5. View all contracts. The list should show the contract added.
 
-    1. `view_contract -a`
+    5.1. `view_contract -a`
 
-1. Edit Contract: Similar to POLICY_ID, use the CONTRACT_ID assigned by the system (eg. C1234A) to edit the premium
+6. Edit Contract: Similar to `POLICY_ID`, use the `CONTRACT_ID` assigned by the system (eg. C1234A) to edit the premium
 
-    1. `edit_contract c:C1234A pr:1300.00`
+    6.1. `edit_contract c:C1234A pr:1300.00`
 
-1. Remove Contract: Remove the contract you edited (use the CONTRACT_ID)
+7. Remove Contract: Remove the contract you edited (use the `CONTRACT_ID`)
 
-    1. `remove_contract c:C1234A`
+    7.1. `remove_contract c:C1234A`
 
 ### Appointment Management
 
 1. Setup: We still have "Alice" (NRIC S9876543A) in the contact list.
 
-1. Add two appointments for Alice.
+2. Add two appointments for Alice.
 
-    1. `add_appointment ic:S9876543A dt:2025-11-15 d:Discuss contract renewal`
+    2.1. `add_appointment ic:S9876543A dt:2025-11-15 d:Discuss contract renewal`
 
-    1. `add_appointment ic:S9876543A dt:2025-10-10 d:Initial healthcare review`
+    2.2. `add_appointment ic:S9876543A dt:2025-10-10 d:Initial healthcare review`
 
-1. Add appointment (Invalid NRIC): This command should fail because the NRIC does not exist.
+3. Add appointment (Invalid NRIC): This command should fail because the NRIC does not exist.
 
-    1. `add_appointment ic:F9999999Z dt:2025-12-01 d:Non-existent contact`
+    3.1. `add_appointment ic:F9999999Z dt:2025-12-01 d:Non-existent contact`
 
-1. Sort appointments: Sort the appointments by date in ascending order. The "Initial healthcare review" (Oct 10) should now appear before the "contract renewal" (Nov 15).
+4. Sort appointments: Sort the appointments by date in ascending order. The "Initial healthcare review" (Oct 10) should now appear before the "contract renewal" (Nov 15).
 
-    1. `sort_appointment -da`
+    4.1. `sort_appointment -da`
 
-1. Edit appointments: Similar to POLICY_ID, use APPOINTMENTID from the GUI (eg. A1234B) from one of the appointments and change its date
+5. Edit appointments: Similar to `POLICY_ID`, use `APPOINTMENT_ID` from the GUI (eg. A1234B) from one of the appointments and change its date
 
-    1. `edit_appointment a:A1234B dt:2025-11-16 d:Sign new contract papers`
+    5.1. `edit_appointment a:A1234B dt:2025-11-16 d:Sign new contract papers`
 
-1. Remove appointment: Remove the appointment you edited (using APPOINTMENTID) (eg. A1234B)
+6. Remove appointment: Remove the appointment you edited (using `APPOINTMENT_ID`) (eg. A1234B)
 
-    1. `remove_appointment a:A1234B`
+    6.1. `remove_appointment a:A1234B`
 
 ### Exiting and Relaunching
 
 1. Exit the app
 
-   1. `exit`
+   1.1. `exit`
 
-1. Relaunch the app
+2. Relaunch the app
 
-    1. After relaunching the app, you should see the existing contacts, policies, contracts and appointments saved previously.
+    2.1. After relaunching the app, you should see the existing contacts, policies, contracts and appointments saved previously.

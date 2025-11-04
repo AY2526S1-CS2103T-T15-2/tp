@@ -6,7 +6,7 @@
 
 # iCon User Guide
 
-iCon is a **desktop app for managing contacts, contracts, policies, and appointments optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, iCon can get your management tasks done faster than traditional GUI apps.
+iCon is a **desktop app for Insurance agents to manage contacts, contracts, policies, and appointments. It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, iCon can get your management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 
@@ -75,7 +75,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Text entered after certain parameters will be counted as we do not perform regex(format validation) on some fields. <br>Fields that can
-  be checked - (Phone, NRIC, Email, ContractId, AppointmentId, PolicyID, Premium) - will throw exceptions for incorrect input format,
+  be checked - (Phone, NRIC, Email, ContractId, AppointmentId, PolicyId, Premium) - will throw exceptions for incorrect input format,
   but other fields' formats cannot be checked - (Name, Address, Tag), thus any input after the colon will be counted (within the confines of [defined accepted input](#format-summary)).
   <br> For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will
   include the extra text in your name. *e.g. NRIC would be checked if it matches the format starting with T/S/F/G/M, followed by 7 digits,
@@ -113,7 +113,7 @@ Display appointment(s) in iCon, either all or a set of specific appointments.
 
 Format: 
 1. `view_appointment -a` view all appointments
-2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]...` at least 1 ID to view.
+2. `view_appointment a:APPOINTMENT_ID1 [APPOINTMENT_ID2] [APPOINTMENT_ID3]...` at least 1 ID to view
 
 Examples:
 * `view_appointment -a`
@@ -126,7 +126,7 @@ Examples:
 
 Edits an existing appointment in iCon.
 
-Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
+Format: `edit_appointment a:APPOINTMENT_ID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
 
 * Edits the appointment at the specified `a:`. The appointment ID refers to the ID number shown in the displayed appointment list. The appointment ID **must be alphanumeric and 6 characters** …​
 * At least one of the optional fields must be provided.
@@ -146,18 +146,18 @@ Examples:
 
 Removes the specified appointment from iCon.
 
-Format: `remove_appointment a:APPOINTMENTID`
+Format: `remove_appointment a:APPOINTMENT_ID`
 
-* Removes the appointment with the specified `APPOINTMENTID`.
+* Removes the appointment with the specified `APPOINTMENT_ID`.
 * The appointment ID refers to the appointment ID shown in the displayed appointment list.
 * The appointment ID **must be alphanumeric and 6 characters long** …​
 
 Examples:
 * `remove_appointment a:xyz123` removes the appointment with appointment ID "xyz123" in iCon.
 
-### Sorting an appointment : `sort_appointment`
+### Sorting appointments : `sort_appointment`
 
-Sorts the appointment in iCon by relevant flags.
+Sorts the appointments in iCon by relevant flags.
 
 Format: `sort_appointment`
 1. `sort_appointment -i` sort appointment by order in which appointment was inserted/added into iCon.
@@ -261,7 +261,7 @@ Examples:
     * Absolute path: `C:\Users\Username\Documents\policy_file.txt` (Windows) or
       `/Users/Username/Documents/policy_file.txt` (MacOS/Linux)
     * Relative path: `policy_file.txt` (if the file is in the iCon home folder) or
-      `data/policy_file.txt` (if the file is in a subfolder named `data` inside the iCon home folder) <br> Note: Use '\' for Windows instead of '/'
+      `data/policy_file.txt` (if the file is in a subfolder named `data` inside the iCon home folder) <br> Note: Use `\` for Windows instead of `/`
 * Policies loaded from a file should be formatted as lines of ``NAME`DETAILS``. For example:
     ```
     Life Insurance`This policy coverage for family...
@@ -291,7 +291,7 @@ Examples:
 *  `edit_policy p:Abc123 n:Healthcare` edits the policy with ID `Abc123` to have the name `Healtchare`.
 
 **Note:**
-* Duplicate policies are similarly checked as in [`add_policy`](#adding-a-policy--addpolicy) and are rejected.
+* Duplicate policies are similarly checked as in [`add_policy`](#adding-a-policy-add-policy) and are rejected.
 
 ### Removing a policy: `remove_policy`
 
@@ -313,7 +313,7 @@ Shows a list of all policies or a specific policy in iCon.
 
 Format:
 1. `view_policy -a` view all policies
-2. `view_policy p:POLICY_ID1 [p:POLICY_ID2] [p:POLICY_ID3]...` at least 1 ID to view.
+2. `view_policy p:POLICY_ID1 [POLICY_ID2] [POLICY_ID3]...` at least 1 ID to view.
 
 Examples:
 * `view_policy p:Abc123` views the policy with ID "Abc123".
@@ -332,16 +332,18 @@ Adds a contract to iCon.
 
 Format: `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIUM_AMOUNT`
 
-* EXPIRY_DATE cannot be before DATE_SIGNED.
-* PREMIUM_AMOUNT must be a non-negative number, ranging from 0 to 999999999999.99.
-* PREMIUM_AMOUNT cannot have any commas or dollar signs. For eg: $999,999 is not accepted. User should input 999999 instead.
-* PREMIUM_AMOUNT will be automatically rounded to the nearest 2 decimal places.
-* DATE_SIGNED and EXPIRY_DATE must be in the format YYYY-MM-DD.
-* DATE_SIGNED and EXPIRY_DATE can be past, present or future dates. But EXPIRY_DATE cannot be before DATE_SIGNED.
+* `EXPIRY_DATE` cannot be before `DATE_SIGNED`.
+* `PREMIUM_AMOUNT` must be a non-negative number, ranging from 0 to 999999999999.99.
+* `PREMIUM_AMOUNT` cannot have any commas or dollar signs. For eg: $999,999 is not accepted. User should input 999999 instead.
+* `PREMIUM_AMOUNT` will be automatically rounded to the nearest 2 decimal places.
+* `DATE_SIGNED` and `EXPIRY_DATE` must be in the format YYYY-MM-DD.
+* `DATE_SIGNED` and `EXPIRY_DATE` can be past, present or future dates.
 
 Example: `add_contract p:P1234A ic:S1234567A dt:2023-01-01 e:2024-01-01 pr:1200.50`
 
 Note:  Contact's NRIC and Policy ID must be valid and must already exist in iCon.
+
+![img.jpg](images/Add_contract_ss.jpg)
 
 ### Remove a contract : `remove_contract`
 
@@ -357,7 +359,7 @@ Displays all contracts in iCon.
 
 Format: 
 1. `view_contract -a` for viewing all contracts
-2. `view_contract c:CONTRACT_ID [c:CONTRACT_ID2]...` for viewing a specific contract by CONTRACT_ID.
+2. `view_contract c:CONTRACT_ID [CONTRACT_ID2]...` for viewing specific contracts by `CONTRACT_ID`
 
 Example: 
 1. `view_contract -a`
@@ -383,8 +385,8 @@ Edits an existing contract in iCon.
 
 Format: `edit_contract c:CONTRACT_ID [p:POLICY_ID] [ic:NRIC] [dt:DATE_SIGNED] [e:EXPIRY_DATE] [pr:PREMIUM_AMOUNT]`
 
-* Edits the contract with the specified `CONTRACT_ID`
-* CONTRACT_ID is a compulsory field.
+* Edits the contract with the specified `CONTRACT_ID`.
+* `CONTRACT_ID` is a compulsory field
 * At least one of the optional fields must be provided.
 * Existing values of selected optional field(s) will be updated (overwritten) to the new input values.
 
@@ -485,9 +487,9 @@ Furthermore, certain edits can cause the iCon to behave in unexpected ways (e.g.
 | **Phone(p:)**         | A string of characters that contain an optional starting +, numbers, dashes, and spaces. It should contain at least 3 numbers, and have at most 30 characters. e.g `999` `98765321` `+65-9722-9120`                                                                                                                                                                                                                                                                                                            |
 | **NRIC(ic:)**         | A string that starts with T/S/F/G/M, followed by 7 numbers, and then a final letter. e.g `T1234567E`                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Email(e:)**         | A string that follows the format **local-part@domain**. The local-part should only contain [alphanumeric characters](#glossary) and any of these special characters `+_.-`. The domain name is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any. e.g `person@gmail.com` |
-| **ContractId(c:)**    | A unique string of 6 [alphanumeric characters](#glossary). Each ContractId is unique to its own contract.                                                                                                                                                                                                                                                                                                                                                                                                      |
-| **AppointmentId(a:)** | A unique string of 6 [alphanumeric characters](#glossary). Each AppointmentId is unique to its own appointment.                                                                                                                                                                                                                                                                                                                                                                                                | 
-| **PolicyId(p:)**      | A string of [alphanumeric characters](#glossary) of length 6, excluding lowercase `l`, uppercase `I`, and uppercase `O` e.g `Abc123`                                                                                                                                                                                                                                                                                                                                                                           |
+| **ContractId(c:)**    | A unique string of 6 [alphanumeric characters](#glossary), excluding lowercase `l`, uppercase `I`, and uppercase `O` e.g `Abc123`. Each ContractId is unique to its own contract.                                                                                                                                                                                                                                                                                                                              |
+| **AppointmentId(a:)** | A unique string of 6 [alphanumeric characters](#glossary), excluding lowercase `l`, uppercase `I`, and uppercase `O` e.g `Abc123`. Each AppointmentId is unique to its own appointment.                                                                                                                                                                                                                                                                                                                        | 
+| **PolicyId(p:)**      | A unique string of 6 [alphanumeric characters](#glossary), excluding lowercase `l`, uppercase `I`, and uppercase `O` e.g `Abc123`. Each PolicyId is unique to its own policy.                                                                                                                                                                                                                                                                                                                                  |
 | **Details(d:)**       | A string that contains [printable ASCII characters](#glossary) e.g `This policy covers flights to European countries`                                                                                                                                                                                                                                                                                                                                                                                          |
 | **Premium(pr:)**      | A number that takes any number from 0 to 999999999999.99. Automatically rounds off to the nearest 2 decimal places. Does not take negative numbers or non-numeric symbols                                                                                                                                                                                                                                                                                                                                      |
 | **Name(n:)**          | A string that contains [printable ASCII characters](#glossary) e.g. `Tom` `Krishna s/o Adhitya`                                                                                                                                                                                                                                                                                                                                                                                                                |
