@@ -32,7 +32,7 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T15-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your iCon.
+1. Copy the file to the folder you want to use as the _home folder_ for iCon.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar iCon.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -113,14 +113,14 @@ Display appointment(s) in iCon, either all or a set of specific appointments
 
 Format: 
 1. `view_appointment -a` view all appointments
-2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]` at least 1 ID to view
+2. `view_appointment a:APPOINTMENTID1 [APPOINTMENTID2] [APPOINTMENTID3]...` at least 1 ID to view
 
 Examples:
 * `view_appointment -a`
 * `view_appointment a:ABCDEF`
 
 **Note:**
-* Viewing appointment(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
+* Viewing appointment(s) by ID allows multiple case-sensitive, ID substrings separated by the space character " "
 
 ### Editing an appointment : `edit_appointment`
 
@@ -128,7 +128,7 @@ Edits an existing appointment in iCon
 
 Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
 
-* Edits the appointment at the specified `a:`. The appointment id refers to the id number shown in the displayed appointment list. The appointment id **must be positive, alphanumeric and 6 characters** …​
+* Edits the appointment at the specified `a:`. The appointment ID refers to the ID number shown in the displayed appointment list. The appointment ID **must be positive, alphanumeric and 6 characters** …​
 * At least one of the optional fields must be provided
 * Existing values of selected optional field(s) will be updated (overwritten) to the new input values
 * Appointment Date allows past and present dates for historical tracking purposes
@@ -136,8 +136,8 @@ Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPO
 
 
 Examples:
-*  `edit_appointment a:abc123 ic:T1234567A` Edits the Nric of the appointment with id 'abc123' to be T1234567A.
-*  `edit_appointment a:456XYZ dt:2020-01-01 d:This...` Edits the appointment date and appointment details of the appointment with id '456XYZ' to 2020-01-01 and "This..." respectively.
+*  `edit_appointment a:abc123 ic:T1234567A` Edits the Nric of the appointment with ID 'abc123' to be T1234567A.
+*  `edit_appointment a:456XYZ dt:2020-01-01 d:This...` Edits the appointment date and appointment details of the appointment with ID '456XYZ' to 2020-01-01 and "This..." respectively.
 
 **Note:**
 * Duplicate appointments are similarly checked as in [`add_appointment`](#adding-an-appointment--addappointment) and are rejected.
@@ -149,11 +149,11 @@ Removes the specified appointment from iCon.
 Format: `remove_appointment a:APPOINTMENTID`
 
 * Removes the appointment with the specified `APPOINTMENTID`.
-* The appointment id refers to the appointment id shown in the displayed appointment list.
-* The appointment id **must be positive, alphanumeric and 6 characters long** …​
+* The appointment ID refers to the appointment ID shown in the displayed appointment list.
+* The appointment ID **must be positive, alphanumeric and 6 characters long** …​
 
 Examples:
-* `remove_appointment a:xyz123` removes the appointment with appointment id "xyz123" in iCon.
+* `remove_appointment a:xyz123` removes the appointment with appointment ID "xyz123" in iCon.
 
 ### Sorting an appointment : `sort_appointment`
 
@@ -161,7 +161,7 @@ Sorts the appointment in iCon by relevant flags.
 
 Format: `sort_appointment`
 1. `sort_appointment -i` sort appointment by order in which appointment was inserted/added into iCon
-2. `sort_appointment -a` sort appointment by the id's alphabetical order
+2. `sort_appointment -a` sort appointment by the ID's alphabetical order
 3. `sort_appointment -da` sort appointment by date in ascending order
 4. `sort_appointment -dd` sort appointment by date in descending order
 
@@ -174,7 +174,7 @@ Format: `sort_appointment`
 
 Adds a contact to iCon
 
-Format: `add_contact n:NAME p:PHONE_NUMBER ic:NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]`
+Format: `add_contact n:NAME p:PHONE_NUMBER ic:NRIC [e:EMAIL] [a:ADDRESS] [t:TAG]...`
 
 Examples:
 
@@ -188,7 +188,7 @@ Examples:
 
 Edits a contact in iCon
 
-Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]`
+Format: `edit_contact ic:NRIC [n:NAME] [p:PHONE_NUMBER] [e:EMAIL] [a:ADDRESS] [t:TAG]...`
 
 Examples:
 
@@ -199,6 +199,7 @@ Examples:
 * This command completely overwrites previous data entered.
 * For all optional fields - tags, email, address - you may remove such fields by not keying any text 
 after the prefix - `t:`, `e:`, `a:` - e.g `edit_contact ic:NRIC t:`
+* At least one of the optional fields must be provided if not an error will be shown <br> E.g.: `edit_contact ic:T1234567A` will show an error message <br> But `edit_contact ic:T1234567A n:Tom` will work
 
 ### Removing contacts : `remove_contact`
 
@@ -257,6 +258,11 @@ Examples:
 * `add_policy f:policy_file.txt`
 
 **Note:**
+* File path should be an absolute path or a relative path from the iCon home folder. For example: <br>
+    * Absolute path: `C:\Users\Username\Documents\policy_file.txt` (Windows) or
+      `/Users/Username/Documents/policy_file.txt` (MacOS/Linux)
+    * Relative path: `policy_file.txt` (if the file is in the iCon home folder) or
+      `data/policy_file.txt` (if the file is in a subfolder named `data` inside the iCon home folder) <br> Note: Use '\' for Windows instead of '/'
 * Policies loaded from a file should be formatted as lines of ``NAME`DETAILS``. For example:
     ```
     Life Insurance`This policy coverage for family...
@@ -283,7 +289,7 @@ Format: `edit_policy p:POLICY_ID [n:NAME] [d:DETAILS]`
 * Existing values of selected optional field(s) will be updated (overwritten) to the new input values
 
 Examples:
-*  `edit_policy p:Abc123 n:Healthcare` edits the policy with id `Abc123` to have the name `Healtchare`.
+*  `edit_policy p:Abc123 n:Healthcare` edits the policy with ID `Abc123` to have the name `Healtchare`.
 
 **Note:**
 * Duplicate policies are similarly checked as in [`add_policy`](#adding-a-policy--addpolicy) and are rejected.
@@ -308,22 +314,16 @@ Shows a list of all policies or a specific policy in iCon.
 
 Format:
 1. `view_policy -a` view all policies
-2. `view_policy p:POLICY_ID1 [p:POLICY_ID2] [p:POLICYID3]` at least 1 id to view
+2. `view_policy p:POLICY_ID1 [p:POLICY_ID2] [p:POLICY_ID3]...` at least 1 ID to view
 
 Examples:
-* `view_policy p:Abc123` views the policy with id "Abc123"
+* `view_policy p:Abc123` views the policy with ID "Abc123"
 
 **Note:**
-* Viewing policies by id allows multiple case-sensitive, id substrings separated by the space character " "
+* Viewing policies by ID allows multiple case-sensitive, ID substrings separated by the space character " "
 
 
-<box type="warning" seamless>
 
-**Caution:**
-If your changes to the data file makes its format invalid, iCon will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the iCon to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
-</box>
 
 ## Contracts
 
@@ -337,6 +337,8 @@ Format: `add_contract p:POLICY_ID ic:NRIC dt:DATE_SIGNED e:EXPIRY_DATE pr:PREMIU
 * PREMIUM_AMOUNT must be a non-negative number, ranging from 0 to 999999999999.99.
 * PREMIUM_AMOUNT cannot have any commas or dollar signs. For eg: $999,999 is not accepted. User should input 999999 instead.
 * PREMIUM_AMOUNT will be automatically rounded to the nearest 2 decimal places.
+* DATE_SIGNED and EXPIRY_DATE must be in the format YYYY-MM-DD.
+* DATE_SIGNED and EXPIRY_DATE can be past, present or future dates. But EXPIRY_DATE cannot be before DATE_SIGNED.
 
 Example: `add_contract p:P1234A ic:S1234567A dt:2023-01-01 e:2024-01-01 pr:1200.50`
 
@@ -356,14 +358,14 @@ Displays all contracts in iCon.
 
 Format: 
 1. `view_contract -a` for viewing all contracts
-2. `view_contract c:CONTRACT_ID` for viewing a specific contract by CONTRACT_ID
+2. `view_contract c:CONTRACT_ID [c:CONTRACT_ID2]...` for viewing a specific contract by CONTRACT_ID
 
 Example: 
 1. `view_contract -a`
 2. `view_contract c:C1234A`
 
 **Note:**
-* Viewing Contract(s) by id allows multiple case-sensitive, id substrings separated by the space character " "
+* Viewing Contract(s) by ID allows multiple case-sensitive, ID substrings separated by the space character " "
 
 ### Sort contracts: `sort_contract`
 
@@ -417,7 +419,15 @@ iCon data are saved in the hard disk automatically after any command that change
 
 ### Editing the data file
 
-iCon data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+iCon data are saved automatically as a JSON file `[JAR file location]/data/iCon.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, iCon will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the iCon to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -471,20 +481,21 @@ iCon data are saved automatically as a JSON file `[JAR file location]/data/addre
 **Note**
 * Prefixes are the same for some fields for the sake of simplicity when typing the command, the prefix is command dependent.
 
-| Model                 | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Phone(p:)**         | A string of characters that contain an optional starting +, numbers, dashes, and spaces. It should contain at least 3 numbers, and have at most 30 characters. e.g `999` `98765321` `+65-9722-9120`                                                                                                                                                                                                                                                                                                            |
-| **NRIC(ic:)**         | A string that starts with T/S/F/G/M, followed by 7 numbers, and then a final letter. e.g `T1234567E`                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Email(e:)**         | A string that follows the format **local-part@domain**. The local-part should only contain [alphanumeric characters](#glossary) and any of these special characters `+_.-`. The domain name is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any. e.g `person@gmail.com` |
-| **ContractId(c:)**    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| **AppointmentId(a:)** |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 
-| **PolicyId(p:)**      | A string of [alphanumeric characters](#glossary) of length 6, excluding lowercase `l`, uppercase `I`, and uppercase `O` e.g `Abc123`                                                                                                                                                                                                                                                                                                                                                                           |
-| **Details(d:)**       | A string that contains [printable ASCII characters](#glossary) e.g `This policy covers flights to European countries`                                                                                                                                                                                                                                                                                                                                                                                          |
-| **Premium(pr:)**      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| **Name(n:)**          | A string that contains [printable ASCII characters](#glossary) e.g `Tom` `Krishna s/o Adhitya`                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| **Address(a:)**       | A string that contains [printable ASCII characters](#glossary) e.g `110 Raffles Street, #06-12`                                                                                                                                                                                                                                                                                                                                                                                                                |
-| **Tag(t:)**           | A string that take any [alphanumeric characters](#glossary), **no spaces allowed** e.g `Priority1`                                                                                                                                                                                                                                                                                                                                                                                                             |
-
+| Model                 | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Phone(p:)**         | A string of characters that contain an optional starting +, numbers, dashes, and spaces. It should contain at least 3 numbers, and have at most 30 characters. e.g. `999` `98765321` `+65-9722-9120`                                                                                                                                                                                                                                                                                                            |
+| **NRIC(ic:)**         | A string that starts with T/S/F/G/M, followed by 7 numbers, and then a final letter. e.g. `T1234567E`                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Email(e:)**         | A string that follows the format **local-part@domain**. The local-part should only contain [alphanumeric characters](#glossary) and any of these special characters `+_.-`. The domain name is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any. e.g. `person@gmail.com` |
+| **ContractId(c:)**    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **AppointmentId(a:)** |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 
+| **PolicyId(p:)**      | A string of [alphanumeric characters](#glossary) of length 6, excluding lowercase `l`, uppercase `I`, and uppercase `O` e.g `Abc123`                                                                                                                                                                                                                                                                                                                                                                            |
+| **Details(d:)**       | A string that contains [printable ASCII characters](#glossary) e.g. `This policy covers flights to European countries`                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Premium(pr:)**      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Name(n:)**          | A string that contains [printable ASCII characters](#glossary) e.g. `Tom` `Krishna s/o Adhitya`                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Address(a:)**       | A string that contains [printable ASCII characters](#glossary) e.g. `110 Raffles Street, #06-12`                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Tag(t:)**           | A string that take any [alphanumeric characters](#glossary), **no spaces allowed** e.g. `Priority1`                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **DateSigned(dt:)**   | A string that can take in a date in the format yyyy-MM-dd e.g. `2025-11-23`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **ExpiryDate(e:)**    | Same as DateSigned <br> Must occur after DateSigned                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 ## Glossary
 
 * **ASCII Character** - Anything accessible on your keyboard (without pressing ALT) is an ASCII character. For more details on ASCII characters, refer to https://www.ascii-code.com/
