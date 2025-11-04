@@ -74,11 +74,11 @@ iCon is a **desktop app for managing contacts, contracts, policies, and appointm
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Text entered after certain parameters will be counted as we do not perform regex(format validation) on some fields, fields that can
+* Text entered after certain parameters will be counted as we do not perform regex(format validation) on some fields. <br>Fields that can
   be checked - (Phone, NRIC, Email, ContractId, AppointmentId, PolicyID, Premium) - will throw exceptions for incorrect input format,
   but other fields' formats cannot be checked - (Name, Address, Tag), thus any input after the colon will be counted (within the confines of [defined accepted input](#format-summary)).
-  For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will
-  include the extra text in your name. *e.g NRIC would be checked if it matches the format starting with T/S/F/G/M, followed by 7 digits,
+  <br> For example, `add_contact n: REAL_NAME OOPS_EXTRA_TEXT p:....` will
+  include the extra text in your name. *e.g. NRIC would be checked if it matches the format starting with T/S/F/G/M, followed by 7 digits,
   and then a final letter, this is what we mean by format validation*
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -128,7 +128,7 @@ Edits an existing appointment in iCon
 
 Format: `edit_appointment a:APPOINTMENTID [ic:NRIC] [dt:APPOINTMENTDATE] [d:APPOINTMENTDETAILS]` 
 
-* Edits the appointment at the specified `a:`. The appointment ID refers to the ID number shown in the displayed appointment list. The appointment ID **must be positive, alphanumeric and 6 characters** …​
+* Edits the appointment at the specified `a:`. The appointment ID refers to the ID number shown in the displayed appointment list. The appointment ID **must be alphanumeric and 6 characters** …​
 * At least one of the optional fields must be provided
 * Existing values of selected optional field(s) will be updated (overwritten) to the new input values
 * Appointment Date allows past and present dates for historical tracking purposes
@@ -150,7 +150,7 @@ Format: `remove_appointment a:APPOINTMENTID`
 
 * Removes the appointment with the specified `APPOINTMENTID`.
 * The appointment ID refers to the appointment ID shown in the displayed appointment list.
-* The appointment ID **must be positive, alphanumeric and 6 characters long** …​
+* The appointment ID **must be alphanumeric and 6 characters long** …​
 
 Examples:
 * `remove_appointment a:xyz123` removes the appointment with appointment ID "xyz123" in iCon.
