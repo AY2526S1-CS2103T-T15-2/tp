@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use Case: UC9 - Add Policy(from file path)**
+**Use Case: UC9 - Add Policies (from file path)**
 
 **MSS**
 
@@ -969,139 +969,138 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1.1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file
+   1.2. Double-click the jar file
 
-   1. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1.3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 - Note: For mac and linux users, use the terminal and `cd` to the directory where the jar file is located. Then, run `java -jar iCon.jar`
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2.1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2.2. Re-launch the app by double-clicking the jar file.<br>Expected: The most recent window size and location is retained.
 
-1. Start Clean: `clear`
+3. Start Clean: `clear`
 
 ### Contact management
 
 1. Add two contacts. The list should update immediately
 
-   1. `add_contact n:Bob Lim p:81112222 ic:G1234567B e:bob@example.com a:456 MBS`
+   1.1. `add_contact n:Bob Lim p:81112222 ic:G1234567B e:bob@example.com a:456 MBS`
 
-   1. `add_contact n:Alice Tan p:91234567 ic:S9876543A e:alice@example.com a:123 Orchard Road`
+   1.2. `add_contact n:Alice Tan p:91234567 ic:S9876543A e:alice@example.com a:123 Orchard Road`
 
-1. Sort contacts by alphabetical sort. `sort_contact -a`.
-   2. The list should re-order to show Alice first, then Bob.
+2. Sort contacts by alphabetical sort. `sort_contact -a`.
+   2.1. The list should re-order to show Alice first, then Bob.
 
-1. Edit contact by NRIC to change fields such as phone number.
+3. Edit contact by NRIC to change fields such as phone number.
 
-    1. `edit_contact ic:G1234567B p:88888888`
+    3.1. `edit_contact ic:G1234567B p:88888888`
 
-1. View a specific contact: View by NRIC. Only Bob's details should be displayed
+4. View a specific contact: View by NRIC. Only Bob's details should be displayed
 
-   1. `view_contact ic:G1234567B`
+   4.1. `view_contact ic:G1234567B`
 
-1. Remove a contact: Remove Bob using his NRIC. The list should update, leaving only Alice.
+5. Remove a contact: Remove Bob using his NRIC. The list should update, leaving only Alice.
 
-    1. `remove_contact ic:G1234567B`
+    5.1. `remove_contact ic:G1234567B`
 
 ### Policy management
 
 1. Add two new policies.
 
-    1. `add_policy n:Premium Health d:Covers all hospital stays and specialist visits`
+    1.1. `add_policy n:Premium Health d:Covers all hospital stays and specialist visits`
 
-    1. `add_policy n:Basic Car d:Covers basic third-party car damage`
+    1.2. `add_policy n:Basic Car d:Covers basic third-party car damage`
 
-1. Add policy from file.
+2. Add policy from file.
 
-    1. Create a file named `policy_file.txt` in the same folder as your .jar file.
+    2.1. Create a file named `policy_file.txt` in the same folder as your .jar file.
 
-    1. Put this text inside that file: ``Life Insurance`This policy coverage for family...``
+    2.2. Put this text inside that file: ``Life Insurance`This policy coverage for family...``
 
-    1. Now, run the command: `add_policy f:policy_file.txt`
+    2.3. Now, run the command: `add_policy f:policy_file.txt`
 
-1. View all policies. The list should show all 3 policies added.
+3. View all policies. The list should show all 3 policies added.
 Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailor the `POLICY_ID` to the randomly generated policy ID as shown in the GUI
 
-    1. `view_policy -a`
+    3.1. `view_policy -a`
 
-1. Edit a policy. Use the `POLICY_ID` for "Premium Health" (eg. P1234A) to edit it
+4. Edit a policy. Use the `POLICY_ID` for "Premium Health" (eg. P1234A) to edit it
 
-    1. `edit_policy p:P1234A n:Premium Health Gold`
+    4.1. `edit_policy p:P1234A n:Premium Health Gold`
 
-1. Remove the Basic Car policy using the `POLICY_ID` (eg. P5678B)
+5. Remove the Basic Car policy using the `POLICY_ID` (eg. P5678B)
 
-    1. `remove_policy p:P5678B`
+    5.1. `remove_policy p:P5678B`
 
 ### Contract management
 
 1. Setup: We should have "Alice" (NRIC S9876543A) and a Policy (eg. P1234A for "Premium Health Gold", refer to the `POLICY_ID` in the GUI).
 
-1. Add a new contract for Alice with the policy.
+2. Add a new contract for Alice with the policy.
 
-    1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:1200.50`
+    2.1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:1200.50`
 
-1. Add a contract (Bad expiry date): This command should fail because the expiry date is before the signed date
+3. Add a contract (Bad expiry date): This command should fail because the expiry date is before the signed date
 
-    1. `add_contract p:P1234A ic:S9876543A dt:2025-01-01 e:2024-01-01 pr:100`
+    3.1. `add_contract p:P1234A ic:S9876543A dt:2025-01-01 e:2024-01-01 pr:100`
 
-    2. The error message: "Signing date comes after expiry date" should appear.
+    3.2. The error message: "Signing date comes after expiry date" should appear.
 
-1. Add a contract (Bad premium): This command should fail because premium is not a positive number
+4. Add a contract (Bad premium): This command should fail because premium is not a positive number
 
-    1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:-50`
+    4.1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:-50`
 
-    2. The error message: "Contract premium should be between 0 and 999999999999.99" should appear.
+    4.2. The error message: "Contract premium should be between 0 and 999999999999.99" should appear.
 
-1. View all contracts. The list should show the contract added.
+5. View all contracts. The list should show the contract added.
 
-    1. `view_contract -a`
+    5.1. `view_contract -a`
 
-1. Edit Contract: Similar to `POLICY_ID`, use the `CONTRACT_ID` assigned by the system (eg. C1234A) to edit the premium
+6. Edit Contract: Similar to `POLICY_ID`, use the `CONTRACT_ID` assigned by the system (eg. C1234A) to edit the premium
 
-    1. `edit_contract c:C1234A pr:1300.00`
+    6.1. `edit_contract c:C1234A pr:1300.00`
 
-1. Remove Contract: Remove the contract you edited (use the `CONTRACT_ID`)
+7. Remove Contract: Remove the contract you edited (use the `CONTRACT_ID`)
 
-    1. `remove_contract c:C1234A`
+    7.1. `remove_contract c:C1234A`
 
 ### Appointment Management
 
 1. Setup: We still have "Alice" (NRIC S9876543A) in the contact list.
 
-1. Add two appointments for Alice.
+2. Add two appointments for Alice.
 
-    1. `add_appointment ic:S9876543A dt:2025-11-15 d:Discuss contract renewal`
+    2.1. `add_appointment ic:S9876543A dt:2025-11-15 d:Discuss contract renewal`
 
-    1. `add_appointment ic:S9876543A dt:2025-10-10 d:Initial healthcare review`
+    2.2. `add_appointment ic:S9876543A dt:2025-10-10 d:Initial healthcare review`
 
-1. Add appointment (Invalid NRIC): This command should fail because the NRIC does not exist.
+3. Add appointment (Invalid NRIC): This command should fail because the NRIC does not exist.
 
-    1. `add_appointment ic:F9999999Z dt:2025-12-01 d:Non-existent contact`
+    3.1. `add_appointment ic:F9999999Z dt:2025-12-01 d:Non-existent contact`
 
-1. Sort appointments: Sort the appointments by date in ascending order. The "Initial healthcare review" (Oct 10) should now appear before the "contract renewal" (Nov 15).
+4. Sort appointments: Sort the appointments by date in ascending order. The "Initial healthcare review" (Oct 10) should now appear before the "contract renewal" (Nov 15).
 
-    1. `sort_appointment -da`
+    4.1. `sort_appointment -da`
 
-1. Edit appointments: Similar to `POLICY_ID`, use `APPOINTMENT_ID` from the GUI (eg. A1234B) from one of the appointments and change its date
+5. Edit appointments: Similar to `POLICY_ID`, use `APPOINTMENT_ID` from the GUI (eg. A1234B) from one of the appointments and change its date
 
-    1. `edit_appointment a:A1234B dt:2025-11-16 d:Sign new contract papers`
+    5.1. `edit_appointment a:A1234B dt:2025-11-16 d:Sign new contract papers`
 
-1. Remove appointment: Remove the appointment you edited (using `APPOINTMENT_ID`) (eg. A1234B)
+6. Remove appointment: Remove the appointment you edited (using `APPOINTMENT_ID`) (eg. A1234B)
 
-    1. `remove_appointment a:A1234B`
+    6.1. `remove_appointment a:A1234B`
 
 ### Exiting and Relaunching
 
 1. Exit the app
 
-   1. `exit`
+   1.1. `exit`
 
-1. Relaunch the app
+2. Relaunch the app
 
-    1. After relaunching the app, you should see the existing contacts, policies, contracts and appointments saved previously.
+    2.1. After relaunching the app, you should see the existing contacts, policies, contracts and appointments saved previously.
