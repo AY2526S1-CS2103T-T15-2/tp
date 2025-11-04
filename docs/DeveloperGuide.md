@@ -252,33 +252,33 @@ iCon helps insurance agents manage a large pool of clients and contracts, with t
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​               | So that I can …​                                                     |
-|----------|-----------------|----------------------------|----------------------------------------------------------------------|
-| `* * *`  | Insurance Agent | add a contact              | store contacts                                                       |
-| `* * *`  | Insurance Agent | remove a contact           | remove unnecessary contacts                                          |
-| `* * *`  | Insurance Agent | view a contact             | see contact details of customers I want to see                       |
-| `* * *`  | Insurance Agent | add a policy               | add more policy types                                                |
-| `* * *`  | Insurance Agent | remove a policy            | remove unnecessary policy types                                      |
-| `* * *`  | Insurance Agent | view a policy              | see the policy details                                               |
-| `* * *`  | Insurance Agent | add a contract             | link a policy to a customer                                          |
-| `* * *`  | Insurance Agent | remove a contract          | remove unnecessary contracts                                         |
-| `* * *`  | Insurance Agent | view a contract            | see the contract details and who signed the contract                 |
-| `* *`    | Insurance Agent | tag a contact              | tag a contact with follow-ups                                        |
-| `* *`    | Insurance Agent | search for a contact       | find a specific contact by name                                      |
-| `* *`    | Insurance Agent | search for a contract      | find a specific contract by its type or date                         |
-| `* *`    | Insurance Agent | add client appointments    | add an appointment date for a contact for follow-ups                 |
-| `* *`    | Insurance Agent | remove client appointments | remove any misplaced appointment dates for a contact                 |
-| `* *`    | Insurance Agent | view client appointments   | see appointments with my clients                                     |
-| `* *`    | Insurance Agent | add contract expiry        | start to schedule an appointment closer to contract's expiry         |
-| `* *`    | Insurance Agent | add contract premium       | easily reference the rates offered to my customers                   |
-| `* *`    | Insurance Agent | edit a contract            | edit any wrong or changed details of a contract                      |
-| `* *`    | Insurance Agent | edit a contact             | edit the wrong details of customers                                  |
-| `* *`    | Insurance Agent | edit a policy              | edit the policy of the contract                                      |
-| `*`      | Insurance Agent | sort by contacts           | order by contacts                                                    |
-| `*`      | Insurance Agent | sort by contracts          | order by contracts                                                   |
-| `*`      | Insurance Agent | edit client appointments   | reschedule an appointment date for a contact or mark it as completed |
-| `*`      | Insurance Agent | sort by appointments       | easily take reference to upcoming appointments                       |
-| `*`      | Insurance Agent | search for appointment     | easily search the details of an appointment with a client            |
+| Priority | As a …​         | I want to …​                                    | So that I can …​                                                           |
+|----------|-----------------|-------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | Insurance Agent | add a contact                                   | store new client information for future reference                          |
+| `* * *`  | Insurance Agent | remove a contact                                | delete outdated or irrelevant client records                               |
+| `* * *`  | Insurance Agent | view a contact                                  | review a client’s personal and contact details quickly                     |
+| `* * *`  | Insurance Agent | add a policy                                    | expand the list of available insurance policy types                        |
+| `* * *`  | Insurance Agent | remove a policy                                 | remove obsolete or discontinued policy types                               |
+| `* * *`  | Insurance Agent | view a policy                                   | see policy coverage and terms in detail                                    |
+| `* * *`  | Insurance Agent | add a contract                                  | link a specific policy to a client                                         |
+| `* * *`  | Insurance Agent | remove a contract                               | delete outdated or invalid client contracts                                |
+| `* * *`  | Insurance Agent | view a contract                                 | review contract details, including the policy type and the client involved |
+| `* *`    | Insurance Agent | search for a contact                            | quickly pull up contact details for reference                              |
+| `* *`    | Insurance Agent | search for a contract                           | quickly reference contract details                                         |
+| `* *`    | Insurance Agent | tag a contact                                   | label contacts with follow-up notes or categories for better organization  |
+| `* *`    | Insurance Agent | add client appointments                         | schedule meetings or follow-ups with clients                               |
+| `* *`    | Insurance Agent | remove client appointments                      | cancel or correct appointments as needed                                   |
+| `* *`    | Insurance Agent | view client appointments                        | view upcoming or past meetings with clients                                |
+| `* *`    | Insurance Agent | add contract expiry                             | plan follow-ups before a client’s policy expires                           |
+| `* *`    | Insurance Agent | add contract premium                            | reference premium rates when discussing options with clients               |
+| `* *`    | Insurance Agent | edit a contract                                 | update any incorrect or changed details in a client’s contract             |
+| `* *`    | Insurance Agent | edit a contact                                  | correct or update client information                                       |
+| `* *`    | Insurance Agent | edit a policy’s details                         | ensure policy information remains accurate and up-to-date                  |
+| `*`      | Insurance Agent | sort my contacts alphabetically by name         | find a specific client’s record quickly when speaking with them            |
+| `*`      | Insurance Agent | sort my contracts by expiry date                | review which contracts need attention or follow-ups soonest                |
+| `*`      | Insurance Agent | edit client appointments                        | reschedule meetings or mark them as completed                              |
+| `*`      | Insurance Agent | sort my appointments by date                    | easily reference upcoming or recent appointments                           |
+| `*`      | Insurance Agent | search for an appointment                       | quickly look up details of a client meeting or follow-up                   |
 
 
 
@@ -534,6 +534,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 2b. Edited details result in a duplicate of an existing policy.
+
+    * 2b1. iCon shows an error message.
+
+      Use case ends.
+
+
 **Use Case: UC12 - View Specific Policies**
 
 **MSS**
@@ -703,6 +710,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 2c. Edited details result in a duplicate of an existing contract.
+
+    * 2c1. iCon shows an error message.
+
+      Use case ends.
+
 **Use Case: UC18 - View specific contracts**
 
 **MSS**
@@ -730,7 +743,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view all contracts
+1. User requests to view all contracts
 2. iCon shows a list of contracts
 
     Use case ends.
@@ -985,15 +998,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Edit contact by NRIC to change fields such as phone number.
 
-    1. `edit_contact ic: G1234567B p:88888888`
+    1. `edit_contact ic:G1234567B p:88888888`
 
 1. View a specific contact: View by NRIC. Only Bob's details should be displayed
 
-   1. `view_contact ic: G1234567B`
+   1. `view_contact ic:G1234567B`
 
 1. Remove a contact: Remove Bob using his NRIC. The list should update, leaving only Alice.
 
-    1. `remove_contact ic: G1234567B`
+    1. `remove_contact ic:G1234567B`
 
 ### Policy management
 
@@ -1018,7 +1031,7 @@ Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailo
 
 1. Edit a policy. Use the POLICY_ID for "Premium Health" (eg. P1234A) to edit it
 
-    1. `edit_policy p:P1234A n: Premium Health Gold`
+    1. `edit_policy p:P1234A n:Premium Health Gold`
 
 1. Remove the Basic Car policy using the POLICY_ID (eg. P5678B)
 
@@ -1036,9 +1049,13 @@ Note the POLICY_IDs (eg. P1234A) assigned by the system in the GUI. Hence, tailo
 
     1. `add_contract p:P1234A ic:S9876543A dt:2025-01-01 e:2024-01-01 pr:100`
 
+    2. The error message: "Signing date comes after expiry date" should appear.
+
 1. Add a contract (Bad premium): This command should fail because premium is not a positive number
 
     1. `add_contract p:P1234A ic:S9876543A dt:2024-01-01 e:2025-01-01 pr:-50`
+
+    2. The error message: "Contract premium should be between 0 and 999999999999.99" should appear.
 
 1. View all contracts. The list should show the contract added.
 
