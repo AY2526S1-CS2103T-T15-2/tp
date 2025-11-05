@@ -17,6 +17,7 @@ import seedu.address.model.appointment.AppointmentId;
 import seedu.address.model.contact.Nric;
 import seedu.address.ui.ListPanelType;
 
+//@@author KH-boop-bit
 /**
  * Adds an appointment to iCon.
  */

@@ -13,6 +13,7 @@ import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractId;
 import seedu.address.ui.ListPanelType;
 
+//@@author Joshua-Seah
 /**
  * Removes a contract from iCon.
  */

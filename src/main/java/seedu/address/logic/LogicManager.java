@@ -74,10 +74,12 @@ public class LogicManager implements Logic {
         return model.getFilteredContactList();
     }
 
+    //@@author AndrescuIII-too
     @Override
     public ObservableList<Contact> getSortedContactList() {
         return model.getSortedContactList();
     }
+    //@@author
 
     @Override
     public ObservableList<Contract> getSortedContractList() {

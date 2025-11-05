@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.AppointmentIdContainsKeywordsPredicate;
 import seedu.address.ui.ListPanelType;
 
-
+//@@author KH-boop-bit
 /**
  * Lists all appointments in the address book to the user.
  */

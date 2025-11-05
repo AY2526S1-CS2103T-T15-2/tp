@@ -34,6 +34,7 @@ class JsonAdaptedContact {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedContract> contracts = new ArrayList<>();
 
+    //@@author porcupinezzz
     /**
      * Constructs a {@code JsonAdaptedContact} with the given contact details.
      */
@@ -54,6 +55,7 @@ class JsonAdaptedContact {
             this.contracts.addAll(contracts);
         }
     }
+    //@@author
 
     /**
      * Converts a given {@code Contact} into this class for Jackson use.

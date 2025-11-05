@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.ui.ListPanelType;
 
+//@@author porcupinezzz
 /**
  * Adds a contact to iCon.
  */

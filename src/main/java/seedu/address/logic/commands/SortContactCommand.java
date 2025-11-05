@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.contact.ContactComparatorType;
 import seedu.address.ui.ListPanelType;
 
+//@@author AndrescuIII-too
 /**
  * Sorts and lists currently viewed contacts in iCon.
  */

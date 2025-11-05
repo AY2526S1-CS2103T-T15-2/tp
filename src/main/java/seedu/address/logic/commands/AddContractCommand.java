@@ -24,6 +24,7 @@ import seedu.address.model.contract.ContractPremium;
 import seedu.address.model.policy.PolicyId;
 import seedu.address.ui.ListPanelType;
 
+//@@author Joshua-Seah
 /**
  * Adds a contract to iCon.
  * Links a contact to a policy.

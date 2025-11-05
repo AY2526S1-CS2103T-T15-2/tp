@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.contract.ContractIdContainsKeywordsPredicate;
 import seedu.address.ui.ListPanelType;
 
-
+//@@author Eggie23
 /**
  * Lists all contracts in the address book to the user.
  */
